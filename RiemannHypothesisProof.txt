@@ -5,7 +5,7 @@
          and Standing Wave Node Line Confinement
 ================================================================================
 
-Author:  Michael Rendier  (pen name: O Captain My Captain)
+Author:  Cody Allison (pen name: Michael Rendier)
 Date:    2026-05-09 (revised)
 License: MIT
 Status:  PROOF — Step 5 formally supported by standing wave node theorem
