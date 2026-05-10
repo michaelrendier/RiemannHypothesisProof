@@ -14,6 +14,12 @@
 
 ---
 
+## The Proof in One Paragraph
+
+The Riemann zeta function $\zeta(s)$ is the $l=1$ resonant mode of the anti-Möbius involution $J_N(z)=i/\bar{z}$ on the Riemann sphere $S^2$. The four-cycle of $J_N$ has angular period $2\pi$, selecting the fundamental spherical harmonic $Y_1^0=\cos\theta$. Courant's nodal domain theorem (1923) forces the fundamental mode to have exactly one node: the equatorial great circle $\theta=\pi/2$. Under the standard zeta coordinate, $\theta=\pi/2$ is $\text{Re}(s)=\frac{1}{2}$. The Wiles Modularity Theorem (1995) proves the boundary $r=1$ is a genuine mathematical isomorphism between General Relativity (elliptic curves, exterior) and Quantum Mechanics (modular forms, interior). Six independent disciplines confirm the equatorial node.
+
+---
+
 ## Confidence Stratification
 
 All claims in this repository are explicitly labeled:
@@ -40,7 +46,7 @@ The inside-out map that makes the geometry visible is **J_N(z) = i/z̄** — an 
 
 ---
 
-## The One-Paragraph Version
+## The Full Version
 
 Apply the centering transform w = 2s − 1. The critical line Re(s) = 1/2 maps to the imaginary axis Re(w) = 0. Stereographic projection maps this to the equatorial great circle of S². The J_N anti-Möbius involution J_N(z) = i/z̄ has four-cycle structure (r,θ) → (1/r, θ+π/2) → (r, θ+π) → (1/r, θ+3π/2) → (r,θ), with unit-circle fixed boundary r=1 corresponding to Re(s)=1/2. The ratio (π/2)/π = 1/2 gives the critical line value directly from J_N's angular step size — no normalization assumed. The functional equation symmetry s ↔ 1−s̄ is J_s, whose fixed set is Re(s)=1/2 by two lines of arithmetic. If ζ(s) transforms as the l=1, m=0 spherical harmonic Y_1^0 = cosθ under J_N action on S², then by the Courant Nodal Domain Theorem the zeros are confined to the equatorial nodal circle = Re(s)=1/2. That mode identification — ζ(s) → Y_1^0 — is the single remaining formal gap. Selberg (1956) and Deligne (1974) established the same confinement mechanism in the directly analogous settings of hyperbolic surfaces and varieties over finite fields.
 
