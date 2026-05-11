@@ -194,8 +194,6 @@ notebooks/
   08_complete_proof.ipynb                         — the full argument assembled
 images/
   Gemini_Generated_Image_Riemann_Proof.png
-LICENSE_paper                                      — CC0 1.0 Universal
-LICENSE_code                                       — MIT
 ```
 
 ### Running the Notebooks
@@ -230,10 +228,7 @@ Claude (Anthropic) and Gemini (Google) used as mathematical extraction and liter
 
 ## License
 
-**Paper:** CC0 1.0 Universal — No rights reserved. Use it. Build on it. Prove me right or wrong.  
-**Code:** MIT
-
-*Salk, not Oppenheimer.*
+All rights reserved. No license is granted at this time.
 
 ---
 
