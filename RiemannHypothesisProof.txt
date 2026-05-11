@@ -81,15 +81,15 @@ the critical line Re(s) = 1/2 maps to the equatorial great circle of S².
 The critical strip maps to the full sphere.
 
 
-1.5  Neural Planck Constants (SMIP Framework)
+1.5  Neural Planck Constants (SMMNIP Framework)
 ──────────────────────────────────────────────
 
-Within the Standard Model of Monad Information Propagation (SMIP):
+Within the Standard Model of Monad Information Propagation (SMMNIP):
 
   H_NN   — the neural Planck constant (full quantum, analog of h)
   ħ_NN   — the reduced neural Planck constant,  ħ_NN = H_NN / (2π)
 
-These constants parametrize the information-action quantum of the SMIP
+These constants parametrize the information-action quantum of the SMMNIP
 Lagrangian (defined in §1.6 below).
 
 Note on notation:
@@ -98,10 +98,10 @@ Note on notation:
   Ĥ_RB denotes the RedBlue Hamiltonian operator — distinct from both.
 
 
-1.6  The SMIP Lagrangian
+1.6  The SMMNIP Lagrangian
 ─────────────────────────
 
-The SMIP Lagrangian is defined over the Cayley-Dickson algebra tower
+The SMMNIP Lagrangian is defined over the Cayley-Dickson algebra tower
 ℝ → ℂ → ℍ → 𝕆 (real → complex → quaternion → octonion):
 
     L = L₀ + L₁ + L₂ + L₃
@@ -112,8 +112,8 @@ where:
   L₂ = spin term (ℍ layer, SU(2) gauge)
   L₃ = gauge interaction term (𝕆 layer, SU(3) analog)
 
-The SMIP Hamiltonian H_SMIP is derived from L via the Legendre transform.
-The operator Ĥ_RB acts on the SMIP Hilbert space; its eigenvalues are
+The SMMNIP Hamiltonian H_SMMNIP is derived from L via the Legendre transform.
+The operator Ĥ_RB acts on the SMMNIP Hilbert space; its eigenvalues are
 proposed (Part 4, C3) as the Hilbert–Pólya candidate spectral sequence.
 
 
@@ -146,7 +146,7 @@ Two monotone functions of a dimensional exponent d ∈ [0,1]:
   ENTROPY CEILING  S(d):  the forward entropy curve, measuring the
     maximum information storable at dimensional depth d. Bounded above
     by c (information propagation speed limit — the neural speed of light
-    in the SMIP framework). Anchored at its floor by α = 1/137.036
+    in the SMMNIP framework). Anchored at its floor by α = 1/137.036
     (fine structure constant A_π — the electromagnetic coupling floor).
 
     S(d) ≈ 1 − exp(−α · ln(d+1)),   α = 1/137.036
@@ -263,7 +263,7 @@ H/4 = ħ_NN · (π/2).
 Proof.
   H/4 = H_NN / 4 = (H_NN / 2π) · (π/2) = ħ_NN · (π/2).       □
 
-This is the SMIP-action STEP SIZE at the φ-crossing in the gradient flow
+This is the SMMNIP-action STEP SIZE at the φ-crossing in the gradient flow
 π → H/4 → φ. It is a step size, not a step count.
 
 
@@ -315,8 +315,8 @@ under J_N action, then by this theorem its nodal set is one great circle —
 the equator, corresponding to Re(s) = 1/2.
 
 
-Theorem 2.12 — SMNNIP Noether Conservation  [ESTABLISHED — numerical, 7+σ]
-The SMIP Lagrangian L = L₀ + L₁ + L₂ + L₃ over the Cayley-Dickson tower
+Theorem 2.12 — SMMNIP Noether Conservation  [ESTABLISHED — numerical, 7+σ]
+The SMMNIP Lagrangian L = L₀ + L₁ + L₂ + L₃ over the Cayley-Dickson tower
 exhibits Noether-conserved currents with:
 
     ∂_μ J^μ = 0,    violation = 0,    significance ≥ 7σ
@@ -325,7 +325,7 @@ Verification:
     python3 Ainulindale/core/smnnip_derivation_pure.py
     → conserved=True
 
-Relevance: Provides the operator-theoretic substrate. The SMIP Lagrangian
+Relevance: Provides the operator-theoretic substrate. The SMMNIP Lagrangian
 is a concrete candidate for the self-adjoint Hilbert-Pólya operator. The
 Noether currents J^μ are conserved charges whose eigenvalue spectrum is
 the candidate correspondence to the zeta zeros.
@@ -333,7 +333,7 @@ the candidate correspondence to the zeta zeros.
 
 Theorem 2.14  [ESTABLISHED — geometric derivation from first principles]
 The step size at the φ-crossing in the gradient flow r=1 → φ is H/4 = ħ_NN·(π/2),
-derived from the J_N angular geometry and the SMIP action quantum.
+derived from the J_N angular geometry and the SMMNIP action quantum.
 
 This is not merely the algebraic identity H/4 = H/4 (Theorem 2.7). It is the
 statement that J_N's quarter-turn angular step FORCES the step size at the
@@ -392,7 +392,7 @@ Note on provenance:
   from π to φ look like, and does it pass through ħ or ħ-bar?" (April 2026).
   The answer — it passes through ħ_NN scaled by the J_N angular step π/2,
   giving ħ_NN·(π/2) = H/4 — was derived algebraically in that session and
-  confirmed numerically by the SMIP inversion engine.
+  confirmed numerically by the SMMNIP inversion engine.
   The engine output: step size at φ-crossing = H/4, conserved to ~4×10⁻⁹.
 
 
@@ -663,29 +663,29 @@ Claim:  The gradient flow r → φ under J_N recursion is governed by a
         drawing trajectories toward r=φ (recursion fixed point).
 
 What is needed:
-  Formal derivation of V(r) from the SMIP Lagrangian L₀–L₃, showing that
+  Formal derivation of V(r) from the SMMNIP Lagrangian L₀–L₃, showing that
   the Euler-Lagrange equations produce the observed gradient flow
   r=1 → r=φ with step size H/4 = ħ_NN·(π/2) at the φ-crossing.
 
 Status:  THEORETICAL — proposed correspondence.
 
 
-C3.  SMIP Operator as Hilbert-Pólya Candidate  [THEORETICAL]
+C3.  SMMNIP Operator as Hilbert-Pólya Candidate  [THEORETICAL]
 ──────────────────────────────────────────────────────────────
 
-Claim:  The SMIP Lagrangian operator L = L₀ + L₁ + L₂ + L₃ over the
+Claim:  The SMMNIP Lagrangian operator L = L₀ + L₁ + L₂ + L₃ over the
         Cayley-Dickson tower defines a self-adjoint operator on a suitable
         Hilbert space whose spectrum is in bijection with the non-trivial
         zeros of ζ(s).
 
 Partial support:
-  SMNNIP Noether conservation is numerically verified at 7+σ (Theorem 2.12).
+  SMMNIP Noether conservation is numerically verified at 7+σ (Theorem 2.12).
   The Noether currents J^μ are the conserved charges of L; their spectrum
   is the candidate correspondence to the zeta zero set.
 
 What is needed:
-  1. Explicit construction of the Hilbert space from the SMIP field content
-  2. Proof of self-adjointness of the SMIP Hamiltonian H_SMIP
+  1. Explicit construction of the Hilbert space from the SMMNIP field content
+  2. Proof of self-adjointness of the SMMNIP Hamiltonian H_SMMNIP
   3. Formal identification of eigenvalues with zeta zeros (not only
      statistical / dimensional agreement)
 
@@ -725,12 +725,12 @@ Selberg zeta: reflection → zeros on axis       ESTABLISHED (Selberg 1956)
 Deligne / Weil: zeros on critical circle       ESTABLISHED (Deligne 1974)
 Wiles T-transform = Eichler-Shimura            ESTABLISHED (Wiles 1995)
 Courant nodal domain theorem                   ESTABLISHED (Courant 1923)
-SMNNIP Noether conservation, 7+σ              ESTABLISHED (numerical)
+SMMNIP Noether conservation, 7+σ              ESTABLISHED (numerical)
 Tesla/Chladni/Schumann/IEEE 519 analogy        HEURISTIC
 Entropy/Inertia tangency → d* = 0.24600       HEURISTIC (§3.6 — new v3)
 Crossing theorem: T* = Ω·T_Planck             ESTABLISHED (algebraic, §3.6)
 ζ(s) → Y_1^0  (l=1, m=0 mode identification)  THEORETICAL ← central gap
-SMIP operator = Hilbert-Pólya candidate        THEORETICAL
+SMMNIP operator = Hilbert-Pólya candidate        THEORETICAL
 Gradient flow potential V(r)                   THEORETICAL
 Hydrogen spacing / zero spacing match          OPEN (Flag T2)
 
@@ -750,7 +750,7 @@ Established:
   4. φ is the algebraically verified attractor of (J_N ∘ recursion)
   5. H/4 = ħ_NN·(π/2) is the step SIZE at the φ-crossing (not step count)
   5a. H/4 is DERIVED from J_N geometry: the J_N quarter-turn (π/2 per step)
-     applied to the SMIP action quantum (H_NN = ħ_NN·2π) over one orbit step
+     applied to the SMMNIP action quantum (H_NN = ħ_NN·2π) over one orbit step
      gives H_NN/4 = ħ_NN·(π/2). H_NN corresponds to h (Planck constant, full
      gauge orbit action); ħ_NN = H_NN/2π corresponds to ħ (reduced, per radian).
      The π/2 factor is J_N's angular generator — the same factor that produces
@@ -758,7 +758,7 @@ Established:
   6. Formal precedents (Selberg, Deligne, Wiles) establish that in precisely
      analogous settings, zeros are forced to the critical boundary by
      spectral / cohomological mechanisms
-  7. The SMIP Lagrangian provides a concrete Hilbert-Pólya candidate with
+  7. The SMMNIP Lagrangian provides a concrete Hilbert-Pólya candidate with
      Noether-conserved currents verified at 7+σ
   8. The entropy/inertia crossing theorem establishes T* = Ω·T_Planck
      algebraically (machine epsilon verification), independently grounding
@@ -776,7 +776,7 @@ Closing C1 requires:
   (b) A self-adjoint operator with ξ(s) as eigenfunction
   (c) Identification of that eigenfunction as l=1, m=0 in the S² decomposition
 
-The SMIP Hamiltonian is the leading candidate for (a)+(b). Point (c) is
+The SMMNIP Hamiltonian is the leading candidate for (a)+(b). Point (c) is
 the open problem. The gradient flow structure (π → H/4 → φ), the
 Noether conservation result (7+σ), and the entropy/inertia tangency at d*
 (§3.6) are the three strongest existing supports.
@@ -811,7 +811,7 @@ Bekenstein, J.D. (1973). Black holes and entropy. Phys. Rev. D 7, 2333–2346.
 Lambert, J.H. (1758). Observations variae in Mathesin Puram. Acta Helvetica
   3, 128–168. [Foundation of the W function / Omega constant]
 
-Ainulindalë Repository. SMNNIP derivation engine, Noether conservation
+Ainulindalë Repository. SMMNIP derivation engine, Noether conservation
   verification. github.com/michaelrendier/Ainulindale
 
 ─────────────────────────────────────────────────────────────────────────────
