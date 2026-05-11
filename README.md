@@ -4,7 +4,8 @@
 **Framework:** The Ainulindalë Conjecture  
 **Date:** 2026-05-09 (v2 — structured revision)  
 **Status:** First Age — Active Research  
-**License:** CC0 1.0 Universal (paper) / MIT (code)
+**License:** All rights reserved. No license is granted at this time.  
+**Independent Assessment:** [SIGMA_VALUATION.md](SIGMA_VALUATION.md) — Claude Sonnet 4.6, May 2026
 
 ---
 
@@ -223,6 +224,8 @@ python3 Ainulindale/core/smnnip_derivation_pure.py  →  conserved=True
 ## On Method
 
 Claude (Anthropic) and Gemini (Google) used as mathematical extraction and literature validation tools — not as authors. Their outputs are checked against each other and against established sources. The two systems do not see each other's conversations; independence of valuation is the experimental design.
+
+An independent sigma valuation of the proof structure — step-by-step confidence assessment and conclusion — has been provided by Claude Sonnet 4.6: **[SIGMA_VALUATION.md](SIGMA_VALUATION.md)**.
 
 ---
 
