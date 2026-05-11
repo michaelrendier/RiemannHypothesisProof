@@ -1,6 +1,6 @@
 THE RIEMANN HYPOTHESIS: A GEOMETRIC-SPECTRAL PROOF VIA J_N INVERSION SYMMETRY
 
-Version 5 — Geodesic-Phase Chain Added to Corollary 2.5 (2026-05-11)
+Version 6 — Code-as-Flow, Eddy Currents, Three-Law Classification Added (2026-05-11)
 Stratification convention:
   [ESTABLISHED]  — algebraically verified or published in cited literature
   [HEURISTIC]    — convergent physical evidence; not logical deduction
@@ -624,6 +624,149 @@ FORMAL CONTENT:
   Formal closing of this identification is part of Conjectural Bridge C1.
 
 
+3.7  Computer Code Is a Flow — Control Structures as Eddy Currents  [HEURISTIC]
+─────────────────────────────────────────────────────────────────────────────────
+
+The Noether current conservation law ∂_μJ^μ = 0 governs information propagation
+in the SMMNIP framework. The claim of this section is that computer code is not
+an analogy for this flow — it IS this flow, running on silicon.
+
+A program is an information flow with conserved quantities. The conserved
+quantities are: state (the values of variables), data integrity (the invariants
+of data structures), and call stack depth (the depth of the recursion). A
+program that violates these conserved quantities has a bug. A bug is a Noether
+violation — a place where the conserved current fails to be divergence-free.
+
+CONTROL STRUCTURES AS EDDY CURRENTS:
+
+An eddy current is a closed circulation of flow induced by a discontinuity
+in the primary field — a local loop that stores or dissipates energy at the
+point of boundary transition without propagating it forward.
+
+  if / then / else:
+    A discontinuity in the flow field. The condition is the boundary.
+    The two branches are the two circulation directions around that boundary.
+    One path is taken; one is not. The flow resolves to one loop and continues.
+    An if/then/else does not destroy the current — it routes it.
+
+  while:
+    A sustained eddy. A closed circulation that persists as long as the loop
+    condition maintains the pressure differential driving it. When the
+    condition fails, the differential collapses, the eddy dissipates, and
+    the forward flow resumes. The energy (state) is preserved through the
+    circulation, not consumed by it.
+
+  for:
+    A quantized eddy. Fixed circulation count. The loop energy is pre-measured.
+    Equivalent to a while with a counter — an eddy with known total angular
+    momentum.
+
+  recursion:
+    A nested eddy inside an eddy. Each call frame is a smaller circulation
+    induced by the outer one. Stack overflow is eddy collapse — the nested
+    circulations exceed the medium's capacity to sustain concurrent loops.
+
+  function call / return:
+    The J_N inversion at the boundary. What was the caller's local state
+    becomes the callee's external context. At return, the inversion reverses.
+    The (I|O) map — inside becomes outside and outside becomes inside — is
+    the call stack made geometric. Every function boundary is a layer
+    transition in the Cayley-Dickson tower.
+
+THE NOETHER CURRENT IN CODE:
+
+The Noether current is what is conserved through all of this. An eddy
+(a loop) does not destroy information — it transforms it. State entering
+a loop must equal state exiting it, modulo whatever the loop was designed
+to change. A loop that loses information without accounting for it is a
+Noether violation. That is a bug.
+
+Code that is correct is Noether-conserving code. The compiler, the type
+system, and the test suite are all instruments for detecting Noether
+violations before they reach production. The discipline of software
+engineering is, in this framing, applied Noether theorem.
+
+RELEVANCE TO THE PROOF:
+
+This is not a coincidence or a metaphor. The SMMNIP Lagrangian was derived
+to describe information propagation. Computer code is information propagation.
+The Noether current fell out of the SMMNIP work because the substrate being
+modeled — computation — is a physical flow with conserved quantities. The
+mathematics was always describing what code actually is.
+
+The identification: code is physics running on silicon.
+
+
+3.8  The Three-Law Word Classification System  [HEURISTIC]
+──────────────────────────────────────────────────────────
+
+The geodesic reading of Corollary 2.5 — Re(s) = 1/2 as the stationary action
+path of the zeta Lagrangian under J_N symmetry — generates a direct application
+to natural language via the HyperWebster semantic engine (Notebook 07).
+
+Every word in any Unicode language maps via the Berry-Keating Hamiltonian
+H = xp to a Riemann zero — the prime word concept. The word is the surface
+form. The Riemann zero is the semantic prime beneath all surface forms for
+that concept across all languages and alphabets.
+
+The three conserved quantities of this mapping constitute a classification
+system. Each word concept carries three labels derived from the three
+fundamental constraints of the framework:
+
+  RIEMANN — what it IS
+    The forward Noether current J_forward: the positive propagating flow.
+    The zero of ζ(s) to which the word maps — the prime it inhabits.
+    This is the concept's identity: the nodal line of the zeta field
+    where its semantic energy is stationary. In any language, the word for
+    'light' maps to the same Riemann zero — because the prime for 'light'
+    is a feature of the geometry, not of the alphabet.
+
+  FERMAT — what it CANNOT BE
+    The backward Noether current J_backward: the constraint boundary.
+    Fermat's Last Theorem is the statement that certain configurations
+    are geometrically excluded — xⁿ + yⁿ ≠ zⁿ for n > 2. The anti-
+    invariant geometry defines the shape of the space the prime does NOT
+    occupy. A concept's Fermat label is the set of concepts it cannot
+    be confused with — the boundary of its semantic eddy, enforced by
+    the same exclusion principle that makes Fermat integers impossible.
+
+  NOETHER — what it MEANS
+    The conserved charge: the DC component extracted by the Capacitor
+    (§07_semantic_engine.ipynb) after integrating across all contexts
+    and all surface forms. This is what survives the eddy. The Noether
+    label is the concept's meaning — the invariant that persists through
+    every language transformation, every metaphorical extension, every
+    historical shift in usage. It is the charge that the current carries.
+
+THE CHLADNI CORRESPONDENCE:
+
+The prime word concepts are the Chladni node lines of the zeta field.
+In Chladni's experiments, sand on a vibrating plate migrates to the
+nodal lines — the points of zero displacement, where the energy is
+stationary. All languages, vibrating at the same semantic frequencies,
+deposit their words at the same nodal lines. The sand is the vocabulary.
+The plate is the zeta field. The driving frequency is the query. The
+nodal lines are the primes.
+
+A word that maps to the wrong nodal line is semantically displaced —
+it is sand that has not yet settled. Corpus processing (experience)
+drives the sand to equilibrium. The prime is reached when the Capacitor's
+DC output stabilises: Knowledge + Experience = Wisdom.
+
+THE OPERATIONAL SYSTEM:
+
+This system is implemented (specification level) in Notebook 07 of this
+repository. The DerivationEngine processes any Unicode text, maps each
+word to its Riemann zero via the Berry-Keating Hamiltonian, extracts the
+conserved Noether charge, and returns the three-law classification.
+
+Status: HEURISTIC — the geometric correspondence is structurally sound.
+Formal proof that all languages converge to the same Riemann zero for
+the same concept requires establishing C1 (Conjectural Bridge) and
+extending it to the semantic domain. This is the primary open problem
+of the semantic engine program.
+
+
 ─────────────────────────────────────────────────────────────────────────────
 PART 4 — CONJECTURAL BRIDGES
 ─────────────────────────────────────────────────────────────────────────────
@@ -762,7 +905,9 @@ Wiles T-transform = Eichler-Shimura            ESTABLISHED (Wiles 1995)
 Courant nodal domain theorem                   ESTABLISHED (Courant 1923)
 SMMNIP Noether conservation, 7+σ              ESTABLISHED (numerical)
 Tesla/Chladni/Schumann/IEEE 519 analogy        HEURISTIC
-Entropy/Inertia tangency → d* = 0.24600       HEURISTIC (§3.6 — new v3)
+Code is a flow; control structures = eddy currents HEURISTIC (§3.7 — new v6)
+Three-law word classification (Riemann/Fermat/Noether) HEURISTIC (§3.8 — new v6)
+Entropy/Inertia tangency → d* = 0.24600       HEURISTIC (§3.6)
 Crossing theorem: T* = Ω·T_Planck             ESTABLISHED (algebraic, §3.6)
 ζ(s) → Y_1^0  (l=1, m=0 mode identification)  THEORETICAL ← central gap
 SMMNIP operator = Hilbert-Pólya candidate        THEORETICAL

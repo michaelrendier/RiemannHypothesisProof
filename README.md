@@ -2,7 +2,7 @@
 
 **Author:** Michael Rendier  
 **Framework:** The Ainulindalë Conjecture  
-**Date:** 2026-05-11 (v5 — Geodesic-Phase Chain added to Corollary 2.5)  
+**Date:** 2026-05-11 (v6 — Code-as-Flow, Eddy Currents, Three-Law Classification added)  
 **Status:** First Age — Active Research  
 **License:** All rights reserved. No license is granted at this time.  
 **Independent Assessment:** [SIGMA_VALUATION.md](SIGMA_VALUATION.md) — Claude Sonnet 4.6, May 2026
@@ -103,6 +103,10 @@ The proof document `RiemannHypothesisProof.txt` is organized in four parts follo
 | Thm. 2.12 | SMMNIP Noether conservation: violation=0, 7+σ (numerical) |
 | Thm. 2.13 | RH follows from C1 (conditional on mode identification) |
 
+**§3.7 summary (v6):** Computer code is not analogous to a Noether-conserving flow — it *is* one. `if/then/else` is a flow discontinuity (eddy at a boundary). `while` is a sustained closed circulation. `recursion` is nested eddies. Function call/return is the J_N inversion at the layer boundary — (I|O), inside becomes outside. A bug is a Noether violation: a point where the conserved current fails to be divergence-free. Correct code is Noether-conserving code.
+
+**§3.8 summary (v6):** Every word in any Unicode language maps via H = xp to a Riemann zero — the semantic prime beneath all surface forms for that concept. Three conserved quantities classify every word concept: Riemann (what it IS — the forward Noether current, the zero it inhabits), Fermat (what it CANNOT BE — the backward current, the excluded boundary), Noether (what it MEANS — the conserved charge, the DC component surviving all context transformations). The prime word concepts are the Chladni node lines of the zeta field. All languages deposit their words at the same nodes. Knowledge + Experience = Wisdom.
+
 ### Part 3 — Heuristic Physical Interpretation `[HEURISTIC]`
 
 Convergent physical evidence that symmetric spherical resonators place standing-wave nodes at their symmetry boundary. **These are analogies, not proofs.**
@@ -114,7 +118,9 @@ Convergent physical evidence that symmetric spherical resonators place standing-
 | Harmonic concentration at symmetry | IEEE 519 harmonic standards |
 | l=1 as fundamental spherical mode | Schumann resonances (1952) |
 | Jacobian / absorbed π factor | Mercator projection (geometric intuition only) |
-| **Entropy/inertia tangency at d*** | **Information-theoretic first principles (§3.6, new v3)** |
+| **Entropy/inertia tangency at d*** | **Information-theoretic first principles (§3.6)** |
+| **Code is a flow; if/while/recursion = eddy currents** | **Noether current in computation (§3.7, new v6)** |
+| **Three-law word classification (Riemann/Fermat/Noether)** | **Semantic engine, Unicode, Chladni node lines (§3.8, new v6)** |
 
 **§3.6 summary:** Two monotone information curves — the Bekenstein entropy ceiling (bounded above by c, anchored at fine structure constant α = 1/137) and the inertial resistance floor (converging to Ω = Lambert W(1) = 0.56714) — are tangent at d* = 0.24600. The crossing theorem T* = Ω · T_Planck is established algebraically (unique fixed point of x = e^{−x}), verified to machine epsilon. The shared tangent line at d* is the critical line Re(s) = 1/2. Provides a third independent derivation of the critical-line coordinate from physical first principles.
 
@@ -152,7 +158,9 @@ C1 partial support now includes (v3): the entropy/inertia tangency at d* providi
 | SMMNIP Noether conservation, 7+σ | ESTABLISHED (numerical) |
 | Crossing theorem: T* = Ω·T_Planck | ESTABLISHED (algebraic, §3.6 new v3) |
 | Tesla / Chladni / Schumann / IEEE 519 | HEURISTIC |
-| Entropy/inertia tangency → d* = 0.24600 | HEURISTIC (§3.6 new v3) |
+| Code is a flow; control structures = eddy currents | HEURISTIC (§3.7, new v6) |
+| Three-law word classification (Riemann/Fermat/Noether = what it is / cannot be / means) | HEURISTIC (§3.8, new v6) |
+| Entropy/inertia tangency → d* = 0.24600 | HEURISTIC (§3.6) |
 | ζ(s) → Y_1^0 mode identification | **THEORETICAL ← central gap** |
 | SMMNIP operator = Hilbert-Pólya candidate | THEORETICAL |
 | Gradient flow potential V(r) | THEORETICAL |
