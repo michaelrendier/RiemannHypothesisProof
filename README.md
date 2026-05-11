@@ -2,7 +2,7 @@
 
 **Author:** Michael Rendier  
 **Framework:** The Ainulindalë Conjecture  
-**Date:** 2026-05-11 (v4 — H/4 First-Principles Derivation added)  
+**Date:** 2026-05-11 (v5 — Geodesic-Phase Chain added to Corollary 2.5)  
 **Status:** First Age — Active Research  
 **License:** All rights reserved. No license is granted at this time.  
 **Independent Assessment:** [SIGMA_VALUATION.md](SIGMA_VALUATION.md) — Claude Sonnet 4.6, May 2026
@@ -17,7 +17,7 @@
 
 ## The Proof in One Paragraph
 
-The Riemann zeta function $\zeta(s)$ is the $l=1$ resonant mode of the anti-Möbius involution $J_N(z)=i/\bar{z}$ on the Riemann sphere $S^2$. The four-cycle of $J_N$ has angular period $2\pi$, selecting the fundamental spherical harmonic $Y_1^0=\cos\theta$. Courant's nodal domain theorem (1923) forces the fundamental mode to have exactly one node: the equatorial great circle $\theta=\pi/2$. Under the standard zeta coordinate, $\theta=\pi/2$ is $\text{Re}(s)=\frac{1}{2}$. The Wiles Modularity Theorem (1995) proves the boundary $r=1$ is a genuine mathematical isomorphism between General Relativity (elliptic curves, exterior) and Quantum Mechanics (modular forms, interior). Six independent disciplines confirm the equatorial node. The action step H/4 = ħ_NN·(π/2) at the golden-ratio attractor φ is now derived from J_N geometry itself (Theorem 2.14, v4): J_N's quarter-turn (π/2 per step, the same factor that gives Re(s)=1/2) applied to the SMMNIP action quantum H_NN forces H_NN/4 as the orbit step — with H_NN the neural analog of Planck's h, and ħ_NN its reduced form ħ.
+The Riemann zeta function $\zeta(s)$ is the $l=1$ resonant mode of the anti-Möbius involution $J_N(z)=i/\bar{z}$ on the Riemann sphere $S^2$. The four-cycle of $J_N$ has angular period $2\pi$, selecting the fundamental spherical harmonic $Y_1^0=\cos\theta$. Courant's nodal domain theorem (1923) forces the fundamental mode to have exactly one node: the equatorial great circle $\theta=\pi/2$. Under the standard zeta coordinate, $\theta=\pi/2$ is $\text{Re}(s)=\frac{1}{2}$. The Wiles Modularity Theorem (1995) proves the boundary $r=1$ is a genuine mathematical isomorphism between General Relativity (elliptic curves, exterior) and Quantum Mechanics (modular forms, interior). The critical line value $1/2 = (\pi/2)/\pi$ is not a coordinate — it is a phase offset: $J_N$ maps a geodesic of $S^2$ to a phase displacement of $\pi/2$ against the domain's $\pi$ period. The $\pi/2$ factor was established independently in the gradient flow $\pi \to H/4 \to \varphi$ (Theorem 2.14) before the RH connection was made, foreclosing circularity. One angular generator. Three consequences: the four-cycle orbit (Lemma 1.2), the action step at $\varphi$ (Theorem 2.14), and the critical line (Corollary 2.5).
 
 ---
 
@@ -52,11 +52,19 @@ The inside-out map that makes the geometry visible is **J_N(z) = i/z̄** — an 
 | Route | Description | Status |
 |-------|-------------|--------|
 | **Algebraic** | J_s fixed-set theorem: σ = 1/2 iff 1−σ = σ (Theorem 1.1) | ESTABLISHED |
-| **Geometric** | J_N angular ratio: Re(s) = (π/2)/π = 1/2 (Corollary 2.5) | ESTABLISHED |
-| **Action-Quantum** | H/4 from J_N geometry: the same π/2 quarter-turn that yields Re(s)=1/2 forces the SMMNIP action step at φ to be H_NN/4 = ħ_NN·(π/2), with H_NN ↔ h and ħ_NN ↔ ħ in the SM analogy (Theorem 2.14, v4) | ESTABLISHED |
+| **Geometric — geodesic phase** | J_N angular ratio: Re(s) = (π/2)/π = 1/2 (Corollary 2.5). Factoring π reveals: numerator = J_N step (π/2), denominator = domain half-period (π), ratio = phase offset. Re(s) = 1/2 is the half-period phase node of J_N's geodesic action on S². The π/2 was established independently in the gradient flow before the RH connection was made. | ESTABLISHED |
+| **Action-Quantum** | H/4 from J_N geometry: the same π/2 quarter-turn forces the SMMNIP action step at φ to be H_NN/4 = ħ_NN·(π/2), with H_NN ↔ h and ħ_NN ↔ ħ in the SM analogy (Theorem 2.14) | ESTABLISHED |
 | **Physical** | Entropy/inertia tangency at d* = 0.24600, bracketed by α and Ω (§3.6) | HEURISTIC |
 
-The π/2 factor is not decorative. It is J_N's angular generator — a single geometric object that simultaneously determines: the position of the critical line (Cor. 2.5), the step size at the φ-attractor (Thm. 2.14), and the four-cycle period of the gauge orbit (Lemma 1.2).
+**The π/2 chain — one geometric object, three consequences:**
+
+| Consequence | Location | Content |
+|-------------|----------|---------|
+| Four-cycle orbit | Lemma 1.2 | Each J_N step = π/2; four steps = 2π full orbit |
+| Action step at φ | Theorem 2.14 | H/4 = ħ_NN·(π/2); action quantum per J_N step |
+| Critical line | Corollary 2.5 | Re(s) = (π/2)/π = 1/2; phase offset of the geodesic |
+
+Independent confirmation: Gemini independently characterized (π/2)/π as "J_N maps a geodesic to a phase offset" without prompting, on presentation of the factored form alone.
 
 ---
 
@@ -84,7 +92,7 @@ The proof document `RiemannHypothesisProof.txt` is organized in four parts follo
 | 1.1 | J_s fixed set = Re(s) = 1/2  (2-line proof) |
 | Lemma 1.2 | J_N⁴ = identity  (direct computation) |
 | Lemma 1.3 | J_N invariant boundary = unit circle r=1 |
-| Cor. 2.5 | Re(s) = 1/2 = (π/2)/π  (geometric theorem from J_N) |
+| Cor. 2.5 | Re(s) = 1/2 = (π/2)/π — geodesic-phase derivation. Factoring π: step (π/2) / period (π) = phase offset (1/2). J_N maps a geodesic of S² to a phase offset of π/2. The π/2 was established in gradient flow geometry before the RH connection, foreclosing circularity. |
 | Thm. 1.4 | φ = fixed point of (J_N ∘ recursion)  (algebraic, exact) |
 | Thm. 2.7 | H/4 = ħ_NN·(π/2)  (algebraic identity; step size, not count) |
 | Thm. 2.14 | H/4 derived from J_N geometry: quarter-turn (π/2) of the SMMNIP action quantum (H_NN ↔ h, ħ_NN ↔ ħ) forces step = H_NN/4 at the φ-crossing. Same π/2 factor as Cor. 2.5. |
