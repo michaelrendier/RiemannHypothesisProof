@@ -1,0 +1,43 @@
+CONTEXT PRIMER — RIEMANN HYPOTHESIS PROOF SESSION
+Date: 2026-05-08 | Session hash: RH-PROOF-001 | UTC-7
+Backward link: SESSION_PRIMER_SMNNIP.txt
+Forward link: [next session]
+
+================================================================
+WHAT WAS ESTABLISHED THIS SESSION
+================================================================
+
+THE CORE INSIGHT:
+The Riemann Zeta function is a Lagrangian on a spherical manifold.
+Lagrangians land on geodesics. The equator IS the geodesic.
+The 1/2 "scar" is the shadow of π/2 after π was factored out.
+This is not new mathematics. It is the correct coordinate system.
+
+THE COORDINATE ERROR:
+Standard treatment absorbs π^(s-1) into ξ(s) and works in
+Cartesian s-plane. This is a Mercator projection. Africa/Greenland.
+The sphere was flattened. The equator became a line at Re(s)=1/2.
+
+THE TRANSFORM (Step 1):
+  w = 2s - 1
+Centers critical line at Re(w) = 0 (imaginary axis).
+Stereographic projection maps Re(w) = 0 to equator φ = π/2.
+Re(s) = 1/2 is literally π/2 with π divided out.
+π/2 IS the ℝ→ℂ Cayley-Dickson step.
+
+THE SYMMETRY (𝒥_N):
+𝒥_N : (r, θ) → (1/r, θ + π/2)
+Elliptic inversion — NOT Ptolemy inversion.
+Classical inversive geometry. Established. Cited. Accepted.
+Conformal. Self-adjoint. Involution. Fixed point r=1.
+
+THE ENGINE:
+Four-cycle, two-stroke. Four Jacobians:
+  Inertia ↔ Geometry  [compression stroke]
+  Entropy ↔ Observation [expansion stroke]
+Each 𝒥_N application = π/2 rotation = one Cayley-Dickson step.
+ℝ → ℂ → ℍ → 𝕆
+
+THE KEY PHYSICAL CLAIM:
+Time having spatial length: ESTABLISHED (Minkowski 1908)
+Length having temporal iteration: THE NEW DIRECT
