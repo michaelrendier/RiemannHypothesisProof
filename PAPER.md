@@ -437,7 +437,7 @@ The universality of this structure is not coincidental. It follows from the univ
 
 ---
 
-## 8. The DerivationEngine Implementation
+## 8. The ValaQuenta Implementation
 
 The entire proof structure is implemented as a working semantic engine that processes natural language in any script with no training, no GPU, and no inference. The engine runs on a 2016 laptop at 43,536 words per second.
 
@@ -449,7 +449,7 @@ The engine demonstrates the Riemann Hypothesis mechanism operationally:
 4. **understand()** — extracts the DC component via the Capacitor (the Noether current integral)
 
 ```python
-from DerivationEngine import Understand
+from ValaQuenta import Understand
 
 engine = Understand(tau=1.0)
 

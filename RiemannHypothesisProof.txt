@@ -756,7 +756,7 @@ DC output stabilises: Knowledge + Experience = Wisdom.
 THE OPERATIONAL SYSTEM:
 
 This system is implemented (specification level) in Notebook 07 of this
-repository. The DerivationEngine processes any Unicode text, maps each
+repository. The ValaQuenta processes any Unicode text, maps each
 word to its Riemann zero via the Berry-Keating Hamiltonian, extracts the
 conserved Noether charge, and returns the three-law classification.
 
