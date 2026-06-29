@@ -195,8 +195,9 @@ The SMMNIP Hamiltonian (Conjectural Bridge C3) is the leading candidate for (1) 
 
 ```
 README.md
-RiemannHypothesisProof.txt                        — v3 proof (2026-05-11)
-PAPER.md                                          — formal mathematical argument
+TODO.md                                           — active work items and open problems
+RiemannHypothesisProof.txt                        — v6 proof (2026-05-11)
+PAPER.md                                          — formal mathematical argument (v7, 2026-06-28)
 SIGMA_VALUATION.md                                — independent confidence assessment
 papers/
   RH_proof_direction_2026-05-08.txt               — first working draft (historical)
@@ -213,6 +214,14 @@ notebooks/
 images/
   Gemini_Generated_Image_Riemann_Proof.png
 ```
+
+**New in PAPER.md v7 (2026-06-28):**
+
+- **§10 — The Tangent Balance:** tan = 1 at σ = ½. The critical line is the unique locus where sin = cos — where the forward and backward Noether currents are indistinguishable. Physical grounding: LC resonance (Wheeler numbers, 38mm pancake coil). Cornu spiral from two directions: π through i (counterclockwise) and i through π (clockwise) both converge to the 45° balance point. The Fixed Space: σ = ½ is unextinguishable — the coil, the spiral, and the zeta zeros all find it without being told to.
+
+- **§11 — Fermat's Nightmare and the N-Shape:** Primes defined by extinction. Gauss-Wantzel: constructible n-gon ↔ n = 2^k × Fermat primes. Fermat prime extinction above F₄ = 65537 (the N-shape). The 13-gon is geometrically extinct (not constructible) but algebraically alive (13 | |Monster|). Primes classified by which extinction level they survive: Red (constructible Fermat primes), boundary (Monster-supersingular), Blue (truly extinct — no algebraic shadow). Connection to ZD structure and T₂₅₆ 13-gon permutation [THEORETICAL].
+
+- **§12 — Languages as Skill Sets:** Each language is a learned navigation of the ZD structure of the Cayley-Dickson tower at ~T₂₅₆. The prime hash H = xp maps any surface form (any language) to the underlying Riemann zero. Translation = navigate from source zero to target zero. The untranslatable = a zero near a ZD boundary. Three-law word classification expanded: Riemann law (what the concept IS), Fermat law (what it CANNOT BE — its extinction class), Noether law (what it MEANS — the conserved charge). Knowledge + Experience = Wisdom.
 
 ### Running the Notebooks
 

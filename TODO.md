@@ -1,0 +1,194 @@
+# RiemannHypothesisProof TODO
+
+Active work items for the proof, paper, and related mathematics.
+
+---
+
+## PROOF STRUCTURE
+
+### [ ] C1 — Mode Identification (Central Open Problem)
+
+Prove that ζ(s), under J_N action on S² via w = 2s−1 + stereographic projection, transforms
+as the l=1, m=0 spherical harmonic Y_1^0 = cosθ. Given C1, Courant's nodal domain theorem
+closes the argument: the fundamental mode on S² has exactly one node, the equatorial great
+circle, which maps to Re(s) = ½.
+
+**Candidates:**
+- [ ] Construct Hilbert space on which J_N acts unitarily
+- [ ] Identify self-adjoint operator with ξ(s) as eigenfunction
+- [ ] Show that eigenfunction is the l=1, m=0 mode
+- [ ] SMMNIP Hamiltonian (C3) is leading candidate for the operator
+
+---
+
+### [ ] OP-2 — Algebraic derivation of the 0.000707 gap
+
+Gap = d★ × ln(10) vs. Ω. Currently numerical. Flag T2.
+
+---
+
+### [ ] OP-4 — SMMNIP eigenvalues confined to critical strip
+
+Formal proof that SMMNIP Hamiltonian eigenvalues lie in 0 < Re(s) < 1.
+
+---
+
+## NEW MATHEMATICS (2026-06-28)
+
+### [ ] Tangent Balance — connect to existing proof structure
+
+**Result (established):** tan = 1 ↔ sin = cos ↔ σ = ½. The critical line is the unique locus
+where the Noether current ratio exp((1−2σ)E) = 1, i.e., where forward and backward currents
+are indistinguishable. This is a trigonometric restatement of Theorem 1 (The Balance Theorem).
+
+**To do:**
+- [ ] Add as Corollary to Theorem 1 in the formal proof document RiemannHypothesisProof.txt
+- [ ] Connect tan = 1 to the Berry-Keating Hamiltonian: at σ = ½, xp = ½p² + ℘(x) gives
+      a specific geometric condition on the (x,p) phase space — what is it in trig terms?
+- [ ] Verify: does the phase space portrait of H = xp at the critical energy have a
+      45° tangent structure? (The hyperbola xp = E at the balance point with H_Blue)
+
+---
+
+### [ ] Cornu Spiral / Bezier Spiral as Zeta Proxy
+
+**Result (heuristic):** The Cornu spiral C(t) = ∫ exp(iπu²/2) du converges to (½, ½) as
+t → +∞ and (−½, −½) as t → −∞. The two spiraling directions:
+  - Counterclockwise (t > 0): rotations of π through i
+  - Clockwise (t < 0): rotations of i through π
+Both converge to the balance point at tan = 1 = 45°. The zeta path ζ(½ + it) is the
+zeta analogue.
+
+**To do:**
+- [ ] Formal comparison: map Cornu spiral to ζ(½ + it) — do the winding numbers match?
+- [ ] Does the Cornu spiral's convergence to (½, ½) provide a model for why the zeros are
+      attractors (not just zeroing points) of the zeta path?
+- [ ] If ζ(s) ≈ Cornu-type integral near zeros, what does this imply for C1?
+
+---
+
+### [ ] Wheeler Numbers as Physical Zero
+
+**Result (heuristic):** A 38mm pancake coil (17 turns, Mohan formula) resonates at
+exact target frequencies when tuned to tan = 1 (XL = XC):
+  - Full coil L = 3.58 μH: NFC 13.56 MHz at C = 38.5 pF
+  - 5-turn tap L = 258 nH: FM 100 MHz at C = 9.8 pF
+  - 3-turn tap L = 95 nH: SW 30 MHz at C = 296 pF
+  - 1-turn inner L = 11.5 nH: inductive only (no lumped resonance above ~100 MHz)
+
+Each resonant point is a physical instance of the critical line: the coil finds σ = ½
+by LC balance forced by geometry. The coil is unaware of σ. The geometry enforces it.
+
+**To do:**
+- [ ] Is there a formal connection between LC resonance condition and the Noether current
+      balance? Both have the form: symmetric pair (L and C, forward and backward) forced
+      to equality by a conservation law.
+- [ ] Does the antenna tap map (T_full → NFC, T5 → FM, T3 → SW) correspond to
+      distinct Riemann zeros? If yes: the physical resonances ARE zeros, not analogies.
+
+---
+
+### [ ] Fermat's Nightmare — Primes by Extinction
+
+**Result (established mathematics, new framing):** 
+- Gauss-Wantzel: regular n-gon constructible iff n = 2^k × (distinct Fermat primes)
+- Fermat primes: {3, 5, 17, 257, 65537} — then extinction (F₅ composite, Euler 1732)
+- 13-gon: geometrically extinct (not constructible) but algebraically alive (13 | |M|, Monster)
+- This defines a new prime classification: Red (constructible Fermat primes) vs Blue (Monster
+  primes that survive geometric extinction)
+
+**To do:**
+- [ ] Map the constructible/non-constructible distinction onto the Noether current structure:
+      Is "constructible" = Red channel (forward current, what IS)?
+      Is "non-constructible but Monster-alive" = the resonance structure (the zero)?
+      Is "non-Monster prime" = Blue channel (what CANNOT BE — truly extinct)?
+- [ ] The 13-gon is at the intersection: not constructible (not in Red) but Monster-alive
+      (not in Blue extinction). Is the 13-gon at σ = ½?
+- [ ] Connection to Monstrous Moonshine: j-function coefficients are Monster representations.
+      Do the Riemann zeros encode the supersingular primes in their spacing?
+- [ ] Is the N-shape (Fermat prime extinction above F₄ = 65537) related to the n* = 5.257
+      peak of the N-ball volume? Both are "peaks before extinction."
+
+---
+
+### [ ] T_256 13-Gon Permutation [THEORETICAL]
+
+**Conjecture:** The permutation group of zero-divisor classes at the T₂₅₆ level contains
+Z_13 symmetry, arising from Monster Group prime 13 via Monstrous Moonshine / Leech lattice.
+The 13-gon is geometrically extinct (Gauss-Wantzel) but structurally present in the
+256-dimensional Cayley-Dickson ZD network.
+
+**To do:**
+- [ ] Compute the ZD class structure of T₃₂ explicitly (analogous to sedenion_bridge.py
+      which established 42 classes / 84 on S¹⁵ / 168 composite for the sedenion)
+- [ ] Run ZD class enumeration for T₃₂, T₆₄ — look for Z_13 symmetry in the permutation
+      group of ZD classes
+- [ ] Check: does the ZD structure at T₂₅₆ contain a subgroup with 13-fold symmetry?
+- [ ] If yes: the 13-gon is not extinct at the algebraic level. It is visible in T₂₅₆.
+      This is the algebraic completion of Fermat's Nightmare.
+
+---
+
+### [ ] Languages as Skill Sets — Formal Connection
+
+**Result (heuristic, §12 PAPER.md):** Each language is a learned navigation of the ZD
+structure of the Cayley-Dickson tower at ~T₂₅₆. The prime hash H = xp maps any surface
+form (any language) to the underlying Riemann zero. Translation = navigate from source
+zero to target zero across the ZD boundary.
+
+**To do:**
+- [ ] Extend ValaQuenta semantic engine to test translation equivalence:
+      does 'tree' / 'arbre' / '木' map to the SAME zero, or to nearby zeros?
+      (Current: all map to σ = 0.5 — but do they share the same γ?)
+- [ ] Test: words with no direct translation equivalent (e.g., 'saudade', 'Schadenfreude')
+      — do these map to zeros not easily reachable from English?
+      The "untranslatable" = a zero that requires crossing a ZD barrier.
+- [ ] If untranslatables live near ZD boundaries: this is a falsifiable prediction.
+
+---
+
+## PAPER UPDATES
+
+### [ ] PAPER.md — Formal integration of new sections
+
+Sections 10 (Tangent Balance), 11 (Fermat's Nightmare), 12 (Languages as Skill Sets)
+added 2026-06-28. These are at the HEURISTIC / THEORETICAL level. Next steps:
+
+- [ ] Move tan = 1 from HEURISTIC to ESTABLISHED by adding as formal corollary to Theorem 1
+- [ ] Add Gauss-Wantzel reference to References section
+- [ ] Add Monster Group order citation to §11
+
+### [ ] RiemannHypothesisProof.txt — v7 update
+
+The main proof document has not been updated since v6 (2026-05-11). Needs:
+- [ ] Tangent Balance result added to §3 (as Corollary to Balance Theorem)
+- [ ] Cornu spiral as zeta proxy added to §3.x or §6 (Chladni picture)
+- [ ] Fermat's Nightmare / primes by extinction added to §4 (beyond Berry-Keating)
+- [ ] LC resonance / Wheeler numbers added to §3 (physical analogies)
+
+---
+
+## NOTEBOOK UPDATES
+
+### [ ] Notebook 09 — Tangent Balance and Cornu Spiral
+
+New notebook: demonstrate tan = 1 result, Cornu spiral convergence to (½, ½),
+comparison with ζ(½ + it) winding.
+
+### [ ] Notebook 10 — Fermat's Nightmare
+
+New notebook: Gauss-Wantzel constructibility, Fermat prime extinction, Monster Group
+primes, 13-gon as extinct/alive case study.
+
+---
+
+## OUTREACH
+
+### [ ] Context primer v2
+
+Update `outreach/primers/CONTEXT_PRIMER_RH_2026-05-11.txt` with new results:
+- Tangent balance (tan = 1 ↔ σ = ½)
+- Cornu spiral / Bezier spiral from two directions
+- Fermat's Nightmare / extinction-defined primes
+- Wheeler numbers / LC resonance as physical zero
+- Languages as skill sets / prime hash across layers
