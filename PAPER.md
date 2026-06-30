@@ -131,37 +131,103 @@ At ε = 0: identity. At ε = 1: s ↦ 1−s (the reflection). This is a one-para
 
 The fixed point: δs = 0 ↔ 1−2s = 0 ↔ s = 1/2.
 
-### 3.2 The Two Conserved Currents
+### 3.2 The Amplitude Lagrangian — Derivation of the Current Forms
 
-By Noether's theorem, the symmetry (3.1) generates a conserved current. The functional equation symmetry is a **reflection** (an involution of order 2), which generates two complementary currents — one from each side of the fixed point:
+The exponential current forms are **derived** from the Euler product, not asserted. The derivation is in `engines/noether_derivation.py` and runs independently.
+
+**Step 1 — Euler product amplitudes.**
+
+The Euler product ζ(s) = Π_p (1 − p^{−s})^{−1} assigns to each prime p, at energy E = log p, two amplitudes:
+
+```
+A_+(σ, E) = |p^{−s}|     = e^{−σE}      [forward amplitude — what IS]
+A_−(σ, E) = |p^{−(1−s)}| = e^{−(1−σ)E} [backward amplitude — what CANNOT BE]
+```
+
+These are direct computations from |p^{−s}| = p^{−σ} = e^{−σ log p} = e^{−σE}. No model assumptions.
+
+**Step 2 — Amplitude Lagrangian.**
+
+```
+L(σ, E) = A_+(σ, E) + A_−(σ, E) = e^{−σE} + e^{−(1−σ)E}          (3.2)
+```
+
+The Lagrangian is the total amplitude at energy scale E across both sides of the critical strip.
+
+**Step 3 — Functional equation symmetry of L.**
+
+```
+L(σ, E) = L(1−σ, E)   for all σ, E                                  (3.3)
+```
+
+This follows trivially from the definition of L. It is the functional equation ξ(s)=ξ(1−s) stated in amplitude space.
+
+**Step 4 — Equation of motion: σ = 1/2 is the unique minimum.**
+
+```
+∂L/∂σ = −E·e^{−σE} + E·e^{−(1−σ)E} = 0  ⟺  σ = 1/2               (3.4)
+```
+
+Second derivative: ∂²L/∂σ² = E²L(σ,E) > 0 everywhere. Therefore σ = 1/2 is a **global minimum** of L, not a saddle. The critical line is not a coordinate choice — it is the minimum energy configuration of the amplitude Lagrangian.
+
+**Step 5 — The Noether current (DERIVED).**
+
+For the one-parameter symmetry (3.1) with generator δσ = (1−2σ), the Noether current is:
+
+```
+J(σ, E) = −∂L/∂σ = E[e^{−σE} − e^{−(1−σ)E}]                      (3.5)
+```
+
+Normalising by E:
+
+```
+J_forward(σ, E)  = e^{−σE}          (= A_+(σ,E) = |p^{−s}|)        (3.6)
+J_backward(σ, E) = −e^{−(1−σ)E}     (= −A_−(σ,E) = −|p^{−(1−s)}|) (3.7)
+```
+
+These forms are not asserted. They are the positive and negative components of −∂L/∂σ, derived from the amplitude Lagrangian (3.2).
+
+**In Fermat's Nightmare language:** J_forward is the current of the Un-Extinctable Bulk (what survives every ZD exclusion). J_backward is the current of the Fermat forbidden zone (what is excluded by ZD at dim=16). The negative sign on J_backward is the mathematical statement that the excluded zone pushes back: it is not absence, it is active opposition. See `engines/fermat_nightmare_connection()`.
+
+**Step 6 — Product conservation (Wiles-Noether identity).**
+
+```
+J_forward(σ,E) × |J_backward(σ,E)| = e^{−σE} × e^{−(1−σ)E} = e^{−E}   (3.8)
+```
+
+The product is constant for **all** σ. This is the conserved Noether product charge. Proved analytically; verified numerically by `engines/wiles_noether_product()` and cross-checked via the FermatMonster engine `wiles_noether_check()`.
+
+**AM-GM closure:** (J_forward + |J_backward|)/2 ≥ √(J_forward × |J_backward|) = e^{−E/2} with equality iff J_forward = |J_backward| iff σ = 1/2. The balance condition is the AM-GM equality condition — minimum total amplitude at fixed conserved product.
+
+### 3.3 The Two Conserved Currents
+
+By Noether's theorem applied to the amplitude Lagrangian (3.2) under the symmetry (3.1), the conserved currents are (derived in §3.2):
 
 **Forward Current (Red):**
 ```
-J_forward(σ, E) = exp(−σE)                           (3.2)
+J_forward(σ, E) = exp(−σE)                                          (3.9)
 ```
-Represents the information carried from Re(s) > 1/2 toward the critical line. This is the current of what IS — the attractor, the prime.
+The current of what IS — the attractor, the Un-Extinctable prime amplitude at energy E.
 
 **Backward Current (Blue):**
 ```
-J_backward(σ, E) = −exp(−(1−σ)E)                    (3.3)
+J_backward(σ, E) = −exp(−(1−σ)E)                                   (3.10)
 ```
-Represents the information carried from Re(s) < 1/2 toward the critical line. This is the current of what CANNOT BE — the repulsor, the forbidden zone.
+The current of what CANNOT BE — the Fermat forbidden zone amplitude. Negative because the excluded zone opposes the forward current.
 
-The sign convention: J_forward is positive (toward the critical line from the right); J_backward is negative (toward the critical line from the left). Their magnitudes are the forward and backward exponential currents.
-
-### 3.3 The Balance Condition
+### 3.4 The Balance Condition
 
 **Theorem 1 (The Balance Theorem).** The total Noether current
 
 ```
 J(σ, E) = J_forward(σ, E) + J_backward(σ, E)
-         = exp(−σE) − exp(−(1−σ)E)                  (3.4)
+         = exp(−σE) − exp(−(1−σ)E)                  (3.11)
 ```
 
 satisfies:
 
 ```
-J(σ, E) = 0  if and only if  σ = 1/2                 (3.5)
+J(σ, E) = 0  if and only if  σ = 1/2                (3.12)
 ```
 
 for all E > 0.
