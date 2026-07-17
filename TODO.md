@@ -43,10 +43,16 @@ are indistinguishable. This is a trigonometric restatement of Theorem 1 (The Bal
 
 **To do:**
 - [ ] Add as Corollary to Theorem 1 in the formal proof document RiemannHypothesisProof.txt
-- [ ] Connect tan = 1 to the Berry-Keating Hamiltonian: at σ = ½, xp = ½p² + ℘(x) gives
+- [x] PARTIAL (2026-07-12) — Connect tan = 1 to the Berry-Keating Hamiltonian: at σ = ½, xp = ½p² + ℘(x) gives
       a specific geometric condition on the (x,p) phase space — what is it in trig terms?
+      Notebook 05 §5.5 locates the actual locus (gradient descent on `balance²` via the
+      real `℘'(x)`, not abstract exponentials, converges every random start onto it —
+      verified, README §14). What is NOT yet done: extracting that locus's closed trig
+      form (is it literally 45°/tan=1?) — the locus is found, not yet characterized.
 - [ ] Verify: does the phase space portrait of H = xp at the critical energy have a
-      45° tangent structure? (The hyperbola xp = E at the balance point with H_Blue)
+      45° tangent structure? (The hyperbola xp = E at the balance point with H_Blue) —
+      STILL OPEN: NB05 §5.5 gives the locus numerically but does not fit/derive its
+      tangent angle.
 
 ---
 
