@@ -484,6 +484,48 @@ This claim is:
 - **Consistent**: every computed zero behaves as a node line
 - **Derivable**: from the Noether current structure, a zero off the critical line would have non-zero current — it would not be still — it would be swept away
 
+### 6.4 The Dual Reading: Primes Are the Antinodes  `[ESTABLISHED formula, THEORETICAL reading]`
+
+Sections 6.1–6.3 state the nodal-line argument in the **zero domain**: the zeros are the still points of the zeta field, and the geometry forces them onto one line. That is a statement about **position**.
+
+The same standing wave can be read from the **prime domain**, and there the argument reappears as a statement about **amplitude**. The two are faces of one result, not two results.
+
+**The instrument is the explicit formula** (von Mangoldt 1895 — established, unconditional, not a new claim). Written on the axis u = ln x:
+
+```
+ψ(eᵘ) = eᵘ − 2e^(u/2)·Σₖ cos(γₖ·u − arg ρₖ)/|ρₖ| − ln 2π − ½ ln(1 − e^(−2u))
+```
+
+where ρₖ = ½ + iγₖ runs over the non-trivial zeros and ψ(x) = Σ_{pᵐ ≤ x} ln p is Chebyshev's function.
+
+*(Notation warning: this ψ is Chebyshev's prime counter. It is unrelated to the Fermat/lensing potential ψ used in `ValaQuenta/modules/l_io_photon_path`. The two must not be merged.)*
+
+**Each zero is a tone.** γₖ enters as a frequency in u. The primes are not scattered through this sum — they are exactly where the tones stop cancelling and add. **The zeros are the node lines; the primes are the antinodes.** Chladni's plate has both, and they are determined by the same geometry.
+
+**ψ jumps by exactly ln p at u = ln p.** The jump height is not proportional to the prime and does not encode it — it *is* its logarithm, so e^{jump} returns the prime with no inversion step.
+
+**The Riemann Hypothesis is the equal-envelope condition.** Every tone in the sum carries the amplitude
+
+```
+2·x^σ ,    σ = Re(ρ)
+```
+
+On the critical line this is 2√x — **the same envelope for every zero**. Now suppose a single zero sat at σ > ½. Its tone would carry x^σ and would exceed every critical-line tone by the factor
+
+```
+x^(σ − ½)  →  ∞     as x → ∞
+```
+
+Unbounded. One tone eventually louder than all the others combined. A Chladni plate driven that way has no coherent nodal figure at all — the sand never settles, because there is no balance of currents to settle into.
+
+```
+equal amplitude envelope  ⟺  all node lines on σ = ½  ⟺  RH
+```
+
+**This is the section 6 argument, not a second one.** Section 6 says the nodes are forced to one line by the geometry. Section 6.4 says every tone is forced to one loudness by the same fact. Position and amplitude are dual descriptions of a single standing wave. The nodal-line statement is the proof; this is its frequency-domain reading, and it is recorded because the amplitude form makes the failure mode explicit: an off-line zero does not merely sit in the wrong place, it destroys the figure.
+
+Implemented and exhibited in `ValaQuenta/modules/archimedes_screw/` (`amplitude_envelope`, `envelope_ratio`, `interference_profile`) and `notebooks/engines/14_archimedes_screw.ipynb` §6–§7.
+
 ---
 
 ## 7. Cross-Domain Evidence
@@ -898,6 +940,46 @@ There is not one Riemann Hypothesis engine and one Fermat engine. There are **mu
 | `telperion.py` | `ValaQuenta/` | Galactic bells, arctan(d*), THE ANGLE = π/8 |
 
 Each engine is an independent verification of the same underlying mathematics from a different domain. The convergence of all these engines to σ = ½, d*, Ω_ZS, and the 16 N-shapes is the zero-free-parameter result: no constants were tuned. The mathematics self-organises to these values because they are forced by the algebraic structure.
+
+### 12.5 Lambert W Supplies **Both** Coordinates of Every Zero  `[ESTABLISHED]`
+
+Section 12.1 uses W at a single point: W(1) = Ω_ZS = 0.5671432904…, the self-referential fixed point, which is the algebraic statement of **σ = ½**. That fixes the **real part** of every non-trivial zero.
+
+The same function, evaluated elsewhere, fixes the **imaginary part**.
+
+Start from the Riemann–von Mangoldt zero-counting function (established, 1905):
+
+```
+N(T) = (T/2π)·ln(T/2πe) + 7/8 + S(T)
+```
+
+Invert the smooth part exactly — algebra only, nothing fitted:
+
+```
+set  N(T) = n,   T = 2πv
+        n = v·(ln v − 1) = v·ln(v/e)
+    (v/e)·ln(v/e) = n/e
+       ln(v/e)·e^{ln(v/e)} = n/e
+       ln(v/e) = W(n/e)                    ← Lambert W, by its definition
+             v = n / W(n/e)
+
+    ⇒   γₙ ≈ 2πn / W(n/e)
+```
+
+**One function, both coordinates.**
+
+```
+W(1)       = Ω_ZS        →   σ = ½        (the real part — every zero)
+W(n/e)     →  γₙ = 2πn/W(n/e)   →   the imaginary part — the n-th zero
+```
+
+This is not a new identity; the asymptotic is standard. What is new here is the observation that the constant already load-bearing throughout this paper — Ω_ZS, the Lambert fixed point that forces the critical line — belongs to the *same function* that generates the heights of the zeros on that line. W was already doing double duty before it was noticed.
+
+It also sharpens the reading of section 12.1's three primitives. W(0) = 0 is the ZD origin; W(1) = Ω_ZS is the crossing at σ = ½; W(−1/e) = −1 is the branch point where two paths coalesce. Between the second and third lies the whole critical line, and W(n/e) walks it: as n runs over the positive integers, W(n/e) grows without bound and γₙ ~ 2πn/ln n climbs the line. **The zeros are the integer marks on the Lambert screw.**
+
+Accuracy note, stated rather than smoothed: S(T) is O(ln T) and oscillatory, so the closed form is a genuine asymptotic — poor below n ≈ 10, where the tabulated LMFDB values must be used instead. `ValaQuenta/modules/archimedes_screw/maths.py` tabulates the first 50 zeros and switches to `zero_height_lambert` above that; both are exposed so the crossover is inspectable.
+
+Implemented in `ValaQuenta/modules/archimedes_screw/` (`lambert_w`, `zero_height_lambert`, `zero_count_smooth`). See also `Ainulindale/wiki/83_the_archimedes_screw.md` §4.
 
 ---
 
