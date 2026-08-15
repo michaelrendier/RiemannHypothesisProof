@@ -115,6 +115,118 @@ In Chladni's experiments (1787), a vibrating plate sprinkled with sand develops 
 
 **The Ainulindale Claim.** The non-trivial zeros of ζ(s) are not merely points where ζ vanishes; they are attractors — the stable node lines of the zeta spiral. Unstable zeros, if they existed, would be points where the spiral passes through the origin but is immediately deflected away. The Riemann Hypothesis is the assertion that no such unstable zeros exist.
 
+### 2.7 Why 1/2 — The Half-Radius Circle and the Self-Dual Gaussian
+
+*Added 2026-08-13. This section is **definitional**: it explains why the critical line
+sits at 1/2 rather than at any other constant. It makes no claim about RH itself.*
+
+The value 1/2 in (2.1) is usually presented as an output — the fixed point one obtains
+after writing down ξ. It is more naturally read as an input: **1/2 is a radius**, and
+the π in π^{−s/2} is what normalises it.
+
+**2.7.1 π is the self-duality constant.**
+
+Consider the Gaussian f_a(x) = e^{−a x²}. Its Fourier transform (ordinary-frequency
+convention) is √(π/a)·e^{−π²ξ²/a}. Requiring f to be its own transform forces
+√(π/a) = 1, i.e.:
+
+```
+a = π      is the unique value for which  e^{−πx²}  is its own Fourier transform.
+```
+
+Verified numerically:
+
+| a in e^{−ax²} | f(0) | F(0) | self-dual |
+|---|---|---|---|
+| π | 1.0 | 1.0 | **yes** |
+| 1 | 1.0 | 1.77245 | no |
+| 2 | 1.0 | 1.25331 | no |
+
+The Mellin transform of this self-dual Gaussian is exactly **π^{−s/2}Γ(s/2)** — the
+factor appearing in ξ. This is the classical theta-function route to (2.1): the
+Jacobi identity θ(1/t) = √t·θ(t) is the self-duality of e^{−πx²}, and (2.1) is that
+self-duality carried through the Mellin transform.
+
+> **π is in ζ because π is the constant that makes a Gaussian self-dual, and
+> self-duality is the reflection.**
+
+**2.7.2 π^{−s/2} is exactly what centres the reflection.**
+
+Let Ξ(s) = π^{−s/2}Γ(s/2)ζ(s) and let N(s) = Γ(s/2)ζ(s) be the same object with the
+π-factor removed. Then:
+
+| s | \|Ξ(s) − Ξ(1−s)\| | \|N(s) − N(1−s)\| |
+|---|---|---|
+| 0.30 + 7.1i | 3.27×10⁻³³ | 0.0124 |
+| 0.80 + 2.5i | 0.0 | 0.35 |
+| 0.25 + 14.0i | 3.1×10⁻³⁶ | 1.15×10⁻⁵ |
+| 0.62 + 0.4i | 2.96×10⁻³¹ | 1.54 |
+
+(mpmath, 30 dp.) The symmetry is exact with the π-factor and destroyed without it.
+π is not incidental to the functional equation; it is the normalisation that places
+the fixed point at 1/2.
+
+**2.7.3 Factoring π out is a half-radius circle.**
+
+| radius r | circumference 2πr | area πr² |
+|---|---|---|
+| 1 | 2π | π |
+| **1/2** | **π** | π/4 |
+
+At r = 1/2 the quantity equal to π is the **circumference**. One complete revolution
+of the half-radius circle has arc length exactly π, so dividing by π normalises one
+full turn to 1. Parametrising by normalised arc length,
+
+```
+σ = arc / π  ∈ [0, 1)     wraps the circle exactly once
+```
+
+and antipodal points differ by 1/2.
+
+**2.7.4 The strip is the diameter; 1/2 is the far end of it.**
+
+Under this parametrisation, σ ↦ 1−σ is a **reflection across a diameter**. A diameter
+reflection of a circle has exactly two fixed points, namely that diameter's endpoints:
+
+```
+σ = 0.00  ->  0.00      FIXED   (the wrap point)
+σ = 0.25  ->  0.75
+σ = 0.50  ->  0.50      FIXED   (the critical line)
+σ = 0.75  ->  0.25
+```
+
+The diameter of the r = 1/2 circle is 2r = **1**, which is the width of the critical
+strip. Hence:
+
+> **Proposition 2.7.** Under σ = arc/π on a circle of radius 1/2, the functional
+> equation's reflection is a reflection across a diameter of length 1. Its two fixed
+> points are σ = 0 (the wrap point) and σ = 1/2 (the critical line), separated by the
+> full width of the critical strip. The critical line lies at distance r = 1/2 from
+> the centre.
+
+The centre is the fixed point of the geometry and carries no angular structure. **1/2
+is the radius at which a circle exists apart from that centre** — the smallest scale
+at which direction is defined at all.
+
+**2.7.5 Remark — the mechanical realisation.**
+
+The same normalisation appears independently in the RedBlue engine's rotor kinematics.
+For two counter-rotating phasors z(φ) = R·e^{iφ} + e·e^{−ikφ}, one has
+min|z| = |R − e|, so the path reaches the origin **only** at R = e; and at R = e the
+path factorises exactly as
+
+```
+z(φ) = 2R·cos(A)·e^{iB}          A = (1+k)φ/2,   B = (1−k)φ/2
+```
+
+a real envelope times a pure phase. At R = e = **1/2** the envelope has unit amplitude
+and the path spans exactly [0, 1] — from the centre to the diameter. Two half-radius
+circles, counter-rotating, span the strip; neither alone can. See
+`Ainulindale/wiki/85_the_apex_path.md`.
+
+*Scripts: `VAPMIP/.claude/scratchpad/2026-08-13_apex_path/half_is_the_equator.py`,
+`half_radius_circle.py`. All figures above are computed.*
+
 ---
 
 ## 3. The Conserved Noether Currents of the Functional Equation
@@ -1045,7 +1157,147 @@ Knowledge (Riemann) + Experience (Fermat boundary-learning) = Wisdom (Noether co
 
 ---
 
-## 14. Conclusion
+## 14. The Hagedorn Ceiling of the Riemann Gas  `[ESTABLISHED]`
+
+### 14.1 ζ(s) is a partition function, with E = ln n
+
+Write `n^{-s} = e^{-s ln n}`. Then the Dirichlet series is, term for term, a
+Boltzmann sum:
+
+```
+    ζ(s) = Σ_n e^{−s·ln n}          Z(β) = Σ_states e^{−βE}
+
+              s ↔ β                        E_n = ln n
+```
+
+**The energy of the integer n is ln n.** The Euler product is the factorisation
+of the partition function over independent modes:
+
+```
+    ζ(s) = ∏_p (1 − p^{−s})^{−1} = ∏_p ( 1 + p^{−s} + p^{−2s} + ⋯ )
+                                          k=0   k=1     k=2
+```
+
+Each prime is a free bosonic mode of energy `ln p`; the occupation number `k` is
+the exponent in the factorisation; a composite is a multi-particle state. Unique
+factorisation is precisely the statement that these states form a Fock basis.
+This is the **Riemann gas** (Julia 1990; Spector 1990; Bost & Connes 1995) and it
+is established, not introduced here.
+
+### 14.2 The ceiling is the pole, at s = 1
+
+The free-mode sum converges if and only if `s > 1`. The pole of ζ at `s = 1` is
+therefore a **limiting temperature** — a Hagedorn transition (Hagedorn 1965),
+above which the partition function has no convergent expression in free modes.
+
+```
+      s     Σ n^{−s}  (10⁶ terms)          ζ(s)              series converges
+    2.0              1.644933         1.644934067                    yes
+    1.5              2.610375         2.612375349                    yes
+    1.1              8.072562        10.584448460                    yes
+    1.0            (divergent)        POLE                            no
+    0.5           1998.540145        −1.460354508                     no
+```
+
+A computer-algebra system will refuse the point by name: `mpmath.zeta(1)` raises
+`ValueError: zeta(1) pole`.
+
+### 14.3 The critical line lies past the ceiling
+
+`σ = ½` is `β = ½` — **one half of the Hagedorn β, hence twice the Hagedorn
+temperature.**
+
+```
+    Σ n^{−1/2}  =  1998.54  at 10⁶ terms, and unbounded
+    ζ(½)        =  −1.46035450880959     — analytic continuation ONLY
+```
+
+> **Statement (14.3).** Every non-trivial zero of ζ lies in the half-plane where
+> the free-mode partition function does not converge. The critical line is not a
+> thermodynamic state of the Riemann gas; it is a property of the continuation
+> that replaces the gas above its limiting temperature.
+
+This is elementary — it is the statement that the Dirichlet series has abscissa
+of convergence 1 — but it constrains **interpretation**, and it is recorded here
+for that reason. Any physical reading of `σ = ½` in this framework must be a
+reading of the analytic continuation. A reading in terms of the free-mode sum,
+of occupation numbers, or of a Boltzmann equilibrium over `E = ln n` is not
+available at `σ = ½`, because no such equilibrium exists there.
+
+### 14.4 Placement of the framework's constants on the β axis
+
+```
+    quantity        β = s        position
+    ─────────────────────────────────────────────────────────────
+    Hagedorn      1.000000       THE CEILING (pole of ζ)
+    Ω_ZS          0.567143       below — continued region
+    σ = ½         0.500000       below — continued region
+    d*            0.246000       below — continued region
+```
+
+`Ω_ZS = W(1)` is the fixed point of `x = e^{−x}`:
+
+```
+    Ω_ZS      = 0.5671432904097839
+    e^{−Ω_ZS} = 0.5671432904097839          equal to 16 digits
+```
+
+In partition-function language this has a direct reading: with `E = ln n`, the
+unit-energy mode is `n = e`, whose Boltzmann weight at inverse temperature β is
+`e^{−β}`. **Ω_ZS is the temperature at which the unit-energy mode's Boltzmann
+weight equals the temperature itself** — a self-reproducing value under the flow.
+That is a statement about `x = e^{−x}`, and it is exact.
+
+### 14.5 ⚠ A tension with §12 that must be recorded, not smoothed
+
+§12.1 states, of `W(1) = Ω_ZS = 0.5671432904…`: *"This IS σ = ½."* §12.2 repeats
+that it is *"the algebraic statement of σ = ½."*
+
+**As written this reads as a numerical identity, and it is not one:**
+
+```
+    Ω_ZS = 0.5671432904…        σ = ½ = 0.5000000000
+```
+
+These are distinct points, and §14.4 places them at distinct positions on the
+same axis. The paper elsewhere treats them as distinct and depends on their
+difference: §12.2 computes `GAP = Ω_ZS − d*·ln 10`, which requires
+
+```
+    Ω_ZS        = 0.567143290
+    d*·ln 10    = 0.566435933
+    GAP         = 0.000707358
+```
+
+and that computation is meaningless if `Ω_ZS = ½`.
+
+The intended claim is evidently **structural** — that `Ω_ZS` is a self-referential
+fixed point in the sense that `σ = ½` is the fixed point of `s ↦ 1 − s` — and
+that reading is defensible. But the sentence as printed asserts identity, and a
+referee is entitled to stop at it. **Either §12 should be restated as a
+correspondence, or the map from `Ω_ZS` to `½` must be exhibited.** It is not
+exhibited anywhere in this paper. Recorded here as an open item; not resolved.
+
+### 14.6 What this section does *not* establish
+
+⚠ Stated explicitly, per the standards of this document:
+
+- **No implication for the Riemann Hypothesis.** Locating the critical line
+  relative to the abscissa of convergence is elementary and was never in doubt.
+  It constrains interpretation; it says nothing about where the zeros are.
+- **The Riemann-gas identification is not original here** and is cited, not
+  claimed.
+- **The proximity `d* ≈ ¼` is noted, not derived.** `d*` enters this framework by
+  an unrelated route (`246 = 1000·d*`, Maynard–Polymath), and no derivation
+  connects that provenance to the value `¼`. §12.2's argument that `d* < ¼` is a
+  separate claim with its own status and is not strengthened by this proximity.
+- **Nothing here is a physical claim about strings or hadrons.** "Hagedorn" names
+  the mathematical phenomenon — a limiting temperature from an exponentially
+  growing density of states — and is used in that sense only.
+
+---
+
+## 15. Conclusion
 
 We have presented the Riemann Hypothesis in the following form:
 
@@ -1077,6 +1329,10 @@ The primes are the words. The equator does not move. The engine runs on a laptop
 
 ## References
 
+- Bost, J.-B. & Connes, A. (1995). Hecke algebras, type III factors and phase transitions with spontaneous symmetry breaking in number theory. *Selecta Mathematica*, 1(3), 411–457.
+- Hagedorn, R. (1965). Statistical thermodynamics of strong interactions at high energies. *Nuovo Cimento Supplemento*, 3, 147–186.
+- Julia, B. (1990). Statistical theory of numbers. In *Number Theory and Physics*, Springer Proceedings in Physics 47, 276–293.
+- Spector, D. (1990). Supersymmetry and the Möbius inversion function. *Communications in Mathematical Physics*, 127, 239–252.
 - Berry, M.V. & Keating, J.P. (1999). The Riemann zeros and eigenvalue asymptotics. *SIAM Review*, 41(2), 236–266.
 - Chladni, E.F.F. (1787). *Entdeckungen über die Theorie des Klanges*. Leipzig.
 - Edwards, H.M. (1974). *Riemann's Zeta Function*. Academic Press.

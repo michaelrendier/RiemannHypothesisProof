@@ -200,3 +200,21 @@ Update `outreach/primers/CONTEXT_PRIMER_RH_2026-05-11.txt` with new results:
 - Fermat's Nightmare / extinction-defined primes
 - Wheeler numbers / LC resonance as physical zero
 - Languages as skill sets / prime hash across layers
+
+
+## OPEN — recorded 2026-08-15 (PAPER §14.5)
+
+**§12.1 asserts `W(1) = Ω_ZS` "IS σ = ½". As printed this reads as a numerical
+identity and it is not one:** Ω_ZS = 0.5671432904…, σ = ½ = 0.5. They are
+distinct points, and §14.4 places them at distinct positions on the same β axis.
+
+The paper *depends* on their being distinct — §12.2's `GAP = Ω_ZS − d*·ln 10 =
+0.000707358` is meaningless if Ω_ZS = ½.
+
+The intended claim is evidently structural (Ω_ZS is a self-referential fixed
+point in the sense that σ = ½ is the fixed point of s ↦ 1−s), and that reading is
+defensible. **Required: either restate §12.1 as a correspondence, or exhibit the
+map Ω_ZS → ½.** It is not exhibited anywhere in the paper.
+
+A referee at Clay standards stops at this sentence. It should be fixed before any
+submission.
