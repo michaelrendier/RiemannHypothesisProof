@@ -216,6 +216,27 @@ The SMMNIP Hamiltonian (Conjecture C3) is the leading candidate for (1) and (2).
 
 **Sigma valuation (2026-08-16):** a fresh assessor pass over PAPER.md and the code is recorded in [SIGMA_VALUATION_2026-08-16.md](SIGMA_VALUATION_2026-08-16.md), superseding nothing in the 2026-05-10 valuation but extending it to the sections added since.
 
+**Addendum — Generational Lineage of ζ (2026-08-28) `[THEORETICAL]`:** a
+decomposition-side reading run parallel to the spectral argument.
+[ADDENDUM_generational_lineage_2026-08-28.md](ADDENDUM_generational_lineage_2026-08-28.md).
+ζ is a *descriptive* equation; the Sieve is the *definitional* one — and ζ does
+not carry its own decomposition (it imports the zero set), while the Sieve
+*is* the decomposition. The Two Trees partition (Riemann ⟂ Fermat conjugates) is
+an exact, remainder-free, **zero-gradient (harmonic) field** — one deterministic
+sieve pass per prime, density-sum ≡ 1 at every scale — measured 7/7. Its nodal
+set under ξ(s)=ξ(1−s) lands on `Re(s)=½`: a **second, construction-side route to
+the C1 nodal-domain closer**, checkable with elementary tools. The generational
+lineage of ζ is *fed from* Fermat's N-Shape theorem (§11) — Fermat defines
+(ordinal, by exclusion), ζ describes. **The ordinal order of the primes and the
+order in which ζ fires them are two orderings of one set** (§11.1); measured:
+the ζ-spectral order (`ln p/√p`) scrambles the sieve's generation map (entropy
+3.69 vs the ordinal minimum 2.56), and the *departure between the orderings is
+`ψ(x) − x`* — the oscillatory part of the explicit formula, a **Recamán-like**
+non-monotone re-visiting of the primes. RH ⟺ that reordering never accumulates,
+which holds iff every zero it passes through is anchored at `σ=½`. **Does not
+close C1**; offers "a moderately more simple understanding of the prime
+numbers." First of a set — one such addendum planned per Clay workspace.
+
 ---
 
 ## 9. Repository Contents

@@ -33,6 +33,30 @@ Formal proof that SMMNIP Hamiltonian eigenvalues lie in 0 < Re(s) < 1.
 
 ---
 
+## ADDENDUM — Generational Lineage of ζ (2026-08-28)  `[THEORETICAL, filed]`
+
+File: `ADDENDUM_generational_lineage_2026-08-28.md`. Decomposition-side reading:
+ζ = descriptive equation, the Sieve = definitional; the Two Trees partition is a
+zero-gradient/harmonic field (7/7 measured); its nodal set under ξ(s)=ξ(1−s) is
+on Re(s)=½ — a **second route to the C1 nodal-domain closer** from the
+construction side. Ordinal order vs ζ-firing order = two orderings of one set;
+the departure between them = `ψ(x)−x` (Recamán-like). Fed from §11 Fermat N-Shape.
+
+**To do:**
+- [ ] Notebook: run `sieve_lineage(N, order='ordinal'|'zeta')` and plot the
+      generation-map scramble + entropy (2.56 vs 3.69) alongside `ψ(x)−x`.
+- [ ] Make §B rigorous: does the Two Trees partition genuinely satisfy a
+      discrete Laplace equation on the strip, or only the conserved-sum + one-
+      pass-per-prime facts? (The addendum tags the full "harmonic" claim
+      THEORETICAL — this is where to promote or retract it.)
+- [ ] Tie the addendum's "nodal set on the fixed line" to the exact statement
+      C1 needs (l=1,m=0 mode) — are they the same closer or two that must both
+      hold?
+- [ ] Confirm "313 Sieve" nomenclature with Cody (313 = 65th prime = sieve
+      regime boundary at N=1e5 — used that reading in the addendum).
+- [ ] The other six Clay addenda (Yang–Mills, Navier–Stokes, P/NP, Hodge, BSD;
+      Poincaré = solved control). Start after RH addendum settles.
+
 ## NEW MATHEMATICS (2026-06-28)
 
 ### [ ] Tangent Balance — connect to existing proof structure
