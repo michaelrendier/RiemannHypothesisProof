@@ -75,19 +75,186 @@ The conserved charge is Q = ∫ J^0 d³x.
 
 *Reference.* Noether (1918). For the modern statement see Peskin & Schroeder (1995), Chapter 2.
 
-### 2.4 The Berry-Keating Hamiltonian
+### 2.4 The Berry-Keating Hamiltonian  `[CONJECTURE — the sole open step]`
 
-**Conjecture (Berry-Keating, 1999).** There exists a self-adjoint operator whose spectrum corresponds to the imaginary parts γ_n of the non-trivial zeros ζ(1/2 + iγ_n) = 0. This operator is (equivalent to) H = xp, the classical Hamiltonian generating the scale transformation x ↦ λx.
+#### 2.4.1 The Hilbert–Pólya lineage
 
-The classical equations of motion:
+The idea that the Riemann zeros are a *spectrum* predates Berry and Keating by
+a century. Hilbert and Pólya (independently, ~1910–1914; the attribution is
+anecdotal, via Odlyzko's correspondence with Pólya) suggested that the numbers
+γ_n with ζ(½ + iγ_n) = 0 might be the eigenvalues of a self-adjoint operator —
+which would make them real *by construction*, and RH a theorem of spectral
+theory rather than of analytic number theory. The suggestion sat without a
+candidate operator for decades. Three developments gave it teeth:
+
+1. **Montgomery (1973).** The pair correlation of the zeros, on the assumption
+   of RH, has the form 1 − (sin πu / πu)² — identical to the pair correlation
+   of eigenvalues of a large random Hermitian matrix from the Gaussian Unitary
+   Ensemble (Dyson, in conversation with Montgomery). The zeros *repel* like
+   the levels of a quantum system with no time-reversal symmetry.
+2. **Odlyzko (1987, and later to 10²²).** Direct numerical computation of the
+   zero spacings confirms GUE statistics to high precision, including the
+   higher correlations Montgomery's argument did not reach.
+3. **Berry (1986), Berry & Keating (1999).** GUE statistics with no
+   time-reversal symmetry is the signature of a *chaotic* classical
+   Hamiltonian. Berry and Keating identified the simplest such Hamiltonian
+   consistent with the counting function (§2.4.2) as
+
 ```
-ẋ = ∂H/∂p = x
-ṗ = −∂H/∂x = −p
+H = x p                                                          (2.1)
 ```
 
-give x(t) = x₀ e^t, p(t) = p₀ e^{−t}, with the conserved energy E = x₀ p₀ = xp.
+   the classical generator of the dilation x ↦ λx.
 
-*Reference.* Berry & Keating (1999). The conjecture is supported by extensive computational evidence but remains unproven.
+#### 2.4.2 Why H = x p — the counting function
+
+The equations of motion of (2.1),
+
+```
+ẋ = ∂H/∂p = x        ṗ = −∂H/∂x = −p
+```
+
+integrate to x(t) = x₀ e^t, p(t) = p₀ e^{−t}, with
+
+```
+E = x p = x₀ p₀   conserved along every orbit                    (2.2)
+```
+
+The orbits are the hyperbolae x p = E in phase space — unbounded, and the flow
+is the pure scaling t ↦ e^t. Semiclassically, the number of states with
+0 < H < E, after Berry and Keating's symmetric regularization (a cell of area
+2πℏ at the origin, ℏ = 1), is
+
+```
+N_BK(E) = E/(2π) · ( ln(E/2π) − 1 ) + 7/8 + o(1)                 (2.3)
+```
+
+Equation (2.3) is **term-for-term the smooth part of the Riemann–von Mangoldt
+counting function**
+
+```
+N(T) = T/(2π) · ( ln(T/2π) − 1 ) + 7/8 + S(T) + o(1)             (2.4)
+```
+
+with E ↔ T and S(T) = π⁻¹ arg ζ(½ + iT) the fluctuating remainder. This
+agreement — the leading term, the −1, and the constant 7/8 — is the concrete
+reason the candidate operator is x p and not something else. The functional
+equation ξ(s) = ξ(1−s) is the reflection s ↦ 1−s, which under s = ½ + iτ is
+τ ↦ −τ — a symmetry the dilation generator carries naturally, since x p is odd
+under (x,p) ↦ (p,x).
+
+#### 2.4.3 Why it is still open — the self-adjointness obstruction
+
+The classical Hamiltonian (2.1) does **not** quantize to a discrete spectrum
+without further input. The symmetric quantization
+
+```
+Ĥ_BK = ½( x̂ p̂ + p̂ x̂ ) = −i ( x ∂_x + ½ )                         (2.5)
+```
+
+on L²(0, ∞) has eigenfunctions x^{−½ − iE} for *every* real E: the spectrum is
+the whole real line, continuous, not the discrete set {γ_n}. To obtain a
+discrete spectrum one must add structure, and the candidates are proposals,
+not theorems:
+
+- **Berry & Keating (1999), phase-space cutoffs.** Restrict to |x| ≥ ℓ_x,
+  |p| ≥ ℓ_p with ℓ_x ℓ_p = 2πℏ. Reproduces (2.3) but not the fluctuations
+  S(T); the cutoff is heuristic.
+- **Connes (1999).** A spectral realisation as an *absorption* spectrum
+  (missing lines) from the action of the idele class group on a noncommutative
+  space; the associated trace formula is the Weil explicit formula. RH becomes
+  a positivity (Weil positivity) rather than a self-adjointness.
+- **Sierra & Townsend (2008), Sierra (2014).** Ĥ = √x̂ · p̂ · √x̂ on the half
+  line, or the "xp + px" model with a self-adjoint extension parametrised by a
+  boundary phase; the zeros appear as an approximate, not exact, spectrum.
+- **Bender, Brody & Müller (2017).** A PT-symmetric non-Hermitian operator
+  Ĥ = (1 − e^{−i p̂})⁻¹ ( x̂ p̂ + p̂ x̂ ) ( 1 − e^{−i p̂} ) whose reality of
+  spectrum is *equivalent* to RH; the similarity transform to a Hermitian
+  operator has not been shown to exist rigorously.
+- **Berry & Keating (2011).** A refined H(x,p) with a smooth well replacing the
+  hard cutoff, matching more of the asymptotics.
+
+None of these has been proven to have exactly {γ_n} as its spectrum. **That is
+the open step** — see §9 for the precise statement and the evidence.
+
+#### 2.4.4 What this paper needs from it, and the three bearings
+
+This paper does not construct the operator. The chain of §3–§5 needs only the
+**equivalence**, stated as the *Ainulindale Hypothesis* (§5.1): the zeros are
+the stable equilibria of the H = x p system ⟺ they are eigenvalues of a
+self-adjoint operator equivalent to x p ⟺ the Noether current J of §3 vanishes
+there. At a real eigenvalue the eigenstate is stationary, so J = 0 (the
+(b) ↔ (c) step, §5.3). The conserved energy (2.2) is identified in §4.1 with
+*the prime* — E = x p = x₀ p₀ — and it is the argument of the forward current
+J_forward = exp(−σE) (§3.3). The Weierstrass Hamiltonian H_Blue = ½p² + ℘(x)
+of §2.5 is the backward partner; their balance at σ = ½ is §4.3.
+
+Three independent lines point at the same operator, and each constrains the
+others:
+
+| bearing | from | gives |
+|---|---|---|
+| **Noether current** | the reflection symmetry ξ(s) = ξ(1−s) (§3) | J = 0 ⟺ σ = ½, proven by elementary algebra |
+| **semiclassical x p** | the counting function (2.3) ≡ (2.4) (§2.4.2, §4) | the *form* of H, and E = xp = the prime |
+| **the un-sieve** | the prime *construction* as a path from the ground state "Just Prime Numbers" | a Zeta Hamiltonian by ordinary Legendre transform — no new mathematics — and a construction-side "mass gap" (`√N` vs `N/2`) the spectrum must reproduce |
+
+The third bearing is developed in
+`ADDENDUM_recursive_unsieve_2026-08-30.md`: once the recursive un-sieve writes
+the birth of the composites as a trajectory from the ground state — generation
+as the time coordinate, birth rate dN/dg as the velocity — the existence of a
+Hamiltonian description follows from *mechanics are mechanics*, the standard
+Lagrangian ↔ Hamiltonian correspondence. Pinning its exact form is the same
+open problem as (2.4.3); asserting that *some* Zeta Hamiltonian exists is not.
+
+#### 2.4.5 The identification: ζ is the on-shell action of the RedBlue system
+
+The Zeta Lagrangian and the Zeta Hamiltonian are not new objects. They are the
+two the framework already carries:
+
+- **The Zeta Hamiltonian is Ĥ_RB (∅_RB)** — the RedBlue Hamiltonian system of
+  §4, H_Red = x p (forward) and H_Blue = ½p² + ℘(x) (backward), whose balance
+  at σ = ½ is the whole mechanism. "Zeta Hamiltonian" and "∅_RB" name one
+  operator.
+- **The Zeta Lagrangian is L_(I|O)** — the Two-Trees intertwiner (Input ↔
+  Output; birth ↔ extinction; the un-sieve ↔ the sieve). An intertwiner
+  conjugates one Hamiltonian to the other, U H_Red = H_Blue U; in the
+  path-integral reading it is the kernel that carries an initial state to a
+  final one, which is exactly what a Lagrangian does under ∫.
+
+ζ itself is neither. **ζ traces a very particular path, and carries the record
+of it — it is the on-shell action of the ∅_RB flow.** Concretely, the phase of
+the functional equation,
+
+```
+θ(t) = arg Γ(¼ + i t/2) − (t/2) ln π                             (2.6)
+```
+
+— the Riemann–Siegel theta function — is the classical action accumulated
+along the ∅_RB orbit, S_cl(t) = ∫ L_(I|O) dt. The Riemann–Siegel formula then
+writes ζ on the critical line as a stationary-phase sum over the classical
+paths,
+
+```
+ζ(½ + i t) = 2 Σ_{n ≤ √(t/2π)} n^{−½} cos( θ(t) − t ln n )  +  R(t)   (2.7)
+```
+
+with each term a path of action θ(t) − t ln n and R(t) the (bounded) remainder.
+The **zeros are the saddle points of (2.7)** — the points where the stationary
+phase condition and the RedBlue balance J(σ, E) = 0 coincide — i.e. the stable
+equilibria of §5. This makes the Berry–Keating identification a statement about
+one object seen three ways: the operator ∅_RB, its intertwiner L_(I|O), and the
+on-shell action ζ that records their common trajectory.
+
+*References.* Hilbert–Pólya (attribution: Odlyzko–Pólya correspondence, 1982).
+Montgomery, "The pair correlation of zeros of the zeta function" (1973).
+Odlyzko, "On the distribution of spacings between zeros of the zeta function"
+(1987). Berry & Keating, "H = xp and the Riemann zeros" and "The Riemann zeros
+and eigenvalue asymptotics", *SIAM Review* 41 (1999). Connes, "Trace formula in
+noncommutative geometry and the zeros of the Riemann zeta function", *Selecta
+Math.* (1999). Sierra & Townsend, *Phys. Rev. Lett.* 101 (2008). Bender, Brody
+& Müller, *Phys. Rev. Lett.* 118 (2017). Berry & Keating, "A compact
+Hamiltonian with the same asymptotic mean spectral density as the Riemann
+zeros" (2011). All computational; the conjecture remains unproven.
 
 ### 2.5 The Weierstrass Elliptic Hamiltonian
 
