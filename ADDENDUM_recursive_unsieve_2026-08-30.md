@@ -67,6 +67,44 @@ positive fine structure: the shape §D.2 of the prior addendum predicted for
 the departure of the firing order from ordinal, now measured from the
 construction side.
 
+### B.1 Clocked by zeta — the penalty is invariant, the schedule is not
+
+The prior addendum §D flagged "ordinal vs ζ firing order" as open. Measured:
+`un_sieve_zeta.py` re-runs all four reads with the ordinal prime rank
+replaced by five zeta-derived orders — `zeta_weight` (`ln p/√p`, the σ=½
+von-Mangoldt amplitude, peaks at `p = 7`), `theta` (`θ(2π p²)`, the
+Riemann–Siegel theta at the height where `p` enters the RS main sum),
+`Zsign` (the sign of the RS `Z`-function at that height — one bit, from ζ),
+`spiral` (`θ mod 2π` + that bit), and the ordinal control.
+
+**Invariant to five decimals across every ordering** (`N = 10⁵`):
+`H(A) = 2.49101`, `H(C) = 9.68456`, **`H(C) − H(A) = +7.19355`**, C−A
+residual |mass| = 158 958, `D == reverse(A)` true, the 60.5 % born-after
+fraction, and the boundary primes 313 / 49 999. Entropy of the C (or A)
+histogram depends only on the multiset of per-prime counts; a permutation of
+the primes just relabels the bins. **Zeta order is not a shortcut through the
+existence cost — the `+7.19` bits is a combinatorial invariant of ℕ.**
+
+What zeta order *does* move is the **payment schedule**. `theta` and
+`zeta_weight` are near-monotone in `p`, so they keep the compact ordinal
+front (A-span 65, C-span 5133). But `Zsign` blows the spans to 781 / 1132 and
+`spiral` to 1278 / 1437 (`N = 1.2×10⁴`): the same entropy, the same residual
+mass, smeared across 25–50× more generations. **The compactness of the
+extinction order — 55 % of composites dying on pass 0 — is an artefact of the
+ordinal clock, not of ℕ.** The −49 984 residual spike sits at generation 0
+under ordinal, generation 21 under `zeta_weight` (`p = 2` has low `ln p/√p`),
+generation 766 under `Zsign`. Mass fixed, location free.
+
+**The Go connection (Cody).** 313 is `π⁻¹(65)` — the 65th prime, the largest
+with `p² ≤ N`, and under any *monotone* clock it is still activated 65th, with
+zero wasted passes: 65 of 9 592 primes strike, and you stop. Under `spiral`,
+313's rank is effectively random in `[0, 9592]`, so you wade through up to
+**9 527 primes that strike nothing** (317, 331, …, every prime in `(√N, N]`)
+before the boundary prime is reached — the exact shape of enumerating illegal
+Go moves. **The ordinal order is the unique zero-rejection order**; that is
+why it is the canonical minimum-entropy decomposition. An oscillatory ζ-clock
+adds rejection work and buys nothing.
+
 ---
 
 ## C. The two boundary primes — a mass-gap-like separation
@@ -135,6 +173,36 @@ third bearing on the same operator, alongside §3 (Noether currents) and
 residual a shape, names the birth/extinction scale gap, and observes that the
 existence of a Zeta Hamiltonian is licensed by ordinary mechanics once the
 prime construction is written as a path.
+
+### D.1 The zeros as the clock — a measured 15 % recovery
+
+§B.1's rank orderings only *relabel* the generation axis, so the entropy gap
+cannot move. A **time embedding** does let it move: give each prime a real
+birth *time* `τ(n) = γ_{rank(gpf(n))}` — the height of the corresponding
+Riemann zero — instead of an integer index, and bin `τ` uniformly. Now the
+actual zero *spacing* enters, not just the order. Measured, `N = 8 000`,
+real zeros `γ₁ = 14.13 … γ₁₀₀₇ = 1427.37`, 160 bins:
+
+| clock | H(C) − H(A) |
+|---|---|
+| uniform (arrival at 1, 2, 3, …) | **+4.3007 b** |
+| zero-time (arrival at `γ_k`) | **+3.6638 b** |
+
+Clocked by the actual zeros the existence penalty **drops ≈ 0.64 bits
+(≈ 15 % at this N)**. The sparse low zeros stretch the compact death front
+(`H(A)` 0.48 → 1.75) while the birth spread compresses relatively. The C−A
+residual autocorrelation goes lag-1 `+0.407` then flat `≈ −0.05` for lag ≥ 3
+— one-step smoothing then white, the signature of level repulsion suppressing
+the far residual.
+
+The `+7.19` combinatorial floor of §B.1 still stands; what this shows is that
+**the zeros are a better-matched clock for the construction than the integers
+are** — replaying birth on the zero timeline recovers cost that ordinal
+replay discards. A directional measurement (one `N`, one bin count), not a
+scaling law, but it is the first quantitative sense in which *ζ is the tape*:
+the trajectory that, replayed against, makes the backward (existence) pass
+measurably cheaper. Engine: `un_sieve_zeta.py`,
+`ContextPlease/claude/scratchpad/2026-08-30_prime-dna/un_sieve_zeta_RESULTS.md`.
 
 ---
 
