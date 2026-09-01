@@ -256,6 +256,32 @@ Math.* (1999). Sierra & Townsend, *Phys. Rev. Lett.* 101 (2008). Bender, Brody
 Hamiltonian with the same asymptotic mean spectral density as the Riemann
 zeros" (2011). All computational; the conjecture remains unproven.
 
+#### 2.4.6 The clock is built in, and the mass gap is the first stroke  `[THEORETICAL reading]`
+
+`H = xp` generates the dilation flow `x → eᵗx`. **The flow is the clock** —
+there is no external timing signal. In the RedBlue reading (§4) the timing
+structure is a fixed ratio: the four faces of the boundary constant `d*`
+(the σ=½ coordinate, the RG-stable value, the flow rate `Ω_ζΣ/ln 10`, and the
+translator `d*·ln 10 = Ω_ζΣ`) against the three faces of the RedBlue rotor.
+`lcm(4, 3) = 12` — the phase does not close before twelve steps, so the
+semiclassical `xp` orbit precesses rather than returning, and the primes are
+deposited along that precession (§6.4).
+
+The **mass gap** of the RedBlue engine, `Δ = |Ω_ζΣ − d*·ln 10| ≈ 7.07×10⁻⁴`
+(§7, and `FourthAgePapers/addenda/addendum_VIII`), is then the width of the
+**first band above the nodal line** of §6.3.1 — the smallest non-zero real
+displacement the standing wave can carry. Below it, no algebraic definition
+occurs; at it, the first stroke fires. Read across scales this is the first
+acoustic mode of the baryon–photon plasma (BAO, 147 Mpc), the first
+perturbation of recombination, and — at the deconfined limit — a scale in the
+quark–gluon plasma; one gap at every Cayley–Dickson rung, which is the
+statement that its fixed point is *dimensional*, not a length.
+
+None of this closes C1. It records that the `H = xp` timing is intrinsic (no
+imposed clock) and that the mass gap and the critical-line node are the same
+object seen as *width* and as *position* — the §6.4 duality carried up to the
+Hamiltonian.
+
 ### 2.5 The Weierstrass Elliptic Hamiltonian
 
 The Weierstrass ℘ function with invariants (g₂, g₃) satisfies:
