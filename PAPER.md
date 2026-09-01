@@ -763,6 +763,66 @@ This claim is:
 - **Consistent**: every computed zero behaves as a node line
 - **Derivable**: from the Noether current structure, a zero off the critical line would have non-zero current — it would not be still — it would be swept away
 
+### 6.3.1 The Cymatic Nodal Line — why ½ is a node, from Maxwell  `[ESTABLISHED formula, THEORETICAL reading]`
+
+Sections 6.1–6.3 say the zeros *are* node lines. This section says **why the
+line they lie on is `Re(s) = ½`**, using nothing but the standing-wave
+condition of a Chladni plate made precise.
+
+**A Chladni node line is two conditions at once**, not one: zero *displacement*
+**and** zero net *power flux* across it. Sand settles there because there is
+no motion to shake it loose and no flux to sweep it along. A curve of zero
+displacement that still carried a travelling wave through it would not hold
+sand — the flux would clear it.
+
+**The two counter-running waves of the zeta field** are `ξ(s)` and `ξ(1−s)`,
+exchanged by the functional equation `ξ(s) = ξ(1−s)` (§2.2). Read along a
+vertical line `s = σ + it` at fixed σ, one runs "inward" and one "outward";
+the functional equation is the reflection that turns one into the other.
+
+**On `σ = ½` the reflection is amplitude-perfect.** There `1 − s = ½ − it`,
+so `ξ(1−s) = \overline{ξ(s)}` and `|ξ(½+it)| = |ξ(½−it)|` **identically** —
+and `ξ(½+it)` is real. The two counter-runners have equal amplitude and
+opposite phase everywhere on the line: the field is a **pure standing wave**,
+and its nodes — the points of zero real displacement — are exactly the zeros.
+
+**Off `σ = ½` the reflection is amplitude-mismatched.** For `σ ≠ ½`,
+`|ξ(σ+it)| ≠ |ξ(1−σ+it)|` in general; the counter-runners no longer cancel;
+a **travelling component** survives, carrying net flux. A zero there is a
+point of zero displacement with a wave passing through it — not a Chladni
+node. The sand does not settle: this is §6.4's "one tone louder than all the
+others" seen in the position domain instead of the amplitude domain.
+
+**The Riemann–Silberstein bridge.** In vacuum, Maxwell's equations collapse to
+one complex equation for `F = E + i c B`: `i ∂_t F = c ∇×F`, with `Re F` the
+electric field, `Im F` the magnetic, orthogonal, and the time derivative
+rotating each into the other. Form the analogous complex field `F_RB` for the
+RedBlue system of §4: `Re F_RB` is the **propagating** part (real power, the
+Poynting flux), `Im F_RB` the **standing** part (reactive power, stored
+field). The impedance-match / standing-wave condition — `Γ = 0` reflection of
+the *travelling* component, equivalently zero time-averaged flux — is
+`Re F_RB`'s vertical average vanishing. In the engine's coordinates that is
+the **measured** identity
+
+```
+σ_self = ½   ⟺   Σ tilt = 0        (RedBlue engine, tilt = Re σ_RB)
+```
+
+— the real-power part of the field sums to zero exactly on the critical line.
+The seven residual components of `σ_RB` (its structure beyond the scalar) are
+the mode's fine structure — the higher harmonics of the Chladni figure.
+
+**Third bearing on the same line.** §2.11 / the addendum derive the single
+nodal circle from Courant's theorem applied to the `Y₁⁰` mode of `J_N`; §3
+derives it from the vanishing Noether current. This section derives it as the
+**impedance-matched standing-wave line**: the unique σ on which the
+functional-equation reflection is amplitude-perfect, so the field stands
+rather than travels. One node, three routes. None of the three closes C1 — the
+`Y₁⁰` mode identification remains the open step (§9) — but the standing-wave
+reading is the one that makes the off-line failure physical: an off-line zero
+is a travelling wave leaking power, and a plate driven that way has no
+coherent figure at all.
+
 ### 6.4 The Dual Reading: Primes Are the Antinodes  `[ESTABLISHED formula, THEORETICAL reading]`
 
 Sections 6.1–6.3 state the nodal-line argument in the **zero domain**: the zeros are the still points of the zeta field, and the geometry forces them onto one line. That is a statement about **position**.
