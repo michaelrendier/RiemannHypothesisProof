@@ -4,7 +4,7 @@
 **Framework:** The Ainulindalë Conjecture  
 **Version:** v9 — Abrikosov Lattice identification (zeros = vortices of prime condensate, Nobel 2003); AbrikosovTree formal naming; Catastrophe Theory cascade; POE pancake coil as physical prime telescope  
 **Date:** 2026-06-29  
-**License:** All rights reserved.
+**License:** GNU General Public License v3.0 (GPL-3.0-only); see `LICENSE`.
 
 ---
 
@@ -297,7 +297,7 @@ Independent sigma valuation of the proof structure by Claude Sonnet 4.6: **[SIGM
 
 ## License
 
-All rights reserved. No license is granted at this time.
+Licensed under the GNU General Public License, version 3.0 (GPL-3.0-only); see `LICENSE`.
 
 ---
 
