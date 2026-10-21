@@ -242,3 +242,42 @@ map Ω_ZS → ½.** It is not exhibited anywhere in the paper.
 
 A referee at Clay standards stops at this sentence. It should be fixed before any
 submission.
+
+
+## NEW — the Sacks-plane electrostatics of the primes (2026-09-30)  `[COMPUTED, filed as a TODO; intuition aid, no claim]`
+
+Cody's question: what do Maxwell's equations say about the Universal Native Space prime/composite
+planes (`AbrikosovTree/render/Arrangement/UNS/plane_*_native.png`, φ = 2π√n ± Θ(k))? Answered by
+computation, `ContextPlease/claude/scratchpad/2026-09-30_uns_maxwell/` (`uns_maxwell.py`, `gauss_zeros.py`,
+mirrored to `.claude/scratchpad`). Model: integers at r = √n, φ = 2π√n (the Sacks spiral, one Archimedean
+spiral); primes are charges of +1 in a 2D Coulomb field. The charge assignment is a modelling choice.
+
+**Exact / computed**
+- The integer density in the Sacks plane is uniform, 1/π per unit area; a circle of radius R encloses exactly
+  the integers n ≤ R².
+- **Gauss's law makes the prime count the flux:** E_r(R) = π(R²)/R (units 2πε₀ = 1). Checked by summing the field
+  of every prime on a ring: mean E_r = 12.2959 / 30.3026 / 78.4972 against π(R²)/R = 12.2900 / 30.3165 / 78.4980
+  at R = 100 / 316 / 1000.
+- **The zeta zeros are radial standing waves of that monopole field**, frequency 2γ in ln R, amplitude about
+  1/(2γ ln R) (Riemann's explicit formula, first term, with Ei(ρ ln x) — `li` of a complex power wraps the log).
+  The smooth Riemann R(x) misses π(x) by 2.09 / 5.07 / −29.39 primes at R = 100 / 316 / 1000; with the first 200 zeros
+  the misses are −0.38 / 0.78 / −2.84.
+- **RH as a field bound (Schoenfeld):** RH ⇒ |π(x) − li(x)| < √x ln x / (8π) for x ≥ 2657, i.e.
+  |E_r − li(R²)/R| < ln R / (4π) for R ≥ 51.5. Measured (π − li)/R = −0.17 / −0.12 / −0.13 against bounds
+  0.37 / 0.46 / 0.55.
+
+**Not found (stated as results)**
+- No angular structure beyond a random selection of the same density: ring-field rms(E_r − mean)/mean = 0.022
+  (primes) vs 0.025 ± 0.002 (random) at R = 316, 0.008 vs 0.015 ± 0.012 at R = 1000; multipole moments
+  |M_m|/√π(N) 0.3–0.9 (primes) vs 0.4–1.2 (random). Five random replicates; no significance claim.
+- The fans and bundles in the UNS panels are the quadratic-form (Sacks) lines in the unrolled (ln n, φ) coordinates,
+  not a physical-plane field. There are no vortices in these planes: φ(n) is monotone in n.
+- Reading the ±Θ counter-twist as opposite rotation, the net magnetic moment follows the composites
+  (Σr² is 12.3× that of the primes at N = 10⁶); that is arithmetic, not new content.
+
+**Open**
+- Put the Gauss/flux statements into `ValaQuenta/modules/prime_gauge_field` as new equations (a new tool: Toolbox rule,
+  engine v1.1).
+- Whether the zero standing-wave picture gives anything beyond restating the explicit formula (unanswered).
+- The harmonicity test of the coarse-grained density in (ln n, φ) and the Bateman–Horn singular-series check of the
+  line-by-line densities (proposed, not run).
