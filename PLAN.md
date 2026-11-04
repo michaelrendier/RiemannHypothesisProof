@@ -21,10 +21,10 @@
 
 ## To be WRITTEN (no code exists today)
 
-1. `rhp/limacon.py` — the loop-fit sifting test of §7 (the numbers are in the project record only).
+1. `rhp/limacon.py` — the loop-fit sifting test (numbers are in the project record only; no longer on the critical path, §7 is rewritten).
 2. `rhp/zero_counting.py` — §6 table from `mpmath`, with Gram's relation and spacing ratio.
 3. `rhp/orthogonality.py` — the test of §8 (inner product, null model); currently only a conjecture.
-4. `rhp/lift.py` — the cusp-lift test of §7.
+4. ~~`rhp/lift.py` — the cusp-lift test~~ withdrawn: the pathway has no cusp. DONE instead (2026-11-03): `rhp/uns.py`, `rhp/flatten.py`, `rhp/render.py`, `rhp/viewport.py`/`camera.py` (vendored skill assets), `tests/test_uns.py` (11), notebook 01, figure + `data/pathway.csv` (Blender import). NEXT: σ-sweep (`rhp/uns.py` + notebook 02), sphere chart picture, Blender render.
 5. `paper/make_paper.py` with `--check`.
 6. `.venv` (numpy, mpmath, sympy, jupyter, nbconvert, pytest) and `requirements.txt`.
 

@@ -12,7 +12,7 @@ This paper was written with an assistant: Claude (Anthropic), model `claude-sonn
 
 ## Abstract
 
-The completed zeta function ξ(s) = ½ s(s−1) π^(−s/2) Γ(s/2) ζ(s) satisfies ξ(s) = ξ(1−s) only because the factor π^(−s/2) is present: remove it and the reflection symmetry about Re(s) = ½ is destroyed. We take this literally. Dividing the strip coordinate by π (θ = πσ) maps the critical strip 0 < σ < 1 onto the polar range 0 < θ < π of a sphere, the reflection s ↦ 1−s onto the equatorial reflection θ ↦ π−θ, and the critical line onto the equator, with the offset ½ = (π/2)/π. We show by computation what this map does and does not do (it is an exact change of variable; it does not locate any zero), and we collect, each with the code that checks it, the places where ½ appears *emergent* — not constructed and not composite — in ordinary mathematics and in the author's "universal native space" (UNS) reading: the self-dual point of s ↦ 1−s, the unit-diameter circle (r = ½, C = π, area π/4), the Amplitude-Lagrangian minimum, the in-phase/quadrature balance (tan = 1), the half-integer offset of the zero-counting phase, and the equal-envelope condition of the explicit formula. We state a reading of ζ as a Lagrangian, a hypothesis that the cardioid cusp in the zeta spiral is a flattening artefact, and a conjecture that the prime wavelength (zero spacing) and the factor wavelength (λ = p) are orthogonal. The Riemann Hypothesis is not proved here; the step that would prove it is the Berry–Keating self-adjointness conjecture, which remains open, and §9 states exactly which parts of the argument are proven, which are imported from the literature, and where the gap is.
+The completed zeta function ξ(s) = ½ s(s−1) π^(−s/2) Γ(s/2) ζ(s) satisfies ξ(s) = ξ(1−s) only because the factor π^(−s/2) is present: remove it and the reflection symmetry about Re(s) = ½ is destroyed. We take this literally. Dividing the strip coordinate by π (θ = πσ) maps the critical strip 0 < σ < 1 onto the polar range 0 < θ < π of a sphere, the reflection s ↦ 1−s onto the equatorial reflection θ ↦ π−θ, and the critical line onto the equator, with the offset ½ = (π/2)/π. We show by computation what this map does and does not do (it is an exact change of variable; it does not locate any zero), and we collect, each with the code that checks it, the places where ½ appears *emergent* — not constructed and not composite — in ordinary mathematics and in the author's "universal native space" (UNS) reading: the self-dual point of s ↦ 1−s, the unit-diameter circle (r = ½, C = π, area π/4), the Amplitude-Lagrangian minimum, the in-phase/quadrature balance (tan = 1), the half-integer offset of the zero-counting phase, and the equal-envelope condition of the explicit formula. We state a reading of ζ as a Lagrangian, a map of what the flat plot of the zeta spiral overlays and what it keeps when the same curve is read in the UNS log-polar chart, and a conjecture that the prime wavelength (zero spacing) and the factor wavelength (λ = p) are orthogonal. The Riemann Hypothesis is not proved here; the step that would prove it is the Berry–Keating self-adjointness conjecture, which remains open, and §9 states exactly which parts of the argument are proven, which are imported from the literature, and where the gap is.
 
 ## 1. Introduction
 
@@ -28,7 +28,7 @@ The intended way around this limitation is not to argue from the coordinate chan
 
 **What is code and what is not.** Mechanisms short enough to read are shown as numbered Listings, extracted from the source by `paper/make_paper.py` and executed cold (Convention B of the skill); sessions are shown as `>>>` transcripts (Convention D); long or established machinery is cited and pointed at (Convention A). Numbers in the text are taken from fresh runs and re-checked by `make_paper.py --check`. *This draft predates that generator: every number below was produced in the session that wrote it, by the scripts named in §12, and will be regenerated.*
 
-**UNS.** The author's "universal native space" is, in the repository's own record (`~/.clauderc`), the reading in which a quantity is divided by ln 10 (so that, for example, d* = Ω_ZS/ln 10 = 0.24631…, with Ω_ZS = W(1) = 0.56714… the Lambert fixed point). **[Author to specify: the exact UNS form of ζ(s) used for the "π factored out" step — the draft below uses only the standard completed form ξ, which is what the code computes.]**
+**UNS.** The author's "Universal Native Space" is radial complex spherical-polar coordinates in which quantities are read on the decimal-log scale; ln 10 is the Jacobian between the decimal-log Native metric ds = d·log₁₀p and natural-log prime-address space, and the four d\* values (the Boundary 0.24631, d\*_RG, d\*_taut = Ω_ZS/ln 10, d\*_ln10 = d\*·ln 10 = Ω_ZS) are the roles of the chart — centre, equatorial plane, radial unit, metric bridge — and close on d\*·ln 10 = d\*_ln10 = d\*_taut·ln 10 = Ω_ZS (`Ainulindale/wiki/17`; with Ω_ZS = W(1) = 0.56714…; the d\*_spec ≈ 0.24600 reading is disputed and not used). For the pathway ζ(½+it) the chart used in §7 is: radius log₁₀|ζ|, angle arg ζ, with t kept as an explicit third coordinate (the spring), and, on the sphere, polar angle πσ (equator σ = ½) with azimuth t mod 2π and the winding kept separately. This is our reading of the author's definition and is `OURS`; the exact UNS form of ζ(s) itself is still to be stated by the author (§11).
 
 ## 3. The spine: factoring π out of ζ
 
@@ -118,11 +118,33 @@ n   γₙ            θ(γₙ)/π      θ(γₙ)/π − (n−1)
 
 So θ(γₙ) ≈ (n − 3/2)π with fluctuations of order S(T) — the "½" here is the midpoint convention of S(T) at a jump, exactly as Gram's relation requires. The mean spacing γₙ₊₁ − γₙ over the first 30 zeros is 0.981 of the Riemann–von Mangoldt value 2π/ln(γₙ/2π). **The earlier "≈ nπ" is corrected in §10.**
 
-## 7. The cardioid threshold, and the cusp as a flattening artefact
+## 7. The flat pathway and its UNS map: what flattening overlays `:CALCULATED`
 
-Between consecutive near-origin passages, each loop of ζ(½+it) (t ∈ [0.05, 50], 6000 points) fits r = a + b cos(θ − φ) with R² between 0.86 and 1.0000; of 9 loops, none has 0.85 < |b/a| < 1 or 1 < |b/a| < 1.15, and all have |b/a| > 1, and 9 of 10 near-origin passages are known zeros (`:CALCULATED`, project record; to be re-run in `rhp.limacon`). The limaçon classes: |b/a| < 1 dimpled (does not reach the origin, no zero); |b/a| = 1 cardioid (touches, one cusp); |b/a| > 1 looped (crosses the origin: a zero). **The cardioid is a sifting threshold, not the curve:** the global fit "the curve is a cardioid" is refuted (R² = −0.77; the curve winds 13.4 turns).
+**Setting.** The familiar picture of ζ(½+it) (the "polar graph", t ≈ 0–50) is the image of the line σ = ½ in the ζ-plane. It has no cusp; it passes through the origin ten times below t = 50, once at each zero. Orientation: log-polar in the ζ-plane (radius log₁₀|ζ|, angle arg ζ) with t explicit; aperture: σ = ½, continuous in t. Code: `rhp/uns.py`, `rhp/flatten.py`, `rhp/render.py`; notebook `notebooks/01_flattening_map.ipynb`; figure `figures/flattening_map.svg`.
 
-**Hypothesis (`THEORETICAL`).** The cusp at |b/a| = 1 is a *flattening artefact*: a point where the planar projection's parametrisation speed vanishes, which would disappear in a coordinate adapted to the spring (u = ln x) or on the sphere of §3. **This is not established.** Stereographic projection is conformal and preserves cusps, so the sphere map of §3.2 alone cannot remove it; the test the hypothesis requires is a higher-dimensional lift in which the same curve is smooth (as an epicycloid's cusp is where a smooth rolling circle touches its base), together with a check that the lift's smooth branch passes through the origin transversely. That test is listed in §11.
+**7.1 The flat curve is a signed-radius polar curve (`ESTABLISHED` form).** Hardy's ζ(½+it) = e^{−iθ(t)} Z(t), Z real. The flat point has angle −θ(t) and signed radius Z(t), so a passage through the origin continues on the opposite side: the petals have no corners. Checks: max |Im(e^{iθ}ζ)| = 6·10⁻¹⁵ on 4001 points; Z agrees with `mpmath.siegelz` to 4·10⁻¹⁶.
+
+**7.2 Direction at the hub (`:CALCULATED`).** The curve crosses the origin at the nth zero in the direction arg(iζ′(½+iγₙ)) mod π, and this equals −θ(γₙ) mod π (n = 1…10, agreement to 10⁻⁶; Z changes sign at every one). The fan of ten directions at the hub is the phase θ sampled at the zeros; the flat plot superimposes the ten passes and keeps none of it.
+
+**7.3 Angular velocity (`:CALCULATED`).** From ζ = e^{−iθ}Z, Im(ζ̄ζ′) = −θ′(t)Z(t)², so dφ/dt = −θ′(t) independently of the radius, with θ′(t) = ½ Re ψ(¼+it/2) − ½ ln π ≈ ½ ln(t/2π). The winding is one-handed for t above about 2π (θ′ changes sign at t = 6.30 on the grid), and each zero is a pass with zero angular momentum. Verified at six values of t to 5 digits and against the numerical angular rate (max deviation 4·10⁻⁴ at spacing 0.0125).
+
+**7.4 Axis crossings (`:CALCULATED`).** The curve meets the real axis where θ = nπ, the Gram points (Im ζ ≤ 5·10⁻¹⁵ at g₀ … g₅ = 17.846, 23.170, 27.670, 31.718, 35.467, 38.999).
+
+**7.5 Artefact classification.** Writing the pathway as the spring (ρ = log₁₀|ζ| + 3, φ = arg ζ, z = t) and the flat plot as its end-on image with the radius exponentiated:
+
+| artefact | mechanism | measured, 0 ≤ t ≤ 50 |
+|---|---|---|
+| hub | all zeros project to one point | 10 passes, C(10,2) = 45 pairwise crossings, all at the origin |
+| false crossings | two different t land on one flat point | 21 away from the origin (66 self-intersections in all), with |Δt| from 3.4 to 47; a near-triple point at (0.443, −0.306) from t = 2.01, 42.99, 49.29/49.30 |
+| petal sign | sign of Z folded into the angle as a π jump | sign flips at all 10 zeros |
+| petal size | linear radius hides log structure | petal maxima span 0.34–3.66 linear, −0.47–+0.56 in log₁₀ |
+| lost clock | t is not drawn | exact rate −θ′(t); −θ(t)/π is shown in Fig. 7, panel D |
+| missed petal | Gram's law fails | none below t = 50; first at the Gram interval n = 125 ([280.80, 282.45) holds no zero), then n = 126, 133, 134 up to t = 300 (`ESTABLISHED`: the first Gram-law violation, reproduced) |
+| mirror half | t < 0 is the conjugate | ζ(½−it) = conj ζ(½+it), difference 0 at four tested t |
+
+The 21 and 45 are counts at 4001 samples (`:CALCULATED`, regression-tested). A viewport sweep of 500-sample windows covers every sample (clamp/flush/sweep assertions of the nes-viewport model), and the spring passes the canonical-pose framing check of the scad-spatial camera.
+
+**7.6 What is not claimed.** Nothing in this section places a zero or tests RH; it maps what the flat picture of the line σ = ½ overlays. The σ ≠ ½ sweep (whether the hemispheres of the sphere chart differ, as |χ(σ+it)| ≈ (t/2π)^{½−σ} suggests) and the sphere chart as a picture are `OPEN` (not in the notebook). The limaçon sifting fit of earlier drafts (loops classed by |b/a|; the cardioid at |b/a| = 1 is a classification threshold, not the curve, and the curve has no cusp) is recorded in the project history but has no code in this repository and is not used here; the earlier hypothesis that a cusp is a flattening artefact is withdrawn: the pathway shown has none.
 
 ## 8. The prime wavelength, and the pancake coil
 
@@ -163,15 +185,15 @@ Two wavelengths, one per ordering of the same set of primes:
 | item | what would settle it |
 |---|---|
 | step 4 / Berry–Keating self-adjointness | a self-adjoint operator whose spectrum is the zeros' imaginary parts, with a boundary condition that makes xp self-adjoint (the obstruction of Berry–Keating 1999 and the literature that followed) |
-| cusp = flattening artefact (§7) | a lift in which the curve is smooth, and a transversality check through the origin |
+| σ ≠ ½ sweep and the sphere chart (§7.6) | ζ(σ+it) at σ = 0.3 … 0.7 in the same three charts: finite log-radius dips replacing the spikes, and the change of winding across σ = ½ |
 | λ_prime ⟂ λ_factor (§8) | a defined inner product on the two quantities and a computed value, on the first N zeros and primes ≤ P, with a null model |
 | ζ as a Lagrangian (§5.2) | an action whose Euler–Lagrange stationary set is shown to equal the zero set |
-| UNS form of ζ (§2) | the author's explicit definition |
+| exact UNS form of ζ(s) (§2) | the author's explicit definition; §7 uses the log-polar/spring reading stated in §2 |
 | the four d\* values (§10.5) | derivation or numerical resolution of d\*_RG |
 
 ## 12. Reproducing this paper
 
-Everything numeric above was produced by: `half_is_the_equator.py` (§3, §4; 30-digit mpmath); `engines/noether_derivation.py` (§5); an `mpmath` script for §6; `GenerationalLineage` `circle` (§4.3); the project's limaçon fit (§7; to be re-run). These are to be vendored into `rhp/` with provenance headers, tested, wrapped in notebooks, and the paper regenerated by `paper/make_paper.py` (see `PLAN.md`).
+Everything numeric above was produced by: `half_is_the_equator.py` (§3, §4; 30-digit mpmath); `engines/noether_derivation.py` (§5); an `mpmath` script for §6; `GenerationalLineage` `circle` (§4.3); the project's limaçon fit (§7; to be re-run). The rest are to be vendored into `rhp/` with provenance headers, tested, wrapped in notebooks, and the paper regenerated by `paper/make_paper.py` (see `PLAN.md`).
 
 ## References (to be verified by title page under the Literature Download Protocol)
 

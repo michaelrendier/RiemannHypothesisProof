@@ -30,7 +30,7 @@ half-integer offset of the zero-counting phase, as the equal-envelope condition 
 *emergent* (the output of a computation whose input did not contain ½), *constructed* (imposed by a symmetric choice), or
 *conditional* (true only if RH holds). Only the emergent rows count as evidence about the structure of the problem, and none of
 them is evidence that a given zero lies on the line. Around that catalogue the paper records three hypotheses (ζ read as a
-Lagrangian; the cardioid cusp in the zeta spiral as a flattening artefact; orthogonality of the *prime wavelength* — the zero
+Lagrangian; a map of what the flat plot of the zeta spiral overlays, read in the UNS log-polar chart; orthogonality of the *prime wavelength* — the zero
 spacing — and the *factor wavelength* λ = p), a table of what is proved, what is imported and where the gap is, and a list of
 corrections to earlier versions of this work.
 
@@ -42,19 +42,27 @@ self-adjointness conjecture, or equivalently the identification of ζ with a mod
 
 | | |
 |---|---|
-| [`paper/PAPER.md`](paper/PAPER.md) | **the paper, draft 0.1** — §1 Introduction · §2 Scope, labels, UNS · §3 The spine: factoring π out of ζ · §4 Where ½ emerges (catalogue) · §5 Zeta as a Lagrangian · §6 The spiral and the half-integer offset · §7 The cardioid threshold and the cusp · §8 The prime wavelength and the coil · §9 Proved / imported / gap · §10 Corrections · §11 Open items · §12 Reproducing · References · Appendix A |
+| [`paper/PAPER.md`](paper/PAPER.md) | **the paper, draft 0.1** — §1 Introduction · §2 Scope, labels, UNS · §3 The spine: factoring π out of ζ · §4 Where ½ emerges (catalogue) · §5 Zeta as a Lagrangian · §6 The spiral and the half-integer offset · §7 The flat pathway and its UNS map · §8 The prime wavelength and the coil · §9 Proved / imported / gap · §10 Corrections · §11 Open items · §12 Reproducing · References · Appendix A |
 | [`PLAN.md`](PLAN.md) | the build plan that follows from the draft: the software to vendor, the code still to write, the documents to create |
 | [`archive/`](archive/README.md) | the repository as it stood on 2026-11-03, moved unchanged; **dated work, not the present state** |
 | `LICENSE` | GNU GPL v3.0 |
 
 ### What exists and what does not yet
 
-Honestly, the repository is mid-rewrite. **Exists:** the draft paper; the plan; the archive. **Does not exist yet** (each is listed in
-[`PLAN.md`](PLAN.md) and the paper's §12 says which numbers wait on it): the vendored `rhp/` package, the test suite, the notebooks,
-the generated Manual, `paper/make_paper.py`, and a `.venv` with pinned requirements. Until they exist, the paper's numerical claims
-are reproducible from the scripts named in its §12 (`half_is_the_equator.py`, `noether_derivation.py`, an `mpmath` zero-counting
-script, GenerationalLineage's `circle`), and the paper says so wherever it matters. Two items have **no code anywhere** today: the
-limaçon sifting fit of §7 and any test of the orthogonality conjecture of §8.
+The repository is mid-rewrite. **Exists:** the draft paper; the plan; the archive; and the first built piece, the **flattening map**
+of §7 — `rhp/uns.py` (Hardy form, θ′, Gram points, UNS cylinder coordinates), `rhp/flatten.py` (artefact classifier and the
+viewport sweep), `rhp/render.py` (dependency-free SVG and the CSV a Blender import reads), `rhp/viewport.py` and `rhp/camera.py`
+(vendored from the author's nes-viewport and scad-spatial skills), `tests/test_uns.py` (11 tests), `notebooks/01_flattening_map.ipynb`,
+`figures/flattening_map.svg`, `data/pathway.csv`, `requirements.txt`. **Does not exist yet** (see [`PLAN.md`](PLAN.md)): the rest of the
+vendored code, notebooks 02–07, the σ ≠ ½ sweep and sphere-chart picture, the generated Manual, `paper/make_paper.py`. Two items have
+**no code anywhere** today: the limaçon sifting fit and any test of the orthogonality conjecture of §8.
+
+```bash
+python3 -m venv .venv && .venv/bin/pip install -r requirements.txt
+.venv/bin/python -m pytest -q tests                      # 11 tests, ~20 s
+cd notebooks && ../.venv/bin/python make_notebook_01.py \
+  && ../.venv/bin/jupyter nbconvert --to notebook --execute --inplace 01_flattening_map.ipynb
+```
 
 ## How to read the paper
 
@@ -72,8 +80,7 @@ limaçon sifting fit of §7 and any test of the orthogonality conjecture of §8.
 Three places where a specialist's reading would help most:
 
 1. **§3.2 and §9** — is the θ = πσ map useful for anything beyond bookkeeping? The paper says no on its own; where might it do work?
-2. **§7** — the cusp-as-artefact hypothesis needs a lift in which the loop is smooth and passes the origin transversely;
-   stereographic projection is conformal and cannot remove a cusp.
+2. **§7** — the flattening map is built (`rhp/uns.py`, `rhp/flatten.py`, notebook 01, `figures/flattening_map.svg`); the σ ≠ ½ sweep and the sphere chart are not.
 3. **§8** — a natural inner product on (zero spacings, prime periods) for which the orthogonality conjecture is a well-posed
    statement, and a null model against which a computed value would mean something.
 
