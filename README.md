@@ -52,15 +52,16 @@ self-adjointness conjecture, or equivalently the identification of ζ with a mod
 The repository is mid-rewrite. **Exists:** the draft paper; the plan; the archive; and the first built piece, the **flattening map**
 of §7 — `rhp/uns.py` (Hardy form, θ′, Gram points, UNS cylinder coordinates), `rhp/flatten.py` (artefact classifier and the
 viewport sweep), `rhp/render.py` (dependency-free SVG and the CSV a Blender import reads), `rhp/viewport.py` and `rhp/camera.py`
-(vendored from the author's nes-viewport and scad-spatial skills), `tests/test_uns.py` and `tests/test_bigpath.py` (20 tests), `notebooks/01_flattening_map.ipynb` and
-`02_machinery_flow_long_pathway.ipynb` (prime wheels, the two halves, the ξ′/ξ flow, the argument-principle accounting, a 3065-zero pathway),
-`rhp/bigpath.py`, `rhp/flow.py`, `rhp/epicycles.py`, `rhp/render_big.py`, `figures/{flattening_map,long_pathway,machinery,flow}.svg`, `data/pathway.csv`, `data/zeros_1_to_3600.csv`, `requirements.txt`. **Does not exist yet** (see [`PLAN.md`](PLAN.md)): the rest of the
-vendored code, notebooks 03–07, the sphere-chart picture, the double-zero margin map, the generated Manual, `paper/make_paper.py`. Two items have
+(vendored from the author's nes-viewport and scad-spatial skills), `tests/test_uns.py` and `tests/test_bigpath.py` (29 tests), `notebooks/01_flattening_map.ipynb` and
+`02_machinery_flow_long_pathway.ipynb` (prime wheels, the two halves, the ξ′/ξ flow, the argument-principle accounting, a 3065-zero pathway) and
+`03_clock_echo_harness_margins_primegame.ipynb` (the θ-clock, negative real-axis crossings, the echo spectrum = explicit formula, an operator test harness with controls, Lehmer margins, the truncated-balance branches, Conway's PRIMEGAME, and a ten-item anomaly log),
+`rhp/bigpath.py`, `flow.py`, `epicycles.py`, `render_big.py`, `clock.py`, `gram.py`, `echo.py`, `harness.py`, `lehmer.py`, `balance.py`, `primegame.py`, `figures/{flattening_map,long_pathway,machinery,flow,clock_echo_harness,balance_margins_primegame}.svg`, `data/pathway.csv`, `data/zeros_1_to_3600.csv`, `requirements.txt`. **Does not exist yet** (see [`PLAN.md`](PLAN.md)): the rest of the
+vendored code, notebooks 04–07, the sphere-chart picture, the generated Manual, `paper/make_paper.py`. Two items have
 **no code anywhere** today: the limaçon sifting fit and any test of the orthogonality conjecture of §8.
 
 ```bash
 python3 -m venv .venv && .venv/bin/pip install -r requirements.txt
-.venv/bin/python -m pytest -q tests                      # 20 tests, ~25 s
+.venv/bin/python -m pytest -q tests                      # 29 tests, ~35 s
 cd notebooks && ../.venv/bin/python make_notebook_01.py \
   && ../.venv/bin/jupyter nbconvert --to notebook --execute --inplace 01_flattening_map.ipynb
 ```
@@ -81,7 +82,7 @@ cd notebooks && ../.venv/bin/python make_notebook_01.py \
 Three places where a specialist's reading would help most:
 
 1. **§3.2 and §9** — is the θ = πσ map useful for anything beyond bookkeeping? The paper says no on its own; where might it do work?
-2. **§7** — the flattening map is built (`rhp/uns.py`, `rhp/flatten.py`, notebook 01, `figures/flattening_map.svg`); the σ ≠ ½ sweep as a picture, the sphere chart and the double-zero margin map are not.
+2. **§7** — the flattening map is built (`rhp/uns.py`, `rhp/flatten.py`, notebook 01, `figures/flattening_map.svg`); the σ ≠ ½ sweep as a picture and the sphere chart are not, and no candidate operator passes the harness.
 3. **§8** — a natural inner product on (zero spacings, prime periods) for which the orthogonality conjecture is a well-posed
    statement, and a null model against which a computed value would mean something.
 

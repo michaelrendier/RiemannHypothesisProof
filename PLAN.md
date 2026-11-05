@@ -24,7 +24,7 @@
 1. `rhp/limacon.py` — the loop-fit sifting test (numbers are in the project record only; no longer on the critical path, §7 is rewritten).
 2. `rhp/zero_counting.py` — §6 table from `mpmath`, with Gram's relation and spacing ratio.
 3. `rhp/orthogonality.py` — the test of §8 (inner product, null model); currently only a conjecture.
-4. ~~`rhp/lift.py` — the cusp-lift test~~ withdrawn: the pathway has no cusp. DONE instead (2026-11-03): `rhp/uns.py`, `rhp/flatten.py`, `rhp/render.py`, `rhp/viewport.py`/`camera.py` (vendored skill assets), `tests/test_uns.py` (11), notebook 01, figure + `data/pathway.csv` (Blender import). DONE 2026-11-04: `rhp/bigpath.py`, `flow.py`, `epicycles.py`, `render_big.py`, notebook 02, `tests/test_bigpath.py`. NEXT: sphere-chart picture, double-zero margin map (Lehmer pairs), Blender render of `data/pathway.csv`.
+4. ~~`rhp/lift.py` — the cusp-lift test~~ withdrawn: the pathway has no cusp. DONE instead (2026-11-03): `rhp/uns.py`, `rhp/flatten.py`, `rhp/render.py`, `rhp/viewport.py`/`camera.py` (vendored skill assets), `tests/test_uns.py` (11), notebook 01, figure + `data/pathway.csv` (Blender import). DONE 2026-11-04: `rhp/bigpath.py`, `flow.py`, `epicycles.py`, `render_big.py`, notebook 02, `tests/test_bigpath.py`. DONE 2026-11-04: `rhp/clock.py`, `gram.py`, `echo.py`, `harness.py`, `lehmer.py`, `balance.py`, `primegame.py`, notebook 03, `tests/test_notebook03.py` (29 tests total). NEXT: a real operator candidate for the harness (boundary conditions on xp), follow the balance branches to their ends (UNRESOLVED), sphere-chart picture, Blender render of `data/pathway.csv`.
 5. `paper/make_paper.py` with `--check`.
 6. `.venv` (numpy, mpmath, sympy, jupyter, nbconvert, pytest) and `requirements.txt`.
 
