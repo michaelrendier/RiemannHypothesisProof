@@ -52,16 +52,16 @@ self-adjointness conjecture, or equivalently the identification of ζ with a mod
 The repository is mid-rewrite. **Exists:** the draft paper; the plan; the archive; and the first built piece, the **flattening map**
 of §7 — `rhp/uns.py` (Hardy form, θ′, Gram points, UNS cylinder coordinates), `rhp/flatten.py` (artefact classifier and the
 viewport sweep), `rhp/render.py` (dependency-free SVG and the CSV a Blender import reads), `rhp/viewport.py` and `rhp/camera.py`
-(vendored from the author's nes-viewport and scad-spatial skills), `tests/test_uns.py` and `tests/test_bigpath.py` (29 tests), `notebooks/01_flattening_map.ipynb` and
+(vendored from the author's nes-viewport and scad-spatial skills), `tests/test_uns.py` and `tests/test_bigpath.py` (46 tests with `tests/test_sphere_wrap.py`), `notebooks/01_flattening_map.ipynb` and
 `02_machinery_flow_long_pathway.ipynb` (prime wheels, the two halves, the ξ′/ξ flow, the argument-principle accounting, a 3065-zero pathway) and
-`03_clock_echo_harness_margins_primegame.ipynb` (the θ-clock, negative real-axis crossings, the echo spectrum = explicit formula, an operator test harness with controls, Lehmer margins, the truncated-balance branches, Conway's PRIMEGAME, and a ten-item anomaly log),
-`rhp/bigpath.py`, `flow.py`, `epicycles.py`, `render_big.py`, `clock.py`, `gram.py`, `echo.py`, `harness.py`, `lehmer.py`, `balance.py`, `primegame.py`, `figures/{flattening_map,long_pathway,machinery,flow,clock_echo_harness,balance_margins_primegame}.svg`, `data/pathway.csv`, `data/zeros_1_to_3600.csv`, `requirements.txt`. **Does not exist yet** (see [`PLAN.md`](PLAN.md)): the rest of the
-vendored code, notebooks 04–07, the sphere-chart picture, the generated Manual, `paper/make_paper.py`. Two items have
+`04_equator_polarisation_springs.ipynb` (the equatorial construction w = (s−1)/s, π factored out of θ, the two counter-rotating waves and their standing-wave cross, primes on the sieve spring and the wheel spring, how far the primes' grip reaches), `03_clock_echo_harness_margins_primegame.ipynb` (the θ-clock, negative real-axis crossings, the echo spectrum = explicit formula, an operator test harness with controls, Lehmer margins, the truncated-balance branches, Conway's PRIMEGAME, and a ten-item anomaly log),
+`rhp/sphere.py`, `rhp/wrap.py`, `rhp/atlas/` (every new picture beside the code that draws it), `rhp/bigpath.py`, `flow.py`, `epicycles.py`, `render_big.py`, `clock.py`, `gram.py`, `echo.py`, `harness.py`, `lehmer.py`, `balance.py`, `primegame.py`, `figures/{flattening_map,long_pathway,machinery,flow,clock_echo_harness,balance_margins_primegame}.svg`, `data/pathway.csv`, `data/zeros_1_to_3600.csv`, `requirements.txt`. **Does not exist yet** (see [`PLAN.md`](PLAN.md)): the rest of the
+vendored code, notebooks 05–07, the generated Manual, `paper/make_paper.py`. Two items have
 **no code anywhere** today: the limaçon sifting fit and any test of the orthogonality conjecture of §8.
 
 ```bash
 python3 -m venv .venv && .venv/bin/pip install -r requirements.txt
-.venv/bin/python -m pytest -q tests                      # 29 tests, ~35 s
+.venv/bin/python -m pytest -q tests                      # 46 tests, ~40 s
 cd notebooks && ../.venv/bin/python make_notebook_01.py \
   && ../.venv/bin/jupyter nbconvert --to notebook --execute --inplace 01_flattening_map.ipynb
 ```
