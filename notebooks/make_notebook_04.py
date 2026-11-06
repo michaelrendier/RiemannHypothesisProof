@@ -140,6 +140,51 @@ together a standing wave. **OPEN:** whether a pathway traced through a *signific
 long before that, so the picture has to be built from the zeros' side (explicit formula, notebook 03), not by adding more wheels.
 """)
 
+
+M("""
+## 8. The two springs and how they meet  (ESTABLISHED structure; OURS reading; CALCULATED)
+
+**What the author's own pages call them.** `Ainulindale/wiki/47_the_two_trees.md` (measured 2026-08-30): *Telperion — the sieve*: each composite dies on the pass of its smallest prime factor, generation π(spf).
+*Laurelin — the un-sieve*: from the ground state "Just Prime Numbers", primes are turned on one at a time and a composite is born when its last needed prime is on, generation π(gpf). Run the extinction from the
+largest prime downward and you get Laurelin's book exactly.
+
+**The identification with the two springs here (exact, not analogy).** (i) *Sieve spring:* n lands on the 0 spot of the circle of circumference p first at p = spf(n). (ii) *Wheel spring:* the truncated Euler product P_K is exactly the Dirichlet
+series over the p_K-smooth numbers, so n enters the sum when the wheel gpf(n) is switched on. Both springs are made of primes; they differ in the *order* the primes act (smallest-first extinction against largest-last completion).
+Primes are not "one spring": a prime is the one number that closes both books at once (spf = gpf).
+
+**Where the clock meets the wheels.** The flat pathway is e^{−iθ(t)}·Z(t). The angle −θ has no primes in it (only Γ and π: §1c). The primes enter through Z(t) = 2Σ_{n≤N} n^{−½}cos(θ(t) − t ln n) + R, each wheel measured *against the clock*.
+The wheel n is at rest relative to the clock when θ′(t) = ln n, i.e. n = √(t/2π), t = 2πn²: the horizontal arm of the §2 cross. At height t the clock visits one wheel after another, in order (25.1, 56.5, 100.5, 157.1, … for n = 2, 3, 4, 5).
+""")
+C("""
+for n in (2, 3, 4, 5, 7):
+    t0 = W.resonance_height(n)
+    print(f"n={n}: rest at t = 2π n² = {t0:8.2f};  θ′(t₀) = {uns.theta_prime(t0):.6f},  ln n = {math.log(n):.6f}")
+spf, gpf = W.spf_gpf(10**5)
+print("n=360 = 2³·3²·5 : Telperion generation π(spf) = 1 (dies on the first pass), Laurelin generation π(gpf) = 3 (born when 5 is on)")
+print("fraction of composites ≤ 10⁵ that Telperion kills on the first pass:", round(float(np.mean(spf[4:][~W.sieve(10**5)[4:]] == 2)), 3))
+""")
+M("""
+**The twin circles.** On the p-circle a pair (n, n+2) must avoid the residues 0 and −2: (p−2)/p of the circle, against ((p−1)/p)² if the two were independent. The product of the ratios over the circles is
+Π p(p−2)/(p−1)² → C₂ = 0.66016, the Hardy–Littlewood constant. So the circles' 0 spots are *not* independent, by exactly the twin constant; this is arithmetic, drawn as circles.
+""")
+C("""
+for P in (5, 11, 101, 1009, 100003):
+    print(f"circles up to {P:6d}: Π p(p−2)/(p−1)² = {W.singular_series_from_circles(P):.6f}   (C₂ = {W.TWIN_C2:.6f})")
+print("twin pairs ≤ 10⁷ counted:", len(W.twin_pairs(10**7)), "  Hardy–Littlewood prediction:", round(W.hl_twin_count(10**7)))
+z = W.twin_gaps_normalised(10**7)
+print(f"gaps between consecutive twin pairs / local mean: mean {z.mean():.3f}  CV {z.std()/z.mean():.3f}  lag-1 autocorrelation {np.corrcoef(z[:-1], z[1:])[0,1]:+.3f}   (exponential: 1, 1, 0)")
+from rhp.atlas import twins
+display(SVG(filename=str(twins.build())))
+""")
+M("""
+What this does and does not show.
+* **Not a proof of the twin prime conjecture.** The circles give the *admissibility* of {0, 2} (no circle kills both members of every pair) and the Hardy–Littlewood *prediction* (58,755 against 58,980 counted below 10⁷, 0.4% low).
+  Admissibility is necessary, not sufficient; that infinitely many survive is the whole open problem (the parity barrier is why sieve methods stop at bounded gaps, 246 unconditionally, and not at 2).
+  The pre-registered P4 in `FourthAgePapers/NoetherWiles/01_predictions.ipynb` says the same of itself: "Admissibility (certain) + infinity (conjectured)".
+* **The lengths between twin pairs are not driving anything coherent.** Normalised by their smooth mean (ln p)²/(2C₂) they are close to memoryless (CV 0.91, lag-1 autocorrelation −0.02). If the twin circles shape the pathway it can only be through that smooth mean.
+* **The doublet.** The twin wheels p, p+2 are a nearly single rotor with the slow beat t·ln(1+2/p) (§3); in the zeros' picture the pair is a doublet of spikes 2/p apart in t = ln n. Whether pairs of zeros control the pair statistics of the primes is the Montgomery–Goldston pair-correlation relation (ESTABLISHED under RH), not computed here.
+""")
+
 M("""
 ## 5. What the code supports of the picture, and what it does not
 
@@ -151,6 +196,8 @@ M("""
 | Each term is a pair of counter-rotating waves; equal on the equator (linear polarisation); the standing-wave set is a cross | ESTABLISHED structure, `:CALCULATED` §2 |
 | Twin primes straddle the 0 spot of the 6-circle; the allowed-centre fraction thins like Π(1−2/p) | ESTABLISHED arithmetic, `:CALCULATED` §3 |
 | Twin wheels part at t·ln(1+2/p): the gap is the beat | OURS reading, `:CALCULATED` §3 |
+| The two springs are Telperion (sieve, by smallest prime factor) and Laurelin (un-sieve, by greatest); the clock visits the wheels at t = 2πn² | OURS reading of the author's measured pages + ESTABLISHED stationary phase, `:CALCULATED` §8 |
+| Twin circles give C₂ and the HL count; the lengths between twin pairs are nearly memoryless | ESTABLISHED arithmetic / HEURISTIC prediction, `:CALCULATED` §8 |
 | "Primes are on the equator" | **CONJECTURE (reading).** The code shows primes as the *rotation rates* on the equator and as the dual-axis echo spikes, not as points of the circle |
 | "Something keeps the zeros on the line, from the factoring side" | **OPEN.** §4 shows the primes' grip fading toward the equator; no mechanism is shown |
 """)

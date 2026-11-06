@@ -95,3 +95,33 @@ def test_wheels_help_far_north_and_stop_helping_at_the_equator():
     eq = W.euler_grip(0.5, t, Ks)
     assert north[0] > north[1] > north[2]                                     # converges
     assert eq[2] > eq[1]                                                      # more wheels is worse than 100 at σ = ½
+
+
+def test_books_and_smooth_numbers():
+    spf, gpf = W.spf_gpf(1000)
+    assert spf[360] == 2 and gpf[360] == 5 and spf[97] == gpf[97] == 97 and spf[1000] == 2 and gpf[1000] == 5
+    # P_K is the Dirichlet series over the p_K-smooth numbers: the numbers it contains are exactly gpf ≤ p_K
+    smooth = [m for m in range(2, 1001) if gpf[m] <= 7]
+    assert 360 in smooth and 97 not in smooth and 1000 in smooth and 11 not in smooth
+
+
+def test_circles_give_the_twin_constant():
+    assert abs(W.singular_series_from_circles(100003) - W.TWIN_C2) < 1e-5
+    assert W.singular_series_from_circles(5) > W.singular_series_from_circles(101) > W.TWIN_C2
+
+
+def test_hl_count_is_close_but_a_prediction():
+    n = len(W.twin_pairs(10 ** 6))
+    assert abs(W.hl_twin_count(10 ** 6) - n) / n < 0.01
+
+
+def test_twin_gaps_are_nearly_memoryless():
+    z = W.twin_gaps_normalised(10 ** 6)
+    assert abs(z.mean() - 1) < 0.05 and 0.8 < z.std() / z.mean() < 1.05
+    assert abs(np.corrcoef(z[:-1], z[1:])[0, 1]) < 0.05
+
+
+def test_the_clock_rests_against_the_wheel_at_2_pi_n_squared():
+    for n in (2, 3, 5, 7):
+        t0 = W.resonance_height(n)
+        assert abs(uns.theta_prime(t0) - math.log(n)) < 1e-3

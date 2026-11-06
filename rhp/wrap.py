@@ -132,3 +132,54 @@ def euler_grip(sigma, t, Ks):
     true = np.array([float(np.log(abs(complex(zeta(mpc(sigma, x)))))) for x in t])
     L = log_abs_euler(sigma, t, list(Ks))
     return np.median(np.abs(true[None, :] - L), axis=1)
+
+
+# ── the two books (Telperion = sieve, Laurelin = un-sieve), the twin constant from the circles, the clock–wheel resonance ──
+TWIN_C2 = 0.6601618158468696          # Hardy–Littlewood twin prime constant Π_{p≥3} p(p−2)/(p−1)²
+
+
+def spf_gpf(n):
+    """Smallest and greatest prime factor arrays for 0..n (0 and 1 left at 0).  Telperion's generation of m is π(spf(m)):
+    the first circle with m on its 0 spot.  Laurelin's is π(gpf(m)): the wheel whose switching-on completes m's term in the Euler product
+    (P_K is exactly the Dirichlet series over the p_K-smooth numbers)."""
+    spf = np.zeros(n + 1, dtype=np.int64)
+    gpf = np.zeros(n + 1, dtype=np.int64)
+    for q in range(2, n + 1):
+        if spf[q] == 0:
+            idx = np.arange(q, n + 1, q)
+            fresh = idx[spf[idx] == 0]
+            spf[fresh] = q
+            gpf[idx] = q                  # primes ascend, so the last write is the greatest
+    return spf, gpf
+
+
+def singular_series_from_circles(P):
+    """Π_{3≤p≤P} (allowed fraction of the p-circle for a twin pair)/(independent fraction) = Π p(p−2)/(p−1)².
+    On the p-circle a pair (n, n+2) must avoid residues {0, −2}: (p−2)/p of the circle, against ((p−1)/p)² if the two were independent."""
+    pr = primes_to(P)
+    pr = pr[pr >= 3].astype(float)
+    return float(np.prod(pr * (pr - 2) / (pr - 1) ** 2))
+
+
+def hl_twin_count(N):
+    """Hardy–Littlewood prediction 2·C₂·Σ_{2≤x<N} 1/ln²x for the number of twin pairs below N (a heuristic, not a theorem)."""
+    xs = np.arange(2, N, dtype=float)
+    return 2 * TWIN_C2 * float(np.sum(1 / np.log(xs) ** 2))
+
+
+def twin_gaps_normalised(N):
+    """Gaps between consecutive twin pairs divided by the local mean (ln p)²/(2C₂): ≈ 1 on average."""
+    tw = twin_pairs(N)
+    g = np.diff(tw).astype(float)
+    return g / (np.log(tw[1:].astype(float)) ** 2 / (2 * TWIN_C2))
+
+
+def resonance_height(n):
+    """The height at which the Hardy clock turns at the rate of the wheel n:  θ′(t) = ln n  ⇔  t = 2π n²  (n = √(t/2π))."""
+    return 2 * math.pi * n * n
+
+
+def relative_phase(n, t):
+    """θ(t) − t·ln n : the phase of the wheel n measured against the clock; stationary at t = 2π n² (Riemann–Siegel's stationary phase)."""
+    t = np.atleast_1d(np.asarray(t, float))
+    return np.array([uns.theta(x) for x in t]) - t * math.log(n)
