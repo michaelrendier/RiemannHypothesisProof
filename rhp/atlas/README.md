@@ -15,6 +15,9 @@ Older figures (`../../figures/`) predate the atlas and are left where notebooks 
 | `net.svg` | `python -m rhp.atlas.net` | the six faces (u,τ) (u,σ′) (u,t) (τ,σ′) (τ,t) (σ′,t) of the four coordinates, unfolded like a hypercube net | 05 §4 |
 | `nodal.svg` | `python -m rhp.atlas.nodal` (≈ 2 min) | `rhp/nodal.py`: Re ξ = 0 and Im ξ = 0 on both hemispheres (the ladder), saddles, heartbeat F(t), the weight |χ|, trivial zeros of ζ | 05 §5 |
 | `diverge.svg` | `python -m rhp.atlas.diverge` | `rhp/diverge.py`: the divergence detector — control on real ψ, injected off-line quadruple, recovered growth slope, detection limit by reach, frequency scan | 05 §8 |
+| `uns_map.svg` | `python -m rhp.atlas.uns_map` | `rhp/unsmap.py`: number-free Cayley+stereographic map; lines/circles → circles; true cusp survives; edge-on rotation vs cusp; spiral-law identifier | 06 §1 |
+| `chladni.svg` | `python -m rhp.atlas.chladni` (≈ 20 s) | `rhp/chladni.py`: even/odd parities, flux ∂σ ln|ξ| (motion), nodal rungs on the sphere, off-line flux pocket, lobe angle | 06 §2 |
+| `spirals.svg` | `python -m rhp.atlas.spirals` | `rhp/coil.py`: ζ in the cylindrical UNS chart, partial-sum cone/cylinder/funnel, conical helices of the explicit formula, the POE pancake coil with zeros as beads | 06 §3 |
 
 Conventions: matplotlib with text kept as text; the animated one is hand-written SVG with plain classes and a dark-mode media query. Labels follow the paper: ESTABLISHED / OURS / THEORETICAL / CONJECTURE / OPEN, with `:CALCULATED`.
 A picture here shows a space and a machinery; none of it tests RH.
