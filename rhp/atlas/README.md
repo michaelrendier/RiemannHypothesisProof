@@ -14,6 +14,7 @@ Older figures (`../../figures/`) predate the atlas and are left where notebooks 
 | `flow_player.html` | `python -m rhp.atlas.flow_player` | the same flow, interactive: drag τ, watch each n ≤ 2500 die (Telperion) and be born (Laurelin); open in a browser | 05 §1 |
 | `net.svg` | `python -m rhp.atlas.net` | the six faces (u,τ) (u,σ′) (u,t) (τ,σ′) (τ,t) (σ′,t) of the four coordinates, unfolded like a hypercube net | 05 §4 |
 | `nodal.svg` | `python -m rhp.atlas.nodal` (≈ 2 min) | `rhp/nodal.py`: Re ξ = 0 and Im ξ = 0 on both hemispheres (the ladder), saddles, heartbeat F(t), the weight |χ|, trivial zeros of ζ | 05 §5 |
+| `diverge.svg` | `python -m rhp.atlas.diverge` | `rhp/diverge.py`: the divergence detector — control on real ψ, injected off-line quadruple, recovered growth slope, detection limit by reach, frequency scan | 05 §8 |
 
 Conventions: matplotlib with text kept as text; the animated one is hand-written SVG with plain classes and a dark-mode media query. Labels follow the paper: ESTABLISHED / OURS / THEORETICAL / CONJECTURE / OPEN, with `:CALCULATED`.
 A picture here shows a space and a machinery; none of it tests RH.

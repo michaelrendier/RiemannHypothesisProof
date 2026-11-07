@@ -106,5 +106,24 @@ M("""
 | 4 | Screw zeros after n = 50 off by ≈ 2.3 | CODE (ValaQuenta, not edited): Lambert approximation fallback |
 | 5 | Σ_RB balance independent of σ | CODE/METHOD (ValaQuenta, not edited): σ enters only as a common weight |
 """)
+
+M("""
+## 8  The divergence detector (generational-lineage reading first)
+**What it detects.** On the line every zero is a pure rotation in u = ln x (gain 1: isometries only). An off-line zero at ½+δ+iγ adds a growth e^{δu}: a DILATE, graded by δ — emergence signature 1 of §5
+("a quantity that changes length where only isometries were in play"; graded, not one bit). Its mirror partner decays as e^{−δu}, so the amplitude at that frequency is a cosh and the slope is ~δ²u for small δ.
+The equator is the fixed set of the mirror (tier 2, DERIVED); the detector reads the state of the balanced object — the Red/Blue amplitude ratio — not the fixed set itself.
+**Order of work (§8):** control on the real ψ first, then injection of a known quadruple, then the detection limit. The null result on real ψ is a statement about the window u ≤ 16 only.
+""")
+C("""
+from rhp import diverge as D
+psi = D.psi_table(10**7)
+s, m, sd = D.control(psi, 20); print("control slopes: mean %.4f sd %.4f  -> 3 sd floor %.3f" % (m, sd, 3*sd))
+print("inject & recover at gamma_1:", [(d, round(v, 4)) for d, v in D.inject_and_recover(psi, [0.05, 0.1, 0.2, 0.3, 0.5])])
+for u1 in (11, 13, 16): print("reach u_max=%d: delta_min(3sd) = %.3f (floor sd %.3f)" % ((u1,) + D.detection_limit(psi, u1)))
+g = np.arange(10, 40, 0.1); _, s0, a0 = D.scan(psi, g); _, s1, a1 = D.scan(psi, g, extra=lambda u: D.quadruple(u, 0.3, 17.5))
+print("control candidates:", D.candidate_peaks(g, s0, a0, 0.1, 0.06)); print("with delta=0.3 injected at 17.5:", D.candidate_peaks(g, s1, a1, 0.1, 0.06))
+display(SVG("../rhp/atlas/diverge.svg"))
+""")
+
 nb["metadata"]["kernelspec"] = {"display_name": "Python 3", "language": "python", "name": "python3"}
 nbf.write(nb, "05_extinction_flow_nodal_ladder_zerorb.ipynb")

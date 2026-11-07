@@ -133,3 +133,46 @@ def test_zero_spacing_is_half_the_wheel_period_at_resonance():
         assert ratio == pytest.approx(0.5, abs=1e-12)
     sp, k = Z.measured_spacing(5)
     assert abs(sp / Z.wavelength_pair(5)[1] - 1) < 0.1
+
+
+# ── divergence detector ──
+@pytest.fixture(scope="module")
+def psi7():
+    from rhp import diverge as D
+    return D.psi_table(10 ** 7)
+
+
+def test_detector_control_is_flat_on_real_psi(psi7):
+    from rhp import diverge as D
+    s, m, sd = D.control(psi7, 20)
+    assert abs(m) < 0.05 and sd < 0.05            # false-alarm floor measured BEFORE any injection
+
+
+def test_detector_recovers_injected_growth(psi7):
+    from rhp import diverge as D
+    rec = dict(D.inject_and_recover(psi7, [0.3]))
+    assert abs(rec[0.3] - 0.3) < 0.05
+
+
+def test_detector_scan_finds_off_grid_mode_and_control_is_empty(psi7):
+    from rhp import diverge as D
+    g = np.arange(10, 40, 0.1)
+    _, s0, a0 = D.scan(psi7, g)
+    assert D.candidate_peaks(g, s0, a0, 0.1, 0.06) == []
+    _, s1, a1 = D.scan(psi7, g, extra=lambda u: D.quadruple(u, 0.3, 17.5))
+    pk = D.candidate_peaks(g, s1, a1, 0.1, 0.06)
+    assert any(abs(p[0] - 17.5) < 0.2 for p in pk)
+
+
+def test_detection_limit_improves_with_reach(psi7):
+    from rhp import diverge as D
+    d11, _ = D.detection_limit(psi7, 11); d16, _ = D.detection_limit(psi7, 16)
+    assert d16 < d11 and d16 < 0.2
+
+
+def test_quadruple_is_a_cosh_pair():
+    from rhp import diverge as D
+    u = np.linspace(6, 14, 400)
+    q = D.quadruple(u, 0.2, 20.0)
+    env = np.sqrt(q ** 2 + np.gradient(q, u) ** 2 / 400.0)        # rough envelope; growth must be visible
+    assert abs(q[-40:]).max() > 3 * abs(q[:40]).max()
