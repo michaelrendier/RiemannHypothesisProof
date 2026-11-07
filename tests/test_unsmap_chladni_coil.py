@@ -109,3 +109,42 @@ def test_explicit_formula_trace_is_two_re_q():
     E = D.residual(u, psi)
     Q = K.explicit_path(u, z)
     assert np.corrcoef(E, 2 * Q.real)[0, 1] > 0.9
+
+
+# ── the pasted standing-wave summation, claim by claim (rhp.standing) ──
+def test_J_is_order_four_with_no_fixed_point_and_circle_invariant():
+    from rhp import standing as S
+    c = S.J_cycle(0.6 + 0.3j)
+    assert abs(c[4] - c[0]) < 1e-12 and abs(c[2] + c[0]) < 1e-12          # J⁴ = id, J² = −z
+    free, cmin, cmax = S.J_fixed_point_defect()
+    assert free > 1.0 and abs(cmin - math.sqrt(2)) < 1e-9 and abs(cmax - math.sqrt(2)) < 1e-9   # r = 1 invariant, not fixed
+
+
+def test_J_is_not_a_symmetry_of_xi_but_the_mirror_is():
+    from rhp import standing as S
+    ss = [complex(0.5 + dx, t) for dx, t in [(0.1, 20.0), (-0.2, 31.0), (0.3, 44.0)]]
+    assert np.all(np.abs(np.log(S.xi_ratio_under(S.J, ss))) > 5)
+    assert np.allclose(S.xi_ratio_under(S.mirror, ss), 1, atol=1e-9)
+
+
+def test_energy_integral_is_not_pi():
+    from rhp import standing as S
+    for k in (1.0, 14.134725):
+        closed, area = S.energy_gemini(k)
+        assert abs(closed - S.energy_numeric(k)) < 1e-6 and abs(closed - area) > 0.3
+
+
+def test_flux_identity_exact_and_mean_equals_theta_prime_for_large_sigma():
+    from rhp import standing as S
+    for sg, t in [(0.7, 30.0), (1.3, 50.0)]:
+        assert S.flux_identity_defect(sg, t) < 1e-8
+    a, b, c = S.remainder_terms(1.3, 50.0)
+    assert abs(a) < 1e-2 and abs(b) < 1e-3                                  # only Re ζ′/ζ is not O(1/t)
+
+
+def test_engine_J_matches_and_only_radius_closes():
+    from rhp import standing as S
+    r = S.engine_J_agrees()
+    if r is None:
+        pytest.skip("ValaQuenta not found")
+    assert r["max_diff"] < 1e-12 and r["radius_closes_after_two"] and abs(r["angle_after_two"] - math.pi) < 1e-12
