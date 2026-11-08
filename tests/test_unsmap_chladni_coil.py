@@ -179,3 +179,26 @@ def test_add_is_spiral_similarity_and_pair_is_real():
     assert np.max(np.abs(s.imag)) < 1e-14 and np.allclose(np.abs(f), np.abs(m))
     f2, _, _ = H.counter_rotating_pair(u, g, 0.15)
     assert abs(f2[-1]) / abs(f2[0]) > 2          # off the line the common radius grows
+
+
+# ── 65-wheel coil ──
+def test_wheel65_exact_primality_below_317_squared():
+    from rhp import wheel65 as w
+    from rhp.wrap import sieve
+    sv = sieve(w.LIMIT - 1)
+    assert len(w.PRIMES) == 65 and w.PRIMES[-1] == 313
+    assert all(w.is_prime(n) == bool(sv[n]) for n in range(2, w.LIMIT))
+
+
+def test_wheel65_313_catches_only_two_composites_below_1e5():
+    from rhp import wheel65 as w
+    hit = [n for n in range(314, 100000) if w.ringing(n) and w.ringing(n)[0] == 313]
+    assert hit == [97969, 99221]
+    assert 317 * 317 > 99999
+
+
+def test_wheel65_response_is_ramanujan_sum():
+    import numpy as np
+    from rhp import wheel65 as w
+    n = np.array([2, 30, 313 * 317, 100003])
+    assert list(w.response(n)) == [2 - 65, 2 + 3 + 5 - 65, 313 - 65 + 0, -65][:2] + [313 - 65, -65]
