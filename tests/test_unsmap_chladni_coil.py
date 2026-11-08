@@ -148,3 +148,34 @@ def test_engine_J_matches_and_only_radius_closes():
     if r is None:
         pytest.skip("ValaQuenta not found")
     assert r["max_diff"] < 1e-12 and r["radius_closes_after_two"] and abs(r["angle_after_two"] - math.pi) < 1e-12
+
+
+# ── the Heartbeat: what the standing wave contains ──
+def test_zero_circle_area_budget_matches_hadamard_constant():
+    from rhp import heartbeat as H
+    z = np.loadtxt("data/zeros_1_to_3600.csv")
+    s, st, ex = H.budget(z)
+    assert abs(st - ex) < 1e-7 and abs(ex - (1 + 0.5772156649015329 / 2 - 0.5 * math.log(4 * math.pi))) < 1e-15
+    assert abs(H.SUM_INV_RHO + H.GROUND_SHARE - 1) < 1e-15
+    cum = np.cumsum(H.tone_radius(z) ** 2) / H.SUM_INV_RHO
+    assert abs(cum[0] - 0.2164) < 5e-4 and abs(cum[9] - 0.586) < 2e-3 and abs(cum[33] - 0.7598) < 2e-3
+
+
+def test_mean_power_is_parseval_value_on_exact_psi():
+    from rhp import heartbeat as H, diverge as D
+    psi = D.psi_table(10 ** 7)
+    m, _ = H.mean_power_measured(psi, 6.0, 16.1)
+    assert abs(m / H.MEAN_POWER - 1) < 0.03
+    assert abs(H.MEAN_POWER - (2 + 0.5772156649015329 - math.log(4 * math.pi))) < 1e-15
+
+
+def test_add_is_spiral_similarity_and_pair_is_real():
+    from rhp import heartbeat as H
+    g = 14.134725141735
+    sc, rot = H.spiral_similarity(g, 1.0)
+    assert abs(sc - math.exp(0.5)) < 1e-12 and abs((rot - g) % (2 * math.pi)) < 1e-9 or abs((rot - g) % (2 * math.pi) - 2 * math.pi) < 1e-9
+    u = np.linspace(0, 5, 500)
+    f, m, s = H.counter_rotating_pair(u, g, 0.0)
+    assert np.max(np.abs(s.imag)) < 1e-14 and np.allclose(np.abs(f), np.abs(m))
+    f2, _, _ = H.counter_rotating_pair(u, g, 0.15)
+    assert abs(f2[-1]) / abs(f2[0]) > 2          # off the line the common radius grows

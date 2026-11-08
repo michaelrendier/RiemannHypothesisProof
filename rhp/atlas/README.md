@@ -18,6 +18,7 @@ Older figures (`../../figures/`) predate the atlas and are left where notebooks 
 | `uns_map.svg` | `python -m rhp.atlas.uns_map` | `rhp/unsmap.py`: number-free Cayley+stereographic map; lines/circles → circles; true cusp survives; edge-on rotation vs cusp; spiral-law identifier | 06 §1 |
 | `chladni.svg` | `python -m rhp.atlas.chladni` (≈ 20 s) | `rhp/chladni.py`: even/odd parities, flux ∂σ ln|ξ| (motion), nodal rungs on the sphere, off-line flux pocket, lobe angle | 06 §2 |
 | `spirals.svg` | `python -m rhp.atlas.spirals` | `rhp/coil.py`: ζ in the cylindrical UNS chart, partial-sum cone/cylinder/funnel, conical helices of the explicit formula, the POE pancake coil with zeros as beads | 06 §3 |
+| `heartbeat.svg` | `python -m rhp.atlas.heartbeat` | `rhp/heartbeat.py`: the explicit formula's standing wave as counter-rotating circles; area budget of the unit circle; who holds the zero-circle area; mean power on exact ψ; ADD/SCALE/SIGN as spiral similarity and conjugation | 06 / docs |
 
 Conventions: matplotlib with text kept as text; the animated one is hand-written SVG with plain classes and a dark-mode media query. Labels follow the paper: ESTABLISHED / OURS / THEORETICAL / CONJECTURE / OPEN, with `:CALCULATED`.
 A picture here shows a space and a machinery; none of it tests RH.
