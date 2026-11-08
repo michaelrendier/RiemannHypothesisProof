@@ -20,5 +20,7 @@ Older figures (`../../figures/`) predate the atlas and are left where notebooks 
 | `spirals.svg` | `python -m rhp.atlas.spirals` | `rhp/coil.py`: ζ in the cylindrical UNS chart, partial-sum cone/cylinder/funnel, conical helices of the explicit formula, the POE pancake coil with zeros as beads | 06 §3 |
 | `heartbeat.svg` | `python -m rhp.atlas.heartbeat` | `rhp/heartbeat.py`: the explicit formula's standing wave as counter-rotating circles; area budget of the unit circle; who holds the zero-circle area; mean power on exact ψ; ADD/SCALE/SIGN as spiral similarity and conjugation | 06 / docs |
 
+| `wave.svg` | `python -m rhp.atlas.wave` | `rhp/wave.py`: the Heartbeat waveform from the two sets (Telperion/Laurelin mirror), zero-tone rebuild, wind envelope, a factor step against the wind, bandwidth to resolve a prime | docs |
+
 Conventions: matplotlib with text kept as text; the animated one is hand-written SVG with plain classes and a dark-mode media query. Labels follow the paper: ESTABLISHED / OURS / THEORETICAL / CONJECTURE / OPEN, with `:CALCULATED`.
 A picture here shows a space and a machinery; none of it tests RH.

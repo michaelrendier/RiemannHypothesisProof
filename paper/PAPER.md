@@ -246,3 +246,10 @@ ContextPlease is the author's private archive of working context for the assista
 
 The author's standing wave (ValaQuenta `bao_mass_gap`, `archimedes_screw`) is the explicit-formula zero tone: one real wave per zero pair, E(u) = Σ_{γ>0}(2/|ρ|)cos(γu − arg ρ), two counter-rotating circles of radius 1/|ρ| and area π/|ρ|². ESTABLISHED: Σ_ρ 1/ρ = 1 + γ_E/2 − ½ln 4π = 0.0230957 (Hadamard constant); hence the zero circles together hold 2.31 % of the unit circle's area π (3066 zeros plus density tail: 0.02309574, exact 0.02309571) and the Γ/π term the rest. The first zero holds 21.6 % of the zero-circle area, the first ten 58.6 %, the 34 on the pancake coil 76.0 %. Mean power ⟨E²⟩ = 2 + γ_E − ln 4π = 0.04619 (Parseval; 0.0453–0.0466 measured on the exact ψ for u ≤ 16.1). A step Δu in ln x multiplies a tone by e^{(½+iγ)Δu}: scale e^{Δu/2} with rotation γΔu (ADD in u acts as a spiral similarity); conjugation ρ ↔ ρ̄ is the reflection. No single tone holds more than 0.5 % of π; the unit circle appears only as the normalisation.
 
+
+### 7.19 The Heartbeat waveform derived from the two sets
+
+The engine's partition (primes | composites | {0,1}) forces opposite deviations: with Telperion's weight Λ(n) and Laurelin's 1 − Λ(n), ψ(x) + (⌊x⌋−1−ψ(x)) = ⌊x⌋−1, so in the
+native variable W_T = (ψ(x)−x)/√x and W_L satisfy |W_T + W_L| ≤ 2/√x (ESTABLISHED identity; measured 0.098 on u ∈ [6,15.9]). The von Mangoldt formula gives W_T = −2Σ_{γ>0}cos(γu − arg ρ)/|ρ|,
+a sum of standing tones (two equal counter-rotating circles each); 3066 tones reproduce the sieve wave to correlation 0.993, rms 0.2173 against √(Σ1/|ρ|²) = 0.2149 (OURS-CALCULATED).
+Reading: a single factor's step in this variable, ln p/√p, peaks at p = e² (2/e) and the wave's peak envelope is of the same size. Details and limits: `docs/heartbeat_waveform_derivation_2026-11-08.md`.

@@ -202,3 +202,53 @@ def test_wheel65_response_is_ramanujan_sum():
     from rhp import wheel65 as w
     n = np.array([2, 30, 313 * 317, 100003])
     assert list(w.response(n)) == [2 - 65, 2 + 3 + 5 - 65, 313 - 65 + 0, -65][:2] + [313 - 65, -65]
+
+
+# ── the Heartbeat waveform from the two sets ──
+def test_wave_partition_matches_engine_and_is_exact():
+    from rhp import wave as w
+    e = w.engine_two_trees(100_000)
+    assert (e["telperion_prime"], e["laurelin_composite"], e["mingling_0_and_1"]) == w.own_partition(100_000) == (9592, 90407, 2)
+    assert e["exact"]
+
+
+def test_wave_trees_are_exact_mirrors_up_to_floor_term():
+    import numpy as np
+    from rhp import wave as w
+    _, psi = w.lam_table(2_000_000)
+    u = np.linspace(6, 14.5, 4000)
+    d, b = w.antisymmetry_defect(u, psi)
+    assert d <= b + 1e-12
+
+
+def test_wave_zero_tones_rebuild_the_sieve_wave_and_power():
+    import math
+    import numpy as np
+    from rhp import wave as w, diverge as dv
+    _, psi = w.lam_table(2_000_000)
+    Z = dv.load_zeros()
+    u = np.linspace(6, 14.5, 6000)
+    c100, _ = w.reconstruction_error(u, psi, Z[:100])
+    c1000, r1000 = w.reconstruction_error(u, psi, Z[:1000])
+    assert c100 > 0.9 and c1000 > 0.97 and r1000 < 0.06
+    wt, _ = w.trees(u, psi)
+    assert abs(w.wind_stats(wt)["rms"] - math.sqrt(w.MEAN_POWER)) < 0.02
+
+
+def test_wave_factor_step_peaks_at_e_squared():
+    import math
+    from rhp import wave as w
+    best = max(range(2, 200), key=lambda p: w.factor_step_ratio(p, 1.0)[0])
+    assert best == 7                                    # nearest integer to e² = 7.389
+    assert abs(w.factor_step_ratio(math.e ** 2, 1.0)[0] - 2 / math.e) < 1e-12
+
+
+def test_wave_tone_is_phase_shifted_sine_of_amplitude_two_over_rho():
+    import numpy as np
+    from rhp import wave as w
+    g = 14.134725
+    u = np.linspace(0, 20, 5000)
+    t = w.tone(u, g)
+    assert abs(t.max() - 2 / abs(complex(0.5, g))) < 1e-4
+    ref = -2 * (0.5 * np.cos(g * u) + g * np.sin(g * u)) / (0.25 + g * g)      # −2[½cos + γ sin]/|ρ|²
+    assert np.allclose(t, ref)
