@@ -354,3 +354,34 @@ def test_prime_wheels_never_close_a_rosette():
     cv = G.convergents_ratio(3, 2, 6)
     assert [(h, k) for h, k, e in cv][-3:] == [(3, 2), (8, 5), (19, 12)] or (19, 12) in [(h, k) for h, k, e in cv]
     assert all(e > 0 for h, k, e in cv)                    # ln3/ln2 is irrational: no convergent is exact
+
+
+# ── Boundary Condition Engine (rhp/boundary.py, rhp/boundary_engine.py) ──
+def test_boundary_engine_menu_drives_the_map_layer():
+    from rhp import boundary_engine as E
+    log = E.selftest(verbose=False)
+    assert log and all(s == "PASS" for s, _ in log) and len(log) > 40
+
+
+def test_worm_turnaround_law_is_exact():
+    from rhp import boundary as B
+    for tau in (.3, .6, 1.0):
+        tb = np.linspace(0, 2 * np.pi / tau, 200001)                       # one full wobble cycle
+        rate = 1 + 5 * tau * np.cos(tau * tb)                              # dθ/dθ_b of the worm, ω = τ, β = 5
+        assert abs(np.mean(rate < 0) - B.retro_fraction(5, tau)) < 2e-3
+    assert B.retro_fraction(5, .15) == 0 and B.worm_retro_threshold() == .2
+
+
+def test_wheel_transition_turnarounds_stop_at_beta_omega_one():
+    from rhp import boundary as B
+    al, c = B.transition_curve("O2", "O3", "wheel", m=21, n=3000)
+    thr = 1 - np.sqrt(1 / (5 * B.PATTERNS["O2"].tau0))                       # β(α)·ω(α) = 5τ(1−α)² = 1
+    assert c["angular_reversals"][al < thr - .05].min() > 0 and c["angular_reversals"][al > thr + .05].max() == 0
+
+
+def test_zeta_turns_one_way_and_wobble_decays():
+    from rhp import boundary as B
+    zt = B.zeta_turning(B.PP.GAMMA1, 5000)
+    assert zt["last_sense_flip_prime"] < 100                                  # beyond the first few primes every step turns the same way
+    meas, pred = B.zeta_wobble()
+    assert abs(meas / pred - 1) < .15                                         # β_ζ(p) = ½ p^{-½}

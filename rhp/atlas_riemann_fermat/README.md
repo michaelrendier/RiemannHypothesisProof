@@ -34,3 +34,5 @@ A picture here shows a space and a machinery; none of it tests RH.
 | `gemini_worm.svg` | `gemini_worm.py` | the Gemini event-horizon sims' curves beside the ζ path (2026-11-09; see `docs/two_trees_in_zeta_and_gemini_worm_2026-11-09.md`) |
 
 | `gemini_original.svg` | `python -m rhp.atlas_riemann_fermat.gemini_original` | `rhp/geminisim.py`: the original event_horizon_sim.py phases 2 (worm = phase modulation, Bessel lines) and 3 (rosette = amplitude modulation) with their spectra |
+
+| `boundary_engine/` | `python -m rhp.boundary_engine --export DIR` (viewer: `python -m rhp.boundary_engine`) | poster of all 19 patterns, strips, 15 transition strips (3 mappings), 4 GIFs (worm, rosette, worm→rosette wheel transition, ζ height sweep); see `docs/boundary_engine_2026-11-09.md` |

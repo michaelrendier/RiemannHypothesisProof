@@ -1,6 +1,5 @@
-# Vendored verbatim from ~/.claude/skills/nes-viewport/assets/viewport.py (author's own skill assets), 2026-11-03.
-# Provenance: OURS (methodology skill); unchanged apart from this header.
 # SPDX-License-Identifier: GPL-3.0-only
+# Copied from the nes-viewport skill (assets/viewport.py); unchanged apart from this header.
 """Framework-agnostic 2D viewport + scrollbar + the soundness test.
 
 No dependencies. Port the maths verbatim into Android / curses / a canvas; keep

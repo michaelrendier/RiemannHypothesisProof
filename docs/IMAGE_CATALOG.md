@@ -195,3 +195,7 @@ Eight panels, 2 × 4. a: the oldest Gemini sim's flow z ↦ 1 + 1/z in polar (13
 
 ## gemini_original.svg  (rhp/atlas_riemann_fermat/gemini_original.py)
 2 × 5. Top row, columns 1-4: phase 2 of the original event_horizon_sim.py (the worm) at cycle time t = 0.1, 0.3, 0.6, 1.0 — a spiral head with a tail that lengthens and wiggles. Bottom row, columns 1-4: phase 3 (the rosette) at t = 0.2, π/6 (k = 1/3), π/4 (k = 1/2), 1.0 (k = 2/π) — a √θ spiral with radial modulation; symmetric lattice at k = 1/2. Top right: line spectrum of the worm's phasor against Bessel |J_n(5)| (phase modulation). Bottom right: rosette sidebands, carrier 1 and 1 ± k at 0.1 for k = 1/3, 1/2, 2/π (amplitude modulation).
+
+
+## boundary_engine/  (directory of PNG and GIF; `rhp/boundary_engine.py --export`)
+`poster_all_patterns.png` — the whole 5 × 5 pattern grid (rows: original, Claude's five phases, Revised_2, φ-flow/crossing/wheel family, ζ whole/Telperion/Laurelin). `strip_{O2,O3,W1,Z1,R3}.png` — each pattern at τ = 0.1, 0.3, 0.6, 1.0. `transition_<A>_<B>_{polar,cartesian,wheel}.png` — A → B at α = 0, 0.25, 0.5, 0.75, 1 for O2→O3, O1→O2, R2→R3, G1→Z1, O2→Z1. `motion_worm.gif`, `motion_rosette.gif`, `motion_transition_wheel_O2_O3.gif`, `motion_zeta_height_sweep.gif` (log P_K at t = 3…30). Reading: wheel-state LERP keeps structure between worm and rosette; Gemini's polar LERP tangles at α ≈ 0.25.
