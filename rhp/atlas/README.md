@@ -28,3 +28,5 @@ Image catalog (every image, panel by panel): `docs/IMAGE_CATALOG.md`; PDF `docs/
 
 Conventions: matplotlib with text kept as text; the animated one is hand-written SVG with plain classes and a dark-mode media query. Labels follow the paper: ESTABLISHED / OURS / THEORETICAL / CONJECTURE / OPEN, with `:CALCULATED`.
 A picture here shows a space and a machinery; none of it tests RH.
+
+| `gemini_worm.svg` | `gemini_worm.py` | the Gemini event-horizon sims' curves beside the ζ path (2026-11-09; see `docs/two_trees_in_zeta_and_gemini_worm_2026-11-09.md`) |

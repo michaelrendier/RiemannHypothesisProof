@@ -308,3 +308,31 @@ def test_primepath_primes_are_spectral_lines_of_log_zeta():
         assert min(abs(u - math.log(n)) for u in us) < 0.04, n
     a2 = max(a for u, a in pk if abs(u - math.log(2)) < 0.04); a3 = max(a for u, a in pk if abs(u - math.log(3)) < 0.04)
     assert abs(a2 / a3 - (2 ** -1.2) / (3 ** -1.2)) < 0.25    # heights follow p^{−σ} (finite-window leakage)
+
+
+# ── Two Trees inside ζ (twotrees_zeta) and the Gemini sims (geminisim) ──
+def test_twotrees_dirichlet_identities():
+    from rhp import twotrees_zeta as tz
+    r = tz.identity_residuals(complex(2, 3), N=100000)
+    assert r["split"] < 1e-12 and r["convolution"] < 1e-12      # T + L = ζ − 1 ;  −ζ′ = ζ·T  (1∗Λ = ln)
+    assert r["series_L"] < 1e-6                                   # Laurelin sum = closed form
+
+
+def test_twotrees_line_heights_split_the_integers():
+    from rhp import twotrees_zeta as tz
+    lam = tz.vonmangoldt_table(40)
+    h = tz.line_heights(sigma=1.2, T=150.0, dt=0.05, ns=(2, 3, 5, 6, 7, 10))
+    unit = lambda n: n ** -1.2
+    for n in (2, 3, 5, 7):                                        # primes: T, ln ζ and L all show the line
+        assert abs(h["T"][n] / (lam[n] * unit(n)) - 1) < .1
+    for n in (6, 10):                                             # composites: ζ and L show it, T and ln ζ do not
+        assert h["zeta"][n] > 0 and h["L"][n] / unit(n) > .8 and h["T"][n] < .06 * unit(n)
+
+
+def test_geminisim_curves():
+    from rhp import geminisim as G
+    assert G.fib_ratio_error(12) < 1e-4
+    (to, ro), (ti, ri) = G.transition()
+    assert abs(ro[-1] * ri[0] - (1 + G.GAP) * ro[-1] * (1 / ro[-1])) < 0.02       # crossing at r = 1 is continuous up to the gap
+    th, r = G.revised2("Heartbeat", 1.0)
+    assert len(th) == 600 and abs(G.turns_per_index(1.0) - 1 / np.pi ** 2) < 1e-12

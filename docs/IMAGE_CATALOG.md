@@ -187,3 +187,7 @@ forced_sigma: iteration σ ← (Fσ + B(1−σ))/(F+B), F = e^{−σE}, B = e^{�
 Gradient descent minimising |E_Red − E_Blue|² with the real ℘′: 25 random starts (red dots) flow to a locus (orange survivors) near x ≈ 1.2–1.4 / 3.0. "Extinction" here is a dynamical flow on the 0_RB balance surface, not the sieve extinction of flow.svg.
 ## 28. `images/Gemini_Generated_Image_Riemann_Proof.png`
 An AI-generated illustration ("The Riemann Sphere — Geometry of the Zeta Resonance"), 768×1376, used as the old README header. It is an illustration, not data; the summarised standing-wave text from the same source is stale and was used only as a pointer.
+
+
+## gemini_worm.svg  (rhp/atlas/gemini_worm.py)
+Eight panels, 2 × 4. a: the oldest Gemini sim's flow z ↦ 1 + 1/z in polar (13 points converging on r = φ). b: Revised_2 Inertial (θ = n, r = 0.02·n·t, t = 1). c: Revised_2 Metric Swap (r = 1/(0.02·n·t + 0.1), θ = (2/π)n + π/2). d: the Transition sim: the inertial path (blue) crosses r = 1 and is inverted (red) with the 0.0007 gap. e–g: Revised_2 Heartbeat at t = 1, 3, 7 (600 points, polyline through consecutive n; rosettes of ≈ π²/t arms). h: the ζ path log P_K at s = ½ + iγ₁, K = 2000, first 65 primes in red. Reading: constant-angle √n spiral (Gemini) against slowing-angle p^{-1/2} spiral (ζ).
