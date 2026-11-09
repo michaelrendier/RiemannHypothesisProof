@@ -28,4 +28,12 @@ Worm (original ph.2) = phase modulation β = 5; rosette (original ph.3) = amplit
 ## Verdict for the Riemann Hypothesis Engine (a reading, with the numbers above)
 - The worm's turning law is NOT a law of the ζ pathway: ζ's tangent turns one way, its wobble decays as ½p^{-½}.
 - The ζ pathway and the Gemini curves share a LANGUAGE: sums of wheels with phase/amplitude modulation, locked into rosettes when frequency ratios are rational (never for ln p/ln q). The engine should hold a general wheel-sum object (frequencies ln p, radii p^{-σ}) and this viewer as its idealization sandbox; the Gemini worm/rosette are the 2–3-wheel rational special cases.
-- Open: whether Gemini's constant-angle clock, re-read as u = ln p, aligns the loop spacing (ζ: geometric in p; worm: uniform in θ_b). Not tested.
+- (The u = ln p test below settled the open item that stood here.)
+
+## The u = ln p clock test (`boundary.zeta_loops`, `boundary_uclock.svg`, 1 test added; 118 pass)
+Gemini's worm turns by a CONSTANT angle per step of its parameter θ_b. Reading θ_b ≡ t·u (u = ln p), which is exactly the ζ carrier −t ln p, three comparisons:
+1. **Clock — ALIGNED.** ζ loops (one 2π of the unwrapped tangent angle) are uniform in u: spacing 0.4444 against 2π/t = 0.4445 at t = γ₁ (rel. sd 2.4 %); 0.2095 against 0.2094 at t = 30 (4.6 %). In prime index n the same loops go from 7 to 56,535 steps apart (geometric, ratio e^{2π/t}): Gemini's clock fits as u and fails as index.
+2. **Radius law — NOT aligned.** Radius growth per loop. ζ away from zeros is a log-spiral with the constant factor e^{π/t}·(u_j/u_{j+1}): measured 2.19 / 1.60 / 1.26 at t = 3 / 5 / 10 against the smooth law 2.29 / 1.64 / 1.28 (1–4 %, from |z|/R(p) = 1.04–1.05, R = p^{½}/(|½−it| ln p)). On or near a zero the growth is suppressed (1.03 at γ₁ against 1.19; |z|/R = 3.9) — the zeros cancel the smooth growth. The worm is hyperbolic: 1.25, 1.33, 1.49, 1.95, 19 (the inversion r → 1/r of a linear inward spiral), independent of τ. (The worm's first-loop factor 1.247 is within 0.2 % of e^{π/γ₁} = 1.249: one number, noted as a coincidence, not used.)
+3. **Wobble — NOT aligned.** ζ's tangent wobble touches ½ p^{-½} as an envelope (panel c); the worm's is 5.
+Result: of the worm's three ingredients — clock, radius law, wobble — only the clock (the carrier t·ln p) is shared with ζ. Gemini's constant-angle spiral is the ζ carrier in u; everything that makes it a worm is its own. For the Riemann Hypothesis Engine: keep the carrier clock u = ln p and the wheel-sum language; do not carry the worm's radius law or PM index as ζ mechanics.
+

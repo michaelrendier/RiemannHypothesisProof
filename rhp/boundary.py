@@ -304,3 +304,27 @@ def zeta_wobble(t=PP.GAMMA1, K=9592, lo=1e4, hi=1e5):
     resid = np.unwrap(np.angle(dz)) + t * np.log(P); m = (P >= lo) & (P < hi)
     resid = resid - np.round(np.median(resid[m]) / (2 * np.pi)) * 2 * np.pi
     return float(np.sqrt(np.mean((resid[m] - resid[m].mean()) ** 2))), float(np.mean(.5 / np.sqrt(P[m])) / np.sqrt(2))
+
+
+# ── the u = ln p clock test: Gemini's constant-angle clock against the ζ path ────────────────────────────
+def zeta_loops(t, K=200000):
+    """Loops of the ζ Euler path (a loop = one 2π of the unwrapped tangent angle, counted after the last turn-sense flip).
+    Returns dict: u_j = ln p at each loop boundary, index positions, spacing in u and in prime index, mean |z| per loop, the smooth-spiral radius
+    R(p) = p^{½}/(|½−it| ln p) averaged over the same loops (valid away from zeros)."""
+    P = PP.first_primes(K); z = PP.log_product_path(t, P, .5); dz = np.diff(np.concatenate([[0], z])); ph = np.unwrap(np.angle(dz))
+    flip = zeta_turning(t, 5000)["last_sense_flip_prime"]; k0 = int(np.searchsorted(P, max(flip, 50))); ref = ph[k0]; idx = [k0]; j = 1
+    while True:
+        k = np.nonzero(ph[idx[-1]:] <= ref - 2 * np.pi * j)[0]
+        if len(k) == 0: break
+        idx.append(idx[-1] + int(k[0])); j += 1
+    idx = np.array(idx); u = np.log(P[idx]); R = lambda p: np.sqrt(p) / (abs(.5 - 1j * t) * np.log(p))
+    mr = np.array([np.mean(np.abs(z[idx[i]:idx[i + 1]])) for i in range(len(idx) - 1)])
+    sm = np.array([np.mean(R(P[idx[i]:idx[i + 1]])) for i in range(len(idx) - 1)])
+    return dict(t=t, u=u, idx=idx, spacing_u=np.diff(u), spacing_index=np.diff(idx), mean_r=mr, smooth_r=sm,
+                growth=mr[1:] / mr[:-1], smooth_growth=sm[1:] / sm[:-1], expected_spacing=2 * np.pi / t)
+
+
+def worm_loop_growth(tau=1.0, e_f=E_INV, loops=5):
+    """Radius growth factor r(j+1)/r(j) of the worm at the ends of its loops θ_b = 2πj: 1.25, 1.33, 1.49, 1.95, 19 — hyperbolic (the inversion of a linear inward spiral)."""
+    r = lambda j: tau * e_f / (10 - 9.9 * (2 * np.pi * j) / (10 * np.pi) + .01)
+    return np.array([r(j + 1) / r(j) for j in range(loops)])

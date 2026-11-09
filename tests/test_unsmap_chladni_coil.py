@@ -385,3 +385,13 @@ def test_zeta_turns_one_way_and_wobble_decays():
     assert zt["last_sense_flip_prime"] < 100                                  # beyond the first few primes every step turns the same way
     meas, pred = B.zeta_wobble()
     assert abs(meas / pred - 1) < .15                                         # β_ζ(p) = ½ p^{-½}
+
+
+def test_uclock_zeta_loops_uniform_in_u_and_log_spiral_radius():
+    from rhp import boundary as B
+    L = B.zeta_loops(B.PP.GAMMA1, 60000)
+    assert abs(L["spacing_u"].mean() / L["expected_spacing"] - 1) < .01 and L["spacing_u"].std() / L["spacing_u"].mean() < .06   # uniform in u
+    assert L["spacing_index"][-1] > 100 * L["spacing_index"][0]                                                                  # wildly non-uniform in index
+    L5 = B.zeta_loops(5.0, 60000)
+    assert abs(np.median(L5["growth"]) / np.median(L5["smooth_growth"]) - 1) < .06                                              # away from zeros: the smooth spiral
+    assert np.allclose(B.worm_loop_growth(), [1.25, 1.33, 1.49, 1.95, 19.0], rtol=.03)
