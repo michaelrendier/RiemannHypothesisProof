@@ -24,5 +24,7 @@ Older figures (`../../figures/`) predate the atlas and are left where notebooks 
 
 | `primepath_flat.svg`, `primepath_3axis.svg`, `primepath_uns.svg` | `python -m rhp.atlas.primepath` | `rhp/primepath.py`: log of the partial Euler product at s = ½ + it for 65 / 10⁴ / 10⁵ / 10⁶ primes, flat, isometric + three orthographic views, and on the Riemann sphere | docs |
 
+Image catalog (every image, panel by panel): `docs/IMAGE_CATALOG.md`; PDF `docs/RHP_Image_Catalog_2026-11-08.pdf` (mirror of `~/Desktop/SpaceClaude/`; rebuild with `python3 docs/build_image_catalog.py`).
+
 Conventions: matplotlib with text kept as text; the animated one is hand-written SVG with plain classes and a dark-mode media query. Labels follow the paper: ESTABLISHED / OURS / THEORETICAL / CONJECTURE / OPEN, with `:CALCULATED`.
 A picture here shows a space and a machinery; none of it tests RH.

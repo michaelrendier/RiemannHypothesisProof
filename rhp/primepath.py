@@ -77,3 +77,22 @@ def equator_crossings(logP):
 
 def round_zeros(zeros, decimals):
     return np.round(np.asarray(zeros, float), decimals)
+
+
+def spectral_lines(sigma=1.2, T=150.0, dt=0.05, umax=3.0, thresh=0.05):
+    """Where the PRIMES are in the pathway: the t-Fourier transform of ln ζ(σ+it) (σ>1).  ln ζ(s) = Σ_n Λ(n)/ln n · n^{−s} = Σ_{prime powers} (1/k) p^{−kσ} e^{−it ln p^k}, so the
+    transform has a line at u = ln n for every prime power n, of height ≈ (1/k) n^{−σ} (here ×2 from the Hann-window normalisation).  Returns [(u, amplitude)] local maxima with u < umax.
+    ESTABLISHED (Dirichlet series of ln ζ); OURS-CALCULATED (peak positions measured).  Resolution 2π/T in u."""
+    from mpmath import mp, zeta, mpc, log as mlog
+    mp.dps = 15
+    ts = np.arange(0, T, dt)
+    f = np.array([complex(mlog(zeta(mpc(sigma, t)))) for t in ts])
+    f = np.unwrap(f.imag) * 1j + f.real
+    w = np.hanning(len(ts))
+    F = np.fft.fft((f - f.mean()) * w)
+    u = -2 * np.pi * np.fft.fftfreq(len(ts), dt)
+    amp = np.abs(F) / (w.sum() / 2)
+    m = u > 0
+    uu, aa = u[m], amp[m]
+    o = np.argsort(uu); uu, aa = uu[o], aa[o]
+    return [(float(uu[i]), float(aa[i])) for i in range(1, len(aa) - 1) if aa[i] > aa[i - 1] and aa[i] > aa[i + 1] and aa[i] > thresh and uu[i] < umax]

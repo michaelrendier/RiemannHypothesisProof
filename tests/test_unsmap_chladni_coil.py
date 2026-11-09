@@ -297,3 +297,14 @@ def test_primepath_zero_heights_need_about_two_decimals():
     corr = lambda Zr: float(np.corrcoef(wt, w.heartbeat(u, Zr) - math.log(2 * math.pi) * np.exp(-u / 2))[0, 1])
     c8, c2, c0 = corr(Z), corr(np.round(Z, 2)), corr(np.round(Z, 0))
     assert c8 - c2 < 0.01 and c0 < 0.5
+
+
+def test_primepath_primes_are_spectral_lines_of_log_zeta():
+    import math
+    from rhp import primepath as pp
+    pk = pp.spectral_lines(sigma=1.2, T=150.0, dt=0.05, umax=2.3, thresh=0.1)
+    us = [u for u, a in pk]
+    for n in (2, 3, 4, 5, 7):                                  # primes 2,3,5,7 and the prime power 4
+        assert min(abs(u - math.log(n)) for u in us) < 0.04, n
+    a2 = max(a for u, a in pk if abs(u - math.log(2)) < 0.04); a3 = max(a for u, a in pk if abs(u - math.log(3)) < 0.04)
+    assert abs(a2 / a3 - (2 ** -1.2) / (3 ** -1.2)) < 0.25    # heights follow p^{−σ} (finite-window leakage)
