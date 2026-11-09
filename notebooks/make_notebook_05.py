@@ -8,7 +8,7 @@ C = lambda s: nb.cells.append(nbf.v4.new_code_cell(s.strip("\n")))
 M("""
 # 05 — The extinction flow, its Laplace dual, the order of approach, the nodal ladder, and what 0_RB says about ζ
 
-**Assistant note.** Written by an AI assistant (Claude) with the author, from `rhp/extinction.py`, `rhp/nodal.py`, `rhp/zerorb.py` and the figures in `rhp/atlas/`
+**Assistant note.** Written by an AI assistant (Claude) with the author, from `rhp/extinction.py`, `rhp/nodal.py`, `rhp/zerorb.py` and the figures in `rhp/atlas_riemann_fermat/`
 (`flow.svg`, `net.svg`, `nodal.svg`, `flow_player.html`). Labels: ESTABLISHED, OURS, THEORETICAL, CONJECTURE, OPEN; `:CALCULATED` = this code reproduces it.
 **This sets up a space and machinery; it proves nothing about RH.**
 
@@ -33,11 +33,11 @@ spf, gpf = W.spf_gpf(N_)
 for U in (2, 3):
     y = N_ ** (1 / U)
     print(f"U={U}: survivors*ln y/N = {X.survivors(spf, N_, y) * math.log(y) / N_:.4f}   omega = {at(uo, o, U):.4f}   | smooth/N = {X.smooth(gpf, N_, y) / N_:.4f}  rho = {at(ur, r, U):.4f}")
-display(SVG("../rhp/atlas/flow.svg"))
+display(SVG("../rhp/atlas_riemann_fermat/flow.svg"))
 """)
 M("""
 Finite-N points sit below ω and above ρ by O(1/ln y); that is the known slow convergence, not a failure.
-Open `../rhp/atlas/flow_player.html` in a browser to drag τ and watch each integer die (blue→grey) and be born (orange ring).
+Open `../rhp/atlas_riemann_fermat/flow_player.html` in a browser to drag τ and watch each integer die (blue→grey) and be born (orange ring).
 """)
 M("""
 ## 2  The Laplace dual: the two books are reciprocal  (OURS-CALCULATED)
@@ -65,7 +65,7 @@ They coincide only for prime powers. The size order of the integers is almost un
 **READING, not a theorem:** the reversal of the order of approach is the candidate for what the north–south mirror s↦1−s does to a term (0_RB: R̂† = B̂).
 """)
 M("## 4  The six faces of (u, τ, σ′, t)")
-C('display(SVG("../rhp/atlas/net.svg"))')
+C('display(SVG("../rhp/atlas_riemann_fermat/net.svg"))')
 M("""
 ## 5  The nodal ladder, both hemispheres
 ESTABLISHED: ξ(½+it) = F(t) is real; ∂ξ/∂σ = −iF′ there. OURS-CALCULATED here: for t ≤ 50 the curves Re ξ = 0 (through the zeros) and Im ξ = 0 (through F's extrema) alternate as a ladder of
@@ -77,7 +77,7 @@ print(len(zs), "zero rungs;", len(ex), "saddle rungs; one saddle between each co
 print("Hessian eigenvalues at first saddle:", N.saddle_hessian(ex[0]))
 sig = np.linspace(-0.6, 1.6, 45); t = np.linspace(10, 35, 160)
 print("off-line Re=Im=0 cells in sigma in [-0.6,1.6], t in [10,35]:", N.offline_crossings(sig, t, N.grid(sig, t)))
-display(SVG("../rhp/atlas/nodal.svg"))
+display(SVG("../rhp/atlas_riemann_fermat/nodal.svg"))
 """)
 M("""
 ## 6  What 0_RB says about ζ (located 2026-11-07) and the tests against it
@@ -122,7 +122,7 @@ print("inject & recover at gamma_1:", [(d, round(v, 4)) for d, v in D.inject_and
 for u1 in (11, 13, 16): print("reach u_max=%d: delta_min(3sd) = %.3f (floor sd %.3f)" % ((u1,) + D.detection_limit(psi, u1)))
 g = np.arange(10, 40, 0.1); _, s0, a0 = D.scan(psi, g); _, s1, a1 = D.scan(psi, g, extra=lambda u: D.quadruple(u, 0.3, 17.5))
 print("control candidates:", D.candidate_peaks(g, s0, a0, 0.1, 0.06)); print("with delta=0.3 injected at 17.5:", D.candidate_peaks(g, s1, a1, 0.1, 0.06))
-display(SVG("../rhp/atlas/diverge.svg"))
+display(SVG("../rhp/atlas_riemann_fermat/diverge.svg"))
 """)
 
 nb["metadata"]["kernelspec"] = {"display_name": "Python 3", "language": "python", "name": "python3"}

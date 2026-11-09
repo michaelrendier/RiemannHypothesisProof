@@ -1,6 +1,6 @@
 # The pathway of the first K primes (2026-11-08)
 
-Code `rhp/primepath.py`; figures `rhp/atlas/primepath_flat.svg`, `primepath_3axis.svg`, `primepath_uns.svg` (`python -m rhp.atlas.primepath`); tests `test_primepath_*`.
+Code `rhp/primepath.py`; figures `rhp/atlas_riemann_fermat/primepath_flat.svg`, `primepath_3axis.svg`, `primepath_uns.svg` (`python -m rhp.atlas_riemann_fermat.primepath`); tests `test_primepath_*`.
 Path: log P_K(s) = Σ_{k≤K} −ln(1 − p_k^{−s}), s = ½ + it, K up to 10⁶ primes (p_K = 15,485,863). Labels: ESTABLISHED / OURS-CALCULATED / READING.
 
 ## Corrections to the premises (measured)

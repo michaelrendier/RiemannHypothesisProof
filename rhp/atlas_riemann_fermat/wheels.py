@@ -5,7 +5,7 @@ a  error of K prime wheels against |ζ|, by latitude σ: far north the primes wi
 b  K*(σ): the number of wheels that does best, against latitude.
 c  the first zero emerging from the wheels: ln|P_K| against ln|ζ| near γ₁ = 14.1347.
 animated: the first six prime wheels (radius p^{−½}, rate ln p), tip-to-tail, with the trace of their sum.
-Code drawn:  rhp.wrap (log_abs_euler, euler_grip).   Run: python -m rhp.atlas.wheels   (≈ 1 min)
+Code drawn:  rhp.wrap (log_abs_euler, euler_grip).   Run: python -m rhp.atlas_riemann_fermat.wheels   (≈ 1 min)
 """
 import math
 import numpy as np

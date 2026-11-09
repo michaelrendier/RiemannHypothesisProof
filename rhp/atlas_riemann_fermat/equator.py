@@ -2,7 +2,7 @@
 """equator.svg — the critical line as the equator; π factored out; the circle versus the winding.
 
 Code drawn:  rhp.sphere (cayley, to_xyz, theta_split, longitude_cayley, winding_hardy, mirror_residual, pole_residues).
-Run:         python -m rhp.atlas.equator
+Run:         python -m rhp.atlas_riemann_fermat.equator
 """
 import numpy as np
 from ._common import plt, save, view, INK, NORTH, SOUTH, HOT, GREY

@@ -5,7 +5,7 @@ a,b  the sieve spring: integers wrapped on circles of circumference 6 and 30; pr
 c    the allowed-centre fraction of the primorial circle at each level (the 0 spot thins).
 d    the wheel spring: twin wheels drift apart at t·ln(1 + 2/p); the beat carries the gap.
 e    the tension: the Hardy spring tightens like 1/ln t; the prime spikes (t = ln n) crowd like eᵗ/t.
-Code drawn:  rhp.wrap.   Run: python -m rhp.atlas.wrap
+Code drawn:  rhp.wrap.   Run: python -m rhp.atlas_riemann_fermat.wrap
 """
 import numpy as np
 from ._common import plt, save, INK, NORTH, SOUTH, HOT, GREY

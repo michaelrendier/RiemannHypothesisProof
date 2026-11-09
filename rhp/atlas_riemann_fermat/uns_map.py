@@ -6,7 +6,7 @@ b  their images on the sphere (Cayley, then stereographic): all circles; σ = ½
 c  a cusp in the plane   d  its image: still a cusp (conformal map), the flat and sphere speeds vanish together
 e  a back-and-forth trace (reversals) that is a UNIFORM ROTATION seen edge-on: the Hilbert companion supplies the missing coordinate
 f  three spiral laws on test spirals (R² of the law's straight line): Archimedean (pancake), logarithmic (loxodrome), Euler/Cornu
-Code drawn: rhp.unsmap.   Run: python -m rhp.atlas.uns_map
+Code drawn: rhp.unsmap.   Run: python -m rhp.atlas_riemann_fermat.uns_map
 """
 import numpy as np
 from scipy.special import fresnel

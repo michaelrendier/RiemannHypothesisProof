@@ -7,7 +7,7 @@ c  mean power of the real wave on the exact ψ, windows of u, against the Parsev
 d  one standing wave as two counter-rotating circles: equal radii, the sum is real; off the line (δ = 0.15) both radii grow as e^{δu}
 e  ADD, SCALE, SIGN on a tone: a step in ln x is a spiral similarity (scale e^{Δu/2}, rotation γΔu); conjugation is the reflection
 f  reading
-Code drawn: rhp.heartbeat, rhp.diverge.   Run: python -m rhp.atlas.heartbeat
+Code drawn: rhp.heartbeat, rhp.diverge.   Run: python -m rhp.atlas_riemann_fermat.heartbeat
 """
 import numpy as np
 from ._common import plt, save, INK, NORTH, SOUTH, HOT, GREY
@@ -15,7 +15,7 @@ from .. import heartbeat as H, diverge as D
 
 
 def build():
-    z = np.loadtxt(__file__.replace("rhp/atlas/heartbeat.py", "data/zeros_1_to_3600.csv"))
+    z = np.loadtxt(__file__.replace("rhp/atlas_riemann_fermat/heartbeat.py", "data/zeros_1_to_3600.csv"))
     fig = plt.figure(figsize=(11.5, 7.8))
     # a
     ax = fig.add_subplot(2, 3, 1)

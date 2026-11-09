@@ -6,7 +6,7 @@ b  parity at t = 30: Re ξ even (free, ∂σ = 0 at the equator), Im ξ odd (hel
 c  the flux, scale-free ∂σ ln|ξ| = J/|ξ|² (J = ½∂σ|ξ|² = Im(conj ξ ∂tξ)): zero on the equator, opposite in the two hemispheres, positive everywhere in the north in this window
 d  inject an off-line zero pair (δ = 0.08 at γ = 25) and the flux reverses in a pocket: the footprint of an off-line zero (a test of the detector, not a search)
 e  the lobe: angle swept by the Hardy phase between consecutive zeros: mean π, spread = the GUE zero-spacing distribution × π
-Code drawn: rhp.chladni, rhp.nodal.   Run: python -m rhp.atlas.chladni   (≈ 1 min)
+Code drawn: rhp.chladni, rhp.nodal.   Run: python -m rhp.atlas_riemann_fermat.chladni   (≈ 1 min)
 """
 import numpy as np
 from mpmath import mpc
@@ -15,7 +15,7 @@ from .. import chladni as C, nodal as N
 
 
 def build():
-    zeros = np.loadtxt(__file__.replace("rhp/atlas/chladni.py", "data/zeros_1_to_3600.csv"))
+    zeros = np.loadtxt(__file__.replace("rhp/atlas_riemann_fermat/chladni.py", "data/zeros_1_to_3600.csv"))
     fig = plt.figure(figsize=(11.5, 8.2))
     # a
     ax = fig.add_subplot(2, 3, 1)

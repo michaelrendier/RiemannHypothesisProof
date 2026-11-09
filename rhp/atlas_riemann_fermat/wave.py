@@ -7,7 +7,7 @@ c  the wind: |W_T| and its envelope (Hilbert) — gusts and near-calms; rms agai
 d  one factor's step in W units, ln p/√p, against the rms wind: it peaks at p = e² (= 7.389, where the engine's Mingling sits) at 2/e = 0.736
 e  fraction of u-time the wind is at least that factor's step, against p
 f  how many zero tones are needed to resolve the jump of a prime p (fraction of the true jump ln p recovered)
-Code drawn: rhp.wave, rhp.diverge, rhp.heartbeat.   Run: python -m rhp.atlas.wave
+Code drawn: rhp.wave, rhp.diverge, rhp.heartbeat.   Run: python -m rhp.atlas_riemann_fermat.wave
 """
 import numpy as np
 from ._common import plt, save, INK, NORTH, SOUTH, HOT, GREY

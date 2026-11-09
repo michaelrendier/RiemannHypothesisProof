@@ -3,7 +3,7 @@
 
 Row 1: the oldest sim's φ-flow z ↦ 1 + 1/z (13 points, polar, θ ∈ [0, π]); Revised_2 Inertial; Metric Swap; the Transition sim (path crosses r = 1 and inverts).
 Row 2: Revised_2 Heartbeat at t = 1, 3, 7 (600 points, polyline through consecutive indices — rosettes whose arm count is ≈ π²/t); ζ path log P_K at s = ½ + iγ₁ for K = 65 and K = 2000.
-Code drawn: rhp.geminisim, rhp.primepath.   Run: python -m rhp.atlas.gemini_worm
+Code drawn: rhp.geminisim, rhp.primepath.   Run: python -m rhp.atlas_riemann_fermat.gemini_worm
 """
 import numpy as np
 from ._common import plt, save, INK, NORTH, SOUTH, HOT, GREY

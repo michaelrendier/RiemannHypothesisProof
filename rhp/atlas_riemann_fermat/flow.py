@@ -6,7 +6,7 @@ b  Telperion: Φ(N,y)·ln y / N  against U = ln N / ln y, for four N, on the Buc
 c  Laurelin:  Ψ(N,y) / N       against U, for four N, on the Dickman function ρ(U)
 d  the gain of the sieve book in the dual plane:  ln|1+ω̂(s′)| = Re E₁(s′),  s′ = σ′ + it  (log branch at s′ = 0 = ζ's pole, north)
 e  reciprocity  s′ρ̂(s′)·(1+ω̂(s′)) = 1 checked from the NUMERIC ω and ρ along σ′ = 1  (error is the grid, first order in h)
-Code drawn:  rhp.extinction, rhp.wrap.  Run: python -m rhp.atlas.flow
+Code drawn:  rhp.extinction, rhp.wrap.  Run: python -m rhp.atlas_riemann_fermat.flow
 """
 import math
 import numpy as np

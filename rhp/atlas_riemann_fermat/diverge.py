@@ -5,7 +5,7 @@ a  CONTROL on the real ψ (x ≤ 10⁷): slope of ln A against u at the first 20
 b  an injected off-line quadruple at γ₁ for δ = 0, 0.1, 0.2, 0.3: the lock-in amplitude along u; the mirror partner makes it a cosh, not a line.
 c  recovered slope against δ (dots) with the 3-sd floor, and the smallest δ the detector can see at reach u_max = 11, 13, 16 (labels).
 d  frequency scan: amplitude against γ for the real ψ (the true zeros are the peaks) and with δ = 0.3 injected at γ = 17.5 (not a zero): it is found there.
-Code drawn: rhp.diverge.   Run: python -m rhp.atlas.diverge
+Code drawn: rhp.diverge.   Run: python -m rhp.atlas_riemann_fermat.diverge
 """
 import numpy as np
 from ._common import plt, save, INK, NORTH, SOUTH, HOT, GREY

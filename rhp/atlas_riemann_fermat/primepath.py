@@ -4,7 +4,7 @@
 flat    log P_K(s) in the complex plane for K = 65, 10⁴, 10⁵, 10⁶ primes; row 1 at t = γ₁ = 14.1347 (first zero), row 2 at t = 3 (off the zeros). First 65 primes drawn in red, the rest in blue.
 3axis   (Re log P, Im log P, ln p) for 10⁴ primes at t = γ₁: isometric, top, front, side; |log P_K| against K with the PNT smooth part; the torus radius R_K = √Σ1/p against K.
 uns     the partial product P_K on the Riemann sphere (|P| = 1 is the equator): isometric and polar views for 10⁴ primes, and ln|P_K| against K with the equator crossings counted.
-Code drawn: rhp.primepath, rhp.unsmap.   Run: python -m rhp.atlas.primepath
+Code drawn: rhp.primepath, rhp.unsmap.   Run: python -m rhp.atlas_riemann_fermat.primepath
 """
 import numpy as np
 from ._common import plt, save, view, INK, NORTH, SOUTH, HOT, GREY

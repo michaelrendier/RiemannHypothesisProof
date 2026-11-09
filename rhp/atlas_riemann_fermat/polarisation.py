@@ -7,7 +7,7 @@ Off the equator the amplitudes differ by r = |χ|·n^{2σ−1}; the two phasors 
 r = 1 off the equator only at n ≈ √(t/2π): the Riemann–Siegel cut-off.  So the standing-wave set is a CROSS: the equator
 (every term) and the horizontal line n = √(t/2π) (every latitude).
 
-Code drawn:  rhp.sphere (abs_chi, amplitude_ratio, polarisation, ellipse_axes).   Run: python -m rhp.atlas.polarisation
+Code drawn:  rhp.sphere (abs_chi, amplitude_ratio, polarisation, ellipse_axes).   Run: python -m rhp.atlas_riemann_fermat.polarisation
 """
 import numpy as np
 from matplotlib.patches import Ellipse

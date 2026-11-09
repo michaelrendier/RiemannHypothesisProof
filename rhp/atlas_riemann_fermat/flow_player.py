@@ -3,7 +3,7 @@
 
 Self-contained page (no network).  Panel 1: every n ≤ N at (u = ln n, status).  Panel 2: the survivor fraction against Mertens
 (e^{−γ}/τ) with a marker at the current τ.  Colours: blue = still alive (spf > y), grey = dead (spf ≤ y), orange ring = smooth (gpf ≤ y).
-Primes are black: they die/are born at the same instant, u = τ.   Code drawn: rhp.wrap.spf_gpf.   Run: python -m rhp.atlas.flow_player
+Primes are black: they die/are born at the same instant, u = τ.   Code drawn: rhp.wrap.spf_gpf.   Run: python -m rhp.atlas_riemann_fermat.flow_player
 """
 import json
 import math

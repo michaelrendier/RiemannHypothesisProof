@@ -7,7 +7,7 @@ c  the partial sums Σ n^{−s} about ζ(s), height u = ln N: a CONE at σ = ½ 
 d  the prime side: the conical helices of the explicit formula (first zeros, flare e^{u/2}) and their sum; prime heights u = ln p marked on the axis
 e  a flat pancake coil (POE: 17 turns, 0.8 mm) with the zeros as beads, one turn per two zeros: what a flat spiral keeps (angle, index) and loses (height, radius)
 f  reading
-Code drawn: rhp.coil, rhp.unsmap.   Run: python -m rhp.atlas.spirals
+Code drawn: rhp.coil, rhp.unsmap.   Run: python -m rhp.atlas_riemann_fermat.spirals
 """
 import numpy as np
 from matplotlib.collections import LineCollection

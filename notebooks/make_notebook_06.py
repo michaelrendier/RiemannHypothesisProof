@@ -31,7 +31,7 @@ print("cusp tip speed / median, flat and sphere:", U.cusp_survives_lift(z, c, 0.
 tt = np.linspace(0, 60, 6000)
 print("edge-on rotation:", U.edge_on_rotation_test(tt, np.cos(2*np.pi*0.5*tt)))
 print("damped oscillator (not a uniform rotation):", U.edge_on_rotation_test(tt, np.sin(tt)*np.exp(-tt/10)))
-display(SVG("../rhp/atlas/uns_map.svg"))
+display(SVG("../rhp/atlas_riemann_fermat/uns_map.svg"))
 """)
 M("""
 **ESTABLISHED:** Möbius geometry — lines and circles go to circles; the map is conformal; σ = ½ is a great circle, every other vertical line a small circle.
@@ -49,7 +49,7 @@ f = Ch.with_offline_quadruple(0.08, 25.0)
 s2 = np.linspace(0.5, 0.72, 23)[1:]; t2 = np.linspace(24, 26, 41)
 print("injected delta=0.08 at gamma=25: points with flux <= 0:", int((Ch.rel_flux_grid(s2, t2, f) <= 0).sum()))
 la = Ch.lobe_angles(zeros[:600]); print("lobe angle: mean %.4f (pi = %.4f), sd %.3f" % (la.mean(), math.pi, la.std()))
-display(SVG("../rhp/atlas/chladni.svg"))
+display(SVG("../rhp/atlas_riemann_fermat/chladni.svg"))
 """)
 M("""
 ξ(1−σ+it) = conj ξ(σ+it): the mirror at fixed height is complex conjugation, so Re ξ is even (a free end) and Im ξ is odd (a held point): two polarisations with different boundary conditions at the equator.
@@ -63,7 +63,7 @@ print("radius law, first 34 zeros:", K.radius_law(zeros[:34])); print("radius la
 print("height-wound pitch 4π/ln(t/2π) at t = 20, 200, 2000:", K.hardy_pitch_t([20, 200, 2000]))
 for sg in (0.5, 0.8, 1.0, 1.5): print("partial-sum spiral about zeta(s), sigma=%.1f: measured, predicted d ln r/dφ:" % sg, K.tail_log_slope(100, 800, 8000, sg))
 print("min |zeta| from the t-axis, t in [10,60]:", K.axis_distance(np.linspace(10, 60, 4000)))
-display(SVG("../rhp/atlas/spirals.svg"))
+display(SVG("../rhp/atlas_riemann_fermat/spirals.svg"))
 """)
 M("""
 **Findings.** (1) A pancake coil with one turn per two zeros, radius = zero index, makes the Hardy angle an Archimedean spiral to r² > 0.9999 (the departure is S(T)); winding on the height t instead gives a pitch 4π/ln(t/2π) that tightens.

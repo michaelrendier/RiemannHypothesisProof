@@ -8,7 +8,7 @@ C = lambda s: nb.cells.append(nbf.v4.new_code_cell(s.strip("\n")))
 M("""
 # 04 — The equator, the two counter-rotating waves, and the primes on the springs
 
-**Assistant note.** Written by an AI assistant (Claude) with the author, from `rhp/sphere.py`, `rhp/wrap.py` and the figures in `rhp/atlas/`
+**Assistant note.** Written by an AI assistant (Claude) with the author, from `rhp/sphere.py`, `rhp/wrap.py` and the figures in `rhp/atlas_riemann_fermat/`
 (each picture sits next to the code that draws it). Labels: ESTABLISHED, OURS, THEORETICAL, CONJECTURE, OPEN; `:CALCULATED` = this code reproduces it.
 **This notebook sets up a space and machinery; it proves nothing.** RH is the statement that every zero lies on the circle drawn here.
 Standing protocol (Chase Every Anomaly): the unexpected results are in §7.
@@ -23,7 +23,7 @@ sys.path.insert(0, str(pathlib.Path.cwd().parent))
 import numpy as np, math
 from IPython.display import SVG, display
 from rhp import sphere as S, wrap as W, uns
-from rhp.atlas import equator, polarisation, wrap as awrap, wheels
+from rhp.atlas_riemann_fermat import equator, polarisation, wrap as awrap, wheels
 zeros = np.loadtxt("../data/zeros_1_to_3600.csv")
 print(len(zeros), "zeros")
 """)
@@ -135,7 +135,7 @@ display(SVG(filename=str(res)))
 display(SVG(filename=str(wheels.animated())))
 """)
 M("""
-The animated figure (`rhp/atlas/wheels_animated.svg`, SMIL; open it in a browser) is the first six prime wheels tip to tail with their sum traced. Equal-and-opposite partner wheels (the mirror) turn the other way:
+The animated figure (`rhp/atlas_riemann_fermat/wheels_animated.svg`, SMIL; open it in a browser) is the first six prime wheels tip to tail with their sum traced. Equal-and-opposite partner wheels (the mirror) turn the other way:
 together a standing wave. **OPEN:** whether a pathway traced through a *significant* number of primes (not 6, not 10⁴) shows a structure beyond what §4 shows; at the equator §4 says the wheel sum stops converging
 long before that, so the picture has to be built from the zeros' side (explicit formula, notebook 03), not by adding more wheels.
 """)
@@ -173,7 +173,7 @@ for P in (5, 11, 101, 1009, 100003):
 print("twin pairs ≤ 10⁷ counted:", len(W.twin_pairs(10**7)), "  Hardy–Littlewood prediction:", round(W.hl_twin_count(10**7)))
 z = W.twin_gaps_normalised(10**7)
 print(f"gaps between consecutive twin pairs / local mean: mean {z.mean():.3f}  CV {z.std()/z.mean():.3f}  lag-1 autocorrelation {np.corrcoef(z[:-1], z[1:])[0,1]:+.3f}   (exponential: 1, 1, 0)")
-from rhp.atlas import twins
+from rhp.atlas_riemann_fermat import twins
 display(SVG(filename=str(twins.build())))
 """)
 M("""

@@ -1,6 +1,6 @@
 # Two Trees inside ζ, the 25,000-zero table, and the Gemini "worm"  (2026-11-09)
 
-Code: `rhp/twotrees_zeta.py`, `rhp/geminisim.py`, `rhp/atlas/gemini_worm.py` → `gemini_worm.svg`. Tests: 3 added (111 pass).
+Code: `rhp/twotrees_zeta.py`, `rhp/geminisim.py`, `rhp/atlas_riemann_fermat/gemini_worm.py` → `gemini_worm.svg`. Tests: 3 added (111 pass).
 Control rule (Cody, 2026-11-09): the ONLY control object is the original Ĥ_RB. Σ_RB, the Archimedes Screw and the "notated" differences belong to the VAPMIP anchor/sentence engineering and are NOT checks here.
 
 ## 1  Does ζ contain both Trees?   (ESTABLISHED algebra; the measurements :CALCULATED)

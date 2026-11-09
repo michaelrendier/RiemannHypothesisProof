@@ -11,7 +11,7 @@ parameter at a time).  Read the figure as a cube net:   top row  (u,τ) (u,σ′
  (τ,σ′) sieve survivors Π_{p≤e^τ}(1 − p^{−1−σ′}) (log10): settles for σ′>0, falls like 1/τ at σ′ = 0 (Mertens), faster below.
  (τ,t)  phase of the Euler partial product P(½+it) with the wheels up to e^τ switched on — the spring seen from the side.
  (σ′,t) gain of the sieve book Re E₁(s′) (the dual plane of flow.svg).
-Code drawn: rhp.wrap, rhp.extinction.   Run: python -m rhp.atlas.net
+Code drawn: rhp.wrap, rhp.extinction.   Run: python -m rhp.atlas_riemann_fermat.net
 """
 import math
 import numpy as np

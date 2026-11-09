@@ -6,7 +6,7 @@ b  the circles' ratio Π p(p−2)/(p−1)² against the largest circle P: it con
 c  twin pairs below x: counted against 2C₂Σ1/ln²x (a heuristic prediction, not a proof).
 d  gaps between consecutive twin pairs, in units of the local mean (ln p)²/(2C₂), against an exponential law.
 e  wheel n against the clock: θ(t) − t ln n is stationary at t = 2πn² — the one wheel at rest relative to the clock at each height.
-Code drawn:  rhp.wrap, rhp.uns.   Run: python -m rhp.atlas.twins
+Code drawn:  rhp.wrap, rhp.uns.   Run: python -m rhp.atlas_riemann_fermat.twins
 """
 import math
 import numpy as np

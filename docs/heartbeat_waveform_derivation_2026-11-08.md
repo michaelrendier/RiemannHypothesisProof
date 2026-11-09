@@ -1,6 +1,6 @@
 # The Heartbeat waveform, derived from the two sets (2026-11-08)
 
-Code: `rhp/wave.py`, figure `rhp/atlas/wave.svg` (`python -m rhp.atlas.wave`), tests `test_wave_*`. Reference engine: `GenerationalLineage/engine/lineage.py::two_trees`
+Code: `rhp/wave.py`, figure `rhp/atlas_riemann_fermat/wave.svg` (`python -m rhp.atlas_riemann_fermat.wave`), tests `test_wave_*`. Reference engine: `GenerationalLineage/engine/lineage.py::two_trees`
 (same partition as `AbrikosovTree/engine/two_trees.py`). Labels: ESTABLISHED / OURS-CALCULATED / READING (not a theorem).
 
 ## 1. The two sets (the engine's own partition)

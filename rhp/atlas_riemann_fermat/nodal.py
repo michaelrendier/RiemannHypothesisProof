@@ -8,7 +8,7 @@ c  the heartbeat F(t) = ξ(½+it) with its zeros (rungs) and extrema (saddles).
 d  log10 |χ(σ+it)| (ζ(s) = χ(s)ζ(1−s)): zero on the equator, the weighting that turns the north's picture into the south's.
 e  ζ itself on the real side: Re ζ = 0 and Im ζ = 0 for σ ∈ [−9, 2], t ∈ [0, 14] — the trivial zeros at −2, −4, −6, −8 are on the real axis
    in the SOUTH; ξ has none there (Γ(s/2) cancels them), so they belong to χ, not to the equatorial structure.
-Code drawn:  rhp.nodal, rhp.sphere.abs_chi.   Run: python -m rhp.atlas.nodal
+Code drawn:  rhp.nodal, rhp.sphere.abs_chi.   Run: python -m rhp.atlas_riemann_fermat.nodal
 """
 import numpy as np
 from mpmath import mp, mpc, zeta
