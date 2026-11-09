@@ -22,5 +22,7 @@ Older figures (`../../figures/`) predate the atlas and are left where notebooks 
 
 | `wave.svg` | `python -m rhp.atlas.wave` | `rhp/wave.py`: the Heartbeat waveform from the two sets (Telperion/Laurelin mirror), zero-tone rebuild, wind envelope, a factor step against the wind, bandwidth to resolve a prime | docs |
 
+| `primepath_flat.svg`, `primepath_3axis.svg`, `primepath_uns.svg` | `python -m rhp.atlas.primepath` | `rhp/primepath.py`: log of the partial Euler product at s = ½ + it for 65 / 10⁴ / 10⁵ / 10⁶ primes, flat, isometric + three orthographic views, and on the Riemann sphere | docs |
+
 Conventions: matplotlib with text kept as text; the animated one is hand-written SVG with plain classes and a dark-mode media query. Labels follow the paper: ESTABLISHED / OURS / THEORETICAL / CONJECTURE / OPEN, with `:CALCULATED`.
 A picture here shows a space and a machinery; none of it tests RH.

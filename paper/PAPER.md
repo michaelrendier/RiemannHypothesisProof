@@ -253,3 +253,9 @@ The engine's partition (primes | composites | {0,1}) forces opposite deviations:
 native variable W_T = (ψ(x)−x)/√x and W_L satisfy |W_T + W_L| ≤ 2/√x (ESTABLISHED identity; measured 0.098 on u ∈ [6,15.9]). The von Mangoldt formula gives W_T = −2Σ_{γ>0}cos(γu − arg ρ)/|ρ|,
 a sum of standing tones (two equal counter-rotating circles each); 3066 tones reproduce the sieve wave to correlation 0.993, rms 0.2173 against √(Σ1/|ρ|²) = 0.2149 (OURS-CALCULATED).
 Reading: a single factor's step in this variable, ln p/√p, peaks at p = e² (2/e) and the wave's peak envelope is of the same size. Details and limits: `docs/heartbeat_waveform_derivation_2026-11-08.md`.
+
+### 7.20 The pathway of the first K primes
+
+log P_K(½+it) = Σ_{k≤K} −ln(1−p_k^{−s}) was computed to K = 10⁶ (OURS-CALCULATED). After the first 65 primes (a jagged tangle) the path is an outward logarithmic spiral that follows the prime-number-theorem
+part Ei((1−s)ln x) (ratio 1.001 at t = 3, K = 10⁵); the wheel torus T^K ⊂ C^K has rms radius √Σ1/p = 1.42 (K = 65) → 1.75 (K = 10⁶). Survivors of the first 65 primes are 9.65 % of the integers and are not all prime
+(26.8 % composite near 10⁶): 65 primes clear every composite only below 317². Zero heights need about two decimals for x ≤ 2·10⁶. Details: `docs/prime_pathway_2026-11-08.md`.

@@ -252,3 +252,48 @@ def test_wave_tone_is_phase_shifted_sine_of_amplitude_two_over_rho():
     assert abs(t.max() - 2 / abs(complex(0.5, g))) < 1e-4
     ref = -2 * (0.5 * np.cos(g * u) + g * np.sin(g * u)) / (0.25 + g * g)      # −2[½cos + γ sin]/|ρ|²
     assert np.allclose(t, ref)
+
+
+# ── the pathway of the first K primes ──
+def test_primepath_survivors_after_65_primes_are_not_only_primes():
+    import numpy as np
+    from rhp import primepath as pp
+    from rhp.wrap import sieve, primes_to
+    assert abs(pp.survivor_density(65) / pp.mertens_estimate(313) - 1) < 0.02
+    N = np.arange(1_000_000, 1_200_000); ok = np.ones(len(N), bool)
+    for p in primes_to(313):
+        ok &= (N % int(p) != 0)
+    prime = sieve(1_200_000)[1_000_000:1_200_000]
+    assert ok.mean() > 0.09 and ok.mean() < 0.10
+    assert (ok & ~prime).sum() / ok.sum() > 0.2          # a quarter of the survivors are composites with all factors > 313
+
+
+def test_primepath_prime_sum_follows_pnt_smooth_part_and_keeps_growing():
+    import numpy as np
+    from rhp import primepath as pp
+    P = pp.first_primes(100_000)
+    z = pp.prime_sum_path(3.0, P)
+    sm = pp.smooth_prime_sum(3.0, P)
+    assert abs(abs(z[-1]) / abs(sm[-1]) - 1) < 0.02
+    assert abs(z[-1]) > 5 * abs(z[999])                  # larger at 10⁵ primes than at 10³
+
+
+def test_primepath_wheel_sphere_radius_grows_like_sqrt_lnln():
+    import math
+    from rhp import primepath as pp
+    r65, r1e4 = pp.wheel_sphere_radius(pp.first_primes(65)), pp.wheel_sphere_radius(pp.first_primes(10_000))
+    assert abs(r65 - 1.42215) < 1e-4 and abs(r1e4 - 1.64598) < 1e-4
+    assert abs(r1e4 ** 2 - (math.log(math.log(104729)) + 0.2615)) < 0.05      # Mertens: Σ1/p ≈ ln ln p + M
+
+
+def test_primepath_zero_heights_need_about_two_decimals():
+    import math
+    import numpy as np
+    from rhp import wave as w, diverge as dv
+    Z = dv.load_zeros(1000)
+    _, psi = w.lam_table(1_000_000)
+    u = np.linspace(6, 13.5, 3000)
+    wt, _ = w.trees(u, psi)
+    corr = lambda Zr: float(np.corrcoef(wt, w.heartbeat(u, Zr) - math.log(2 * math.pi) * np.exp(-u / 2))[0, 1])
+    c8, c2, c0 = corr(Z), corr(np.round(Z, 2)), corr(np.round(Z, 0))
+    assert c8 - c2 < 0.01 and c0 < 0.5
