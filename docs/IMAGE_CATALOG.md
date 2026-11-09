@@ -191,3 +191,7 @@ An AI-generated illustration ("The Riemann Sphere — Geometry of the Zeta Reson
 
 ## gemini_worm.svg  (rhp/atlas_riemann_fermat/gemini_worm.py)
 Eight panels, 2 × 4. a: the oldest Gemini sim's flow z ↦ 1 + 1/z in polar (13 points converging on r = φ). b: Revised_2 Inertial (θ = n, r = 0.02·n·t, t = 1). c: Revised_2 Metric Swap (r = 1/(0.02·n·t + 0.1), θ = (2/π)n + π/2). d: the Transition sim: the inertial path (blue) crosses r = 1 and is inverted (red) with the 0.0007 gap. e–g: Revised_2 Heartbeat at t = 1, 3, 7 (600 points, polyline through consecutive n; rosettes of ≈ π²/t arms). h: the ζ path log P_K at s = ½ + iγ₁, K = 2000, first 65 primes in red. Reading: constant-angle √n spiral (Gemini) against slowing-angle p^{-1/2} spiral (ζ).
+
+
+## gemini_original.svg  (rhp/atlas_riemann_fermat/gemini_original.py)
+2 × 5. Top row, columns 1-4: phase 2 of the original event_horizon_sim.py (the worm) at cycle time t = 0.1, 0.3, 0.6, 1.0 — a spiral head with a tail that lengthens and wiggles. Bottom row, columns 1-4: phase 3 (the rosette) at t = 0.2, π/6 (k = 1/3), π/4 (k = 1/2), 1.0 (k = 2/π) — a √θ spiral with radial modulation; symmetric lattice at k = 1/2. Top right: line spectrum of the worm's phasor against Bessel |J_n(5)| (phase modulation). Bottom right: rosette sidebands, carrier 1 and 1 ± k at 0.1 for k = 1/3, 1/2, 2/π (amplitude modulation).

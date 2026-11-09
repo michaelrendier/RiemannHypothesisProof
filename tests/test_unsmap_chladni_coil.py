@@ -336,3 +336,21 @@ def test_geminisim_curves():
     assert abs(ro[-1] * ri[0] - (1 + G.GAP) * ro[-1] * (1 / ro[-1])) < 0.02       # crossing at r = 1 is continuous up to the gap
     th, r = G.revised2("Heartbeat", 1.0)
     assert len(th) == 600 and abs(G.turns_per_index(1.0) - 1 / np.pi ** 2) < 1e-12
+
+
+def test_original_sim_worm_is_phase_modulation_rosette_is_amplitude_modulation():
+    from scipy.special import jv
+    from rhp import geminisim as G
+    for t in (0.6, 1.0):                                  # whole cycles in the 10π window: lines are exactly Bessel J_n(5)
+        assert max(abs(m - j) for _, j, m in G.worm_sidebands(t)) < 1e-9
+    c, up, dn = G.rosette_sidebands(0.5)
+    assert abs(c - 1) < 1e-3 and abs(up - .1) < 1e-3 and abs(dn - .1) < 1e-3     # carrier 1, sidebands 1 ± k at depth/2
+    th, r = G.original_phase(2, 1.0)
+    assert abs(th[-1] - 100 * np.pi) < 1e-9 and r.max() <= 1.2 * np.sqrt(100 * np.pi)
+
+
+def test_prime_wheels_never_close_a_rosette():
+    from rhp import geminisim as G
+    cv = G.convergents_ratio(3, 2, 6)
+    assert [(h, k) for h, k, e in cv][-3:] == [(3, 2), (8, 5), (19, 12)] or (19, 12) in [(h, k) for h, k, e in cv]
+    assert all(e > 0 for h, k, e in cv)                    # ln3/ln2 is irrational: no convergent is exact
