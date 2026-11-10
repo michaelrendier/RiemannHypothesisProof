@@ -490,3 +490,15 @@ def test_nodal_extractor_core_and_results():
         r = json.load(open(p2))
         assert r["rungs_found"] == r["zeros_known_below_tmax"] == 21 and r["unmatched_known"] == 0 and r["offline_crossings"] == 0
         assert r["re_domains_pos"] + r["re_domains_neg"] == r["rungs_found"] + 1 and r["im_lines_offline"] == 20
+
+
+def test_fermat_side_probe_recorded():
+    import os, json, math
+    p = "experiments/fermat_side_probe.json"
+    if not os.path.exists(p): return
+    r = json.load(open(p))
+    assert abs(r["L_chi_m4_zeros_below_100"][0] - 6.0209489) < 1e-6 and len(r["L_chi_m4_zeros_below_100"]) == 50
+    assert r["r2_over_4_n1_32"][:10] == [1, 1, 0, 1, 2, 0, 0, 1, 1, 2]                              # sums of two squares: n = 5 and 10 have 2 Gaussian representations
+    assert abs(r["LambdaK"]["5"] - 2 * math.log(5)) < 1e-12 and r["LambdaK"]["3"] == 0 and abs(r["LambdaK"]["9"] - 2 * math.log(3)) < 1e-12
+    assert all(v["max_ratio"] <= 1.0 for v in r["weil_bound"].values())                              # Weil: Riemann hypothesis for the Fermat curves over F_p
+    assert r["two_squares_density"]["1000000"]["density"] < r["two_squares_density"]["1000"]["density"]
