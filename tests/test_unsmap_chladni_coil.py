@@ -450,3 +450,14 @@ def test_ping_to_200k_recorded():
     assert a("3066", "300-999") == 1.0 and a("3066", "1000-1999") > 0.99 and a("3066", "2000-2999") < 0.96      # perfect to ~10³ at 3066 zero-tones
     assert a("25000", "6000-7999") == 1.0 and a("25000", "8000-9999") > 0.995 and a("25000", "20000-29999") < 0.9   # perfect to ~10⁴ at 25,000
     assert all(v["cohen_d"] < 0 for K in r for v in r[K]["stragglers"].values())                                   # stragglers read less prime-like, not more
+
+
+def test_slot0_empty_keeps_the_euler_norm_exact():
+    import os, json
+    p = "experiments/sedenion_slot_rule.json"
+    if not os.path.exists(p): return
+    r = json.load(open(p))
+    for N in ("16", "32", "64", "128"):
+        for rule, n0 in r["slot0_primes"][N].items():
+            rl = r["E2"][N][rule]["ratio_log"]["value"]
+            assert (n0 == 0) == (rl < 1e-12), (N, rule, n0, rl)     # |v_K| = |zeta_K| exactly iff no prime sits on the identity slot

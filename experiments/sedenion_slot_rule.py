@@ -8,7 +8,7 @@ from rhp import sedenion_slots as S
 
 HERE = os.path.dirname(os.path.abspath(__file__)); out = {}
 P = S.primes_upto(5000)
-RULES = ("seq0", "seq1", "mod", "char")
+RULES = ("seq0", "seq1", "mod", "char", "charx")
 TS = (14.134725, 21.022040, 30.0, 50.0, 100.0)
 rng = np.random.default_rng(20261110)
 
@@ -68,4 +68,5 @@ for N in (16, 32, 64, 128):
                                                                   pct=float(np.mean([n[k] <= r[k] for n in nulls]))) for k in r}
     print("E2 N", N, "done"); sys.stdout.flush()
 out["E2"] = E2
+out["slot0_primes"] = {N: {rule: int((S.rule_slots(rule, pk, N) == 0).sum()) for rule in RULES} for N in (16, 32, 64, 128)}
 json.dump(out, open(os.path.join(HERE, "sedenion_slot_rule.json"), "w"), indent=1)

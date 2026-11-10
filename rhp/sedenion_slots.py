@@ -102,6 +102,12 @@ def rule_slots(rule: str, primes, N: int, rng=None):
         for j, d in enumerate(_DISC[:m]):
             out += np.array([1 << j if kronecker(d, int(p)) == -1 else 0 for p in primes])
         return out
+    if rule == "charx":
+        m = int(math.log2(N)) - 1; out = np.zeros(n, int)
+        for j, d in enumerate(_DISC[:m]):
+            out += np.array([1 << j if kronecker(d, int(p)) == -1 else 0 for p in primes])
+        out[out == 0] = N // 2
+        return out
     if rule == "random": return rng.integers(1, N, n)
     raise ValueError(rule)
 
