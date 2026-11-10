@@ -407,3 +407,36 @@ def test_zeros25k_recreation_in_house():
     r = json.load(open("experiments/zeros25k/results.json"))
     assert r["A"]["failures"] == 0 and r["B"]["count_wrong"] == 0              # every root a sign change; Backlund count = k at 500 heights
     assert r["A"]["table_err_max"] < 1e-13                                      # the SemPriCon table is good to 5e-14
+
+
+def test_sedenion_slot_machinery_and_norm_identity():
+    import os, json
+    from rhp import sedenion_slots as S
+    for N, nd in ((16, 42), (32, 294), (64, 1518)):
+        A = S.Alg(N); I = np.eye(N)
+        assert all(np.allclose(A.Lmat(k) @ A.Lmat(k), -I) for k in range(1, N))        # every slot is a circle
+        D = S.deform_matrix(N); assert int(D.sum() // 2) == nd and (N - 1) * (N - 2) // 2 - nd == {16: 63, 32: 171, 64: 435}[N]
+    P = S.primes_upto(2000)
+    assert (P[63], P[64], P[127], P[128]) == (311, 313, 719, 727)                      # 64th, 65th, 128th, 129th prime
+    pk = P[:120]; t = 14.134725
+    p1 = S.euler_path(S.rule_slots("same", pk, 16), pk, t, 16); z = S.complex_path(pk, t)
+    assert np.abs(p1[:, 0] + 1j * p1[:, 1] - z).max() < 1e-12                          # control: one slot = complex zeta exactly
+    rng = np.random.default_rng(3)
+    for N in (16, 64):                                                                   # norm identity: any imaginary-slot assignment has |v_K| = |zeta_K|
+        pr = S.euler_path(rng.integers(1, N, len(pk)), pk, t, N)
+        assert np.allclose(np.linalg.norm(pr, axis=1), np.abs(z), rtol=1e-12)
+    sib = os.path.join(os.path.dirname(__file__), "..", "..", "SedenionSpectralRelativity")
+    if os.path.exists(os.path.join(sib, "emerger_spectrum.py")):
+        import sys; sys.path.insert(0, sib); import emerger_spectrum as E
+        S16 = S.sign_table(16)
+        assert all(int(E.cd_mul(E.e(i), E.e(j))[i ^ j]) == S16[i, j] for i in range(16) for j in range(16))
+
+
+def test_sedenion_slot_rule_results_recorded():
+    import os, json
+    p = "experiments/sedenion_slot_rule.json"
+    if not os.path.exists(p): return
+    r = json.load(open(p))
+    for N in ("16", "32", "64", "128"):
+        for rule in ("seq0", "seq1"):                                                    # the sequential rules are not distinguished from random assignments
+            assert all(abs(v["z"]) < 3.5 for v in r["E1"][N][rule].values())
