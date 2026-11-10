@@ -203,3 +203,6 @@ Eight panels, 2 × 4. a: the oldest Gemini sim's flow z ↦ 1 + 1/z in polar (13
 
 ## boundary_uclock.svg  (rhp/atlas_riemann_fermat/boundary_uclock.py)
 1 × 3. a: the ζ path's loop boundaries at t = γ₁: loop number against u = ln p (straight line, slope t/2π) with the same loops against prime index n on a log axis (red dots). b: radius growth factor per loop — ζ at t = 3, 5, 10 (dots measured, lines the smooth log-spiral law), ζ at the first zero (crosses, suppressed), the worm (black squares: 1.25, 1.33, 1.49, 1.95, 19). c: |step angle + t ln p| against p (blue) with the envelope ½p^{-½} (red) and the worm's constant index 5 (dashed).
+
+## nodal_extract.svg  (rhp/atlas_riemann_fermat/nodal_extract.py)
+1 × 3. a: ξ on σ ∈ [−0.5, 1.5], t ∈ [10, 50]: cymatic sand (heaviest on Re ξ = 0), the 10 extracted Re ξ = 0 rungs (red) through the zeros ●, the 9 Im ξ = 0 lines (blue) leaving the equator at the heartbeat extrema ◆. b: the prime wave on x ∈ [1000, 1100]: exact W, the wave from K = 100 / 3066 / 25000 zero-tones, exact nodes ψ(x) = x as ticks (they come in jump + slide pairs). c: node count in [1000, 1500] against K: found nodes saturate near the exact 39, Rice's law (dashed) keeps rising.

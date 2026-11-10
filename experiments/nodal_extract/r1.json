@@ -1,0 +1,257 @@
+{
+ "1000-1500": {
+  "window": [
+   1000,
+   1500
+  ],
+  "exact_nodes": 39,
+  "exact_jump": 20,
+  "exact_slide": 19,
+  "per_K": {
+   "10": {
+    "nodes": 4,
+    "rice_predicted": 3.507500911618589,
+    "exact_matched": 0.0,
+    "found_matched": 0.0,
+    "chance": 0.005128205128205128,
+    "secs": 0.0
+   },
+   "100": {
+    "nodes": 9,
+    "rice_predicted": 9.12940119411992,
+    "exact_matched": 0.05128205128205128,
+    "found_matched": 0.2222222222222222,
+    "chance": 0.015384615384615385,
+    "secs": 0.2
+   },
+   "1000": {
+    "nodes": 19,
+    "rice_predicted": 27.28411701261602,
+    "exact_matched": 0.23076923076923078,
+    "found_matched": 0.47368421052631576,
+    "chance": 0.041025641025641026,
+    "secs": 3.7
+   },
+   "3066": {
+    "nodes": 33,
+    "rice_predicted": 47.35886464800894,
+    "exact_matched": 0.41025641025641024,
+    "found_matched": 0.48484848484848486,
+    "chance": 0.05641025641025641,
+    "secs": 10.3
+   },
+   "25000": {
+    "nodes": 47,
+    "rice_predicted": 134.47246540005347,
+    "exact_matched": 1.0,
+    "found_matched": 0.9148936170212766,
+    "chance": 0.09743589743589744,
+    "secs": 75.1
+   }
+  }
+ },
+ "3000-3500": {
+  "window": [
+   3000,
+   3500
+  ],
+  "exact_nodes": 19,
+  "exact_jump": 9,
+  "exact_slide": 10,
+  "per_K": {
+   "10": {
+    "nodes": 1,
+    "rice_predicted": 1.3334899580964672,
+    "exact_matched": 0.0,
+    "found_matched": 0.0,
+    "chance": 0.010526315789473684,
+    "secs": 0.0
+   },
+   "100": {
+    "nodes": 1,
+    "rice_predicted": 3.47083724924107,
+    "exact_matched": 0.0,
+    "found_matched": 0.0,
+    "chance": 0.0,
+    "secs": 0.1
+   },
+   "1000": {
+    "nodes": 7,
+    "rice_predicted": 10.372939870474022,
+    "exact_matched": 0.05263157894736842,
+    "found_matched": 0.14285714285714285,
+    "chance": 0.042105263157894736,
+    "secs": 0.9
+   },
+   "3066": {
+    "nodes": 13,
+    "rice_predicted": 18.005004710270196,
+    "exact_matched": 0.15789473684210525,
+    "found_matched": 0.23076923076923078,
+    "chance": 0.021052631578947368,
+    "secs": 3.1
+   },
+   "25000": {
+    "nodes": 27,
+    "rice_predicted": 51.12405863030756,
+    "exact_matched": 1.0,
+    "found_matched": 0.7777777777777778,
+    "chance": 0.05263157894736842,
+    "secs": 32.4
+   }
+  }
+ },
+ "10000-10500": {
+  "window": [
+   10000,
+   10500
+  ],
+  "exact_nodes": 10,
+  "exact_jump": 5,
+  "exact_slide": 5,
+  "per_K": {
+   "10": {
+    "nodes": 0,
+    "rice_predicted": 0.4220623227008857,
+    "exact_matched": 0.0,
+    "found_matched": 0.0,
+    "chance": 0.0,
+    "secs": 0.0
+   },
+   "100": {
+    "nodes": 0,
+    "rice_predicted": 1.0985531778751232,
+    "exact_matched": 0.0,
+    "found_matched": 0.0,
+    "chance": 0.0,
+    "secs": 0.0
+   },
+   "1000": {
+    "nodes": 2,
+    "rice_predicted": 3.2831346560857835,
+    "exact_matched": 0.0,
+    "found_matched": 0.0,
+    "chance": 0.04,
+    "secs": 0.3
+   },
+   "3066": {
+    "nodes": 2,
+    "rice_predicted": 5.6987561564429,
+    "exact_matched": 0.1,
+    "found_matched": 0.5,
+    "chance": 0.0,
+    "secs": 1.0
+   },
+   "25000": {
+    "nodes": 8,
+    "rice_predicted": 16.181253409816012,
+    "exact_matched": 0.5,
+    "found_matched": 0.625,
+    "chance": 0.02,
+    "secs": 8.9
+   }
+  }
+ },
+ "30000-30500": {
+  "window": [
+   30000,
+   30500
+  ],
+  "exact_nodes": 0,
+  "exact_jump": 0,
+  "exact_slide": 0,
+  "per_K": {
+   "10": {
+    "nodes": 0,
+    "rice_predicted": 0.14298774543832038,
+    "exact_matched": 0.0,
+    "found_matched": 0.0,
+    "chance": 0.0,
+    "secs": 0.0
+   },
+   "100": {
+    "nodes": 0,
+    "rice_predicted": 0.37217167631375586,
+    "exact_matched": 0.0,
+    "found_matched": 0.0,
+    "chance": 0.0,
+    "secs": 0.0
+   },
+   "1000": {
+    "nodes": 0,
+    "rice_predicted": 1.1122718072534938,
+    "exact_matched": 0.0,
+    "found_matched": 0.0,
+    "chance": 0.0,
+    "secs": 0.1
+   },
+   "3066": {
+    "nodes": 0,
+    "rice_predicted": 1.9306444825448248,
+    "exact_matched": 0.0,
+    "found_matched": 0.0,
+    "chance": 0.0,
+    "secs": 0.3
+   },
+   "25000": {
+    "nodes": 0,
+    "rice_predicted": 5.481941455066702,
+    "exact_matched": 0.0,
+    "found_matched": 0.0,
+    "chance": 0.0,
+    "secs": 3.0
+   }
+  }
+ },
+ "100000-100200": {
+  "window": [
+   100000,
+   100200
+  ],
+  "exact_nodes": 0,
+  "exact_jump": 0,
+  "exact_slide": 0,
+  "per_K": {
+   "10": {
+    "nodes": 0,
+    "rice_predicted": 0.01728384519555202,
+    "exact_matched": 0.0,
+    "found_matched": 0.0,
+    "chance": 0.0,
+    "secs": 0.0
+   },
+   "100": {
+    "nodes": 0,
+    "rice_predicted": 0.044986775753806246,
+    "exact_matched": 0.0,
+    "found_matched": 0.0,
+    "chance": 0.0,
+    "secs": 0.0
+   },
+   "1000": {
+    "nodes": 0,
+    "rice_predicted": 0.13444742186132957,
+    "exact_matched": 0.0,
+    "found_matched": 0.0,
+    "chance": 0.0,
+    "secs": 0.0
+   },
+   "3066": {
+    "nodes": 0,
+    "rice_predicted": 0.23336937205115613,
+    "exact_matched": 0.0,
+    "found_matched": 0.0,
+    "chance": 0.0,
+    "secs": 0.0
+   },
+   "25000": {
+    "nodes": 0,
+    "rice_predicted": 0.6626373972818762,
+    "exact_matched": 0.0,
+    "found_matched": 0.0,
+    "chance": 0.0,
+    "secs": 0.4
+   }
+  }
+ }
+}

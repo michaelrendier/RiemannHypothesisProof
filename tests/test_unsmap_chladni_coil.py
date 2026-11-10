@@ -461,3 +461,32 @@ def test_slot0_empty_keeps_the_euler_norm_exact():
         for rule, n0 in r["slot0_primes"][N].items():
             rl = r["E2"][N][rule]["ratio_log"]["value"]
             assert (n0 == 0) == (rl < 1e-12), (N, rule, n0, rl)     # |v_K| = |zeta_K| exactly iff no prime sits on the identity slot
+
+
+def test_nodal_extractor_core_and_results():
+    import os, json, math
+    from rhp import nodal_extract as NX
+    x = np.linspace(-2, 2, 401); X, Y = np.meshgrid(x, x)
+    L, c = NX.zero_set_2d(x, x, X ** 2 + Y ** 2 - 1)
+    assert len(L) == 1 and c == [True] and abs(NX.polyline_length(L[0]) - 2 * math.pi) < 3e-4                  # one closed curve, the unit circle
+    xs = np.linspace(-2, 2, 321); XX, YY = np.meshgrid(xs, xs); Zc = (XX + 1j * YY) ** 2 - 1
+    Rl, _ = NX.zero_set_2d(xs, xs, Zc.real); Il, _ = NX.zero_set_2d(xs, xs, Zc.imag)
+    pts = NX.seg_intersections(Rl, Il); assert len(pts) == 2 and np.allclose(sorted(pts[:, 0]), [-1, 1], atol=2e-3)      # zeros of z² − 1
+    psi, lam = NX.psi_table(400); ex, dr, kd = NX.exact_prime_nodes(100, 300, psi)
+    xv = []; 
+    for n in range(100, 301): xv += [n - 1e-9, n, n + 0.25, n + 0.5, n + 0.75, n + 1 - 1e-9]
+    brute = 0; prev = None
+    for xx in xv:
+        v = psi[int(math.floor(xx))] - xx; s = 1 if v > 0 else -1
+        if prev is not None and s != prev: brute += 1
+        prev = s
+    assert abs(len(ex) - brute) <= 2                                                                              # exact nodes agree with brute sampling
+    p1 = "experiments/nodal_extract/r1.json"; p2 = "experiments/nodal_extract/r2.json"
+    if os.path.exists(p1):
+        r = json.load(open(p1))
+        assert r["1000-1500"]["exact_nodes"] == 39 and r["1000-1500"]["per_K"]["25000"]["exact_matched"] > .99 and r["3000-3500"]["per_K"]["25000"]["exact_matched"] > .99
+        assert r["1000-1500"]["per_K"]["25000"]["nodes"] < r["1000-1500"]["per_K"]["25000"]["rice_predicted"] / 2   # Rice overpredicts at large K
+    if os.path.exists(p2):
+        r = json.load(open(p2))
+        assert r["rungs_found"] == r["zeros_known_below_tmax"] == 21 and r["unmatched_known"] == 0 and r["offline_crossings"] == 0
+        assert r["re_domains_pos"] + r["re_domains_neg"] == r["rungs_found"] + 1 and r["im_lines_offline"] == 20

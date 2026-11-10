@@ -1,0 +1,28 @@
+11:27:24 R1 1000 1500 10 {'nodes': 4, 'rice_predicted': 3.507500911618589, 'exact_matched': 0.0, 'found_matched': 0.0, 'chance': 0.005128205128205128, 'secs': 0.0}
+11:27:24 R1 1000 1500 100 {'nodes': 9, 'rice_predicted': 9.12940119411992, 'exact_matched': 0.05128205128205128, 'found_matched': 0.2222222222222222, 'chance': 0.015384615384615385, 'secs': 0.2}
+11:27:28 R1 1000 1500 1000 {'nodes': 19, 'rice_predicted': 27.28411701261602, 'exact_matched': 0.23076923076923078, 'found_matched': 0.47368421052631576, 'chance': 0.041025641025641026, 'secs': 3.7}
+11:27:38 R1 1000 1500 3066 {'nodes': 33, 'rice_predicted': 47.35886464800894, 'exact_matched': 0.41025641025641024, 'found_matched': 0.48484848484848486, 'chance': 0.05641025641025641, 'secs': 10.3}
+11:28:53 R1 1000 1500 25000 {'nodes': 47, 'rice_predicted': 134.47246540005347, 'exact_matched': 1.0, 'found_matched': 0.9148936170212766, 'chance': 0.09743589743589744, 'secs': 75.1}
+11:28:53 R1 3000 3500 10 {'nodes': 1, 'rice_predicted': 1.3334899580964672, 'exact_matched': 0.0, 'found_matched': 0.0, 'chance': 0.010526315789473684, 'secs': 0.0}
+11:28:53 R1 3000 3500 100 {'nodes': 1, 'rice_predicted': 3.47083724924107, 'exact_matched': 0.0, 'found_matched': 0.0, 'chance': 0.0, 'secs': 0.1}
+11:28:54 R1 3000 3500 1000 {'nodes': 7, 'rice_predicted': 10.372939870474022, 'exact_matched': 0.05263157894736842, 'found_matched': 0.14285714285714285, 'chance': 0.042105263157894736, 'secs': 0.9}
+11:28:57 R1 3000 3500 3066 {'nodes': 13, 'rice_predicted': 18.005004710270196, 'exact_matched': 0.15789473684210525, 'found_matched': 0.23076923076923078, 'chance': 0.021052631578947368, 'secs': 3.1}
+11:29:29 R1 3000 3500 25000 {'nodes': 27, 'rice_predicted': 51.12405863030756, 'exact_matched': 1.0, 'found_matched': 0.7777777777777778, 'chance': 0.05263157894736842, 'secs': 32.4}
+11:29:29 R1 10000 10500 10 {'nodes': 0, 'rice_predicted': 0.4220623227008857, 'exact_matched': 0.0, 'found_matched': 0.0, 'chance': 0.0, 'secs': 0.0}
+11:29:30 R1 10000 10500 100 {'nodes': 0, 'rice_predicted': 1.0985531778751232, 'exact_matched': 0.0, 'found_matched': 0.0, 'chance': 0.0, 'secs': 0.0}
+11:29:30 R1 10000 10500 1000 {'nodes': 2, 'rice_predicted': 3.2831346560857835, 'exact_matched': 0.0, 'found_matched': 0.0, 'chance': 0.04, 'secs': 0.3}
+11:29:31 R1 10000 10500 3066 {'nodes': 2, 'rice_predicted': 5.6987561564429, 'exact_matched': 0.1, 'found_matched': 0.5, 'chance': 0.0, 'secs': 1.0}
+11:29:40 R1 10000 10500 25000 {'nodes': 8, 'rice_predicted': 16.181253409816012, 'exact_matched': 0.5, 'found_matched': 0.625, 'chance': 0.02, 'secs': 8.9}
+11:29:40 R1 30000 30500 10 {'nodes': 0, 'rice_predicted': 0.14298774543832038, 'exact_matched': 0.0, 'found_matched': 0.0, 'chance': 0.0, 'secs': 0.0}
+11:29:40 R1 30000 30500 100 {'nodes': 0, 'rice_predicted': 0.37217167631375586, 'exact_matched': 0.0, 'found_matched': 0.0, 'chance': 0.0, 'secs': 0.0}
+11:29:40 R1 30000 30500 1000 {'nodes': 0, 'rice_predicted': 1.1122718072534938, 'exact_matched': 0.0, 'found_matched': 0.0, 'chance': 0.0, 'secs': 0.1}
+11:29:40 R1 30000 30500 3066 {'nodes': 0, 'rice_predicted': 1.9306444825448248, 'exact_matched': 0.0, 'found_matched': 0.0, 'chance': 0.0, 'secs': 0.3}
+11:29:43 R1 30000 30500 25000 {'nodes': 0, 'rice_predicted': 5.481941455066702, 'exact_matched': 0.0, 'found_matched': 0.0, 'chance': 0.0, 'secs': 3.0}
+11:29:43 R1 100000 100200 10 {'nodes': 0, 'rice_predicted': 0.01728384519555202, 'exact_matched': 0.0, 'found_matched': 0.0, 'chance': 0.0, 'secs': 0.0}
+11:29:43 R1 100000 100200 100 {'nodes': 0, 'rice_predicted': 0.044986775753806246, 'exact_matched': 0.0, 'found_matched': 0.0, 'chance': 0.0, 'secs': 0.0}
+11:29:43 R1 100000 100200 1000 {'nodes': 0, 'rice_predicted': 0.13444742186132957, 'exact_matched': 0.0, 'found_matched': 0.0, 'chance': 0.0, 'secs': 0.0}
+11:29:43 R1 100000 100200 3066 {'nodes': 0, 'rice_predicted': 0.23336937205115613, 'exact_matched': 0.0, 'found_matched': 0.0, 'chance': 0.0, 'secs': 0.0}
+11:29:44 R1 100000 100200 25000 {'nodes': 0, 'rice_predicted': 0.6626373972818762, 'exact_matched': 0.0, 'found_matched': 0.0, 'chance': 0.0, 'secs': 0.4}
+11:31:40 R2 grid (3181, 101) 116 s
+11:31:41 R2 {"t_max": 80.0, "grid": [3181, 201], "zeros_known_below_tmax": 21, "rungs_found": 21, "rung_max_err_vs_table": 0.00017801234893966011, "rung_median_err": 6.978197779261563e-05, "unmatched_known": 0, "re_lines": 21, "re_closed": 0, "re_length": 50.699588707908674, "im_lines_offline": 20, "im_closed": 0, "offline_crossings": 0, "offline_points": [], "re_domains_pos": 11, "re_domains_neg": 11, "line_ends": {"back_to_equator_side": 0, "reaches_sigma_max": 21, "reaches_t_boundary": 0, "closed": 0}}
+11:31:41 DONE
