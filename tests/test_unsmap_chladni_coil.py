@@ -395,3 +395,15 @@ def test_uclock_zeta_loops_uniform_in_u_and_log_spiral_radius():
     L5 = B.zeta_loops(5.0, 60000)
     assert abs(np.median(L5["growth"]) / np.median(L5["smooth_growth"]) - 1) < .06                                              # away from zeros: the smooth spiral
     assert np.allclose(B.worm_loop_growth(), [1.25, 1.33, 1.49, 1.95, 19.0], rtol=.03)
+
+
+def test_zeros25k_recreation_in_house():
+    import json, os
+    p = "data/zeros_25000_hp.tsv"
+    if not os.path.exists(p): return
+    g = np.array([float(l.split("\t")[1]) for l in open(p).read().split("\n")[1:] if l.strip()])
+    assert len(g) == 25000 and np.all(np.diff(g) > 0.03)                       # strictly increasing, min gap 0.0353
+    assert abs(g[0] - 14.134725141734693790) < 1e-15 and abs(g[24999] - 21942.5924301325946845) < 1e-12
+    r = json.load(open("experiments/zeros25k/results.json"))
+    assert r["A"]["failures"] == 0 and r["B"]["count_wrong"] == 0              # every root a sign change; Backlund count = k at 500 heights
+    assert r["A"]["table_err_max"] < 1e-13                                      # the SemPriCon table is good to 5e-14
