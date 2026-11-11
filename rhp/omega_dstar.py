@@ -78,7 +78,8 @@ def n_shape_crossing(dps=30):
 
 
 def lambert_branches(dps=30):
-    """W₀(0) = 0, W₀(1) = Ω, W₀(−1/e) = W₋₁(−1/e) = −1 (the fold), and the same divided by ln 10 (the UNS reading)."""
+    """W₀(0) = 0, W₀(1) = Ω, W₀(−1/e) = W₋₁(−1/e) = −1 (the fold), and the same divided by ln 10 (the UNS reading).
+    At the fold W has a square-root singularity, so the numerical value is only good to ≈ √(10^−dps) (3·10⁻¹⁶ at 30 digits), not to dps digits."""
     mp.mp.dps = dps; ln10 = mp.log(10)
     v = dict(W0_0=mp.lambertw(0).real, W0_1=mp.lambertw(1).real, W0_fold=mp.lambertw(-1 / mp.e).real, Wm1_fold=mp.lambertw(-1 / mp.e, -1).real)
     return v, {k: x / ln10 for k, x in v.items()}

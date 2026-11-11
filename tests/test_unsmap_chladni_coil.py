@@ -635,5 +635,5 @@ def test_omega_dstar():
     assert abs(float(d["d_star"]) - 0.246307201473) < 1e-11 and abs(float(d["gap_in_omega_units"]) - 7.0736e-4) < 1e-7
     m = O.map_pair(); assert abs(float(m["product"]) - 1) < 1e-6 and m["forward_signs"][:4] == [1, -1, 1, -1]  # multipliers −Ω and −1/Ω, alternating
     n = O.n_shape_crossing(); assert float(n["closes"]) < 1e-25                                                # the N-shape closes at E = 2Ω
-    w, wu = O.lambert_branches(); assert abs(float(w["W0_fold"]) + 1) < 1e-20 and abs(float(w["Wm1_fold"]) + 1) < 1e-20
+    w, wu = O.lambert_branches(); assert abs(float(w["W0_fold"]) + 1) < 1e-13 and abs(float(w["Wm1_fold"]) + 1) < 1e-13   # square-root singularity at −1/e: ~√ε accuracy, not ε
     assert O.boltzmann_orientation()["root_exists"] is False
