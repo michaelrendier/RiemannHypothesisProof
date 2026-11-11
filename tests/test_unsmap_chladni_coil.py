@@ -502,3 +502,19 @@ def test_fermat_side_probe_recorded():
     assert abs(r["LambdaK"]["5"] - 2 * math.log(5)) < 1e-12 and r["LambdaK"]["3"] == 0 and abs(r["LambdaK"]["9"] - 2 * math.log(3)) < 1e-12
     assert all(v["max_ratio"] <= 1.0 for v in r["weil_bound"].values())                              # Weil: Riemann hypothesis for the Fermat curves over F_p
     assert r["two_squares_density"]["1000000"]["density"] < r["two_squares_density"]["1000"]["density"]
+
+
+def test_nshape_shape():
+    import os, json, math
+    from rhp import nshape as NS
+    om = NS.big_omega(1000); assert om[1:21].tolist() == [0, 1, 1, 2, 1, 2, 1, 3, 2, 2, 1, 3, 1, 2, 2, 4, 1, 3, 1, 3]
+    assert [NS.e8_shell(m) for m in (2, 4)] == [240, 2160] and [NS.count_hurwitz_norm(n) for n in (1, 2, 3, 5)] == [24, 24, 96, 144]
+    assert [NS.euler_factor(N) for N in (65, 221, 1073)] == [5, 17, 29]
+    P = NS.primes_upto(2000); isp = np.zeros(2001, bool); isp[P] = True; odd = np.arange(2001) % 2 == 1
+    h = NS.hyperbola_points(2000); assert ((h == (odd & ~isp & (np.arange(2001) > 1)))[odd & (np.arange(2001) > 1)]).all()
+    p = "experiments/nshape_shape.json"
+    if os.path.exists(p):
+        r = json.load(open(p))
+        assert r["hyperbola"]["lattice_reach_equals_odd_composites"] and r["hyperbola"]["direct_search_ok"]
+        assert r["circle"]["theory_matches_all_odd_N"] and r["circle"]["euler_factor_failures"] == 0 and r["circle"]["all_2plus_are_composite"]
+        assert abs(r["tower"]["hole_fraction_among_primes_below_1e6"]["Zi"] - 0.5) < 0.01 and r["onion"]["10000000"]["mode"] == 3

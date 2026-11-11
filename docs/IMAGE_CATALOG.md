@@ -206,3 +206,6 @@ Eight panels, 2 × 4. a: the oldest Gemini sim's flow z ↦ 1 + 1/z in polar (13
 
 ## nodal_extract.svg  (rhp/atlas_riemann_fermat/nodal_extract.py)
 1 × 3. a: ξ on σ ∈ [−0.5, 1.5], t ∈ [10, 50]: cymatic sand (heaviest on Re ξ = 0), the 10 extracted Re ξ = 0 rungs (red) through the zeros ●, the 9 Im ξ = 0 lines (blue) leaving the equator at the heartbeat extrema ◆. b: the prime wave on x ∈ [1000, 1100]: exact W, the wave from K = 100 / 3066 / 25000 zero-tones, exact nodes ψ(x) = x as ticks (they come in jump + slide pairs). c: node count in [1000, 1500] against K: found nodes saturate near the exact 39, Rice's law (dashed) keeps rising.
+
+## nshape.svg  (rhp/atlas_riemann_fermat/nshape.py)
+1 × 3. a: the Ω-onion, share of n ≤ x in each layer Ω = 1 (primes, the core) … 8+, x = 10² … 10⁷. b: share of odd composites ≤ x reached by Euler's circle (flat ≈ 0.11) against Fermat's hyperbola (all of them). c: the tower Z, Z[i], Hurwitz, E8: irreducible classes per rational prime p (log axis), units 2 / 4 / 24 / 240 and the share of rational primes that stay holes 100 % / 50 % / 0 / 0.
