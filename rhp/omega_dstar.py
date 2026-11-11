@@ -89,3 +89,14 @@ def boltzmann_orientation(dps=30):
     """Check on the asserted step.  For a Planck-energy excitation the Boltzmann weight at temperature T is e^{−T_P/T} = e^{−1/x}, not e^{−x}.  Does x = e^{−1/x} have a real root?
     (ln x = −1/x ⇒ x ln x = −1, but min over x>0 of x ln x is −1/e > −1.)  Returns (min of x ln x, whether a root exists)."""
     mp.mp.dps = dps; xmin = 1 / mp.e; return dict(min_x_ln_x=xmin * mp.log(xmin), root_exists=bool(xmin * mp.log(xmin) <= -1))
+
+
+def exp_cardioid(k):
+    """The exponential family f(y) = c·e^y.  Its main 'cardioid' boundary (Kerry Mitchell, UFformulary/lkm.ufm `cardioid-julia`: "c = k/exp(k)", k = e^{2πi m/n}) is the multiplier
+    circle |k| = 1 written in c.  For c = k e^{−k} the fixed point is y* = k and its multiplier is f'(y*) = c e^{y*} = k.  The Lambert values are the real points of this curve:
+      c = −1   (the entropy map x → e^{−x} with y = −x):  k = −W(1) = −Ω       inside the cardioid (attracting, multiplier −Ω)
+      c = 1/e  k = +1  = −W₀(−1/e)                                             the cusp (fold, multiplier +1)
+      c = −e   k = −1                                                          the period-doubling (multiplier −1: x → e^{−λx} flips at λ = e)
+    Returns dict(c, fixed_point, multiplier) at 30 digits for k (a complex or real number)."""
+    mp.mp.dps = 30; k = mp.mpmathify(k); c = k * mp.e ** (-k)
+    return dict(c=c, fixed_point=k, multiplier=c * mp.e ** k, residual=abs(c * mp.e ** k - k))

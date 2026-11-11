@@ -637,3 +637,13 @@ def test_omega_dstar():
     n = O.n_shape_crossing(); assert float(n["closes"]) < 1e-25                                                # the N-shape closes at E = 2Ω
     w, wu = O.lambert_branches(); assert abs(float(w["W0_fold"]) + 1) < 1e-13 and abs(float(w["Wm1_fold"]) + 1) < 1e-13   # square-root singularity at −1/e: ~√ε accuracy, not ε
     assert O.boltzmann_orientation()["root_exists"] is False
+
+
+def test_exp_cardioid():
+    import mpmath as mp
+    from rhp import omega_dstar as O
+    om = mp.lambertw(1).real
+    a = O.exp_cardioid(-om); assert abs(a["c"] + 1) < mp.mpf(10) ** -25 and abs(a["multiplier"] + om) < mp.mpf(10) ** -25      # c = −1: the entropy map, multiplier −Ω
+    b = O.exp_cardioid(1); assert abs(b["c"] - 1 / mp.e) < mp.mpf(10) ** -25 and abs(b["multiplier"] - 1) < mp.mpf(10) ** -25   # the cusp: fold
+    d = O.exp_cardioid(-1); assert abs(d["c"] + mp.e) < mp.mpf(10) ** -25 and abs(d["multiplier"] + 1) < mp.mpf(10) ** -25      # the flip
+    z = O.exp_cardioid(mp.e ** (1j * 0.7)); assert abs(abs(z["multiplier"]) - 1) < mp.mpf(10) ** -25                           # the whole boundary has |multiplier| = 1
