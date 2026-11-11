@@ -624,3 +624,16 @@ def test_zerophase():
     p = "experiments/zerophase_probe.json"
     if os.path.exists(p):
         r = json.load(open(p)); assert r["zero_scan"]["zeros_in_range"] == 29 and r["zero_scan"]["peak_height_min"] > 0.8 and r["zero_scan"]["max_offset"] < 0.1
+
+
+def test_omega_dstar():
+    import mpmath as mp
+    from rhp import omega_dstar as O
+    r = O.omega_routes(40); v = [r[k] for k in ("lambertw", "iteration", "newton", "bisection_digit_curves")]
+    assert max(abs(a - b) for a in v for b in v) < mp.mpf(10) ** -35                                         # four routes, one number
+    d = O.d_star_faces(30); assert abs(d["d_star"] - d["d_star_equals_minus_log10_omega"]) < mp.mpf(10) ** -25 and d["closure_residual"] < mp.mpf(10) ** -25
+    assert abs(float(d["d_star"]) - 0.246307201473) < 1e-11 and abs(float(d["gap_in_omega_units"]) - 7.0736e-4) < 1e-7
+    m = O.map_pair(); assert abs(float(m["product"]) - 1) < 1e-6 and m["forward_signs"][:4] == [1, -1, 1, -1]  # multipliers −Ω and −1/Ω, alternating
+    n = O.n_shape_crossing(); assert float(n["closes"]) < 1e-25                                                # the N-shape closes at E = 2Ω
+    w, wu = O.lambert_branches(); assert abs(float(w["W0_fold"]) + 1) < 1e-20 and abs(float(w["Wm1_fold"]) + 1) < 1e-20
+    assert O.boltzmann_orientation()["root_exists"] is False
