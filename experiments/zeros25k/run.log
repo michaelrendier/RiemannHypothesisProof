@@ -95,3 +95,6 @@
 17:51:42 stage C2 K 3066 {"secs": 2.4, "miss_rate_primepowers": 0.002840909090909091, "false_alarm_rate_others": 0.5005041048538096, "rms_err_composite": 1.2422333933676246, "rms_err_prime": 5.061809530123105, "p_star_resolved_half": 2089, "resolved_by_block": {"2-100": 1.0, "100-300": 1.0, "300-600": 1.0, "600-1000": 1.0, "1000-2000": 0.9333333333333333, "2000-3500": 0.20967741935483872, "3500-5000": 0.0, "5000-8001": 0.0}}
 17:51:59 stage C2 K 25000 {"secs": 16.8, "miss_rate_primepowers": 0.0, "false_alarm_rate_others": 0.14244562869076768, "rms_err_composite": 0.4904002692525086, "rms_err_prime": 0.9605392175051742, "p_star_resolved_half": null, "resolved_by_block": {"2-100": 1.0, "100-300": 1.0, "300-600": 1.0, "600-1000": 1.0, "1000-2000": 1.0, "2000-3500": 1.0, "3500-5000": 1.0, "5000-8001": 1.0}}
 17:51:59 DONE
+10:50:58 ping_extend K 3066 n ≤ 200000 secs 86
+11:01:41 ping_extend K 25000 n ≤ 200000 secs 643
+11:01:41 ping_extend DONE

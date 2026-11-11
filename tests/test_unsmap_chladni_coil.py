@@ -551,3 +551,14 @@ def test_zdtree():
     p = "experiments/zdtree_probe.json"
     if os.path.exists(p):
         r = json.load(open(p)); assert r["8"]["zd_pairs"] == 29886 and r["8"]["carrying_delta"] == 243 and all(r[k].get("survivor_recursion_ok", True) for k in r)
+
+
+def test_normcheck():
+    import os, json
+    from rhp import normcheck as nc
+    for N in (1, 2, 4, 8): assert nc.level_report(N, 400)["all"]["max_abs"] < 1e-12                       # Hurwitz: composition exact
+    r16 = nc.level_report(16, 800)
+    assert r16["all"]["max_abs"] > 0.2 and all(r16[k]["max_abs"] < 1e-12 for k in ("LL", "LU", "UL", "UU"))   # fails only for factors that mix the halves
+    assert nc.level_report(32, 400)["LL"]["max_abs"] > 0.2                                                  # T_32's lower half is T_16: the failure is inherited
+    v = nc.basis_pair_sums(16); assert set(v) == {0, 4, 8} and v[0] == v[8] == 336                          # norm 0 and norm-doubling in equal number
+    assert nc.zero_product_halves(16) == {("LU", "LU"): 336}
