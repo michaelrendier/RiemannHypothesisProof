@@ -535,3 +535,19 @@ def test_bitflip():
     if os.path.exists(p):
         r = json.load(open(p)); assert r["primes_agree_all_7"] == r["primes_total"] and r["composites_agreeing_all_7"] == 3
         assert r["per_base_composites_agreeing"]["-4"] == 750 and r["minimal_subset_zero_survivors_below_100000"][0] == 2
+
+
+def test_zdtree():
+    import os, json
+    from rhp import zdtree as T, sedenion_slots as SS
+    prev = None
+    for k, zd in ((4, 42), (5, 294), (6, 1518)):
+        n = 2 ** k; Z, per, tot = T.zd_incidence(k); carry, clean = T.classes(per, tot)
+        assert int(Z[np.triu_indices(n, 1)].sum()) == zd and len(carry) == 2 ** k - k - 5
+        assert clean == list(range(1, 8)) + [2 ** j for j in range(3, k)]                                  # octonion differences + pure doublings
+        assert (Z[1:, 1:] == SS.deform_matrix(n)[1:, 1:]).all()                                              # ZD incidence = anticommutation graph
+        if prev is not None: assert (Z[: n // 2, : n // 2][1:, 1:] == prev[1:, 1:]).all()                    # old pairs never change status
+        prev = Z
+    p = "experiments/zdtree_probe.json"
+    if os.path.exists(p):
+        r = json.load(open(p)); assert r["8"]["zd_pairs"] == 29886 and r["8"]["carrying_delta"] == 243 and all(r[k].get("survivor_recursion_ok", True) for k in r)
