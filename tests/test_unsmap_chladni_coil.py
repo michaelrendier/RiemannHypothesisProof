@@ -578,3 +578,20 @@ def test_j2():
     for m in (1, 2, 3): assert j2.decomposition_check(P, SS._DISC[:m])[1] == 0
     sh = j2.rule_class_shares(16, "charx", SS.primes_upto(20000)[:500]); assert sh["zero"] == 0 and sh["deform"] == 0 and sh["anti"] > 0.8
     assert j2.rule_class_shares(16, "char", SS.primes_upto(20000)[:500])["zero"] > 0.03
+
+
+def test_beurling():
+    import os, json
+    from rhp import beurling as B
+    from rhp.sedenion_slots import primes_upto
+    P = primes_upto(2_000_000); xs = np.exp(np.linspace(np.log(1e5), np.log(2e6), 60))
+    one = np.ones(len(P), np.int64)
+    assert np.abs(B.psi_beurling(P, one, xs) / xs - 1).max() < 0.005                                      # true primes: ψ/x → 1
+    m = B.gated_multiplicity(P, 1.0); r = B.psi_beurling(P, m, xs) / xs
+    assert np.abs(r - B.gated_prediction(xs, 1.0)).max() < 0.02 and r.max() - r.min() > 1.0             # gated: PNT fails, oscillation as predicted from the harmonics
+    a = B.generalized_integers(P[P <= 2000], m[P <= 2000], 2000); assert (a[1], a[2], a[3], a[4], a[5]) == (1, 2, 2, 3, 0)   # m(2) = m(3) = 2, m(5) = 0: (1−x)^−2 gives 3 products equal to 4
+    assert B.z5_irreducibles_brute(300) == B.z5_irreducibles(300)[2] == 83                              # irreducibles of Z[√−5]
+    n_all, n_pr, n_irr = B.z5_irreducibles(10 ** 6); assert n_irr > 1.5 * n_all
+    p = "experiments/beurling_probe.json"
+    if os.path.exists(p):
+        r = json.load(open(p)); assert 0.19 < r["true"]["rms_windows"][0] < 0.25 and abs(r["true"]["zero_sum_prediction"] - 0.215) < 0.01
