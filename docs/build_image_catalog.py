@@ -24,8 +24,9 @@ def main():
             out_lines.append("")                      # pandoc needs a blank line before a list
         out_lines.append(line)
         m = re.match(r"## \d+\. `([^`]+)`", line)
-        if m:
-            src = ROOT / m.group(1)
+        m2 = re.match(r"## (\S+\.svg)\s+\((rhp/atlas_riemann_fermat)/", line)           # atlas entries: '## name.svg  (rhp/atlas_riemann_fermat/name.py)'
+        if m or m2:
+            src = ROOT / (m.group(1) if m else f"{m2.group(2)}/{m2.group(1)}")
             if src.suffix == ".svg" and src.exists():
                 png = tmp / (src.stem + ".png")
                 subprocess.run(["rsvg-convert", "-w", "1500", str(src), "-o", str(png)], check=True)

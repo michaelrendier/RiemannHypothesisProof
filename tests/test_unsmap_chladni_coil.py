@@ -595,3 +595,32 @@ def test_beurling():
     p = "experiments/beurling_probe.json"
     if os.path.exists(p):
         r = json.load(open(p)); assert 0.19 < r["true"]["rms_windows"][0] < 0.25 and abs(r["true"]["zero_sum_prediction"] - 0.215) < 0.01
+
+
+def test_mertens_wave():
+    import os, json
+    from rhp import mertens_wave as W
+    g, zp = W.load_zp(K=3000); c = W.residues(g, zp); mu = W.mobius_table(5000); M = np.cumsum(mu.astype(np.int64))
+    assert mu[1] == 1 and mu[4] == 0 and mu[6] == 1 and mu[30] == -1
+    x = np.array([100.5, 1000.5]); assert np.abs(W.m_reconstruct(x, g, c) - M[[100, 1000]]).max() < 0.7           # the explicit formula
+    n = np.arange(2, 600); assert np.mean(W.classify(W.mu_ping(n, g, c, 3000)) == mu[n]) == 1.0                    # 3000 tones: μ perfect to ≈ 600
+    assert abs(W.convolution_residual(200, g, c, 3000)) < 0.01                                                      # Σ M(x/n) = 1
+    p = "experiments/mertens_probe.json"
+    if os.path.exists(p):
+        r = json.load(open(p)); d = r["exact"]["decades"]; assert all(v["corr_M_psi"] < -0.7 for v in d.values())   # the two waves are in antiphase
+        assert abs(r["slope"]["partial_variance"]["25000"] ** 0.5 - 0.17) < 0.01 and r["exact"]["max_M_over_sqrt"] < 1.0
+
+
+def test_zerophase():
+    import math, os, json
+    from rhp import zerophase as Z
+    u = np.linspace(0.5, 6, 1500); g1 = 14.134725
+    b = Z.bearing(Z.lift_stereo(Z.zero_spiral(u, g1)))
+    assert b.std() < 1e-3 and abs(math.degrees(b.mean()) - math.degrees(math.atan(2 * g1))) < 1e-3                  # loxodrome: constant bearing arctan 2γ
+    assert np.degrees(Z.bearing(Z.lift_linear(u, g1 * u, 6.0)).std()) > 0.5                                         # the linear lift is not conformal
+    assert abs(Z.pitch_deg(g1) - 2.026) < 0.01 and abs(Z.polygon_h(4) - 1) < 1e-12 and abs(Z.polygon_h(6) - 2 ** -0.5) < 1e-12
+    w, lx = Z.weights(20000); ts = np.array([14.134725, 17.5, 21.022040]); A = Z.scan_zero(ts, w, lx)
+    assert A[0] > 0.7 and A[2] > 0.7 and A[1] < 0.4                                                                 # lines at the zeros, quiet between
+    p = "experiments/zerophase_probe.json"
+    if os.path.exists(p):
+        r = json.load(open(p)); assert r["zero_scan"]["zeros_in_range"] == 29 and r["zero_scan"]["peak_height_min"] > 0.8 and r["zero_scan"]["max_offset"] < 0.1

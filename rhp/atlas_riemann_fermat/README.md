@@ -39,4 +39,5 @@ A picture here shows a space and a machinery; none of it tests RH.
 
 | `boundary_uclock.svg` | `python -m rhp.atlas_riemann_fermat.boundary_uclock` | `rhp/boundary.py`: Gemini's constant-angle clock read as u = ln p against the ζ path: loop uniformity in u, radius growth per loop (ζ log-spiral vs worm hyperbolic), wobble index ½p^{-½} vs 5 |
 | `nodal_extract.svg` | `python -m rhp.atlas_riemann_fermat.nodal_extract` | `rhp/nodal_extract.py`: the nodal-line extractor on ξ (rungs, Im lines, sand) and on the prime wave (exact crossings ψ(x) = x against K zero-tones) |
+| `zerophase.svg` | `python -m rhp.atlas_riemann_fermat.zerophase` | `rhp/zerophase.py`: the critical line as the equator, zero-tones as loxodromes, the zero-phase line spectrum against the Archimedean (Ulam / polygonal) scan |
 | `nshape.svg` | `python -m rhp.atlas_riemann_fermat.nshape` | `rhp/nshape.py`: the Ω-onion, the two factoring conics (circle and hyperbola) and the tower of division-algebra lattices: the bulk and its holes |

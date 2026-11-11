@@ -209,3 +209,6 @@ Eight panels, 2 × 4. a: the oldest Gemini sim's flow z ↦ 1 + 1/z in polar (13
 
 ## nshape.svg  (rhp/atlas_riemann_fermat/nshape.py)
 1 × 3. a: the Ω-onion, share of n ≤ x in each layer Ω = 1 (primes, the core) … 8+, x = 10² … 10⁷. b: share of odd composites ≤ x reached by Euler's circle (flat ≈ 0.11) against Fermat's hyperbola (all of them). c: the tower Z, Z[i], Hurwitz, E8: irreducible classes per rational prime p (log axis), units 2 / 4 / 24 / 240 and the share of rational primes that stay holes 100 % / 50 % / 0 / 0.
+
+## zerophase.svg  (rhp/atlas_riemann_fermat/zerophase.py)
+2 × 2. a: the critical line is the equator; zero-tones x^ρ = e^{(½+iγ)u} lifted by stereographic projection are loxodromes (zeros 1, 2, 3; pitch 2.03°, 1.36°, 1.15°). b: the bearing along u for zero 1 under the two lifts: the stereographic lift keeps it at 87.974° (arctan 2γ); the linear-in-ln-n lift coded in `AbrikosovTree/render/lattice_planes.py` wobbles ±1.4°. c: the zero-phase scan A(t) = |Σ(Λ(n)−1)n^(−½−it)|/ln x at x = 5·10⁴: a line of height ≈ 0.92 at each of the 29 zero ordinates in [10, 100], background 0.15. d: the Archimedean scan A(h), θ = 2πh√n (h = 1 Sacks/Ulam, the m-gon at h = √(2/(m−2))): nothing above the random-phase level 0.53. Data `experiments/zerophase_probe.json`.
