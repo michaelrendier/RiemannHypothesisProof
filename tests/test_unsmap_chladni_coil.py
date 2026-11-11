@@ -562,3 +562,19 @@ def test_normcheck():
     assert nc.level_report(32, 400)["LL"]["max_abs"] > 0.2                                                  # T_32's lower half is T_16: the failure is inherited
     v = nc.basis_pair_sums(16); assert set(v) == {0, 4, 8} and v[0] == v[8] == 336                          # norm 0 and norm-doubling in equal number
     assert nc.zero_product_halves(16) == {("LU", "LU"): 336}
+
+
+def test_j2():
+    import numpy as np
+    from rhp import j2, sedenion_slots as SS
+    for N in (8, 16, 32):
+        Jl, Jp = j2.J_left(N), j2.J_perm(N)
+        assert j2.order(Jl) == 4 and j2.projective_order(Jl) == 2 and j2.swaps_colour(Jl, N) and np.allclose(Jl @ Jl, -np.eye(N))     # swap by multiplication: a 4-cycle, an involution on rays
+        assert j2.order(Jp) == 2 and j2.swaps_colour(Jp, N) and int(np.nonzero(Jp[:, 0])[0][0]) == 4                                   # the strict involution moves 1 (e₀) to e₄: not an automorphism
+        assert min(j2.automorphism_defects(Jl, N, 40)) > 1
+    assert j2.orbit_of_identity(16, 4, 4) == [(0, 1), (4, 1), (0, -1), (4, -1), (0, 1)]
+    assert j2.klein_orbit_size(0.5 + 14.13j) == 2 and j2.klein_orbit_size(0.7 + 14.13j) == 4
+    P = SS.primes_upto(5000)[1:]
+    for m in (1, 2, 3): assert j2.decomposition_check(P, SS._DISC[:m])[1] == 0
+    sh = j2.rule_class_shares(16, "charx", SS.primes_upto(20000)[:500]); assert sh["zero"] == 0 and sh["deform"] == 0 and sh["anti"] > 0.8
+    assert j2.rule_class_shares(16, "char", SS.primes_upto(20000)[:500])["zero"] > 0.03

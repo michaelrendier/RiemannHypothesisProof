@@ -1,0 +1,347 @@
+{
+ "operators": {
+  "8": {
+   "L4": {
+    "order": 4,
+    "proj_order": 2,
+    "swaps": true,
+    "square_is_minus_I": true,
+    "auto_defect": [
+     18.42669129723628,
+     18.0277679712787
+    ]
+   },
+   "P4": {
+    "order": 2,
+    "proj_order": 2,
+    "swaps": true,
+    "auto_defect": [
+     17.790582597022258,
+     17.840210843988118
+    ]
+   },
+   "P4_moves_e0_to": 4,
+   "all_Lk_square_minus_I": true
+  },
+  "16": {
+   "L4": {
+    "order": 4,
+    "proj_order": 2,
+    "swaps": true,
+    "square_is_minus_I": true,
+    "auto_defect": [
+     21.585326174654764,
+     21.585326174654764
+    ]
+   },
+   "P4": {
+    "order": 2,
+    "proj_order": 2,
+    "swaps": true,
+    "auto_defect": [
+     22.987195930310143,
+     23.693763827186757
+    ]
+   },
+   "P4_moves_e0_to": 4,
+   "all_Lk_square_minus_I": true
+  },
+  "32": {
+   "L4": {
+    "order": 4,
+    "proj_order": 2,
+    "swaps": true,
+    "square_is_minus_I": true,
+    "auto_defect": [
+     34.52909458863079,
+     37.14705885116536
+    ]
+   },
+   "P4": {
+    "order": 2,
+    "proj_order": 2,
+    "swaps": true,
+    "auto_defect": [
+     33.05551924272636,
+     38.16082999543004
+    ]
+   },
+   "P4_moves_e0_to": 4,
+   "all_Lk_square_minus_I": true
+  },
+  "64": {
+   "L4": {
+    "order": 4,
+    "proj_order": 2,
+    "swaps": true,
+    "square_is_minus_I": true,
+    "auto_defect": [
+     55.103881865427596,
+     53.81860763459965
+    ]
+   },
+   "P4": {
+    "order": 2,
+    "proj_order": 2,
+    "swaps": true,
+    "auto_defect": [
+     53.774813342485864,
+     53.361272050777245
+    ]
+   },
+   "P4_moves_e0_to": 4,
+   "all_Lk_square_minus_I": true
+  }
+ },
+ "stroke_cycle_e0": [
+  [
+   0,
+   1
+  ],
+  [
+   4,
+   1
+  ],
+  [
+   0,
+   -1
+  ],
+  [
+   4,
+   -1
+  ],
+  [
+   0,
+   1
+  ],
+  [
+   4,
+   1
+  ]
+ ],
+ "klein": {
+  "xi_fe": 5.854827030937197e-32,
+  "xi_schwarz": 0,
+  "L4_fe": 1.2513269441979545e-31,
+  "L4_schwarz": 0
+ },
+ "klein_orbits": {
+  "zeros": 25000,
+  "size2": 25000,
+  "size4": 0
+ },
+ "hole_share_inert": {
+  "-4": 0.50105,
+  "8": 0.50135,
+  "-3": 0.5008,
+  "5": 0.5017,
+  "-7": 0.50055,
+  "-11": 0.50015,
+  "13": 0.5015
+ },
+ "share_trivial_frobenius": {
+  "1": 0.49895,
+  "2": 0.2484,
+  "3": 0.1229,
+  "4": 0.0604,
+  "5": 0.0289,
+  "6": 0.0133,
+  "7": 0.00545
+ },
+ "decomposition_check": {
+  "1": [
+   20000,
+   0
+  ],
+  "2": [
+   20000,
+   0
+  ],
+  "3": [
+   19999,
+   0
+  ],
+  "4": [
+   19998,
+   0
+  ]
+ },
+ "rule_shares": {
+  "16": {
+   "slot_classes": {
+    "zero": 1,
+    "axis": 1,
+    "anti": 8,
+    "comm": 0,
+    "deform": 6
+   },
+   "seq1": {
+    "zero": 0.0,
+    "axis": 0.067,
+    "anti": 0.534,
+    "comm": 0.0,
+    "deform": 0.399
+   },
+   "mod": {
+    "zero": 0.0,
+    "axis": 0.0,
+    "anti": 0.5035,
+    "comm": 0.0,
+    "deform": 0.4965
+   },
+   "char": {
+    "zero": 0.0535,
+    "axis": 0.063,
+    "anti": 0.503,
+    "comm": 0.0,
+    "deform": 0.3805
+   },
+   "charx": {
+    "zero": 0.0,
+    "axis": 0.128,
+    "anti": 0.872,
+    "comm": 0.0,
+    "deform": 0.0
+   },
+   "random": {
+    "zero": 0.0,
+    "axis": 0.062,
+    "anti": 0.548,
+    "comm": 0.0,
+    "deform": 0.39
+   }
+  },
+  "32": {
+   "slot_classes": {
+    "zero": 1,
+    "axis": 1,
+    "anti": 10,
+    "comm": 0,
+    "deform": 20
+   },
+   "seq1": {
+    "zero": 0.0,
+    "axis": 0.0325,
+    "anti": 0.3245,
+    "comm": 0.0,
+    "deform": 0.643
+   },
+   "mod": {
+    "zero": 0.0,
+    "axis": 0.0,
+    "anti": 0.256,
+    "comm": 0.0,
+    "deform": 0.744
+   },
+   "char": {
+    "zero": 0.022,
+    "axis": 0.032,
+    "anti": 0.316,
+    "comm": 0.0,
+    "deform": 0.63
+   },
+   "charx": {
+    "zero": 0.0,
+    "axis": 0.063,
+    "anti": 0.5565,
+    "comm": 0.0,
+    "deform": 0.3805
+   },
+   "random": {
+    "zero": 0.0,
+    "axis": 0.0385,
+    "anti": 0.33,
+    "comm": 0.0,
+    "deform": 0.6315
+   }
+  },
+  "64": {
+   "slot_classes": {
+    "zero": 1,
+    "axis": 1,
+    "anti": 12,
+    "comm": 0,
+    "deform": 50
+   },
+   "seq1": {
+    "zero": 0.0,
+    "axis": 0.016,
+    "anti": 0.192,
+    "comm": 0.0,
+    "deform": 0.792
+   },
+   "mod": {
+    "zero": 0.0,
+    "axis": 0.0,
+    "anti": 0.1265,
+    "comm": 0.0,
+    "deform": 0.8735
+   },
+   "char": {
+    "zero": 0.0075,
+    "axis": 0.016,
+    "anti": 0.1885,
+    "comm": 0.0,
+    "deform": 0.788
+   },
+   "charx": {
+    "zero": 0.0,
+    "axis": 0.032,
+    "anti": 0.338,
+    "comm": 0.0,
+    "deform": 0.63
+   },
+   "random": {
+    "zero": 0.0,
+    "axis": 0.0185,
+    "anti": 0.193,
+    "comm": 0.0,
+    "deform": 0.7885
+   }
+  },
+  "128": {
+   "slot_classes": {
+    "zero": 1,
+    "axis": 1,
+    "anti": 14,
+    "comm": 0,
+    "deform": 112
+   },
+   "seq1": {
+    "zero": 0.0,
+    "axis": 0.008,
+    "anti": 0.112,
+    "comm": 0.0,
+    "deform": 0.88
+   },
+   "mod": {
+    "zero": 0.0,
+    "axis": 0.0,
+    "anti": 0.0645,
+    "comm": 0.0,
+    "deform": 0.9355
+   },
+   "char": {
+    "zero": 0.0015,
+    "axis": 0.008,
+    "anti": 0.102,
+    "comm": 0.0,
+    "deform": 0.8885
+   },
+   "charx": {
+    "zero": 0.0,
+    "axis": 0.016,
+    "anti": 0.196,
+    "comm": 0.0,
+    "deform": 0.788
+   },
+   "random": {
+    "zero": 0.0,
+    "axis": 0.0095,
+    "anti": 0.1075,
+    "comm": 0.0,
+    "deform": 0.883
+   }
+  }
+ }
+}
