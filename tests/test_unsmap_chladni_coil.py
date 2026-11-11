@@ -518,3 +518,20 @@ def test_nshape_shape():
         assert r["hyperbola"]["lattice_reach_equals_odd_composites"] and r["hyperbola"]["direct_search_ok"]
         assert r["circle"]["theory_matches_all_odd_N"] and r["circle"]["euler_factor_failures"] == 0 and r["circle"]["all_2plus_are_composite"]
         assert abs(r["tower"]["hole_fraction_among_primes_below_1e6"]["Zi"] - 0.5) < 0.01 and r["onion"]["10000000"]["mode"] == 3
+
+
+def test_bitflip():
+    import os, json
+    from sympy import jacobi_symbol, factorint
+    from rhp import bitflip as BF
+    rng = np.random.default_rng(5); n = rng.integers(1, 10 ** 6, 4000) * 2 + 1; a = rng.integers(-10 ** 5, 10 ** 5, 4000)
+    assert (BF.jacobi(a, n) == np.array([jacobi_symbol(int(x) % int(m), int(m)) for x, m in zip(a, n)])).all()
+    assert (BF.modpow(a, (n - 1) // 2, n) == np.array([pow(int(x), (int(m) - 1) // 2, int(m)) for x, m in zip(a, n)])).all()
+    P = np.array([p for p in range(3, 3000) if all(p % q for q in range(2, int(p ** .5) + 1))], np.int64)
+    assert all(BF.two_ways(P, d)[2].all() for d in BF.DISC)                       # primes agree on every base (Euler's criterion)
+    for c in (1857241, 2433601, 6189121):                                        # the three Carmichael survivors of all seven bits below 10⁷
+        f = factorint(c); assert all(BF.two_ways(np.array([c]), d)[2][0] for d in BF.DISC) and all((c - 1) % (q - 1) == 0 for q in f)
+    p = "experiments/bitflip_test.json"
+    if os.path.exists(p):
+        r = json.load(open(p)); assert r["primes_agree_all_7"] == r["primes_total"] and r["composites_agreeing_all_7"] == 3
+        assert r["per_base_composites_agreeing"]["-4"] == 750 and r["minimal_subset_zero_survivors_below_100000"][0] == 2

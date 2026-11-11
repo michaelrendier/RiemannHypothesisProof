@@ -1,0 +1,124 @@
+{
+ "N_max": 10000000,
+ "bases": [
+  -4,
+  8,
+  -3,
+  5,
+  -7,
+  -11,
+  13
+ ],
+ "odd_n": 4999999,
+ "primes": 664578,
+ "composites": 4335421,
+ "primes_agree_all_7": 664578,
+ "primes_total": 664578,
+ "primes_not_agreeing_first": [],
+ "per_base_composites_agreeing": {
+  "-4": 750,
+  "8": 1009,
+  "-3": 413,
+  "5": 348,
+  "-7": 304,
+  "-11": 280,
+  "13": 313
+ },
+ "composites_agreeing_all_7": 3,
+ "first_composites_agreeing_all_7": [
+  1857241,
+  2433601,
+  6189121
+ ],
+ "best_subset_by_size": {
+  "1": {
+   "survivors": 280,
+   "bases": [
+    -11
+   ]
+  },
+  "2": {
+   "survivors": 21,
+   "bases": [
+    -11,
+    13
+   ]
+  },
+  "3": {
+   "survivors": 7,
+   "bases": [
+    5,
+    -7,
+    -11
+   ]
+  },
+  "4": {
+   "survivors": 4,
+   "bases": [
+    8,
+    -7,
+    -11,
+    13
+   ]
+  },
+  "5": {
+   "survivors": 3,
+   "bases": [
+    -4,
+    5,
+    -7,
+    -11,
+    13
+   ]
+  },
+  "6": {
+   "survivors": 3,
+   "bases": [
+    -4,
+    8,
+    5,
+    -7,
+    -11,
+    13
+   ]
+  },
+  "7": {
+   "survivors": 3,
+   "bases": [
+    -4,
+    8,
+    -3,
+    5,
+    -7,
+    -11,
+    13
+   ]
+  }
+ },
+ "survivors_after_prefix_in_listed_order": [
+  750,
+  375,
+  77,
+  35,
+  14,
+  6,
+  3
+ ],
+ "minimal_subset_zero_survivors_below_100000": [
+  2,
+  [
+   5,
+   13
+  ]
+ ],
+ "minimal_subset_zero_survivors_below_1000000": [
+  3,
+  [
+   -4,
+   -11,
+   13
+  ]
+ ],
+ "composites_with_residue_not_pm1_base5": 4334998,
+ "base5_disagreements_composites": 4335073
+}
