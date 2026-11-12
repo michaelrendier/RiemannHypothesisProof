@@ -672,3 +672,18 @@ def test_fermat_curve():
     assert F.exceptional_primes(2, 60) == [3, 5]
     assert all(max(F.exceptional_primes(n, int(F.weil_threshold(n)) + 1)) < F.weil_threshold(n) for n in (3, 4, 5, 6))  # inside the Weil ceiling
     assert F.genus(5) == 6 and abs(F.weil_threshold(3) - 16.0) < 0.1
+
+
+def test_polar_field():
+    import math, mpmath as mp
+    from rhp import polar_field as P
+    a = P.closest_approach(); assert abs(a[0] - 0.14712670) < 1e-6 and abs(a[1] - 0.2563) < 2e-3                                   # widget defaults: S and I never meet (0.147)
+    b = P.closest_approach(base=10.0); assert abs(b[0] - 0.16451642) < 1e-6 and abs(b[1] - 0.6268) < 2e-3                          # log10: the ring moves to 0.627, not to Ω
+    c = P.closest_approach(alpha=1 / 137.035999084, depth=math.pi / 2); assert abs(c[0] - 0.17505638) < 1e-6
+    assert len(P.base_crossings()[0]) == 0 and abs(P.base_crossings()[1] - 0.3132) < 1e-4                                        # base terms: no crossing on (0, 50]
+    s, i = P.one_d_forms(); assert abs(s - 0.0016036809) < 1e-9 and abs(i - 0.3622851241) < 1e-9                                    # S(d*) ≠ I(d*) ≠ d*
+    import numpy as np
+    t = np.linspace(0, 2 * np.pi, 64, endpoint=False); K = P.gaussian_curvature(P.surfaces()["S-I"], 0.246 * np.cos(t), 0.246 * np.sin(t))
+    assert abs(K.mean() - 0.8184) < 2e-3 and K.min() < 0 < K.max()                                                               # K changes sign on the ring; not zero
+    p = P.planck_temperature(); assert abs(float(p["T_P"]) / 1.4167841617e32 - 1) < 1e-9 and abs(p["bekenstein_radius"] / p["l_P_over_2pi"] - 1) < mp.mpf(10) ** -25
+    assert abs(P.hagedorn_ceiling_kelvin() - 7.7778e16) < 1e13
