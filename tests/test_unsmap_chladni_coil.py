@@ -717,3 +717,13 @@ def test_gap_side_and_ceiling_descent():
         r = json.load(open(p)); T = r["targets"]["d* = Ω/ln10"]
         assert T["n_hits"] == 38 and T["n_hits"] > 100 * r["null_mean"] and r["targets"]["0.24600"]["n_hits"] == 0
         assert sorted(map(tuple, T["distinct_curve_pairs"])) == sorted([("1/D", "x = 10^D"), ("1/g (prime density)", "x = 10^D"), ("1/x = 10^-D", "D (digits of x)"), ("1/x = 10^-D", "g = ln x (mean gap)")])
+
+
+def test_vogel_widget_decoding():
+    from rhp import vogel as V
+    a, c = V.cf_convergents(130 / 360); assert (c[-1][0], c[-1][1]) == (13, 36) and c[-1][2] < 1e-12                          # 130° = 13/36 turn: 36 arms
+    a, c = V.cf_convergents(143.494 / 360); assert (c[3][0], c[3][1]) == (2, 5) and 1e-3 < c[3][2] < 2e-3                    # 143.494° ≈ 2/5: five arms
+    assert abs(V.arms(143.494)[-1][1] - 0.98) < 0.01 and V.arms(143.494)[-1][0] == 5                                         # drift ≈ 1 turn over 700 points: five roughly straight arms
+    ga = V.cf_convergents(V.GOLDEN_DEG / 360)[0]; aa = V.cf_convergents(V.ALPHA_INV / 360)[0]
+    assert ga[:5] == [0, 2, 1, 1, 1] and aa[:5] == [0, 2, 1, 1, 1] and aa[5] == 2 and ga[5] == 1                              # α⁻¹ and the golden angle agree through the first four partial quotients, then differ
+    assert abs(V.drift_turns(V.ALPHA_INV, V.GOLDEN_DEG) - 763.09) < 0.01                                                      # the two spirals drift one turn apart after ≈ 763 points
