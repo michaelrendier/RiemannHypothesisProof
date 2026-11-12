@@ -758,3 +758,15 @@ def test_flow_tests():
     p = "experiments/fermat_mobius_growth.json"
     if os.path.exists(p):
         g = json.load(open(p)); assert g["n=3, p=7"]["envelope_max_abs_c"][-1] < 1.1 and all(abs(x - 2) < 0.15 for x in g["n=4, p=17"]["growth_exponent_between_doublings"])
+
+
+def test_recovered_original_derivation():
+    from scipy.special import lambertw
+    from scipy.optimize import brentq
+    import numpy as np
+    dmax = lambda x: -np.log(x) / np.log(10); dmin = lambda x: x / np.log(10)                                   # the two curves of the 2026-04-09 code (recovered note)
+    x = brentq(lambda x: dmax(x) - dmin(x), 1e-10, 0.99); W = float(lambertw(1).real)
+    assert abs(x - W) < 1e-15 and 1e-17 < abs(x - W)                                                              # the 'machine-epsilon match' is root-finder vs closed form (≈ 3e-16)
+    assert abs(dmax(x) - 0.2463072014734) < 1e-12 and abs(dmin(x) - dmax(x)) < 1e-14                              # d* at the crossing
+    xs = np.array([0.1, 0.3, 0.5, 0.8]); assert np.allclose(np.log10(xs), -dmax(xs)) and np.allclose(-xs / np.log(10), -dmin(xs))   # mine (D_i, D_f) are their negatives
+    assert abs(1.416784e32 * 10 ** (-np.log10(1.416784e32 / 1.4e17)) - 1.4e17) < 1e3                              # the Hagedorn value sits 15.005 digits below the Planck ceiling
