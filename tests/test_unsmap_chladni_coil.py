@@ -740,3 +740,21 @@ def test_nodal_two_sided():
         assert R4["sign_agree_Re"] == 1.0 and R4["sign_agree_Im"] == 1.0                                                # Re/Im of ξ and 1/ξ share their nodal sets
         assert R4["rung_angle_from_horizontal_deg"]["max_abs"] < 1.0                                                    # rung ⟂ critical line at every zero (to < 1°)
         for k, v in r["R3"].items(): assert v["opposite_sign_fraction"] > 0.75 and v["M_in_psi_gaps_mean"] < 0.24 and v["psi_in_M_gaps_mean"] < 0.22   # antiphase, and weakly locked below the 0.25 null
+
+
+def test_flow_tests():
+    import os, json, math
+    from rhp import flow as FL
+    assert abs(FL.flux_around(1.0, 0.1, n=60) + 1) < 1e-3 and abs(FL.flux_around(complex(0.5, 14.134725141734693), 0.05, n=60) - 1) < 1e-3   # sink at the pole, source at a zero
+    assert abs(FL.flux_around(complex(0.5, 20.0), 0.05, n=60)) < 1e-3                                                                          # nothing at an ordinary point
+    th3 = FL.frobenius_angles(7, 3); th5 = FL.frobenius_angles(31, 5)
+    assert len(np.unique(np.round(np.mod(th3, 2 * math.pi), 7))) == 2 and len(np.unique(np.round(np.mod(th5, 2 * math.pi), 7))) == 4         # n = 5: 12 tones, 4 distinct angles (multiplicity 3)
+    s = np.array([0.5 + 0.0j, 0.5 + 1.0j]); assert np.max(np.abs(FL.fermat_F(s, 31, th5).imag)) < 1e-6 * np.max(np.abs(FL.fermat_F(s, 31, th5).real)) + 1e-9   # F real on the critical line
+    p = "experiments/flow_tests.json"
+    if os.path.exists(p):
+        r = json.load(open(p))["F2"]
+        assert r["zeros 1..25000"]["spacing_var"] < 0.2 and r["zeros 1..25000"]["frac_below_0p1"] < 0.005 and 0.9 < r["Poisson control"]["spacing_var"] < 1.1     # zeros rigid, Poisson control at 1
+        assert all(0.6 < r[k]["spacing_var"] < 0.8 for k in r if k.startswith("primes")) and r["primes 1e+07-1e+08"]["nvar_L10"] > 10 * r["zeros 1..25000"]["nvar_L10"]
+    p = "experiments/fermat_mobius_growth.json"
+    if os.path.exists(p):
+        g = json.load(open(p)); assert g["n=3, p=7"]["envelope_max_abs_c"][-1] < 1.1 and all(abs(x - 2) < 0.15 for x in g["n=4, p=17"]["growth_exponent_between_doublings"])
