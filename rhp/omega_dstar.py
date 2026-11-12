@@ -100,3 +100,25 @@ def exp_cardioid(k):
     Returns dict(c, fixed_point, multiplier) at 30 digits for k (a complex or real number)."""
     mp.mp.dps = 30; k = mp.mpmathify(k); c = k * mp.e ** (-k)
     return dict(c=c, fixed_point=k, multiplier=c * mp.e ** k, residual=abs(c * mp.e ** k - k))
+
+
+def lambda_family(dps=30):
+    """The experiment with its coupling made explicit: forward ceiling S_f/k_B = e^{−λx} against the floor S_i/k_B = x.  The paper has λ = 1.  Crossing x*(λ) = W(λ)/λ; digit coordinate D* = log₁₀ x*;
+    the multiplier of the map x → e^{−λx} at the crossing is −λ x* = −W(λ).  With y = −λx the same map is y → c·e^y, c = −λ: the real axis of Kerry Mitchell's exponential family.
+    LOCATIONS of the three Lambert values (T* = x* T_Planck):
+      λ → 0   W = 0     x* → 1        D* = 0        T* = T_Planck     multiplier 0 (superattracting: the vacuum fixed point)
+      λ = 1   W = Ω     x* = Ω        D* = −d*      T* = Ω T_P        multiplier −Ω   (the paper)
+      λ = e   W = 1     x* = 1/e      D* = −log₁₀e  T* = T_P/e        multiplier −1   (period doubling; the end of the attracting range)
+      λ = −1/e (the map x → e^{+x/e}):  W₀(−1/e) = −1, x* = e, D* = +log₁₀e, multiplier +1 (the fold: a tangency, a catastrophe)
+    The attracting range λ ∈ (0, e) maps W onto (0, 1); d*·ln 10 = Ω is the fraction of the way from the vacuum (0) to the flip (1) at which the paper's λ = 1 sits."""
+    mp.mp.dps = dps; ln10 = mp.log(10); rows = {}
+    for name, lam in (("vacuum (limit)", mp.mpf("1e-20")), ("paper", mp.mpf(1)), ("flip", mp.e), ("fold", -1 / mp.e)):
+        w = mp.lambertw(lam).real; x = w / lam
+        rows[name] = dict(lam=lam, W=w, x_star=x, D_star=mp.log10(x), mult=-lam * x, residual=abs(x - mp.e ** (-lam * x)))
+    return rows
+
+
+def bulb_tangent_point(m, n, dps=30):
+    """Tangent point of the period-n bulb of the exponential family's main cardioid: k = e^{2πi m/n}, c = k e^{−k} (UFformulary lkm.ufm `cardioid-julia`).  Returns (k, c).
+    READING: k = e^{iπ/2} (m/n = 1/4) is the operator J₂ = L_k's own eigenvalue (L_k² = −I): the quarter turn, the period-4 bulb; k = −1 (m/n = 1/2) is the two-stroke."""
+    mp.mp.dps = dps; k = mp.e ** (2j * mp.pi * m / n); return k, k * mp.e ** (-k)

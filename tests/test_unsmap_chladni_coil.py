@@ -647,3 +647,15 @@ def test_exp_cardioid():
     b = O.exp_cardioid(1); assert abs(b["c"] - 1 / mp.e) < mp.mpf(10) ** -25 and abs(b["multiplier"] - 1) < mp.mpf(10) ** -25   # the cusp: fold
     d = O.exp_cardioid(-1); assert abs(d["c"] + mp.e) < mp.mpf(10) ** -25 and abs(d["multiplier"] + 1) < mp.mpf(10) ** -25      # the flip
     z = O.exp_cardioid(mp.e ** (1j * 0.7)); assert abs(abs(z["multiplier"]) - 1) < mp.mpf(10) ** -25                           # the whole boundary has |multiplier| = 1
+
+
+def test_lambda_family():
+    import mpmath as mp
+    from rhp import omega_dstar as O
+    f = O.lambda_family(); om = mp.lambertw(1).real
+    assert abs(f["paper"]["x_star"] - om) < mp.mpf(10) ** -25 and abs(f["paper"]["D_star"] + om / mp.log(10)) < mp.mpf(10) ** -25          # λ = 1: Ω, D* = −d*
+    assert abs(f["flip"]["x_star"] - 1 / mp.e) < mp.mpf(10) ** -25 and abs(f["flip"]["mult"] + 1) < mp.mpf(10) ** -25                       # λ = e: x* = 1/e, multiplier −1
+    assert abs(f["fold"]["x_star"] - mp.e) < mp.mpf(10) ** -12 and abs(f["fold"]["mult"] - 1) < mp.mpf(10) ** -12                          # λ = −1/e: tangency at x = e (sqrt-eps accuracy)
+    assert abs(f["vacuum (limit)"]["x_star"] - 1) < mp.mpf(10) ** -15 and abs(f["vacuum (limit)"]["mult"]) < mp.mpf(10) ** -15
+    assert abs(float(O.d_star_faces(30)["d_star"]) / float(mp.log10(mp.e)) - float(om)) < 1e-12                                              # d*/log₁₀e = Ω: the fraction of the way from vacuum to flip
+    k, c = O.bulb_tangent_point(1, 4); assert abs(k - 1j) < 1e-25 and abs(c - 1j * mp.e ** (-1j)) < 1e-25

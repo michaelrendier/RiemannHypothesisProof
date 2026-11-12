@@ -25,3 +25,15 @@ f(x) = e^{−x} (the entropy map, falling onto the ceiling) and its inverse f⁻
 ## The fractal that applies (UFformulary, 2026-11-11)
 Of the 507 files in `PtolemyDesktop/Archimedes/Maths/Formula/UFformulary/` (Ultra Fractal) none computes the Riemann ζ or the critical-line zeros; the 'zeta' names are other things (Luschny's ZetaPolynomials in `jam3.ufm`; Toby Marshall's `mandalaZeta`; the 'Zeta-Like' type z = Σ aₖ^z in `mch.ufm`, a Dirichlet-polynomial iteration). Two are useful: (1) **Kerry Mitchell's `cardioid-julia` (`lkm.ufm`, comment at line 1259, formula at 1327)**: for z = c·e^z the main 'cardioid' boundary is c = k/e^k, k = e^{2πi m/n}. That is the multiplier circle, and the Lambert values are its real points: c = −1 (our entropy map, k = −Ω, inside), c = 1/e (k = +1, the cusp = the fold W(−1/e) = −1), c = −e (k = −1, period doubling: x → e^{−λx} flips at λ = e). `rhp.omega_dstar.exp_cardioid`, `test_exp_cardioid`. (2) The Riemann-sphere projection transforms (`pdf.uxf`, `reb.uxf`, `sam.uxf`, 'view from the South Pole, North Pole = ∞'), the same picture as our stereographic lift. `pdf.uxf`'s 'Lambert' is a map projection, unrelated to W.
 
+## Where the three Lambert values sit in the experiment (the coupling λ made explicit; 2026-11-12)
+Forward ceiling e^{−λx} against floor x (the paper has λ = 1); crossing x*(λ) = W(λ)/λ, multiplier of x → e^{−λx} at the crossing −W(λ). With y = −λx this is y → c·e^y, c = −λ: the real axis of the exponential family of `lkm.ufm cardioid-julia` (c = k/e^k on the cardioid, |k| = 1). `rhp.omega_dstar.lambda_family`, `test_lambda_family`.
+| point | λ (= −c) | W | x* = T*/T_P | D* = log₁₀ x* | multiplier |
+|---|---|---|---|---|---|
+| vacuum | → 0 | 0 | 1 (T* = T_Planck) | 0 | 0 (superattracting) |
+| **the paper** | **1** | **Ω = 0.567143** | **Ω** | **−d\* = −0.246307** | **−Ω** |
+| flip | e | 1 | 1/e | −log₁₀ e = −0.434294 | −1 (period doubling) |
+| fold | −1/e (x → e^{+x/e}) | W₀(−1/e) = −1 | e | +log₁₀ e | +1 (tangency) |
+- The attracting range λ ∈ (0, e) maps W onto (0, 1). **d\*/log₁₀e = Ω**: the paper's λ = 1 sits at the fraction Ω of the way from the vacuum to the flip, on the digit axis as well as the ratio axis.
+- The Lambert values are the multipliers (k = −W) of one family; the cardioid boundary k = e^{iθ} is where the family is marginal. Tangent points of period-n bulbs (`bulb_tangent_point`): k = −1 (m/n = 1/2) is the two-stroke; k = i (m/n = 1/4, c = 0.84147 + 0.54030i) is the quarter turn, the eigenvalue of J₂ = L_k (L_k² = −I). READING, not a result.
+- Not located: the second crossing (speed of causality chasing inertia), still undocumented; and the physical origin of e^{−λx} (λ = 1 is asserted).
+
