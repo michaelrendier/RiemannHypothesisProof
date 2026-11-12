@@ -24,3 +24,13 @@ Source for σ: `Ainulindale/wiki/123_sigma_rb_mass_gap_calibration.md`. From now
 | **α** | (1) **α_fs** = 1/137.035999, the fine-structure constant, in this project the SOURCE of the rule that a quantity must say the same thing in every version of the maths (error-check discipline); (2) **Α_π / A_fermat** (capital Alpha, subscript π or fermat), the Fermat-side structural constant (the 'domain floor'); (3) **α_NN**, the neural fine-structure constant, defined to say the same thing at every tower layer; (4) the widget slider 'Inertia (α)' and the 'entropy coupling α' of the polar field | **α_fs**, **A_fermat**, **α_NN**. A_fermat is NOT α_fs and α_fs is not an ingredient of the horizon mechanism (Cody, 2026-11-10 and 2026-11-12). **Original meaning (recovered note, claude.ai chat 2a6155dc, 2026-04-09): 'ALPHA' = the d = 0 endpoint, T = T_P, the start of the forward curve (normalised ceiling x = 1)**; the 1/137.036 identification is later. A third object to confirm: the field tensor **Α^μν** of the Red-Blue Hamiltonian (chat 49156a9e, 04-11/12) |
 | **d\*** | five values: d\*_taut = Ω_ζΣ/ln 10 = 0.24631 (exact, = −log₁₀ Ω_ζΣ); d\* 'Boundary' 0.24631; d\*_RG (dimension 8, numeric open); d\*_ln10 = Ω_ζΣ; and the measured d\*_spec = 0.24600 | always with its subscript; wiki 17, `reference_four_dstar_values` |
 | **W** | Lambert W with its branches (W₀, W₋₁); W(0), W(1) = Ω_ζΣ, W(−1/e) = −1 (the fold) | `rhp/omega_dstar.py` |
+
+### Which number is which (added 2026-11-12, after the question 'is Ω_ζΣ Omega_Riemann and d\* Alpha_fermat?')
+| name | what it is | x = T/T_P | digit coordinate d | source |
+|---|---|---|---|---|
+| **Ω_ζΣ** (Omega_Riemann) | W(1), the crossing of the forward and inverse curves | 0.5671 | 0.2463 | wiki 17; `derive_omega_zs`; recovered 04-09 code |
+| **d\*** (d\*_taut) | the same crossing in decimal digits, −log₁₀ Ω_ζΣ = Ω_ζΣ/ln 10; equivalently the DISTANCE in digits from the d = 0 endpoint to the crossing | not a separate point | 0.2463 | recovered code; docs/omega_dstar |
+| **Α_π / A_fermat, original 04-09 code ('ALPHA')** | the d = 0 endpoint, T = T_P, start of the forward curve (the ceiling) | 1 | 0 | recovery note, chat 2a6155dc |
+| **Α_π, later usage** | 1/137.035999, the 'domain floor' (E8/Wyler) | not on this scale | n/a | wiki 17; `derive_alpha_fermat`; First/Second Age |
+| prime-spacing crossing (RHP) | x ln x = 1: mean gap ln x = 1/x; the inversion x → 1/x image of the Ω crossing | 1/Ω = 1.7632 | +0.2463 | docs/gap_side |
+OPEN: wiki 17 puts the domain at [Α_π = 0.0073, Ω_ζΣ = 0.567] and says d\* sits inside it; the original derivation puts Alpha at x = 1. The two descriptions of the Fermat-side constant are not reconciled (Cody to say which is meant).
