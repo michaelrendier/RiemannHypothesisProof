@@ -37,3 +37,4 @@ Forward ceiling e^{−λx} against floor x (the paper has λ = 1); crossing x*(�
 - The Lambert values are the multipliers (k = −W) of one family; the cardioid boundary k = e^{iθ} is where the family is marginal. Tangent points of period-n bulbs (`bulb_tangent_point`): k = −1 (m/n = 1/2) is the two-stroke; k = i (m/n = 1/4, c = 0.84147 + 0.54030i) is the quarter turn, the eigenvalue of J₂ = L_k (L_k² = −I). READING, not a result.
 - Not located: the second crossing (speed of causality chasing inertia), still undocumented; and the physical origin of e^{−λx} (λ = 1 is asserted).
 
+Note (Cody, 2026-11-12): the original Lambert-W experiment found ONE number, Ω; the four d\* and the three W values came from later testing, so the λ-family table above is a later-testing layer. The inertia half (A_fermat, from the speed of causality) is in docs/fermat_horizon_2026-11-12.md.

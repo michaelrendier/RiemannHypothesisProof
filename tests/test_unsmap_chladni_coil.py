@@ -659,3 +659,16 @@ def test_lambda_family():
     assert abs(f["vacuum (limit)"]["x_star"] - 1) < mp.mpf(10) ** -15 and abs(f["vacuum (limit)"]["mult"]) < mp.mpf(10) ** -15
     assert abs(float(O.d_star_faces(30)["d_star"]) / float(mp.log10(mp.e)) - float(om)) < 1e-12                                              # d*/log₁₀e = Ω: the fraction of the way from vacuum to flip
     k, c = O.bulb_tangent_point(1, 4); assert abs(k - 1j) < 1e-25 and abs(c - 1j * mp.e ** (-1j)) < 1e-25
+
+
+def test_fermat_curve():
+    import math
+    from rhp import fermat_curve as F
+    for n in (3, 4, 5):
+        for p in [q for q in F.primes_upto(150) if (int(q) - 1) % n == 0]:
+            p = int(p); tot, ang, dev = F.count_from_jacobi(p, n)
+            assert abs(tot - F.affine_count_bruteforce(p, n)) < 1e-6 and dev < 1e-6 and len(ang) == (n - 1) * (n - 2)    # Weil: N = p + ΣJ, 2g tones of modulus √p
+    assert F.exceptional_primes(3, 60) == [2, 7, 13] and F.exceptional_primes(5, 200) == [2, 11, 41, 71, 101]            # the places the equation cannot reach
+    assert F.exceptional_primes(2, 60) == [3, 5]
+    assert all(max(F.exceptional_primes(n, int(F.weil_threshold(n)) + 1)) < F.weil_threshold(n) for n in (3, 4, 5, 6))  # inside the Weil ceiling
+    assert F.genus(5) == 6 and abs(F.weil_threshold(3) - 16.0) < 0.1
