@@ -727,3 +727,16 @@ def test_vogel_widget_decoding():
     ga = V.cf_convergents(V.GOLDEN_DEG / 360)[0]; aa = V.cf_convergents(V.ALPHA_INV / 360)[0]
     assert ga[:5] == [0, 2, 1, 1, 1] and aa[:5] == [0, 2, 1, 1, 1] and aa[5] == 2 and ga[5] == 1                              # α⁻¹ and the golden angle agree through the first four partial quotients, then differ
     assert abs(V.drift_turns(V.ALPHA_INV, V.GOLDEN_DEG) - 763.09) < 0.01                                                      # the two spirals drift one turn apart after ≈ 763 points
+
+
+def test_nodal_two_sided():
+    import os, json
+    from rhp import two_sided as T
+    a = np.array([1., -1., 2., 0., -3., 3.]); assert list(T.sign_changes(a)) == [1, 2, 4, 5]                          # zeros skipped, sign flips found
+    A = np.arange(0.0, 100.0, 10.0); B = np.array([5.0, 12.0, 23.0]); m, d = T.locking(A, B); assert abs(d[0] - 0.5) < 1e-12 and abs(d[1] - 0.2) < 1e-12 and abs(d[2] - 0.3) < 1e-12
+    p = "experiments/nodal_two_sided.json"
+    if os.path.exists(p):
+        r = json.load(open(p)); R4 = r["R4"]
+        assert R4["sign_agree_Re"] == 1.0 and R4["sign_agree_Im"] == 1.0                                                # Re/Im of ξ and 1/ξ share their nodal sets
+        assert R4["rung_angle_from_horizontal_deg"]["max_abs"] < 1.0                                                    # rung ⟂ critical line at every zero (to < 1°)
+        for k, v in r["R3"].items(): assert v["opposite_sign_fraction"] > 0.75 and v["M_in_psi_gaps_mean"] < 0.24 and v["psi_in_M_gaps_mean"] < 0.22   # antiphase, and weakly locked below the 0.25 null

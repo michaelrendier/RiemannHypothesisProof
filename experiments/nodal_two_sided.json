@@ -1,0 +1,62 @@
+{
+ "R3": {
+  "1e+03-1e+04": {
+   "psi_nodes": 471,
+   "M_nodes": 111,
+   "nodes_per_M_node": 4.243243243243243,
+   "M_in_psi_gaps_mean": 0.2111328652470225,
+   "M_in_psi_null": 0.25229767541844283,
+   "psi_in_M_gaps_mean": 0.2141033053339782,
+   "psi_in_M_null": 0.2489591639023736,
+   "opposite_sign_fraction": 0.7803361731521989
+  },
+  "1e+04-1e+05": {
+   "psi_nodes": 1500,
+   "M_nodes": 348,
+   "nodes_per_M_node": 4.310344827586207,
+   "M_in_psi_gaps_mean": 0.22465284454637832,
+   "M_in_psi_null": 0.24997126432866296,
+   "psi_in_M_gaps_mean": 0.20766133231060338,
+   "psi_in_M_null": 0.24955994134285137,
+   "opposite_sign_fraction": 0.7998807072037093
+  },
+  "1e+05-1e+06": {
+   "psi_nodes": 4567,
+   "M_nodes": 1161,
+   "nodes_per_M_node": 3.933677863910422,
+   "M_in_psi_gaps_mean": 0.23431162098237804,
+   "M_in_psi_null": 0.2500745865158196,
+   "psi_in_M_gaps_mean": 0.2054231714694422,
+   "psi_in_M_null": 0.24981440350431655,
+   "opposite_sign_fraction": 0.8124612246537557
+  },
+  "1e+06-1e+07": {
+   "psi_nodes": 12224,
+   "M_nodes": 2214,
+   "nodes_per_M_node": 5.52122854561879,
+   "M_in_psi_gaps_mean": 0.22436681234525815,
+   "M_in_psi_null": 0.24983372488619277,
+   "psi_in_M_gaps_mean": 0.2108537172423487,
+   "psi_in_M_null": 0.2500724900918384,
+   "opposite_sign_fraction": 0.7822229190748392
+  }
+ },
+ "R4": {
+  "grid": [
+   3181,
+   201
+  ],
+  "sign_agree_Re": 1.0,
+  "sign_agree_Im": 1.0,
+  "re_lines_xi": 21,
+  "re_lines_inv": 21,
+  "re_length_xi": 50.699588707908674,
+  "re_length_inv": 50.86460411858648,
+  "rung_crossings": 42,
+  "rung_angle_from_horizontal_deg": {
+   "median_abs": 0.37640543826117323,
+   "max_abs": 0.8009066390374642,
+   "mean": 0.0
+  }
+ }
+}
