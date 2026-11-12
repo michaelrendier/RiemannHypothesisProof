@@ -687,3 +687,16 @@ def test_polar_field():
     assert abs(K.mean() - 0.8184) < 2e-3 and K.min() < 0 < K.max()                                                               # K changes sign on the ring; not zero
     p = P.planck_temperature(); assert abs(float(p["T_P"]) / 1.4167841617e32 - 1) < 1e-9 and abs(p["bekenstein_radius"] / p["l_P_over_2pi"] - 1) < mp.mpf(10) ** -25
     assert abs(P.hagedorn_ceiling_kelvin() - 7.7778e16) < 1e13
+
+
+def test_natural_crossings():
+    import os, json, math
+    p = "experiments/natural_crossings.json"
+    if not os.path.exists(p): return
+    R = json.load(open(p)); T = R["targets"]
+    assert R["n_curves"] == 204 and R["null_mean_hits"] < 0.01
+    assert T["d* = Ω/ln10"]["n_hits"] == 2 and T["0.24600"]["n_hits"] == 0                                     # d* is hit by exactly one equation (two scalings); the measured 0.246 by none
+    assert T["Ω"]["n_hits"] == 34                                                                              # 17 scalings of x = e^-x, 17 of 1/x = e^x
+    import re
+    for e in T["Ω"]["examples"] + T["d* = Ω/ln10"]["examples"]:
+        a, f, b, g = re.match(r"(\S+)\*(.+?)\s+=\s+(\S+)\*(.+?)\s+\(x", e).groups(); assert a == b or {f, g} == {"x", "10^-x"}   # multipliers never differ: α, φ, 2/π only rescale both sides
