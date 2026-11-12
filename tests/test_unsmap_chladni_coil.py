@@ -770,3 +770,15 @@ def test_recovered_original_derivation():
     assert abs(dmax(x) - 0.2463072014734) < 1e-12 and abs(dmin(x) - dmax(x)) < 1e-14                              # d* at the crossing
     xs = np.array([0.1, 0.3, 0.5, 0.8]); assert np.allclose(np.log10(xs), -dmax(xs)) and np.allclose(-xs / np.log(10), -dmin(xs))   # mine (D_i, D_f) are their negatives
     assert abs(1.416784e32 * 10 ** (-np.log10(1.416784e32 / 1.4e17)) - 1.4e17) < 1e3                              # the Hagedorn value sits 15.005 digits below the Planck ceiling
+
+
+def test_base_independence_and_carrying_assumption():
+    import math, numpy as np, mpmath as mp
+    from scipy.optimize import brentq
+    om = float(mp.lambertw(1).real)
+    for b in (2.0, 10.0, math.e, 37.0):
+        assert abs(brentq(lambda x: -np.log(x) / np.log(b) - x / np.log(b), 1e-10, 0.99) - om) < 1e-14                        # the crossing does not depend on the log base
+    assert abs(om / math.log(2) - 0.8182148125) < 1e-9 and abs(om / math.log(10) - 0.2463072015) < 1e-9                    # only the digit coordinate does: bits 0.818, digits 0.2463, nats 0.5671
+    for a, b in ((2.0, 1.0), (1.0, 0.5), (math.e, 1.0)):
+        lam = a * b; assert abs(float(mp.lambertw(lam).real) / lam - brentq(lambda x: math.exp(-lam * x) - x, 1e-6, 1)) < 1e-12   # floor S = a x, forward x = e^{-bS}: crossing W(ab)/(ab); Ω needs ab = 1
+    X = math.exp(om); assert abs(math.log(X) - 1 / X) < 1e-14                                                              # with S = ln X and x = 1/X the pair is ln X = 1/X (the prime-spacing crossing)
