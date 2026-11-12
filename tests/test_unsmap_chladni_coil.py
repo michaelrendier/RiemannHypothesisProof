@@ -700,3 +700,20 @@ def test_natural_crossings():
     import re
     for e in T["Ω"]["examples"] + T["d* = Ω/ln10"]["examples"]:
         a, f, b, g = re.match(r"(\S+)\*(.+?)\s+=\s+(\S+)\*(.+?)\s+\(x", e).groups(); assert a == b or {f, g} == {"x", "10^-x"}   # multipliers never differ: α, φ, 2/π only rescale both sides
+
+
+def test_gap_side_and_ceiling_descent():
+    import mpmath as mp, os, json
+    from rhp import omega_dstar as O
+    g = O.gap_side_crossing(); eps = mp.mpf(10) ** -30
+    assert abs(g["x_star"] - g["one_over_omega"]) < eps and abs(g["D_star"] - g["d_star"]) < eps                              # x* = 1/Ω, D* = d*
+    assert g["residual_gap_eq_inv_x"] < eps and g["residual_density_eq_x"] < eps and abs(g["x_ln_x"] - 1) < eps               # mean gap = 1/x, prime density = x, x ln x = 1
+    assert g["composites_per_gap"] < 0 and abs(g["composite_threshold_D"] - 0.4342944819) < 1e-9                              # fewer than one composite between primes below x = e
+    assert abs(g["fraction_of_way_1_to_e"] - mp.lambertw(1).real) < eps                                                       # d* sits at fraction Ω of the way from D = 0 to D = log10 e
+    c = O.ceiling_descent(60); assert abs(c["mean_last"] - c["d_star"]) < mp.mpf(10) ** -8 and abs(c["iterates"][0] - 1) < eps  # d* digits gained per step from the ceiling
+    assert abs(float(c["iterates"][1]) - 0.36787944117144233) < 1e-12 and abs(float(c["iterates"][2]) - 0.6922006275553464) < 1e-12
+    p = "experiments/gap_curves_scan.json"
+    if os.path.exists(p):
+        r = json.load(open(p)); T = r["targets"]["d* = Ω/ln10"]
+        assert T["n_hits"] == 38 and T["n_hits"] > 100 * r["null_mean"] and r["targets"]["0.24600"]["n_hits"] == 0
+        assert sorted(map(tuple, T["distinct_curve_pairs"])) == sorted([("1/D", "x = 10^D"), ("1/g (prime density)", "x = 10^D"), ("1/x = 10^-D", "D (digits of x)"), ("1/x = 10^-D", "g = ln x (mean gap)")])

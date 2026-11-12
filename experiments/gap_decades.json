@@ -1,0 +1,147 @@
+{
+ "decades": [
+  {
+   "m": 1,
+   "primes": 21,
+   "mean_gap": 4.285714285714286,
+   "mean_composites": 3.2857142857142856,
+   "mean_digit_weight": 6.571428571428571,
+   "gap_entropy_nats": 1.2353177280975796,
+   "pnt_mean_gap": 3.4538776394910684,
+   "pnt_mean_composites": 2.4538776394910684,
+   "composite_density": 0.7666666666666666
+  },
+  {
+   "m": 2,
+   "primes": 143,
+   "mean_gap": 6.34965034965035,
+   "mean_composites": 5.34965034965035,
+   "mean_digit_weight": 16.04895104895105,
+   "gap_entropy_nats": 1.8505353114709535,
+   "pnt_mean_gap": 5.756462732485114,
+   "pnt_mean_composites": 4.756462732485114,
+   "composite_density": 0.8411111111111111
+  },
+  {
+   "m": 3,
+   "primes": 1061,
+   "mean_gap": 8.480678605089539,
+   "mean_composites": 7.480678605089538,
+   "mean_digit_weight": 29.92271442035815,
+   "gap_entropy_nats": 2.2387279865954737,
+   "pnt_mean_gap": 8.05904782547916,
+   "pnt_mean_composites": 7.05904782547916,
+   "composite_density": 0.8821111111111111
+  },
+  {
+   "m": 4,
+   "primes": 8363,
+   "mean_gap": 10.761210092072222,
+   "mean_composites": 9.761210092072222,
+   "mean_digit_weight": 48.806050460361114,
+   "gap_entropy_nats": 2.5201558822427406,
+   "pnt_mean_gap": 10.361632918473205,
+   "pnt_mean_composites": 9.361632918473205,
+   "composite_density": 0.9070777777777778
+  },
+  {
+   "m": 5,
+   "primes": 68906,
+   "mean_gap": 13.061271877630395,
+   "mean_composites": 12.061271877630395,
+   "mean_digit_weight": 72.36763126578236,
+   "gap_entropy_nats": 2.736001043893071,
+   "pnt_mean_gap": 12.664218011467252,
+   "pnt_mean_composites": 11.664218011467252,
+   "composite_density": 0.9234377777777778
+  },
+  {
+   "m": 6,
+   "primes": 586081,
+   "mean_gap": 15.356266454636817,
+   "mean_composites": 14.356266454636817,
+   "mean_digit_weight": 100.49386518245771,
+   "gap_entropy_nats": 2.9123295828332925,
+   "pnt_mean_gap": 14.966803104461297,
+   "pnt_mean_composites": 13.966803104461297,
+   "composite_density": 0.9348798888888888
+  },
+  {
+   "m": 7,
+   "primes": 5096876,
+   "mean_gap": 17.657872783249974,
+   "mean_composites": 16.657872783249974,
+   "mean_digit_weight": 133.2629822659998,
+   "gap_entropy_nats": 3.0615860568348188,
+   "pnt_mean_gap": 17.269388197455342,
+   "pnt_mean_composites": 16.269388197455342,
+   "composite_density": 0.9433680444444444
+  }
+ ],
+ "digit_transition_gaps": [
+  {
+   "m": 1,
+   "p": 7,
+   "q": 11,
+   "gap": 4,
+   "composites_below": 2,
+   "composites_at_or_above": 1
+  },
+  {
+   "m": 2,
+   "p": 97,
+   "q": 101,
+   "gap": 4,
+   "composites_below": 2,
+   "composites_at_or_above": 1
+  },
+  {
+   "m": 3,
+   "p": 997,
+   "q": 1009,
+   "gap": 12,
+   "composites_below": 2,
+   "composites_at_or_above": 9
+  },
+  {
+   "m": 4,
+   "p": 9973,
+   "q": 10007,
+   "gap": 34,
+   "composites_below": 26,
+   "composites_at_or_above": 7
+  },
+  {
+   "m": 5,
+   "p": 99991,
+   "q": 100003,
+   "gap": 12,
+   "composites_below": 8,
+   "composites_at_or_above": 3
+  },
+  {
+   "m": 6,
+   "p": 999983,
+   "q": 1000003,
+   "gap": 20,
+   "composites_below": 16,
+   "composites_at_or_above": 3
+  },
+  {
+   "m": 7,
+   "p": 9999991,
+   "q": 10000019,
+   "gap": 28,
+   "composites_below": 8,
+   "composites_at_or_above": 19
+  },
+  {
+   "m": 8,
+   "p": 99999989,
+   "q": 100000007,
+   "gap": 18,
+   "composites_below": 10,
+   "composites_at_or_above": 7
+  }
+ ]
+}

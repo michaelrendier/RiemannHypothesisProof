@@ -122,3 +122,23 @@ def bulb_tangent_point(m, n, dps=30):
     """Tangent point of the period-n bulb of the exponential family's main cardioid: k = e^{2πi m/n}, c = k e^{−k} (UFformulary lkm.ufm `cardioid-julia`).  Returns (k, c).
     READING: k = e^{iπ/2} (m/n = 1/4) is the operator J₂ = L_k's own eigenvalue (L_k² = −I): the quarter turn, the period-4 bulb; k = −1 (m/n = 1/2) is the two-stroke."""
     mp.mp.dps = dps; k = mp.e ** (2j * mp.pi * m / n); return k, k * mp.e ** (-k)
+
+
+def gap_side_crossing(dps=40):
+    """The Fermat / prime-spacing side of the same location.  By the prime number theorem the mean gap between primes near x is ln x, the prime density 1/ln x.  They meet the position x here:
+        ln x = 1/x   ⇔   1/ln x = x   ⇔   x ln x = 1   ⇒   ln x = Ω,  x* = e^Ω = 1/Ω = 1.7632…,  D* = log₁₀ x* = Ω/ln 10 = d*.
+    The inversion J_N : x → 1/x sends the entropy-side crossing x = Ω (D = −d*) to this one (D = +d*), and the inverse of the entropy map e^{−x}, namely −ln y, is the mean prime gap ln x at x = 1/y.
+    The composites between primes first exist on average where ln x − 1 > 0, i.e. beyond x = e (D = log₁₀ e = 0.4343 = the flip point of lambda_family)."""
+    mp.mp.dps = dps; om = mp.lambertw(1).real; x = mp.e ** om
+    return dict(x_star=x, one_over_omega=1 / om, D_star=mp.log10(x), d_star=om / mp.log(10), mean_gap=mp.log(x), inv_x=1 / x, prime_density=1 / mp.log(x),
+                residual_gap_eq_inv_x=abs(mp.log(x) - 1 / x), residual_density_eq_x=abs(1 / mp.log(x) - x), x_ln_x=x * mp.log(x), composites_per_gap=mp.log(x) - 1,
+                composite_threshold_x=mp.e, composite_threshold_D=mp.log10(mp.e), fraction_of_way_1_to_e=mp.log10(x) / mp.log10(mp.e))
+
+
+def ceiling_descent(n=60, dps=40):
+    """Chase from the normalised ceiling (x = 1: T = T_Planck for entropy, v = c for inertia) by the entropy map x → e^{−x}.  The error contracts by a factor Ω per step, so the digits of the
+    fixed point gained per iteration are −log₁₀ Ω = d*.  (The inverse map −ln x, run from near Ω, loses d* digits per step: multiplier −1/Ω.)"""
+    mp.mp.dps = dps; om = mp.lambertw(1).real; x = mp.mpf(1); xs = [x]
+    for _ in range(n): x = mp.e ** (-x); xs.append(x)
+    err = [abs(v - om) for v in xs]; gained = [-mp.log10(err[i + 1] / err[i]) for i in range(len(err) - 1) if err[i] > 0 and err[i + 1] > 0]
+    return dict(iterates=xs, errors=err, digits_gained_per_step=gained, mean_last=sum(gained[-10:]) / len(gained[-10:]), d_star=om / mp.log(10), steps_per_digit=1 / (om / mp.log(10)))

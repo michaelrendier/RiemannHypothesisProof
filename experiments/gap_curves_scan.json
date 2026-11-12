@@ -1,0 +1,273 @@
+{
+ "n_curves": 255,
+ "n_crossings": 25257,
+ "null_mean": 0.011333333333333334,
+ "null_p99": 0.0,
+ "targets": {
+  "d* = \u03a9/ln10": {
+   "T": 0.24630720147342253,
+   "n_hits": 38,
+   "n_equal_multiplier": 34,
+   "distinct_curve_pairs": [
+    [
+     "1/D",
+     "x = 10^D"
+    ],
+    [
+     "1/g (prime density)",
+     "x = 10^D"
+    ],
+    [
+     "1/x = 10^-D",
+     "D (digits of x)"
+    ],
+    [
+     "1/x = 10^-D",
+     "g = ln x (mean gap)"
+    ]
+   ],
+   "different_multiplier": [
+    "1*[D (digits of x)] = 1/ln10*[1/x = 10^-D]",
+    "ln10*[D (digits of x)] = 1*[1/x = 10^-D]",
+    "1*[x = 10^D] = 1/ln10*[1/D]",
+    "ln10*[x = 10^D] = 1*[1/D]"
+   ]
+  },
+  "log10 e = 1/ln10": {
+   "T": 0.43429448190325176,
+   "n_hits": 3618,
+   "n_equal_multiplier": 187,
+   "distinct_curve_pairs": [
+    [
+     "(1+ln g)/ln10 (gap entropy, digits)",
+     "1/D"
+    ],
+    [
+     "(1+ln g)/ln10 (gap entropy, digits)",
+     "1/g (prime density)"
+    ],
+    [
+     "(1+ln g)/ln10 (gap entropy, digits)",
+     "1/x = 10^-D"
+    ],
+    [
+     "(1+ln g)/ln10 (gap entropy, digits)",
+     "D^2"
+    ],
+    [
+     "(1+ln g)/ln10 (gap entropy, digits)",
+     "g^2"
+    ],
+    [
+     "(D+1)(g-1)",
+     "(D+1)(g-1)"
+    ],
+    [
+     "(D+1)(g-1)",
+     "1-1/g (composite density)"
+    ],
+    [
+     "(D+1)(g-1)",
+     "D(g-1) (digit weight / gap)"
+    ],
+    [
+     "(D+1)(g-1)",
+     "g-1 (composites per gap)"
+    ],
+    [
+     "(D+1)(g-1)",
+     "log10 g (digits of the gap)"
+    ],
+    [
+     "1-1/g (composite density)",
+     "1-1/g (composite density)"
+    ],
+    [
+     "1-1/g (composite density)",
+     "D(g-1) (digit weight / gap)"
+    ],
+    [
+     "1-1/g (composite density)",
+     "g-1 (composites per gap)"
+    ],
+    [
+     "1-1/g (composite density)",
+     "log10 g (digits of the gap)"
+    ],
+    [
+     "1/D",
+     "D (digits of x)"
+    ],
+    [
+     "1/D",
+     "g = ln x (mean gap)"
+    ],
+    [
+     "1/D",
+     "g^2"
+    ],
+    [
+     "1/D",
+     "x = 10^D"
+    ],
+    [
+     "1/g (prime density)",
+     "D (digits of x)"
+    ],
+    [
+     "1/g (prime density)",
+     "D^2"
+    ],
+    [
+     "1/g (prime density)",
+     "g = ln x (mean gap)"
+    ],
+    [
+     "1/g (prime density)",
+     "g^2"
+    ],
+    [
+     "1/g (prime density)",
+     "x = 10^D"
+    ],
+    [
+     "1/x = 10^-D",
+     "D (digits of x)"
+    ],
+    [
+     "1/x = 10^-D",
+     "g = ln x (mean gap)"
+    ],
+    [
+     "1/x = 10^-D",
+     "g^2"
+    ],
+    [
+     "1/x = 10^-D",
+     "x = 10^D"
+    ],
+    [
+     "D (digits of x)",
+     "D^2"
+    ],
+    [
+     "D (digits of x)",
+     "g^2"
+    ],
+    [
+     "D(g-1) (digit weight / gap)",
+     "D(g-1) (digit weight / gap)"
+    ],
+    [
+     "D(g-1) (digit weight / gap)",
+     "g-1 (composites per gap)"
+    ],
+    [
+     "D(g-1) (digit weight / gap)",
+     "log10 g (digits of the gap)"
+    ],
+    [
+     "D^2",
+     "g = ln x (mean gap)"
+    ],
+    [
+     "g = ln x (mean gap)",
+     "g^2"
+    ],
+    [
+     "g-1 (composites per gap)",
+     "g-1 (composites per gap)"
+    ],
+    [
+     "g-1 (composites per gap)",
+     "log10 g (digits of the gap)"
+    ],
+    [
+     "g^2",
+     "x = 10^D"
+    ],
+    [
+     "log10 g (digits of the gap)",
+     "log10 g (digits of the gap)"
+    ]
+   ],
+   "different_multiplier": [
+    "1*[D (digits of x)] = 1/ln10*[1/g (prime density)]",
+    "1*[D (digits of x)] = ln10*[D^2]",
+    "1*[D (digits of x)] = 1/ln10*[g^2]",
+    "1/e*[D (digits of x)] = 1/ln10*[1/x = 10^-D]",
+    "ln10*[D (digits of x)] = 1*[1/g (prime density)]",
+    "ln10*[D (digits of x)] = e*[1/x = 10^-D]",
+    "ln10*[D (digits of x)] = 1/ln10*[1/D]",
+    "ln10*[D (digits of x)] = 1*[g^2]",
+    "1/ln10*[D (digits of x)] = 1*[D^2]",
+    "1*[g = ln x (mean gap)] = e*[1/x = 10^-D]",
+    "1*[g = ln x (mean gap)] = 1/ln10*[1/D]",
+    "2/e*[g = ln x (mean gap)] = 2*[1/x = 10^-D]",
+    "1/e*[g = ln x (mean gap)] = 1*[1/x = 10^-D]",
+    "ln10*[g = ln x (mean gap)] = 1*[1/D]",
+    "1/ln10*[g = ln x (mean gap)] = ln10*[D^2]",
+    "1*[1/g (prime density)] = ln10*[(1+ln g)/ln10 (gap entropy, digits)]",
+    "1*[1/g (prime density)] = 1/e*[x = 10^D]",
+    "e*[1/g (prime density)] = 1*[x = 10^D]",
+    "1/ln10*[1/g (prime density)] = 1*[(1+ln g)/ln10 (gap entropy, digits)]",
+    "1/ln10*[1/g (prime density)] = ln10*[D^2]"
+   ]
+  },
+  "0.24600": {
+   "T": 0.246,
+   "n_hits": 0,
+   "n_equal_multiplier": 0,
+   "distinct_curve_pairs": [],
+   "different_multiplier": []
+  },
+  "\u03a9": {
+   "T": 0.5671432904097838,
+   "n_hits": 19,
+   "n_equal_multiplier": 17,
+   "distinct_curve_pairs": [
+    [
+     "D (digits of x)",
+     "e^-D"
+    ],
+    [
+     "e^-D",
+     "g = ln x (mean gap)"
+    ]
+   ],
+   "different_multiplier": [
+    "1*[g = ln x (mean gap)] = ln10*[e^-D]",
+    "1/ln10*[g = ln x (mean gap)] = 1*[e^-D]"
+   ]
+  },
+  "1/ln10 * \u03a9? (0.2463 x 1)": {
+   "T": 0.24630720147342253,
+   "n_hits": 38,
+   "n_equal_multiplier": 34,
+   "distinct_curve_pairs": [
+    [
+     "1/D",
+     "x = 10^D"
+    ],
+    [
+     "1/g (prime density)",
+     "x = 10^D"
+    ],
+    [
+     "1/x = 10^-D",
+     "D (digits of x)"
+    ],
+    [
+     "1/x = 10^-D",
+     "g = ln x (mean gap)"
+    ]
+   ],
+   "different_multiplier": [
+    "1*[D (digits of x)] = 1/ln10*[1/x = 10^-D]",
+    "ln10*[D (digits of x)] = 1*[1/x = 10^-D]",
+    "1*[x = 10^D] = 1/ln10*[1/D]",
+    "ln10*[x = 10^D] = 1*[1/D]"
+   ]
+  }
+ }
+}
