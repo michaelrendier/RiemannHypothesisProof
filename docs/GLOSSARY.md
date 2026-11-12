@@ -34,3 +34,7 @@ Source for σ: `Ainulindale/wiki/123_sigma_rb_mass_gap_calibration.md`. From now
 | **Α_π, later usage** | 1/137.035999, the 'domain floor' (E8/Wyler) | not on this scale | n/a | wiki 17; `derive_alpha_fermat`; First/Second Age |
 | prime-spacing crossing (RHP) | x ln x = 1: mean gap ln x = 1/x; the inversion x → 1/x image of the Ω crossing | 1/Ω = 1.7632 | +0.2463 | docs/gap_side |
 OPEN: wiki 17 puts the domain at [Α_π = 0.0073, Ω_ζΣ = 0.567] and says d\* sits inside it; the original derivation puts Alpha at x = 1. The two descriptions of the Fermat-side constant are not reconciled (Cody to say which is meant).
+
+### The four d\* faces against RHP's measurements (2026-11-12; docs/four_dstar_2026-11-12.md)
+d\* (Boundary) = the digit length D\* of the crossing; d\*_taut (Flow) = digits of the fixed point gained per iteration from the ceiling ('one step of r'); d\*_ln(10) (Translator) = the mean prime gap ln X\* at the crossing = d\*·ln 10 = Ω_ζΣ, and mean gap ÷ digit length = ln 10 at every X (PNT); d\*_RG (Stability, dimension 8) not touched. READING: one crossing, two coordinates: digits (Riemann / entropy side) d\* = 0.2463 and gap count (Fermat / inertia side) Ω = W(1) = 0.5671, related by ln 10.
+
