@@ -1,0 +1,128 @@
+[
+ {
+  "name": "\u03a9_\u03b6\u03a3: four independent routes agree (closed form, contraction, Newton, bisection on the digit curves)",
+  "side": "horizon",
+  "residual": 2.5025172703052605e-39,
+  "tol": 1e-35,
+  "passed": true,
+  "detail": "x = e^{\u2212x}",
+  "seconds": 0.25
+ },
+ {
+  "name": "closure d*\u00b7ln 10 = \u03a9_\u03b6\u03a3 (the Translator)",
+  "side": "horizon",
+  "residual": 0.0,
+  "tol": 1e-28,
+  "passed": true,
+  "detail": "d* = \u2212log\u2081\u2080\u03a9",
+  "seconds": 0.0
+ },
+ {
+  "name": "prime-spacing crossing: mean gap ln X = 1/X at X = 1/\u03a9; gap = ln 10 \u00d7 digits",
+  "side": "gap",
+  "residual": 6.887662211849341e-41,
+  "tol": 1e-30,
+  "passed": true,
+  "detail": "X = e^\u03a9",
+  "seconds": 0.0
+ },
+ {
+  "name": "digits of the fixed point gained per iteration from the ceiling = d* (to 1e-8)",
+  "side": "horizon",
+  "residual": 2.493053233074905e-15,
+  "tol": 1e-08,
+  "passed": true,
+  "detail": "\u2212log\u2081\u2080 of the error contraction \u03a9",
+  "seconds": 0.0
+ },
+ {
+  "name": "functional equation and Schwarz reflection (Klein group): \u03be(s) = \u03be(1\u2212s), \u03be(s\u0304) = conj \u03be(s); \u039b(s,\u03c7\u208b\u2084)",
+  "side": "riemann+fermat",
+  "residual": 1.2513269441979545e-31,
+  "tol": 1e-28,
+  "passed": true,
+  "detail": "max over \u03be and \u039b(s,\u03c7\u208b\u2084)",
+  "seconds": 0.47
+ },
+ {
+  "name": "Guinand\u2013Weil: \u03a3_\u03c1 h(\u03b3) (25,000 zeros) = smooth terms \u2212 2\u03a3\u039b(n)n^{\u2212\u00bd}g(ln n) (primes), window r\u2080 = 14.13, \u03c3 = 1",
+  "side": "boundary",
+  "residual": 8.881784197001252e-14,
+  "tol": 1e-12,
+  "passed": true,
+  "detail": "zero sum 2.0000000001",
+  "seconds": 1.12
+ },
+ {
+  "name": "Guinand\u2013Weil, window r\u2080 = 1000, \u03c3 = 1",
+  "side": "boundary",
+  "residual": 4.489297822374283e-12,
+  "tol": 1e-10,
+  "passed": true,
+  "detail": "zero sum 3.9802437252",
+  "seconds": 0.36
+ },
+ {
+  "name": "Guinand\u2013Weil, window r\u2080 = 15,000, \u03c3 = 0.8 (near the top of the zero table, \u03b3_max = 21,943)",
+  "side": "boundary",
+  "residual": 1.248361414241117e-10,
+  "tol": 1e-09,
+  "passed": true,
+  "detail": "zero sum 5.8075656796",
+  "seconds": 0.82
+ },
+ {
+  "name": "convolution identity \u03a3_{n \u2264 x} M_K(x/n) = 1 (zero-tones are annihilated by convolution with 1), x = 200, K = 25,000",
+  "side": "riemann (1/\u03b6 side)",
+  "residual": 0.0001086416988300698,
+  "tol": 0.001,
+  "passed": true,
+  "detail": "\u03b6(\u03c1) = 0",
+  "seconds": 0.64
+ },
+ {
+  "name": "M\u00f6bius explicit formula: RMS of (M_K \u2212 M)/\u221ax for x \u2208 [10\u00b3, 3\u00b710\u00b3] with K = 25,000 zero-tones",
+  "side": "riemann (1/\u03b6 side)",
+  "residual": 0.001073118716798673,
+  "tol": 0.002,
+  "passed": true,
+  "detail": "explicit formula with trivial-zero terms",
+  "seconds": 1.07
+ },
+ {
+  "name": "\u03be and 1/\u03be share their nodal lines: sign agreement of Re/Im on the strip grid (1 \u2212 fraction)",
+  "side": "riemann (both hemispheres)",
+  "residual": 0.0,
+  "tol": 1e-12,
+  "passed": true,
+  "detail": "Re(1/\u03be) = Re \u03be/|\u03be|\u00b2",
+  "seconds": 0.07
+ },
+ {
+  "name": "Weil explicit formula on exact counts: #{x\u207f + y\u207f = 1 over GF(p^k)} = p^k \u2212 \u03a3(\u2212J)^k, (n,p) \u2208 {(3,7),(4,5),(3,13),(5,11)}, k \u2264 3 (brute force over the field)",
+  "side": "fermat",
+  "residual": 4.547473508864641e-13,
+  "tol": 1e-09,
+  "passed": true,
+  "detail": "Hasse\u2013Davenport",
+  "seconds": 0.48
+ },
+ {
+  "name": "Fermat tones have modulus \u221ap: max | |J| \u2212 \u221ap | over the 2g generic Jacobi sums, (n, p) = (5, 31), (7, 29)",
+  "side": "fermat",
+  "residual": 8.171241461241152e-14,
+  "tol": 1e-06,
+  "passed": true,
+  "detail": "RH for the Fermat curve (Weil)",
+  "seconds": 0.0
+ },
+ {
+  "name": "F(s) is real on the critical line (finite-tone completed function): max |Im F| / max |Re F|, (n, p) = (5, 31)",
+  "side": "fermat",
+  "residual": 1.531776676115888e-15,
+  "tol": 1e-06,
+  "passed": true,
+  "detail": "\u03c9 \u2192 p/\u03c9\u0304 symmetry",
+  "seconds": 0.0
+ }
+]

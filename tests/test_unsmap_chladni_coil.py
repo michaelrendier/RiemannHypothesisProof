@@ -782,3 +782,15 @@ def test_base_independence_and_carrying_assumption():
     for a, b in ((2.0, 1.0), (1.0, 0.5), (math.e, 1.0)):
         lam = a * b; assert abs(float(mp.lambertw(lam).real) / lam - brentq(lambda x: math.exp(-lam * x) - x, 1e-6, 1)) < 1e-12   # floor S = a x, forward x = e^{-bS}: crossing W(ab)/(ab); Ω needs ab = 1
     X = math.exp(om); assert abs(math.log(X) - 1 / X) < 1e-14                                                              # with S = ln X and x = 1/X the pair is ln X = 1/X (the prime-spacing crossing)
+
+
+def test_tonebank_explicit_ledger():
+    import os
+    from rhp import gf, tonebank as TB, explicit as EX, ledger as LG, nodal_extract as NX
+    b = TB.FermatBank(3, 7); assert len(b) == 2 and abs(b.affine_count(1) - gf.count_fermat_affine(7, 1, 3)) < 1e-9
+    for n, p, k in ((3, 7, 3), (4, 5, 4), (5, 11, 2)):
+        assert abs(gf.count_fermat_affine(p, k, n) - TB.FermatBank(n, p).affine_count(k)) < 1e-8                  # Weil / Hasse–Davenport against brute force over GF(p^k)
+    bank = TB.ToneBank.zeta(3000); _, lam = NX.psi_table(200000)
+    r = EX.guinand_weil(bank.gamma, lam, 14.134725141734693, 1.0); assert r["residual"] < 1e-11 and abs(r["zero_sum"] - 2.0) < 1e-6   # Guinand–Weil: zeros against primes
+    r = EX.guinand_weil(bank.gamma, lam, 100.0, 0.8); assert r["residual"] < 1e-10
+    rows = LG.run(["Ω_ζΣ", "closure", "prime-spacing", "Klein", "Weil explicit", "Fermat tones", "F(s) is real"]); assert rows and all(x.passed for x in rows)   # executable ledger
