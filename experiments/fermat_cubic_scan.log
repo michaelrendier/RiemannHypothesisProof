@@ -1,0 +1,16 @@
+AFE zeros of L(E,1+it), t in (0.2, 30.0): 21  first: [4.043044, 6.048935, 8.21765, 9.429199, 10.908728, 12.715639, 13.582114, 14.892111, 16.300017, 17.549582]   [253s]
+{'x': 2000000, 'ln_x': 14.5087, 'n_prime_powers': 149222, 'peaks_above_0p35': 27, 'zeros': 21, 'matched_within_0p03': 4, 'max_offset': 0.1332, 'height_mean': 0.8611, 'height_min': 0.7145, 'height_max': 0.9728, 'midpoint_median': 0.1343, 'midpoint_max': 0.7308, 'median_all': 0.3725} unmatched peaks: [9.51, 10.2, 12.04, 12.65, 15.59, 16.25, 19.57, 20.27, 23.75, 24.35, 25.92, 27.23, 28.05, 28.96, 30.21]
+   zero   4.04304   scan peak   4.06000   offset 0.0170
+   zero   6.04894   scan peak   6.03000   offset 0.0189
+   zero   8.21765   scan peak   8.21000   offset 0.0077
+   zero   9.42920   scan peak   9.51000   offset 0.0808
+   zero  10.90873   scan peak  10.91000   offset 0.0013
+   zero  12.71564   scan peak  12.65000   offset 0.0656
+   zero  13.58211   scan peak  13.62000   offset 0.0379
+   zero  14.89211   scan peak  14.94000   offset 0.0479
+   zero  16.30002   scan peak  16.25000   offset 0.0500
+   zero  17.54958   scan peak  17.58000   offset 0.0304
+   zero  18.55924   scan peak  18.52000   offset 0.0392
+   zero  19.50763   scan peak  19.57000   offset 0.0624
+control (random signs): {'max': 1.6671671931523375, 'median': 0.6026912167231446, 'peaks_above_0p35': 34}
+done 430s

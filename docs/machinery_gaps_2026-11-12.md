@@ -26,3 +26,8 @@ Order agreed with Cody: the gaps one at a time, each building on the last, the f
 ## Reading
 - Guinand–Weil is the two-sided identity in its sharpest form: the SAME number computed once from the zeros and once from the primes; the Weil count is its finite-field twin, exact at every power. These are the two 'data sets' the standing wave must reproduce, and any engine that claims to carry both sides has to pass them.
 - The ledger is the executable form of the 'says the same thing in every maths' rule. It does not yet contain a 0_RB residual: no concrete boundary check has been written down for 0_RB.
+
+## Step 2 — zero-phase scan of the Fermat cubic's a_p (x³+y³=z³, conductor 27)   :CALCULATED
+Exact zeros of L(E,1+it) from the AFE (mpmath, t<30): 21, first 4.043044, 6.048935, 8.21765, 9.429199, 10.908728.
+a_p-only scan A_E(t) at X=2·10⁶ (resolution ≈2π/ln X ≈ 0.43): peaks at 12 of the first 12 zeros within 0.082 (4 within 0.03); heights 0.71–0.97 (mean 0.86).
+Also 15 extra peaks (9.51, 10.2, 12.04, …) with no zero beside them: side-lobes of a ~0.4-wide window, not matched. Random-sign control: median 0.60, max 1.67, 34 peaks — it is NOT cleaner than the real scan by peak count, so the evidence is the zero-matched heights and positions, not peak count. Verdict: the Fermat side's zeros are readable from its a_p alone, at the coarse resolution; extra-peak rate needs a window/apodisation before it can be called a detector.
