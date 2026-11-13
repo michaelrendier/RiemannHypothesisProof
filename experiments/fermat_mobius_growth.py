@@ -2,7 +2,7 @@
 import json, math, sys, pathlib
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parents[1]))
 import numpy as np
-from rhp import flow as FL
+from rhp import factor_flow as FL
 R = {}
 for n, p in ((3, 7), (4, 17), (5, 31), (7, 29)):
     th = FL.frobenius_angles(p, n); poly = np.poly1d([1.0 + 0j])

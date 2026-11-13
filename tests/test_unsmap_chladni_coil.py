@@ -744,7 +744,7 @@ def test_nodal_two_sided():
 
 def test_flow_tests():
     import os, json, math
-    from rhp import flow as FL
+    from rhp import factor_flow as FL
     assert abs(FL.flux_around(1.0, 0.1, n=60) + 1) < 1e-3 and abs(FL.flux_around(complex(0.5, 14.134725141734693), 0.05, n=60) - 1) < 1e-3   # sink at the pole, source at a zero
     assert abs(FL.flux_around(complex(0.5, 20.0), 0.05, n=60)) < 1e-3                                                                          # nothing at an ordinary point
     th3 = FL.frobenius_angles(7, 3); th5 = FL.frobenius_angles(31, 5)

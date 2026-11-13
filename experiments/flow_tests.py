@@ -1,8 +1,8 @@
-"""Flow tests (rhp.flow): F2 islands vs rigid points (spacing statistics), F3 the Fermat finite-tone wave (nodes and strip).  Writes flow_tests.json."""
+"""Flow tests (rhp.factor_flow): F2 islands vs rigid points (spacing statistics), F3 the Fermat finite-tone wave (nodes and strip).  Writes flow_tests.json."""
 import json, math, sys, pathlib
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parents[1]))
 import numpy as np
-from rhp import flow as FL, nodal_extract as NX
+from rhp import factor_flow as FL, nodal_extract as NX
 from rhp.sedenion_slots import primes_upto
 rng = np.random.default_rng(1); R = {}
 # F2: islands (primes) against rigid points (zeros)

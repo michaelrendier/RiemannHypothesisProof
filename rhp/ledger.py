@@ -119,7 +119,7 @@ def _modulus():
 
 @check("F(s) is real on the critical line (finite-tone completed function): max |Im F| / max |Re F|, (n, p) = (5, 31)", "fermat", 1e-6)
 def _freal():
-    from .flow import fermat_F, frobenius_angles
+    from .factor_flow import fermat_F, frobenius_angles
     th = frobenius_angles(31, 5); s = 0.5 + 1j * np.linspace(0.0, 4.0, 101); v = fermat_F(s, 31, th); return float(np.max(np.abs(v.imag)) / np.max(np.abs(v.real))), "ω → p/ω̄ symmetry"
 
 

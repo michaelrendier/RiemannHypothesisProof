@@ -1,6 +1,6 @@
 # The flow of the factors past the prime holes; the finite-tone wave — 2026-11-12   :CALCULATED
 
-Code `rhp/flow.py`; runs `experiments/flow_tests.py`, `experiments/fermat_mobius_growth.py` (→ `.json`); test `test_flow_tests`. Symbols follow the new glossary section (σ_ζ, Ω_ζΣ, A_fermat; α_fs is not used).
+Code `rhp/factor_flow.py` (was written over `rhp/flow.py` by mistake, see log 58); runs `experiments/flow_tests.py`, `experiments/fermat_mobius_growth.py` (→ `.json`); test `test_flow_tests`. Symbols follow the new glossary section (σ_ζ, Ω_ζΣ, A_fermat; α_fs is not used).
 Question (Cody): do the factors flow past the primes; is it turbulent; are the primes rocks piercing the surface; what does the Laplacian over the Cartesian ζ say?
 
 ## F1 — the Laplacian over the Cartesian ζ (ESTABLISHED, checked)

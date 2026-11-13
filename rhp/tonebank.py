@@ -8,7 +8,7 @@ Both expose  .gamma (ordinates; for the finite-field bank θ_j/ln p), .mult, .wa
 from __future__ import annotations
 import math
 import numpy as np
-from . import mertens_wave as MW, nodal_extract as NX, flow as FL
+from . import mertens_wave as MW, nodal_extract as NX, factor_flow as FL
 
 
 class ToneBank:

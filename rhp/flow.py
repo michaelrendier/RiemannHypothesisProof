@@ -1,55 +1,68 @@
 # SPDX-License-Identifier: GPL-3.0-only
-"""Flow tests: the Cartesian Laplacian of log|ζ|, the islands (primes) against the rigid points (zeros), and the Fermat finite-tone wave.   :CALCULATED unless marked.
+"""The ξ′/ξ flow on the strip, and the argument-principle accounting (Gauss's law for it).
 
-ESTABLISHED: on the (σ_ζ, t) plane Δ log|ζ(σ + it)| = 2π Σ_ρ δ(s − ρ) − 2π δ(s − 1): the zeros are point sources of the potential log|ζ|, the pole at s = 1 a sink; arg ζ is the stream function (the zeros are also vortices).
-Islands: the depth field h(n) = d(n) − 2 ≥ 0 (d = number of divisors) is zero exactly at the primes: the points no factor stream-line passes through.  Spacing statistics separate two kinds of point set:
-Poisson (independent, variance of the normalised spacing = 1) and GUE-like (level repulsion, variance ≈ 0.18).
-Fermat side: for p ≡ 1 (mod n) the 2g = (n−1)(n−2) Frobenius eigenvalues are ω_j = −J_j = √p e^{iθ_j}; F(s) = p^{gs} ∏(1 − ω_j p^{−s}) is real on σ_ζ = ½ (up to a constant), with 2g zeros per period 2π/ln p.
+Complex potential Φ = log ξ(s).  L(s) = ξ′/ξ(s) = 1/s + 1/(s−1) − ½ ln π + ½ ψ(s/2) + ζ′/ζ(s).
+Velocity (u, v) = (Re L, −Im L), u along σ, v along t.  Zeros of ξ are sources + vortices.
+Symmetry (ξ(s)=ξ(1−s), ξ(s̄)=conj ξ(s)):  L(1−s̄) = −conj L(s)  ⇒  u odd, v even under σ ↦ 1−σ.
+Labels: ESTABLISHED (definitions); the grid checks are :CALCULATED (floating point, not a proof).
 """
 from __future__ import annotations
-import math
 import numpy as np
+from mpmath import mp, mpc, mpf, zeta, digamma, log, pi, arg as marg
+
+from . import bigpath
+
+mp.dps = 15
 
 
-def flux_around(center, r, n=200, dps=20):
-    """(1/2π) ∮ ∂_r log|ζ| r dθ around `center` (a complex number): +1 per enclosed zero, −1 for the pole at s = 1."""
-    import mpmath as mp
-    mp.mp.dps = dps; c = mp.mpmathify(center); tot = 0.0
-    for k in range(n):
-        th = 2 * math.pi * k / n; e = mp.e ** (1j * th); s = c + r * e
-        tot += float(mp.re(mp.zeta(s, derivative=1) / mp.zeta(s) * e)) * r * (2 * math.pi / n)
-    return tot / (2 * math.pi)
+def L(s):
+    s = mpc(s)
+    return complex(1 / s + 1 / (s - 1) - log(pi) / 2 + digamma(s / 2) / 2 + zeta(s, derivative=1) / zeta(s))
 
 
-def unfold_zeros(g):
-    """Smooth counting function N̄(t) = θ(t)/π + 1 (Riemann–Siegel θ, asymptotic form), so that the mean spacing of N̄(γ_k) is 1."""
-    g = np.asarray(g, float); th = g / 2 * np.log(g / (2 * math.pi)) - g / 2 - math.pi / 8 + 1 / (48 * g); return th / math.pi + 1
+def flow_grid(sig, ts):
+    """u = Re L, v = −Im L on a (σ × t) grid. Returns arrays shaped (len(ts), len(sig))."""
+    U = np.zeros((len(ts), len(sig)))
+    V = np.zeros_like(U)
+    for i, t in enumerate(ts):
+        for j, s in enumerate(sig):
+            w = L(mpc(s, t))
+            U[i, j], V[i, j] = w.real, -w.imag
+    return U, V
 
 
-def spacing_stats(x):
-    """normalised nearest-neighbour spacings s = Δx/⟨Δx⟩: (variance, fraction below 0.1, mean)."""
-    s = np.diff(np.sort(x)); s = s / s.mean(); return float(s.var()), float(np.mean(s < 0.1)), float(s.mean())
+def symmetry_residuals(pts):
+    """max |u(s*) + u(s)| and |v(s*) − v(s)| over sample points, s* = 1 − s̄ (should be ~1e-13)."""
+    du = dv = 0.0
+    for s in pts:
+        a, b = L(s), L(1 - np.conj(s))
+        du = max(du, abs(b.real + a.real))
+        dv = max(dv, abs(-b.imag - (-a.imag)))
+    return du, dv
 
 
-def number_variance(x, L, nwin=4000, rng=None):
-    """variance of the number of points in windows of length L (unit mean density): Poisson → L; GUE → (ln(2πL) + γ_E + 1)/π² for L ≫ 1."""
-    rng = rng or np.random.default_rng(0); x = np.sort(x); lo, hi = x[0], x[-1] - L; st = rng.uniform(lo, hi, nwin)
-    c = np.searchsorted(x, st + L) - np.searchsorted(x, st); return float(c.var())
+def S_of_T(T, step=0.02):
+    """S(T) = (1/π) arg ζ(½+iT) by continuous variation along 2 → 2+iT → ½+iT.
+
+    On the vertical leg arg stays in (−π/2, π/2) (|ζ(2+it) − 1| < 1), so the principal value starts the track;
+    the horizontal leg is followed by unwrapping small steps. Returns (S, max |Δarg| per step).
+    """
+    a0 = float(marg(zeta(mpc(2, T))))
+    sig = np.arange(2.0, 0.5 - step / 2, -step)
+    ang = np.array([float(marg(zeta(mpc(s, T)))) for s in sig])
+    ang[0] = a0
+    d = np.diff(ang)
+    d = (d + np.pi) % (2 * np.pi) - np.pi
+    total = a0 + d.sum()
+    return total / np.pi, float(np.max(np.abs(d)))
 
 
-def frobenius_angles(p, n):
-    """θ_j = arg(−J_j/√p) for the (n−1)(n−2) generic Jacobi sums of x^n + y^n = 1 over F_p (p ≡ 1 mod n)."""
-    from .fermat_curve import jacobi_sums
-    J = jacobi_sums(int(p), int(n)); return np.array([np.angle(-v / math.sqrt(p)) for (a, b), v in J.items() if (a + b) % n != 0])
-
-
-def fermat_F(s, p, th):
-    """F(s) = ∏_j (p^{s/2} − √p e^{iθ_j} p^{−s/2}) (the real-on-the-line normalisation of the L-polynomial), s a complex array."""
-    L = math.log(p); out = np.ones_like(np.asarray(s, complex))
-    for t in th: out = out * (np.exp(np.asarray(s, complex) * L / 2) - math.sqrt(p) * np.exp(1j * t) * np.exp(-np.asarray(s, complex) * L / 2))
-    return out
-
-
-def fermat_wave(u, p, th):
-    """W_F(u) = −Σ_j cos(θ_j u/ln p): the real standing wave of the finite-tone prime wave at u = k ln p (equal amplitudes, 2g tones, RMS √g)."""
-    L = math.log(p); u = np.asarray(u, float); return -np.cos(np.outer(u, th) / L).sum(axis=1)
+def argument_accounting(Ts, zeros_all):
+    """For each height T: N from the argument principle (θ/π + 1 + S) against the number of zeros on the line below T."""
+    rows = []
+    for T in Ts:
+        S, dmax = S_of_T(T)
+        n_arg = bigpath.theta_fast([T])[0] / np.pi + 1 + S
+        n_line = int(np.sum(zeros_all < T))
+        rows.append(dict(T=float(T), S=S, N_arg=float(n_arg), N_line=n_line, gap=float(n_arg - n_line), step_max=dmax))
+    return rows
