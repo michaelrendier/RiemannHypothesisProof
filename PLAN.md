@@ -33,3 +33,10 @@
 `README.md` (informal introduction + contents, as GenerationalLineage), `docs/` code-reference Manual (API per module, Listings, transcripts),
 `notebooks/` (one per paper section: 01 π-factoring · 02 emergent-½ catalogue · 03 amplitude Lagrangian · 04 zero-counting phase ·
 05 cardioid sifting · 06 prime & factor wavelength · 07 the open step), `tests/`, `archive/` (done), `CONTRIBUTING.md`, `CITATION.cff`, `references/INDEX.md`.
+
+
+## TODO — The Zipper (added 2026-11-16, Cody)
+
+A mechanism, to be built and measured, that **zips and unzips the two domains along the positive integer line**: the primes (Telperion, the sieve) and the factor spacings (Laurelin, the un-sieve; Fermat's side), i.e. T + L = ζ − 1 read as two interlocking rows. Name: *the Zipper*.
+Standing facts the Zipper starts from (all already in this repository, `:CALCULATED`): T + L = ζ − 1 exact (item 19); W_L = −W_T to ≤ 2/√x, antiphase corr −0.82 (items 16, 39); every integer n ≥ 2 sits in exactly one row (prime or composite); the Möbius inversion 1/ζ is the unzip; the wheels (frequencies ln p) are incommensurate and never lock exactly (item 22).
+Engineering model to test (INTERPRETATION until measured): teeth = integers; two staggered rows; a registry condition (one pitch); a head/neck lock; a slider that enforces local order one pair at a time. See `paper/PAPER.md` §11.5 for the stub and the measurements it needs. Not built; no code yet.
