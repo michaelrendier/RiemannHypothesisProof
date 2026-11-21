@@ -1,6 +1,6 @@
 # Factoring π out of the Zeta Function: the critical line as an equatorial great circle, and the places where ½ emerges
 
-**DRAFT 0.1 — 2026-11-03 — not for submission.** Written from the code and measurements that exist today; nothing here is carried over from the archived drafts (`archive/2026-11-03_pre-rewrite/`) unless it was re-run.
+**DRAFT 0.2 — 2026-11-21 — not for submission.** Brought up to the state of the repository at commit `52689b5` (2026-11-16) plus the test-environment repair of 2026-11-21 (§13), with the intended code for each remaining pathway (§11.6). The text of §§1–12 is the 0.1 text; this revision adds §11.6, §13 and the note on the November 2026 claim (§9.1). Nothing here claims RH. Earlier status line, kept: DRAFT 0.1 (2026-11-03): Written from the code and measurements that exist today; nothing here is carried over from the archived drafts (`archive/2026-11-03_pre-rewrite/`) unless it was re-run.
 
 **Author:** Cody Michael Allison (Michael Rendier) · the.wandering.god@gmail.com · ORCID 0009-0007-7239-6760
 
@@ -188,6 +188,9 @@ Two wavelengths, one per ordering of the same set of primes:
 
 **An equivalence that is a restatement.** Earlier drafts defined a zero to be *stable* when J(σ,E) = 0 and then proved "RH ⇔ every zero is stable". Since J = 0 ⇔ σ = ½ for E ≠ 0, "stable" is a re-statement of "σ = ½"; the equivalence is true and carries no content beyond RH. The real content of step 4 is an argument that zeros *must* satisfy the balance, which this paper does not supply.
 
+### 9.1 A claim of a proof, 2026-11-20 (reported, not verified here)
+On 2026-11-20 a four-page note by Levent Alpöge was reported to claim a proof of RH, made with an AI model, released as Lean code with no readable text (method as reported by one outlet: Stepanov's method with multiplicity obtained from chains of theta lifts between definite unitary groups). It had not been independently checked when this revision was written; this repository has not read the note or the code. It is an arithmetic-geometric route, not the spectral route of step 4. If it stands, the rows of this paper that are true "only if RH holds" become unconditional; it would not by itself supply a self-adjoint operator (Hilbert–Pólya), so step 4 would remain the open *spectral* question. The status of RH in this paper stays `OPEN` until the claim is checked by others. Record: `ContextPlease/claude/hist_prime/RiemannHypothesisProof/PRIMER_2026-11-20_ALPOGE_CLAIM_AND_MASS_GAP_CHECK.md`.
+
 ## 10. Corrections kept in the record
 
 1. **"θ(tₙ) ≈ nπ"** (earlier drafts): the computation of §6 gives (n − 3/2)π with S(T) fluctuation.
@@ -220,9 +223,35 @@ Two wavelengths, one per ordering of the same set of primes:
 
 **Open:** which of those mechanical parts correspond to something already computed; whether the incommensurate wheels make the seam jam or define the slider.
 
+### 11.6 Intended code: the remaining pathways (2026-11-21; each `THEORETICAL` until built and run)
+The engine plan of 2026-11-12 (`docs/machinery_gaps_2026-11-12.md`) has eight steps; steps 1–3 are done and recorded (§13). The five that remain, and the two items with no code at all, are listed with the file to write, what it must compute, and the prediction to register *before* it is run. The standing rule: one gap at a time, each building on the last; list the filename (`ls rhp`) before writing it; run the full suite before every push.
+
+| # | pathway | file to write | what it computes | prediction to register first |
+|---|---|---|---|---|
+| P1 | **Linear-recurrence rank**, finite (Fermat) against growing (Riemann) (analogous test 4) | `rhp/recurrence.py` (Berlekamp–Massey over ℝ with a tolerance, and Prony; the GenerationalLineage `berlekamp_massey` toolset exists to cross-check) | the minimal recurrence order of the tone sequence of each side: the Fermat wave from `FermatBank(n,p)` and the zeta wave from `ToneBank.zeta(K)` | the Fermat order equals the number of distinct Frobenius angles (for (n,p) = (5,31): 4); the zeta order grows without bound with K; a random-sign control shows full order |
+| P2 | **The second coordinate** of the two-hemisphere field, for both sides (gap 2) | `rhp/second_coord.py`, starting from the restored `rhp/flow.py` (never overwrite it: the extinction module lives in `rhp/extinction.py`, the factor flow in `rhp/factor_flow.py`) | a coordinate that, with u = ln x, places both a Riemann-side and a Fermat-side object on one plane | the coordinate is defined by an equation, not by a fit; the Fermat cubic's 21 known zeros and ζ's first 25,000 both land on it with residual below a stated tolerance |
+| P3 | **Zero dynamics** (gap 3 and analogous test 5): the de Bruijn–Newman heat flow | `rhp/dbn.py` | the zeros of H_t(z) for small t ≥ 0 and their motion (the Newman constant Λ: RH ⇔ Λ ≤ 0; Λ ≥ 0 is the published lower bound; verify the current values from the literature before citing) | the critical-line row is stable under the flow at t = 0; zero-pair collisions (the route off the line) do not occur for the first 200 zeros at the t tested |
+| P4 | **Violation detectors** (gap 5): what a zero off the line would do to each check | extend `rhp/diverge.py` (already recovers an injected quadruple: δ = 0.3 → slope 0.287, 0.5 → 0.497) to one detector per ledger line, `rhp/violation.py` | for each of the 14 ledger checks, the signature of an injected off-line zero at a stated σ, γ | each check has a stated detection threshold; the controls at the first 20 true zeros give slope 0.000 ± 0.033 |
+| P5 | **The standing-wave module** (the engine's centrepiece) | `rhp/standing_wave.py`, built from `tonebank.py`, `explicit.py`, `ledger.py`, `factor_flow.py`, `two_sided.py`, `polar_field.py` | the two hemispheres interacting across the boundary, with 0_RB as the error check; the Fermat side has zero tones and a mean (−√x), the zeta side the pole (x) | the wave rebuilt from K tones matches ψ(x) to the corr 0.77/0.93/0.98/0.993 recorded at 10/100/1000/3066 zeros; the Fermat side shows the mean −√x with prime-only inert primes leading 98.6 % of x ≤ 2·10⁶ |
+| Z | **The Zipper** (§11.5) | `rhp/zipper.py` | the two rows (primes, factor spacings) staggered by half a pitch, the slider as a local ordering rule | to be written after P5; stated in §11.5 |
+| L | **Limaçon sifting fit** | `rhp/limacon.py` | the loop-fit sifting test (the numbers are in the project record only) | no longer on the critical path |
+| O | **Orthogonality** λ_prime ⟂ λ_factor (§8) | `rhp/orthogonality.py` | a defined inner product on the first N zeros and primes ≤ P, with a null model | the inner product is within the null's 95 % band or outside it; either is reported |
+
+**The arithmetic route (outside this repository's method).** If a proof along the lines of §9.1 is confirmed, the useful work for these pathways changes from *proving* to *explaining*: P1–P5 would become tests of why the zeros sit where they do, and the Hilbert–Pólya operator would remain the open object. Until then they stand as written.
+
 ## 12. Reproducing this paper
 
 Everything numeric above was produced by: `half_is_the_equator.py` (§3, §4; 30-digit mpmath); `engines/noether_derivation.py` (§5); an `mpmath` script for §6; `GenerationalLineage` `circle` (§4.3); the project's limaçon fit (§7; to be re-run). The rest are to be vendored into `rhp/` with provenance headers, tested, wrapped in notebooks, and the paper regenerated by `paper/make_paper.py` (see `PLAN.md`).
+
+## 13. State of the repository, 2026-11-21 `:CALCULATED`
+- **Code:** 58 modules in `rhp/`; 9 test files; **149 tests, all passing** (`.venv/bin/python -m pytest tests -q`, 2 min 10 s). Before 2026-11-21 the repository's `.venv` lacked `scipy` and `sympy`, so two test modules could not run in it; both were added and `requirements.txt` was updated (the suite had been recorded as 149 passing under another interpreter).
+- **Notebooks:** six (`notebooks/01`–`06`: flattening map; machinery and the long pathway; clock, echo, harness, margins, prime game; equator, polarisation, springs; extinction flow, nodal ladder, ζ in 0_RB; the UNS map, Chladni figures and spirals), plus `NOTEBOOK_CATALOG.ipynb`.
+- **Docs:** 31 files in `docs/` (the glossary, the four d* values, the Fermat horizon, the nodal two-sided analysis, the gaps plan, the image catalogue, the experiment log items 1–59).
+- **Ledger:** `python -m rhp.ledger` runs 14 identities, 14 of 14 passing (Ω by four routes 2.5·10⁻³⁹; Guinand–Weil residuals 9·10⁻¹⁴ to 1.25·10⁻¹⁰ on 25,000 zeros; Weil counts exact to 4·10⁻¹³; the Klein group 1.3·10⁻³¹).
+- **Engine plan:** steps 1–3 done (gap 1 one object, gap 4 the executable ledger, Guinand–Weil; the zero-phase scan of the Fermat cubic: 12 of the first 12 zeros seen within 0.082 at resolution 0.43; Chebyshev bias from the zeros of L(s, χ₋₄): 34 zeros carry about 88 % of the variance). Steps 4–8 are pathways P1–P5 of §11.6.
+- **What is not built:** the limaçon fit, the orthogonality test, the Zipper, and P1–P5.
+- **What is still `OPEN`:** the Berry–Keating self-adjointness step (§9, step 4), the geometric form (4′), d*_RG, and the relation between the four recorded d* values and the measured 0.24600 (§10.5; under review by the author, 2026-11-21).
+- **Not claimed:** RH is not proved here; the reported 2026-11-20 claim is neither endorsed nor refuted (§9.1).
 
 ## References (to be verified by title page under the Literature Download Protocol)
 
