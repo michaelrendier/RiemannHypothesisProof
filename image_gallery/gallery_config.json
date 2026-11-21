@@ -1,0 +1,43 @@
+{
+ "repo": "~/Projects/ThePlace/RiemannHypothesisProof",
+ "name": "Riemann–Fermat Atlas Gallery",
+ "slug": "Riemann_Fermat_Atlas_Gallery",
+ "port": 8769,
+ "catalog": "docs/IMAGE_CATALOG.md",
+ "tagline": "Every figure of RiemannHypothesisProof: the atlas figures (each with its panel-by-panel description from the image catalogue), the boundary-engine transitions and strips, the paper figures and the archive. A picture here shows a space or a machinery, not evidence about RH.",
+ "exclude": [
+  "Gemini_Generated_Image"
+ ],
+ "groups": [
+  {
+   "name": "Atlas figures (catalogue)",
+   "match": "^rhp/atlas_riemann_fermat/[^/]+$",
+   "blurb": "Redrawn by python -m rhp.atlas_riemann_fermat.<name>; descriptions from docs/IMAGE_CATALOG.md."
+  },
+  {
+   "name": "Boundary engine: transitions",
+   "match": "boundary_engine/transition_",
+   "blurb": "Cartesian, polar and wheel views of the transitions between the named regimes."
+  },
+  {
+   "name": "Boundary engine: strips and poster",
+   "match": "boundary_engine/(strip_|poster_)",
+   "blurb": "The strips and the all-patterns poster."
+  },
+  {
+   "name": "Boundary engine: motion (GIF)",
+   "match": "boundary_engine/.*\\.gif$",
+   "blurb": "Animations."
+  },
+  {
+   "name": "Paper figures",
+   "match": "^figures/",
+   "blurb": "Figures of the paper draft."
+  },
+  {
+   "name": "Archive: pre-rewrite (2026-11-03)",
+   "match": "^archive/",
+   "blurb": "Dated work, not the present state."
+  }
+ ]
+}
