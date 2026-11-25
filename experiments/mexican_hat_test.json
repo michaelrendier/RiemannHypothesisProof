@@ -1,0 +1,64 @@
+{
+ "H1": {
+  "max_abs_residual_zdot_eq_minus_dV_dz": 3.9895287073932195e-10,
+  "median_abs_residual_rdot_eq_minus_dV_dr": 1.3620557138618539,
+  "note": "f = 0 part; the f z x^3 term adds a phi-dependent force"
+ },
+ "H2": {
+  "wells": [
+   {
+    "z": 1.9432643761741544,
+    "V": -1.771334622758906,
+    "V_second_derivative": 2.826276435707525,
+    "kind": "minimum"
+   },
+   {
+    "z": -1.1050213676308371,
+    "V": 0.20725496249020442,
+    "V_second_derivative": 0.27107222292072586,
+    "kind": "minimum"
+   },
+   {
+    "z": -0.8382430085433183,
+    "V": 0.2103296602687017,
+    "V_second_derivative": -0.2473486586282463,
+    "kind": "maximum (hump)"
+   }
+  ],
+  "orbit_z_range": [
+   -0.3659760507337809,
+   1.847987401836819
+  ],
+  "V_at_orbit_z_min": 0.15745981680005866,
+  "V_at_orbit_z_max": -1.7590599488102718,
+  "vacuum_like_z0_for_c_zero": 1.688194301613413
+ },
+ "H3_aizawa": {
+  "hole_radius": 0.11647657542205177,
+  "ring_peak_radius": 0.28750000000000003,
+  "density_at_peak": 1.0,
+  "density_at_0p5_of_peak_inner_edge": 0.1375,
+  "V_eff_min_at_r": 0.28750000000000003,
+  "r_max": 1.5295181401801212
+ },
+ "H3_zeta": {
+  "slope_log_density_vs_log_r_for_r_lt_0p3": -1.0023384672926992,
+  "expected_for_a_curve_through_the_origin": -1.0,
+  "density_at_r_0p02": 3.8831134981123636,
+  "density_at_r_0p3": 0.25550000148602564,
+  "hole": false,
+  "note": "rho ~ 1/r follows from crossing 0 at nonzero speed (time within eps is proportional to eps); V_eff = -ln rho = ln r + const has the form of the 2-D point-mass potential only formally"
+ },
+ "perturbation_f": {
+  "f0_r_range": [
+   0.18678587299909288,
+   1.4890476411195672
+  ],
+  "f0_ring_thickness_ln_r": 2.075929130959586,
+  "f01_r_range": [
+   0.11647657542205177,
+   1.5295181401801212
+  ],
+  "f01_ring_thickness_ln_r": 2.575017840273392
+ }
+}

@@ -1,0 +1,78 @@
+{
+ "T1": {
+  "section_points": 12283,
+  "rate_median": 34.517303961230965,
+  "share_rate_gt_14p5": 0.8264267687047139,
+  "share_full_path_gt_14p5": 0.15688460778848054
+ },
+ "T2": {
+  "section_Zprime_median": 5.0581422969459,
+  "section_Zprime_p5_p95": [
+   1.7537003085474137,
+   14.877327046041554
+  ],
+  "full_Zprime_median": 4.27072198733891,
+  "full_Zprime_p95": 14.792038348021565,
+  "section_rate_sign_positive": 0.9995115199869739,
+  "corr_u_a_section": -0.8351105217759668,
+  "corr_u_a_full": -0.0013817612879222661
+ },
+ "T3": {
+  "grid": 60,
+  "cells": 3600,
+  "section_empty_cells": 3122,
+  "full_path_share_in_section_empty_cells": 0.8264015089991567,
+  "full_empty_cells": 1754,
+  "section_occupied_cells": 478,
+  "full_occupied_cells": 1846
+ },
+ "T5": [
+  {
+   "zeros": [
+    0,
+    1000
+   ],
+   "max_abs_Zprime": 12.672822554744556,
+   "bound_Bp_at_end": 54.280380840916614,
+   "max_over_bound": 0.23346966912199274
+  },
+  {
+   "zeros": [
+    1000,
+    5000
+   ],
+   "max_abs_Zprime": 19.607191426516128,
+   "bound_Bp_at_end": 101.53225347898912,
+   "max_over_bound": 0.1931129346062786
+  },
+  {
+   "zeros": [
+    5000,
+    25000
+   ],
+   "max_abs_Zprime": 31.171175057261305,
+   "bound_Bp_at_end": 186.15401449188542,
+   "max_over_bound": 0.1674483096286923
+  }
+ ],
+ "T4": {
+  "section_points": 1504,
+  "KS_u_p": 5.561159468888919e-17,
+  "KS_rate_p": 0.00012317656930495362,
+  "full_occupied_cells": 95,
+  "hole_cells": 44,
+  "section_points_in_hole": 0,
+  "full_points_in_hole": 0,
+  "u_range_full": [
+   -2.156661102672572,
+   0.42495274474124933
+  ],
+  "rate_range_full": [
+   -1.0670948869134502,
+   1.148762936339866
+  ]
+ },
+ "_meta": {
+  "note": "phase portrait cells: u in [-6,3.3], asinh(rate) in [-7,7], 60 x 60"
+ }
+}
