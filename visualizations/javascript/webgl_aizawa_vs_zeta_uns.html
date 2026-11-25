@@ -19,34 +19,40 @@ header{padding:12px 16px;border-bottom:1px solid var(--line)}h1{font-size:18px;m
 .grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:10px 16px}.panel{background:var(--card);border:1px solid var(--line);border-radius:8px;overflow:hidden}
 .panel h2{font-size:12.5px;margin:0;padding:6px 10px;border-bottom:1px solid var(--line);color:var(--mut);font-weight:600}
 canvas{display:block;width:100%;background:var(--cv);touch-action:none}.tall canvas{aspect-ratio:1/1}.short canvas{aspect-ratio:2/1}
-.note{padding:6px 10px 8px;color:var(--mut);font-size:12px}.legend{padding:0 16px 14px;color:var(--mut);font-size:12.5px;max-width:1100px}.legend b{color:var(--fg)}
+.note{padding:6px 10px 8px;color:var(--mut);font-size:12px}.ref{font-size:12px}.ref a{color:var(--acc)}.legend{padding:0 16px 14px;color:var(--mut);font-size:12.5px;max-width:1100px}.legend b{color:var(--fg)}
 @media (max-width:800px){.grid{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
-<header><h1>Aizawa attractor vs the ζ pathway in Universal Native Space</h1>
-<div class="sub">The same camera on both. Drag to rotate, wheel to zoom, double-click to reset. Left: Aizawa, integrated live. Right: ζ(½ + it) for the first <span id="nzTxt">25000</span> zeros.</div></header>
+<header><h1>The ζ pathway growing, beside the Aizawa attractor</h1>
+<div class="sub">Top right: ζ(½ + it) drawn through all 25,000 zeros we have, <b>100 zeros per step, 250 steps, one step per second (250 s)</b>. Bottom left: the prime spring at the current step. Same camera on both 3-D panels: drag, wheel, double-click to reset.</div></header>
 <div class="bar">
- <label>zeros drawn <input id="nz" type="range" min="0" max="1000" value="1000"><b id="nzv">25000</b></label>
- <button id="play">▶ grow</button>
+ <button id="play">❚❚ pause</button><button id="back">◀ step</button><button id="fwd">step ▶</button>
+ <label>step <input id="nz" type="range" min="1" max="250" value="1" style="width:220px"><b id="nzv"></b></label>
  <label>ζ chart <select id="chart"><option value="sphere">Riemann sphere (value)</option><option value="cyl">UNS cylinder (spring: ρ, φ, t)</option><option value="flat">UNS flat (log-polar)</option></select></label>
  <button id="eq">equatorial view</button><button id="pole">from the pole</button><button id="reset">reset</button>
  <label><input id="link" type="checkbox" checked> link cameras</label>
  <label><input id="lines" type="checkbox"> lines</label>
- <label><input id="eqring" type="checkbox" checked> equator ring</label>
+ <label><input id="eqring" type="checkbox" checked> equator |ζ|=1</label>
+ <label><input id="remer" type="checkbox" checked> Re ζ = 0</label>
  <label><input id="zmark" type="checkbox" checked> zeros</label>
  <label>prime ticks <select id="pt"><option value="0">none</option><option value="2">p = 2</option><option value="3">p = 3</option><option value="5">p = 5</option><option value="7">p = 7</option><option value="all" selected>2 3 5 7 11 13</option></select></label>
 </div>
 <div class="grid">
  <div class="panel tall"><h2>Aizawa attractor (RK4, live) <span id="azinfo"></span></h2><canvas id="cA"></canvas></div>
- <div class="panel tall"><h2>ζ(½ + it) <span id="zinfo"></span></h2><canvas id="cZ"></canvas></div>
- <div class="panel short"><h2>Prime spring at height t: Σ −ln(1 − p<sup>−½−it</sup>) over the first primes</h2><canvas id="cE"></canvas>
-  <div class="note"><label>t <input id="te" type="range" min="10" max="1000" value="0" style="width:60%"> <b id="tev"></b></label> <label><input id="efollow" type="checkbox"> follow the path head</label> · each step is one prime (2 3 5 7 11 13 17 19 labelled)</div></div>
+ <div class="panel tall"><h2>ζ(½ + it) <span id="zinfo"></span></h2><canvas id="cZ"></canvas><div class="note" id="orient"></div></div>
+ <div class="panel short"><h2>Prime spring at the current step: Σ −ln(1 − p<sup>−½−it</sup>) over the first 3,000 primes</h2><canvas id="cE"></canvas>
+  <div class="note"><label><input id="efollow" type="checkbox" checked> follow the animation (t = the last zero drawn)</label> · t <b id="tev"></b> <input id="te" type="range" min="10" max="1000" value="0" style="width:40%"> · one step per prime (2 3 5 7 11 13 17 19 labelled)</div></div>
  <div class="panel short"><h2>Zero spectrum: Σ cos(γx)/N over the zeros drawn; spikes at x = ln p<sup>k</sup></h2><canvas id="cS"></canvas>
-  <div class="note"><span style="color:#ffcf5a">■</span> primes ln p · <span style="color:#7ad">■</span> prime powers ln p<sup>k</sup> (k ≥ 2) · the spikes grow as more zeros are drawn</div></div>
+  <div class="note"><span style="color:#ffcf5a">■</span> primes ln p · <span style="color:#7ad">■</span> prime powers ln p<sup>k</sup> (k ≥ 2) · the spikes sharpen as zeros are added</div></div>
 </div>
-<div class="legend"><p><b>Both are a rotation with a radial driver.</b> Aizawa: dφ/dt = d (constant), dr/dt = (z − b) r, and r can never reach the axis. ζ on the critical line: ζ = e<sup>−iθ(t)</sup>·Z(t), angle −θ(t) turning at −θ′(t) = −½ ln(t/2π), radius the signed Z(t); Z′/Z is the sum over the zeros of the pole kernels 1/(t − γ), and the zeros are exactly the axis passages Aizawa forbids.
-In the cylinder chart the zeros sit on the axis at height γ. In the sphere chart every zero is the south pole and the equator ring is |ζ| = 1. The prime ticks mark where prime p's phasor is back at angle 0 (t·ln p = 2πk).</p></div>
+<div class="legend">
+<p><b>What the pole view shows.</b> The path leans to Re ζ &gt; 0: the mean value of ζ(½+it) over t is 1 (the n = 1 term), and the n = 1 term alone is a circle through 0 that never enters Re &lt; 0. The primes and prime powers (n ≥ 2) push the path into Re &lt; 0 for about 24% of its length at 25,000 zeros (18% at 100, 21% at 1,000, 23% at 5,000), so between a fifth and a quarter of the picture is the sparse side, centred on the negative real axis at every zero count. It is not a truncation: it is the width of log ζ, which Selberg (1946) showed grows only like √(½ ln ln t), so the sparse side fills very slowly with height. Exact structure: ζ = S + e<sup>−2iθ</sup> S̄ + R with S = Σ<sub>n≤N</sub> n<sup>−½−it</sup>, N = ⌊√(t/2π)⌋: the prime spring plus its mirror turning at −2θ′, a pseudo-cardioid with no cusp (|Z′| ≥ 0.62 at the first 1,500 zeros).</p>
+<p><b>Both are a rotation with a radial driver.</b> Aizawa: dφ/dt = d, dr/dt = (z − b) r, never reaching the axis. ζ = e<sup>−iθ(t)</sup>·Z(t): angle −θ(t), signed radius Z; Z′/Z is the sum of the zero poles 1/(t − γ). In the cylinder chart the zeros sit on the axis at height γ; in the sphere chart every zero is the south pole. Prime ticks mark where prime p's phasor is back at angle 0 (t·ln p = 2πk).</p>
+<p class="ref"><b>Code and sources on GitHub.</b> This page, its data builder and the experiments: <a href="https://github.com/michaelrendier/RiemannHypothesisProof">michaelrendier/RiemannHypothesisProof</a> (<code>visualizations/javascript/</code>, <code>experiments/</code>); the engines: <a href="https://github.com/michaelrendier/ValaQuenta">michaelrendier/ValaQuenta</a> (<code>modules/zeta_uns_path</code>, <code>modules/aizawa_attractor</code>). The Aizawa animation that prompted the comparison was found as the “Holographic Aizawa Attractor” page, entry 1137 of <a href="https://github.com/xml12333/HTML_CSS_JS">xml12333/HTML_CSS_JS</a> (a collection of code-along projects; original author not established; no licence shown); the code here is an independent port.</p>
+<p class="ref"><b>Literature.</b> Riemann, B. (1859), Über die Anzahl der Primzahlen unter einer gegebenen Grösse. · Gram, J. P. (1903), Note sur les zéros de la fonction ζ(s) de Riemann, Acta Math. 27, 289–304. · Hardy, G. H. (1914), Sur les zéros de la fonction ζ(s) de Riemann, C. R. Acad. Sci. Paris 158, 1012–1014. · Siegel, C. L. (1932), Über Riemanns Nachlaß zur analytischen Zahlentheorie, Quellen Stud. Gesch. Math. Astr. Phys. 2, 45–80. · Selberg, A. (1946), Contributions to the theory of the Riemann zeta-function, Arch. Math. Naturvid. 48(5). · Edwards, H. M. (1974), Riemann's Zeta Function, Academic Press. · Bateman, P. T. &amp; Horn, R. A. (1962), A heuristic asymptotic formula concerning the distribution of prime numbers, Math. Comp. 16, 363–367. · Stein, M., Ulam, S. M. &amp; Wells, M. B. (1964), A visual display of some properties of the distribution of primes, Amer. Math. Monthly 71, 516–520. · The attractor's original paper (Y. Aizawa) is not yet verified against a title page. Cited here from memory, not downloaded.</p>
+<p class="ref">A picture here shows a space or a machinery. It is not evidence about the Riemann Hypothesis.</p>
+</div>
 <script src="zeta_uns_path_data.js"></script>
 <script>
 "use strict";
@@ -119,83 +125,86 @@ function ringGeometry(kind) { const pts = [], R = kind === 'sphere' ? CH.sphere.
   for (const y of ys) for (let i = 0; i <= 128; i++) { const a = i/128*2*Math.PI; pts.push(R*Math.cos(a), y, R*Math.sin(a)); } const a = new Float32Array(pts); return { pos: a, tt: new Float32Array(a.length/3) }; }
 
 /* ───── state ───── */
-const cam = { yaw: 0.6, pitch: 0.35, dist: 4.2 }, camA = { yaw: 0.6, pitch: 0.35, dist: 4.2 };
+const STEPS = 250, PER = 100;        /* the animation: 100 zeros per step, 250 steps, one step per second = 250 s */
+const cam = { yaw: 0.6, pitch: Math.PI/2, dist: 4.2 }, camA = { yaw: 0.6, pitch: Math.PI/2, dist: 4.2 };
 const gA = GL($('cA')), gZ = GL($('cZ'));
-let Aiz = null, Zc = null, ZmarkL = null, ringL = null, ticks = [], kind = 'sphere', frac = 1, playing = false;
+let Aiz = null, Zc = null, ZmarkL = null, ringL = null, merL = null, ticks = [], kind = 'sphere', step = 1, playing = true, Zg = null;
 const PCOL = { 2: [1, .81, .35], 3: [.4, 1, .6], 5: [.45, .75, 1], 7: [1, .5, .8], 11: [1, .6, .3], 13: [.7, .6, 1] };
-let Zg = null;
-function rebuildZ() { if (!gZ) return; const Z = zetaGeometry(kind); Zg = Z; Zc = layer(gZ, Z.pos, Z.tt); const zg = zerosGeometry(kind); ZmarkL = layer(gZ, zg.pos, zg.tt); const r = ringGeometry(kind); ringL = layer(gZ, r.pos, r.tt);
+const ZIDX = new Int32Array(STEPS + 1); for (let k = 1; k <= STEPS; k++) ZIDX[k] = idxOfT(ZEROS[k*PER - 1]);
+/* running statistics along the path, weighted by dt (a t-average): the mean value of zeta and the share of the path with Re zeta < 0 */
+const cW = new Float64Array(N), cNeg = new Float64Array(N), cRe = new Float64Array(N), cIm = new Float64Array(N);
+{ let w = 0, n = 0, re = 0, im = 0; for (let i = 0; i < N; i++) { const d = i < N - 1 ? T[i+1] - T[i] : T[i] - T[i-1]; w += d; if (RE[i] < 0) n += d; re += RE[i]*d; im += IM[i]*d; cW[i] = w; cNeg[i] = n; cRe[i] = re; cIm[i] = im; } }
+function meridianGeometry() { const pts = [], R = CH.sphere.scale; for (let i = 0; i <= 128; i++) { const a = i/128*2*Math.PI; pts.push(0, R*Math.sin(a), R*Math.cos(a)); } const q = new Float32Array(pts); return { pos: q, tt: new Float32Array(q.length/3) }; }   /* Re zeta = 0 is the plane X = 0 of the value sphere */
+function rebuildZ() { if (!gZ) return; const Z = zetaGeometry(kind); Zg = Z; Zc = layer(gZ, Z.pos, Z.tt); const zg = zerosGeometry(kind); ZmarkL = layer(gZ, zg.pos, zg.tt); const r = ringGeometry(kind); ringL = layer(gZ, r.pos, r.tt); const mg = meridianGeometry(); merL = layer(gZ, mg.pos, mg.tt);
   ticks = []; const sel = $('pt').value, ps = sel === 'all' ? [2,3,5,7,11,13] : sel === '0' ? [] : [+sel]; for (const p of ps) { const g = primeTicks(kind, p, Z); ticks.push({ p, L: layer(gZ, g.pos, g.tt) }); } }
 function resize(c) { const w = Math.max(200, c.clientWidth * (window.devicePixelRatio || 1)); if (c.width !== (w|0)) { c.width = w|0; c.height = (c.clientHeight * (window.devicePixelRatio || 1))|0; } }
 function mvpFor(c, cm, centre) { const asp = c.width / c.height; return M4.mul(M4.persp(0.8, asp, 0.1, 100), M4.mul(M4.trans(0, 0, -cm.dist), M4.mul(M4.rotX(cm.pitch), M4.mul(M4.rotY(cm.yaw), M4.trans(-centre[0], -centre[1], -centre[2]))))); }
+const link = () => $('link').checked;
 function render() {
-  if (playing) { frac = Math.min(1, frac + 0.0015); $('nz').value = Math.round(frac*1000); syncN(false); if (frac >= 1) { playing = false; $('play').textContent = '▶ grow'; } }
-  const zn = Math.max(1, Math.round(frac * NZ)), zi = Math.min(N, zn*16 + 1), ai = Math.max(2, Math.round(frac * AZ.points));
-  if (gA) { resize($('cA')); const gl = gA.gl; gl.viewport(0, 0, gA.gl.canvas.width, gA.gl.canvas.height); gl.clear(gl.COLOR_BUFFER_BIT); const m = mvpFor($('cA'), link() ? cam : camA, [0, 0.8, 0]);
+  const zn = step * PER, zi = ZIDX[step] + 1, ai = Math.max(2, Math.round(step / STEPS * AZ.points));
+  if (gA) { resize($('cA')); const gl = gA.gl; gl.viewport(0, 0, gl.canvas.width, gl.canvas.height); gl.clear(gl.COLOR_BUFFER_BIT); const m = mvpFor($('cA'), link() ? cam : camA, [0, 0.8, 0]);
     draw(gA, Aiz, m, { count: ai, mode: 0, size: 1.3, alpha: Math.max(0.1, Math.min(0.7, 30000 / ai)), lines: $('lines').checked }); }
   if (gZ) { resize($('cZ')); const gl = gZ.gl; gl.viewport(0, 0, gl.canvas.width, gl.canvas.height); gl.clear(gl.COLOR_BUFFER_BIT); const m = mvpFor($('cZ'), cam, [0, 0, 0]);
     const zs = Math.ceil(zi / STRIDE); draw(gZ, Zc, m, { count: zs, mode: 0, size: 1.2, alpha: Math.max(0.06, Math.min(0.5, 20000 / zs)), lines: $('lines').checked });
     if ($('eqring').checked) draw(gZ, ringL, m, { mode: 2, size: 1, alpha: 0.5, color: [0.5, 0.8, 1], lines: true });
+    if ($('remer').checked && kind === 'sphere') draw(gZ, merL, m, { mode: 2, size: 1, alpha: 0.55, color: [1, 0.55, 0.55], lines: true });
     if ($('zmark').checked) draw(gZ, ZmarkL, m, { count: zn, mode: 2, size: 2, alpha: kind === 'sphere' ? 0.25 : 0.8, color: [1, 1, 1] });
     for (const tk of ticks) { const keep = Math.round(tk.L.n * Math.min(1, T[Math.min(N-1, zi)] / TMAX)); draw(gZ, tk.L, m, { count: keep, mode: 2, size: 3, alpha: 0.85, color: PCOL[tk.p] }); } }
-  const lastT = T[Math.min(N-1, Math.round(frac * NZ) * 16)];
-  let lit = -1; if (gA) { const gl = gA.gl, w = gl.canvas.width, h = gl.canvas.height, px = new Uint8Array(w * h * 4); gl.readPixels(0, 0, w, h, gl.RGBA, gl.UNSIGNED_BYTE, px); lit = 0; for (let i = 0; i < px.length; i += 4) if (px[i] + px[i+1] + px[i+2] > 60) lit++; }
-  const er = (gA ? gA.gl.getError() : 0); $('azinfo').textContent = '· ' + ai.toLocaleString() + ' points' + (er || window.__glerr ? ' · GL error ' + er + (window.__glerr || '') : '') + (gA ? ' · ' + (gA.gl.getParameter(gA.gl.VERSION)) + ' · lit pixels ' + lit : ''); $('zinfo').textContent = '· zeros ' + zn.toLocaleString() + ' · t up to ' + lastT.toFixed(1) + ' · ' + zi.toLocaleString() + ' path points';
-  if ($('efollow').checked) { $('te').value = Math.min(+$('te').max, lastT); drawEuler(); }
 }
 function frame() { render(); requestAnimationFrame(frame); }
-const link = () => $('link').checked;
+function readout() { const zn = step * PER, i = ZIDX[step], w = cW[i], re = cRe[i] / w, im = cIm[i] / w, neg = cNeg[i] / w;
+  $('azinfo').textContent = '· ' + Math.round(step / STEPS * AZ.points).toLocaleString() + ' points'; $('zinfo').textContent = '· step ' + step + ' of ' + STEPS + ' · zeros ' + zn.toLocaleString() + ' · t = ' + ZEROS[zn-1].toFixed(1) + ' · ' + (i + 1).toLocaleString() + ' path points';
+  $('orient').innerHTML = '⟨ζ⟩ over t so far = <b>' + re.toFixed(3) + (im >= 0 ? ' + ' : ' − ') + Math.abs(im).toFixed(3) + 'i</b> · Re ζ &lt; 0 on <b>' + (100 * neg).toFixed(1) + '%</b> of the path (the sparse side, centred on the negative real axis)'; }
 
 /* ───── mouse ───── */
-function drag(c, cm, other) { let d = null; c.addEventListener('pointerdown', e => { d = [e.clientX, e.clientY]; c.setPointerCapture(e.pointerId); });
+function drag(c, cm) { let d = null; c.addEventListener('pointerdown', e => { d = [e.clientX, e.clientY]; c.setPointerCapture(e.pointerId); });
   c.addEventListener('pointermove', e => { if (!d) return; const t = link() ? cam : cm; t.yaw += (e.clientX - d[0]) * 0.008; t.pitch = Math.max(-1.57, Math.min(1.57, t.pitch + (e.clientY - d[1]) * 0.008)); d = [e.clientX, e.clientY]; });
   c.addEventListener('pointerup', () => d = null); c.addEventListener('wheel', e => { e.preventDefault(); const t = link() ? cam : cm; t.dist = Math.max(1.2, Math.min(14, t.dist * Math.exp(e.deltaY * 0.001))); }, { passive: false });
-  c.addEventListener('dblclick', () => { Object.assign(cam, { yaw: 0.6, pitch: 0.35, dist: 4.2 }); Object.assign(camA, { yaw: 0.6, pitch: 0.35, dist: 4.2 }); }); }
+  c.addEventListener('dblclick', () => { Object.assign(cam, { yaw: 0.6, pitch: Math.PI/2, dist: 4.2 }); Object.assign(camA, { yaw: 0.6, pitch: Math.PI/2, dist: 4.2 }); }); }
 drag($('cA'), camA); drag($('cZ'), cam);
 $('eq').onclick = () => { cam.pitch = 0; camA.pitch = 0; }; $('pole').onclick = () => { cam.pitch = Math.PI/2; camA.pitch = Math.PI/2; };
 $('reset').onclick = () => $('cZ').dispatchEvent(new Event('dblclick'));
 
-/* ───── Euler prime spring (Canvas 2D) ───── */
+/* ───── prime spring (Canvas 2D): the chain of the first 3,000 prime steps at the current t ───── */
 const PR = []; { const s = new Uint8Array(40001).fill(1); s[0] = s[1] = 0; for (let i = 2; i * i <= 40000; i++) if (s[i]) for (let j = i*i; j <= 40000; j += i) s[j] = 0; for (let i = 2; i <= 40000; i++) if (s[i]) PR.push(i); }
 function drawEuler() { const c = $('cE'); resize(c); const x = c.getContext('2d'), W = c.width, H = c.height, t = +$('te').value; $('tev').textContent = t.toFixed(2);
   x.fillStyle = '#05060f'; x.fillRect(0, 0, W, H); let re = 0, im = 0; const pts = []; const P = 3000;
-  for (let k = 0; k < P; k++) { const p = PR[k], mag = Math.pow(p, -0.5), ang = -t * Math.log(p);       // p^{-s}, s = 1/2 + it
-    const ar = mag*Math.cos(ang), ai = mag*Math.sin(ang), nr = 1 - ar, ni = -ai, m2 = nr*nr + ni*ni; re += -0.5*Math.log(m2); im += -Math.atan2(ni, nr); pts.push([re, im]); }   // step = -ln(1 - p^{-s})
+  for (let k = 0; k < P; k++) { const p = PR[k], mag = Math.pow(p, -0.5), ang = -t * Math.log(p), ar = mag*Math.cos(ang), ai = mag*Math.sin(ang), nr = 1 - ar, ni = -ai, m2 = nr*nr + ni*ni; re += -0.5*Math.log(m2); im += -Math.atan2(ni, nr); pts.push([re, im]); }
   let x0 = 1e9, x1 = -1e9, y0 = 1e9, y1 = -1e9; for (const [a, b] of pts) { x0 = Math.min(x0, a); x1 = Math.max(x1, a); y0 = Math.min(y0, b); y1 = Math.max(y1, b); }
   const sc = 0.9 * Math.min(W / (x1 - x0 + 1e-9), H / (y1 - y0 + 1e-9)), ox = W/2 - sc*(x0 + x1)/2, oy = H/2 + sc*(y0 + y1)/2, X = a => ox + sc*a, Y = b => oy - sc*b;
   x.lineWidth = 1; for (let k = 1; k < pts.length; k++) { x.strokeStyle = `hsl(${280 - 280*k/pts.length},90%,62%)`; x.beginPath(); x.moveTo(X(pts[k-1][0]), Y(pts[k-1][1])); x.lineTo(X(pts[k][0]), Y(pts[k][1])); x.stroke(); }
   x.fillStyle = '#fff'; x.font = (11 * (window.devicePixelRatio || 1)) + 'px sans-serif'; for (let k = 0; k < 8; k++) { x.beginPath(); x.arc(X(pts[k][0]), Y(pts[k][1]), 3, 0, 7); x.fill(); x.fillText(PR[k], X(pts[k][0]) + 5, Y(pts[k][1]) - 5); } }
-$('te').addEventListener('input', drawEuler);
+$('te').addEventListener('input', () => { $('efollow').checked = false; drawEuler(); });
 
-/* ───── zero spectrum (Canvas 2D); recomputed for the zeros drawn ───── */
-let spec = SP0, specN = NZ;
-function computeSpec(n) { n = Math.max(1, n | 0); const out = new Float32Array(SX.length); for (let i = 0; i < SX.length; i++) { let s = 0; const x = SX[i]; for (let k = 0; k < n; k++) s += Math.cos(ZEROS[k] * x); out[i] = s / n; } return out; }
+/* ───── zero spectrum (Canvas 2D), updated incrementally as zeros are added ───── */
+let spec = new Float32Array(SX.length), specN = 0; const specSum = new Float64Array(SX.length);
+function setSpec(n) { if (n < specN) { specSum.fill(0); specN = 0; } for (let k = specN; k < n; k++) { const g = ZEROS[k]; for (let i = 0; i < SX.length; i++) specSum[i] += Math.cos(g * SX[i]); } specN = n; for (let i = 0; i < SX.length; i++) spec[i] = specSum[i] / n; drawSpec(); }
 function drawSpec() { const c = $('cS'); resize(c); const x = c.getContext('2d'), W = c.width, H = c.height; x.fillStyle = '#05060f'; x.fillRect(0, 0, W, H);
   const xmin = SX[0], xmax = SX[SX.length-1], X = v => (v - xmin)/(xmax - xmin)*(W - 20) + 10; let amp = 0; for (let i = 0; i < spec.length; i++) if (SX[i] > 0.6) amp = Math.max(amp, Math.abs(spec[i])); amp = Math.max(amp, 1e-4);
-  const Y = v => H/2 - (v/amp)*(H*0.42);
-  const ticksL = []; for (const p of PR) { if (Math.log(p) > xmax) break; for (let k = 1; Math.log(p)*k <= xmax; k++) ticksL.push([Math.log(p)*k, p, k]); }
+  const Y = v => H/2 - (v/amp)*(H*0.42); const ticksL = []; for (const p of PR) { if (Math.log(p) > xmax) break; for (let k = 1; Math.log(p)*k <= xmax; k++) ticksL.push([Math.log(p)*k, p, k]); }
   for (const [lx, p, k] of ticksL) { x.strokeStyle = k === 1 ? 'rgba(255,207,90,.55)' : 'rgba(120,170,220,.35)'; x.beginPath(); x.moveTo(X(lx), 6); x.lineTo(X(lx), H - 6); x.stroke(); }
   x.strokeStyle = '#555'; x.beginPath(); x.moveTo(10, H/2); x.lineTo(W - 10, H/2); x.stroke(); x.strokeStyle = '#7fe0ff'; x.lineWidth = 1.2; x.beginPath();
   for (let i = 0; i < spec.length; i++) { const px = X(SX[i]), py = Math.max(4, Math.min(H - 4, Y(spec[i]))); if (i) x.lineTo(px, py); else x.moveTo(px, py); } x.stroke();
   x.fillStyle = '#ffcf5a'; x.font = (11 * (window.devicePixelRatio || 1)) + 'px sans-serif'; for (const [lx, p, k] of ticksL) if (k === 1 && p <= 13) x.fillText(p, X(lx) - 3, 16);
   x.fillStyle = '#98a2c3'; x.fillText('x = ln p^k   (N = ' + specN.toLocaleString() + ' zeros)', 12, H - 8); }
-let specTimer = null; function scheduleSpec() { clearTimeout(specTimer); specTimer = setTimeout(() => { const n = Math.max(1, Math.round(frac*NZ)); spec = n >= NZ ? SP0 : computeSpec(n); specN = n; drawSpec(); }, 120); }
 
-/* ───── controls ───── */
-function syncN(user) { const v = +$('nz').value / 1000; frac = v; const n = Math.max(1, Math.round(v * NZ)); $('nzv').textContent = n.toLocaleString(); if (user) scheduleSpec(); else if ((Math.round(frac*1000) % 25) === 0) scheduleSpec(); }
-$('nz').addEventListener('input', () => { playing = false; $('play').textContent = '▶ grow'; syncN(true); });
-$('play').onclick = () => { playing = !playing; if (playing && frac >= 1) { frac = 0.002; } $('play').textContent = playing ? '❚❚ pause' : '▶ grow'; };
-$('chart').onchange = e => { kind = e.target.value; rebuildZ(); }; $('pt').onchange = rebuildZ;
-for (const id of ['te']) { $(id).max = Math.floor(TMAX); $(id).value = 14.1347; } drawEuler();
-if (gA) { const g = azGeometry(); Aiz = layer(gA, g.pos, g.line); }
-/* URL options: ?chart=sphere|cyl|flat  &view=pole|eq  &zeros=NUMBER  &ticks=0|2|3|5|7|all  &snap=1 (replace each WebGL canvas by a still image: for screenshots in browsers that do not capture WebGL) */
+/* ───── the animation: one step per second ───── */
+function setStep(k) { step = Math.max(1, Math.min(STEPS, k)); $('nz').value = step; $('nzv').textContent = step + ' / ' + STEPS + ' · ' + (step * PER).toLocaleString() + ' zeros';
+  if ($('efollow').checked) $('te').value = ZEROS[step * PER - 1]; drawEuler(); setSpec(step * PER); readout(); render(); }
+$('nz').addEventListener('input', e => setStep(+e.target.value));
+$('fwd').onclick = () => setStep(step + 1); $('back').onclick = () => setStep(step - 1);
+$('play').onclick = () => { if (step >= STEPS && !playing) setStep(1); playing = !playing; $('play').textContent = playing ? '❚❚ pause' : '▶ play'; };
+setInterval(() => { if (!playing) return; if (step >= STEPS) { playing = false; $('play').textContent = '▶ replay'; return; } setStep(step + 1); }, 1000);
+$('chart').onchange = e => { kind = e.target.value; rebuildZ(); }; $('pt').onchange = rebuildZ; $('efollow').onchange = () => setStep(step);
+$('te').max = Math.floor(TMAX);
+/* URL options: ?chart=sphere|cyl|flat &view=pole|eq|tilt &step=1..250 &play=0 &ticks=0|2|3|5|7|all &snap=1 (replace each WebGL canvas by a still image: for screenshots in browsers that do not capture WebGL) */
 const Q = new URLSearchParams(location.search);
 if (Q.get('chart')) { kind = Q.get('chart'); $('chart').value = kind; } if (Q.get('ticks')) $('pt').value = Q.get('ticks');
-if (Q.get('view') === 'pole') { cam.pitch = Math.PI/2; camA.pitch = Math.PI/2; } if (Q.get('view') === 'eq') { cam.pitch = 0; camA.pitch = 0; }
-if (Q.get('zeros')) { $('nz').value = Math.round(+Q.get('zeros') / NZ * 1000); }
-rebuildZ(); syncN(true); drawSpec(); addEventListener('resize', () => { drawEuler(); drawSpec(); }); render();
-if (Q.get('snap')) { render(); for (const id of ['cA', 'cZ']) { const c = $(id), im = new Image(); im.src = c.toDataURL('image/png'); im.style.cssText = 'display:block;width:100%'; c.parentNode.replaceChild(im, c); } }
-else requestAnimationFrame(frame);
+if (Q.get('view') === 'eq') { cam.pitch = 0; camA.pitch = 0; } if (Q.get('view') === 'tilt') { cam.pitch = 0.35; camA.pitch = 0.35; }
+if (Q.get('play') === '0' || Q.get('snap')) { playing = false; $('play').textContent = '▶ play'; }
+if (gA) { const g = azGeometry(); Aiz = layer(gA, g.pos, g.line); }
+rebuildZ(); addEventListener('resize', () => { drawEuler(); drawSpec(); }); setStep(Q.get('step') ? +Q.get('step') : 1);
+if (Q.get('snap')) { render(); for (const id of ['cA', 'cZ']) { const c = $(id), im = new Image(); im.src = c.toDataURL('image/png'); im.style.cssText = 'display:block;width:100%'; c.parentNode.replaceChild(im, c); } } else requestAnimationFrame(frame);
 </script>
 </body>
 </html>

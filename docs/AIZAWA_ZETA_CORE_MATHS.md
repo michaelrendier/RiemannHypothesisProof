@@ -65,8 +65,21 @@ The CSS "Gradient Mesh" (#1074 in the collection) is nine radial gradients on a 
 | A₂ root system (the trig hexagon) | all six trig functions from rotation; `rhp/trig_hexagon.py` | its tests |
 | RK4 and Lyapunov exponents | any path you integrate | engine tests |
 
-## 8. Open
+## 8. The sparse side, the pseudo-cardioid, and the Ulam diagonals (2026-11-24, second pass; `experiments/pole_density_and_ulam.py`)
+
+**The sparse side seen from the pole.** The mean value of ζ(½+it) over t is 1.0000 at every zero count (the n = 1 term), so the path leans to Re ζ > 0. The share of the path with Re ζ < 0 is 18% (100 zeros), 21% (1,000), 23% (5,000), **24.0% (25,000)**: between a fifth and a quarter. The least-dense direction is the negative real axis (−177.5°) at every count. It is not a truncation: the n = 1 term alone is a circle through 0 that never enters Re < 0, the primes and prime powers push the path into Re < 0, and the width of log ζ grows only like √(½ ln ln t) (Selberg 1946), so the sparse side fills very slowly with height; more primes at the same heights would not remove it.
+
+**The pseudo-cardioid.** ζ = S + e^(−2iθ) S̄ + R with S = Σ_{n≤N} n^(−½−it), N = ⌊√(t/2π)⌋ (exact algebra of the Riemann–Siegel sum; residual ≤ (t/2π)^(−1/4), measured ratio to the bound ≤ 0.92). So the path is the prime spring S plus its mirror turning at −2θ′. N = 1 gives a circle through 0; adding n ≥ 2 gives the pseudo-cardioid. A true cardioid has a cusp where the speed is 0; ζ crosses 0 with speed |Z′| ≥ 0.62 at each of the first 1,500 zeros (median 3.77), so there is no cusp.
+
+**The Ulam diagonals.** In a 301 × 301 square spiral there are 2,239 straight diagonal pieces (length ≥ 8). Every one has second difference exactly 8, so every piece is f(k) = 4k² + bk + c, which is the perfect squares displaced by a constant: f = 4x² − D/16 with x = k + b/8 and D = b² − 16c (identity error 4×10⁻⁹).
+- A **whole (central) diagonal**: small |D|; D = 0 is the squares themselves (b = 4, c = 1: (2k+1)², no primes).
+- The **short diagonals where primes sit**: pieces of non-central diagonal lines, each with its own D. The richest in this spiral: D = −652 (86 primes in 131 terms, two pieces with the same D and different (b, c): phase offsets of each other), D = −12 (74 in 301), D = 272 (72 in 142). Prime richness follows the character (D/p), as in §5.
+- **What they are a shadow of.** In the Sacks picture (radius √m, angle 2π√m) a diagonal is a ray at the fixed angle **πb/2 (mod 2π)**, because the angle step 2π√4 = 4π ≡ 0; it bends by **−πD/(32k)**. Measured: err × k = 1.5708 for D = −16 and 1.1778 for D = −12, against predicted 1.5708 and 1.1781; D = 0 is exact. So a diagonal is the shadow of the squares of the even numbers, displaced by −D/16, wound onto the plane at the resonance angle where √a is an integer. A phase offset in k keeps D; moving to a parallel diagonal changes D.
+
+**The boundary-engine images (all viewed).** W1/O3 strips: concentric rosette rings; O2 strips: the worm, a tight core with one long arm; R3 strips: a pinwheel that goes to a star and back to a plain spiral at τ = 1; Z1 strips: the ζ Euler path, a spiral of circles with a scribbled core that, at τ = 1, sits displaced from the origin with a jagged tail (the later, smaller prime steps). Transitions G1→Z1 and O2→Z1 (cartesian, polar, fallback) all end at α = 1 on the identical Z1 image (concentric circles about a displaced centre, jagged tail to the right), by different roads: G1 through a chain of trochoid curls, O2 through a contracting spiral with crescents; O2→O3 and R2→R3 end on dense rosettes/pinwheels instead. That is the "different spiral pathways ending on the same object": Z1 is the prime spring S, whose loops are uniform in ln p with spacing 2π/t.
+
+## 9. Open
 
 - The Aizawa paper reference is not yet verified against a title page; the origin of the animation page is unknown.
 - Asked, not yet done: `AbrikosovTree` Ulam spaces read as phase offsets of a shared Δ, and the L-function zeros of one χ_Δ drawn beside ζ's.
-- The boundary engine's finding that different spirals end on the same object was read from its poster only, not analysed here.
+- Whether the pseudo-cardioid / prime-spring structure can replace the orbweaver is untested: it needs the orbweaver's job stated as a test (what it predicts, on what data).
