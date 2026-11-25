@@ -20,7 +20,7 @@ header{padding:12px 16px;border-bottom:1px solid var(--line)}h1{font-size:18px;m
 .grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:10px 16px}.panel{background:var(--card);border:1px solid var(--line);border-radius:8px;overflow:hidden}
 .panel h2{font-size:12.5px;margin:0;padding:6px 10px;border-bottom:1px solid var(--line);color:var(--mut);font-weight:600}
 canvas{display:block;width:100%;background:var(--cv);touch-action:none}.tall canvas{aspect-ratio:1/1}.short canvas{aspect-ratio:2/1}.wide{grid-column:1/-1}.wide canvas{aspect-ratio:4.2/1}
-.note{padding:6px 10px 8px;color:var(--mut);font-size:12px}.note.big{font-size:12.5px;line-height:1.5}.panel{position:relative}.giz{position:absolute;left:8px;top:34px;width:160px;height:104px;pointer-events:none}.ref{font-size:12px}.ref a{color:var(--acc)}.legend{padding:0 16px 14px;color:var(--mut);font-size:12.5px;max-width:1100px}.legend b{color:var(--fg)}
+.note{padding:6px 10px 8px;color:var(--mut);font-size:12px}.note.big{font-size:12.5px;line-height:1.5}.panel{position:relative}.nlab{position:absolute;left:0;top:34px;width:100%;aspect-ratio:1/1;pointer-events:none;background:none!important}.giz{position:absolute;left:8px;top:34px;width:160px;height:104px;pointer-events:none}.ref{font-size:12px}.ref a{color:var(--acc)}.legend{padding:0 16px 14px;color:var(--mut);font-size:12.5px;max-width:1100px}.legend b{color:var(--fg)}
 @media (max-width:800px){.grid{grid-template-columns:1fr}}
 </style>
 </head>
@@ -44,11 +44,12 @@ canvas{display:block;width:100%;background:var(--cv);touch-action:none}.tall can
  <label><input id="paint" type="checkbox"> paint the attractor with ζ(x + 19iy)</label>
  <label><input id="env" type="checkbox" checked> bound ring</label>
  <label><input id="front" type="checkbox" checked> frontier (the farthest reach in each direction)</label>
+  <label><input type="checkbox" id="nlab" checked> number the steps</label> <label><input type="checkbox" id="nall"> every step (else every 10th)</label>
  <label>prime ticks <select id="pt"><option value="0">none</option><option value="2">p = 2</option><option value="3">p = 3</option><option value="5">p = 5</option><option value="7">p = 7</option><option value="all" selected>2 3 5 7 11 13</option></select></label>
 </div>
 <div class="grid">
  <div class="panel tall"><h2>Aizawa attractor (RK4, live) <span id="azinfo"></span></h2><canvas id="cA"></canvas><canvas id="gA" class="giz" width="320" height="208"></canvas><div class="note" id="anote"></div></div>
- <div class="panel tall"><h2>ζ(½ + it) <span id="zinfo"></span></h2><canvas id="cZ"></canvas><canvas id="gZ" class="giz" width="320" height="208"></canvas><div class="note" id="orient"></div></div>
+ <div class="panel tall"><h2>ζ(½ + it) <span id="zinfo"></span></h2><canvas id="cZ"></canvas><canvas id="gZ" class="giz" width="320" height="208"></canvas><canvas id="nZ" class="nlab"></canvas><div class="note" id="orient"></div></div>
  <div class="panel short"><h2>Prime spring at the current step: Σ −ln(1 − p<sup>−½−it</sup>) over the first 3,000 primes</h2><canvas id="cE"></canvas>
   <div class="note"><label><input id="efollow" type="checkbox" checked> follow the animation (t = the last zero drawn)</label> · t <b id="tev"></b> <input id="te" type="range" min="10" max="1000" value="0" style="width:40%"> · one step per prime (2 3 5 7 11 13 17 19 labelled)</div></div>
  <div class="panel short"><h2>The flow of the primes in the zeros (Landau 1911): Σ cos(γ ln n) over the zeros drawn, against −(T/2π) Λ(n)/√n</h2><canvas id="cS"></canvas>
@@ -208,7 +209,12 @@ function drawGizmo(id, cm, labs, cap) { const c = $(id); if (!c) return; const x
     x.globalAlpha = o.d < -0.05 ? 0.45 : 1; x.strokeStyle = cols[o.i]; x.fillStyle = cols[o.i]; const tx = cx + o.px * L, ty = cy - o.py * L; x.beginPath(); x.moveTo(cx, cy); x.lineTo(tx, ty); x.stroke(); x.beginPath(); x.arc(tx, ty, 4, 0, 7); x.fill(); x.fillText(labs[o.i], tx + 6, ty + 4); });
   x.globalAlpha = 1; x.fillStyle = '#ffb3b3'; x.font = '13px sans-serif'; x.fillText(cap, 4, H - 6); }
 function drawGizmos() { const un = $('achart').value === 'uns'; drawGizmo('gA', link() ? cam : camA, un ? LABS.Au : LABS.A, 'gold = the plane z = b (radial balance)'); drawGizmo('gZ', cam, LABS[kind], kind === 'attr' ? 'ζ/(1+|ζ|) · curve = σ = ½' : 'curve = σ = ½'); }
-function renderAll() { render(); drawGizmos(); }
+function drawStepNumbers() { const c = $('nZ'), z = $('cZ'); if (!c || !z || !Zg) return; c.width = z.width; c.height = z.height; const x = c.getContext('2d'); x.clearRect(0, 0, c.width, c.height); if (!$('nlab').checked) return;
+  const W = c.width, H = c.height, dpr = window.devicePixelRatio || 1, m = mvpFor(z, cam, [0, 0, 0]), P = Zg.pos, every = $('nall').checked ? 1 : 10, blk = blockMode(); x.font = (10 * dpr) + 'px sans-serif'; x.textBaseline = 'middle';
+  for (let k = 1; k <= step; k++) { if (blk ? (k !== step) : (k % every && k !== step)) continue; const i = ZIDX[k], px = P[3*i], py = P[3*i+1], pz = P[3*i+2];
+    const cx = m[0]*px + m[4]*py + m[8]*pz + m[12], cy = m[1]*px + m[5]*py + m[9]*pz + m[13], cw = m[3]*px + m[7]*py + m[11]*pz + m[15]; if (cw <= 0) continue;
+    const sx = (cx / cw * 0.5 + 0.5) * W, sy = (1 - (cy / cw * 0.5 + 0.5)) * H, cur = k === step; x.fillStyle = cur ? '#ffe36b' : 'rgba(255,255,255,.85)'; x.beginPath(); x.arc(sx, sy, 2.2 * dpr, 0, 7); x.fill(); x.fillText(String(k), sx + 4 * dpr, sy); } }
+function renderAll() { render(); drawGizmos(); drawStepNumbers(); }
 function tag(x, W, text) { x.fillStyle = '#ffb3b3'; x.font = (11 * (window.devicePixelRatio || 1)) + 'px sans-serif'; x.fillText(text, W - x.measureText(text).width - 8, 14 * (window.devicePixelRatio || 1)); }
 
 function render() {
