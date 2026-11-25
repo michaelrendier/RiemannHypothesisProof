@@ -12,7 +12,7 @@ from .. import wrap as W
 
 N = 2500
 
-HTML = r"""<!doctype html><meta charset=utf-8><title>Extinction flow</title>
+HTML = r"""<!doctype html><meta charset=utf-8><title>Extinction flow</title><link rel="icon" type="image/png" href="https://michaelrendier.github.io/assets/favicon.png">
 <style>body{font:13px monospace;margin:12px;background:#fff;color:#1b1b1f}canvas{border:1px solid #ccc;margin-right:8px}
 @media(prefers-color-scheme:dark){body{background:#15151a;color:#ddd}canvas{border-color:#444}}</style>
 <h3>The extinction flow: Telperion (sieve) and Laurelin (un-sieve) as τ = ln y runs</h3>

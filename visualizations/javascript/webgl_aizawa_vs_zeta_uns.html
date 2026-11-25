@@ -1,6 +1,7 @@
 <!doctype html>
 <html lang="en">
 <head>
+<link rel="icon" type="image/png" href="favicon.png">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Aizawa vs Zeta in UNS</title>
@@ -29,7 +30,7 @@ canvas{display:block;width:100%;background:var(--cv);touch-action:none}.tall can
 <div class="bar">
  <button id="play">❚❚ pause</button><button id="back">◀ step</button><button id="fwd">step ▶</button>
  <label>step <input id="nz" type="range" min="1" max="250" value="1" style="width:220px"><b id="nzv"></b></label>
- <label>ζ chart <select id="chart"><option value="sphere">Riemann sphere (value)</option><option value="cyl">UNS cylinder (spring: ρ, φ, ln t)</option><option value="flat">UNS flat (log-polar)</option></select></label>
+ <label>ζ chart <select id="chart"><option value="sphere">Riemann sphere (value)</option><option value="attr">Through the sphere (ζ compressed + driver Z′/Z)</option><option value="cyl">UNS cylinder (spring: ρ, φ, ln t)</option><option value="flat">UNS flat (log-polar)</option></select></label>
  <button id="eq">equatorial view</button><button id="pole">from the pole</button><button id="reset">reset</button>
  <label><input id="link" type="checkbox" checked> link cameras</label>
  <label><input id="blk" type="checkbox"> each 100 separately (not cumulative)</label>
@@ -39,6 +40,7 @@ canvas{display:block;width:100%;background:var(--cv);touch-action:none}.tall can
  <label><input id="zmark" type="checkbox" checked> zeros</label>
  <label><input id="paint" type="checkbox"> paint the attractor with ζ(x + 19iy)</label>
  <label><input id="env" type="checkbox" checked> bound ring</label>
+ <label><input id="front" type="checkbox" checked> frontier (the farthest reach in each direction)</label>
  <label>prime ticks <select id="pt"><option value="0">none</option><option value="2">p = 2</option><option value="3">p = 3</option><option value="5">p = 5</option><option value="7">p = 7</option><option value="all" selected>2 3 5 7 11 13</option></select></label>
 </div>
 <div class="grid">
@@ -57,6 +59,8 @@ canvas{display:block;width:100%;background:var(--cv);touch-action:none}.tall can
 </div>
 <div class="legend">
 <p><b>What the pole view shows.</b> The path leans to Re ζ &gt; 0: the mean value of ζ(½+it) over t is 1 (the n = 1 term), and the n = 1 term alone is a circle through 0 that never enters Re &lt; 0. The primes and prime powers (n ≥ 2) push the path into Re &lt; 0 for about 24% of its length at 25,000 zeros (18% at 100, 21% at 1,000, 23% at 5,000), so between a fifth and a quarter of the picture is the sparse side, centred on the negative real axis at every zero count. It is not a truncation: it is the width of log ζ, which Selberg (1946) showed grows only like √(½ ln ln t), so the sparse side fills very slowly with height. Exact structure: ζ = S + e<sup>−2iθ</sup> S̄ + R with S = Σ<sub>n≤N</sub> n<sup>−½−it</sup>, N = ⌊√(t/2π)⌋: the prime spring plus its mirror turning at −2θ′, a pseudo-cardioid with no cusp (|Z′| ≥ 0.62 at the first 1,500 zeros).</p>
+<p><b>The orange slice, measured.</b> On the value sphere the slice is not empty but it is cut from the large-|ζ| end: of the points with |ζ| &gt; 6 only 9.6% have Re ζ &lt; 0 (18% for |ζ| &gt; 1), and the left/right density ratio falls from 0.37 near the origin to 0.05 near ∞. Every one of the 24,998 lobes (the loop between two zeros) has its peak within 120° of +Re: 15,797 within 30°, 7,470 at 30–60°, 1,625 at 60–90°, 106 at 90–120°, none beyond. The farthest the path reaches in each direction, the <b>frontier</b> (yellow), is a limaçon, r(φ) ≈ 13.3 + 7.0 cos φ (R² = 0.977, b/a = 1.9: a pseudo-cardioid, smooth, no cusp): 19.8 toward +Re and 4.6 toward −Re. The slice is its dimple. Reason: ζ = S + e<sup>−2iθ</sup> S̄ with S = 1 + (n ≥ 2 terms) and |ζ| ≤ 2|S|; the fixed first term 1 puts the centre of S on +1, so a large |S| is mostly 1 plus aligned terms. In the <b>through-the-sphere</b> chart (ζ compressed to a disc, and the driver Z′/Z as the third coordinate, Aizawa's x, y, z analogue) the path crosses the unit sphere: 32% of it inside, 68% outside, median radius 1.03, and the left wedge (|arg| &gt; 138°) is almost empty: 12 of its 1,644 cells are visited, against 48% of the whole ball. Each zero is a vertical line through the centre of the sphere.</p>
+<p><b>The slices, nested.</b> Taking the first N zeros, the frontier grows outward and the slice outside it shrinks at every checkpoint. N = 100, 200, 500, 1,000, 2,000, 5,000, 10,000, 25,000: reach toward +Re 6.1, 7.6, 9.2, 10.5, 13.4, 14.8, 16.5, 19.8 (growing like t<sup>0.255</sup>, the t<sup>¼</sup> of the Riemann–Siegel bound); reach toward −Re 0.01, 0.35, 1.4, 1.5, 2.3, 3.2, 5.1, 5.1 (faster but in jumps: nothing new between 10,000 and 25,000 zeros); wedge width (where the frontier is under half the +Re reach) 170°, 165°, 155°, 140°, 140°, 130°, 110°, 110°. Per window of 1,000 zeros the Re &lt; 0 share rises 0.207 → 0.251 and the left/right density 0.054 → 0.125, both linear in ln ln t (R² 0.90, 0.88): Selberg's slow broadening. Block to block there is no alternating pattern (residual spread 0.009, autocorrelations about 0).</p>
 <p><b>The flow of the primes, and what the maths say it is.</b> Landau's formula (1911; Gonek 1993): for a prime power n = p<sup>k</sup>, Σ<sub>0&lt;γ≤T</sub> cos(γ ln n) = −(T/2π) Λ(n)/√n + O(log T). The zeros, as a set of frequencies, carry a spike at every ln p<sup>k</sup> with weight ln p/p<sup>k/2</sup>; the bars show it converging as zeros are added (mean deviation from the prediction 0.138 at 100 zeros, 0.0019 at 25,000, for the prime powers below 60). The same fact in the zero positions: the fluctuation of the zero count, S(T) = N(T) − θ(T)/π − 1 = (1/π) arg ζ(½+iT), is a sum of prime waves, S(T) ≈ −(1/π) Σ<sub>p,k</sub> sin(kT ln p)/(k p<sup>k/2</sup>) (Selberg 1946; Titchmarsh §14). Regressing S at the 24,999 gaps on sin and cos of T ln n for the prime powers n ≤ 200 explains 99.6% of its variance; the fitted amplitudes for p = 2, 3, 5, 7 are 97%, 93%, 86%, 80% of the predicted −1/(π k p<sup>k/2</sup>), falling for larger p because the sum is truncated (Selberg's smoothing). So the primes flow through the zeros as the phase wobble of the pathway: each block of 100 zeros turns 50 times (θ rises by π per zero), and the wobble in where the zeros fall is the primes.</p>
 <p><b>The blocks.</b> Each block of 100 zeros winds 49.3 to 50.5 turns, so the area it sweeps does not halve. What shrinks is the new ground it adds to the blocks before: 443, 181, 120, 82, 66, 61, 42, 46, 40, 31 cells of a 40 × 40 map of the value plane (ratios 0.41, 0.66, 0.68, 0.80, 0.92, …). The blocks repeat one footprint, the pseudo-cardioid, and the union saturates (1,598 of 1,600 cells); the block's spread grows slowly with height.</p>
 <p><b>Both are a rotation with a radial driver.</b> Aizawa: dφ/dt = d, dr/dt = (z − b) r, never reaching the axis. ζ = e<sup>−iθ(t)</sup>·Z(t): angle −θ(t), signed radius Z; Z′/Z is the sum of the zero poles 1/(t − γ). In the cylinder chart the zeros sit on the axis at height γ; in the sphere chart every zero is the south pole. Prime ticks mark where prime p's phasor is back at angle 0 (t·ln p = 2πk).</p>
@@ -70,7 +74,7 @@ canvas{display:block;width:100%;background:var(--cv);touch-action:none}.tall can
 "use strict";
 const D = window.ZETA_UNS, $ = id => document.getElementById(id);
 const f32 = s => { const b = atob(s), u = new Uint8Array(b.length); for (let i = 0; i < b.length; i++) u[i] = b.charCodeAt(i); return new Float32Array(u.buffer); };
-const T = f32(D.t), RE = f32(D.re), IM = f32(D.im), ZEROS = f32(D.zeros), SX = f32(D.specx), SP0 = f32(D.spec), N = D.n, NZ = D.nz, TMAX = D.tmax;
+const T = f32(D.t), RE = f32(D.re), IM = f32(D.im), DRV = f32(D.drv), ZEROS = f32(D.zeros), SX = f32(D.specx), SP0 = f32(D.spec), N = D.n, NZ = D.nz, TMAX = D.tmax;
 
 /* ───── small matrix kit (column-major) ───── */
 const M4 = {
@@ -119,11 +123,12 @@ function azGeometry() { const pos = new Float32Array(AZ.points*3), line = new Fl
 
 /* ───── zeta charts ───── */
 const STRIDE = 1;          /* draw every 3rd path point (133k of 400k): the order and the growth are kept, the glow stays readable */
-const CH = { sphere: { scale: 1.05 }, cyl: { scale: 0.27, H: 1.5 }, flat: { scale: 0.27 } };
+const CH = { attr: { scale: 1.05 }, sphere: { scale: 1.05 }, cyl: { scale: 0.27, H: 1.5 }, flat: { scale: 0.27 } };
 function zetaGeometry(kind) {
   const Ns = Math.ceil(N / STRIDE), pos = new Float32Array(Ns*3), tt = new Float32Array(Ns);
   for (let j = 0; j < Ns; j++) { const i = j * STRIDE, re = RE[i], im = IM[i], m = re*re + im*im, T_i = T[i]; tt[j] = i / N;
-    if (kind === 'sphere') { const X = 2*re/(m+1), Y = 2*im/(m+1), Z = (m-1)/(m+1); pos[3*j] = X*CH.sphere.scale; pos[3*j+1] = Z*CH.sphere.scale; pos[3*j+2] = Y*CH.sphere.scale; }
+    if (kind === 'attr') { const mm = Math.sqrt(m), k_ = CH.attr.scale / (1 + mm); pos[3*j] = re * k_; pos[3*j+1] = DRV[i] * CH.attr.scale; pos[3*j+2] = im * k_; }
+    else if (kind === 'sphere') { const X = 2*re/(m+1), Y = 2*im/(m+1), Z = (m-1)/(m+1); pos[3*j] = X*CH.sphere.scale; pos[3*j+1] = Z*CH.sphere.scale; pos[3*j+2] = Y*CH.sphere.scale; }
     else { const rho = Math.max(0, Math.log10(Math.sqrt(m) + 1e-30) + 3), phi = Math.atan2(im, re), r = rho*CH[kind].scale;
       pos[3*j] = r*Math.cos(phi); pos[3*j+1] = kind === 'cyl' ? heightOf('cyl', T_i) : 0; pos[3*j+2] = r*Math.sin(phi); } }
   return { pos, tt };
@@ -131,9 +136,10 @@ function zetaGeometry(kind) {
 function heightOf(kind, t) { return kind === 'cyl' ? ((Math.log(Math.max(t, 10) / 10) / Math.log(TMAX / 10))*2 - 1)*CH.cyl.H : 0; }   /* cylinder height = ln t (log-height), so the first blocks have room */
 function idxOfT(t) { let lo = 0, hi = N - 1; while (lo < hi) { const m = (lo + hi) >> 1; if (T[m] < t) lo = m + 1; else hi = m; } return lo; }
 function zerosGeometry(kind) { const pos = new Float32Array(NZ*3), tt = new Float32Array(NZ);
-  for (let k = 0; k < NZ; k++) { tt[k] = k / NZ; const y = kind === 'sphere' ? -CH.sphere.scale : heightOf(kind, ZEROS[k]); pos[3*k+1] = y; } return { pos, tt }; }
+  for (let k = 0; k < NZ; k++) { tt[k] = k / NZ; const y = kind === 'sphere' ? -CH.sphere.scale : kind === 'attr' ? 0 : heightOf(kind, ZEROS[k]); pos[3*k+1] = y; } return { pos, tt }; }
 function primeTicks(kind, p, Z) { const d = 2*Math.PI/Math.log(p), out = []; for (let k = Math.ceil(10/d); k*d <= TMAX; k++) { const i = Math.min(Z.tt.length - 1, Math.round(idxOfT(k*d) / STRIDE)); out.push(Z.pos[3*i], Z.pos[3*i+1], Z.pos[3*i+2]); } const a = new Float32Array(out); return { pos: a, tt: new Float32Array(a.length/3) }; }
-function ringGeometry(kind) { const pts = [], R = kind === 'sphere' ? CH.sphere.scale : 3*CH[kind].scale, ys = kind === 'cyl' ? [-CH.cyl.H, 0, CH.cyl.H] : [0];
+function ringGeometry(kind) { if (kind === 'attr') { const q = [], S_ = CH.attr.scale; for (let i = 0; i <= 128; i++) { const a = i/128*2*Math.PI; q.push(S_*Math.cos(a), 0, S_*Math.sin(a)); } for (let i = 0; i <= 128; i++) { const a = i/128*2*Math.PI; q.push(S_*Math.cos(a), S_*Math.sin(a), 0); } for (let i = 0; i <= 128; i++) { const a = i/128*2*Math.PI; q.push(0, S_*Math.sin(a), S_*Math.cos(a)); } const aa = new Float32Array(q); return { pos: aa, tt: new Float32Array(aa.length/3) }; }
+  const pts = [], R = kind === 'sphere' ? CH.sphere.scale : 3*CH[kind].scale, ys = kind === 'cyl' ? [-CH.cyl.H, 0, CH.cyl.H] : [0];
   for (const y of ys) for (let i = 0; i <= 128; i++) { const a = i/128*2*Math.PI; pts.push(R*Math.cos(a), y, R*Math.sin(a)); } const a = new Float32Array(pts); return { pos: a, tt: new Float32Array(a.length/3) }; }
 
 /* ───── state ───── */
@@ -150,6 +156,14 @@ const cW = new Float64Array(N), cNeg = new Float64Array(N), cRe = new Float64Arr
 const GN = 40, BCELL = [], NEWC = new Int32Array(STEPS + 1), CUMC = new Int32Array(STEPS + 1), BCNT = new Int32Array(STEPS + 1);
 { const seen = new Uint8Array(GN*GN); for (let k = 1; k <= STEPS; k++) { const occ = new Uint8Array(GN*GN); for (let i = ZIDX[k-1]; i <= ZIDX[k]; i++) { const cx = Math.floor((RE[i] + 4) / 10 * GN), cy = Math.floor((IM[i] + 5) / 10 * GN); if (cx >= 0 && cx < GN && cy >= 0 && cy < GN) occ[cy*GN + cx] = 1; }
   let nw = 0, c = 0; for (let j = 0; j < GN*GN; j++) { if (occ[j]) { c++; if (!seen[j]) { nw++; seen[j] = 1; } } } BCELL[k] = occ; NEWC[k] = nw; BCNT[k] = c; CUMC[k] = (CUMC[k-1] || 0) + nw; } }
+const FB = 72, FRC = new Float32Array((STEPS + 1) * FB), FRB = new Float32Array((STEPS + 1) * FB);   /* the frontier: farthest |zeta| reached in each 5-degree direction, cumulative (FRC) and within the block (FRB) */
+{ const run = new Float32Array(FB); for (let k = 1; k <= STEPS; k++) { const blk = new Float32Array(FB); for (let i = ZIDX[k-1]; i <= ZIDX[k]; i++) { const b = Math.min(FB - 1, Math.floor((Math.atan2(IM[i], RE[i]) + Math.PI) / (2 * Math.PI / FB))), m_ = Math.hypot(RE[i], IM[i]); if (m_ > run[b]) run[b] = m_; if (m_ > blk[b]) blk[b] = m_; } FRC.set(run, k * FB); FRB.set(blk, k * FB); } }
+let frL = null;
+function rebuildFrontier() { if (!gZ) return; const pts = [], bl = blockMode(), arr = bl ? FRB : FRC, S_ = (CH[kind] || CH.sphere).scale, tNow = T[ZIDX[step]]; for (let b = 0; b <= FB; b++) { const bb = b % FB, m = Math.max(arr[step * FB + bb], 1e-3), phi = -Math.PI + (bb + 0.5) * 2 * Math.PI / FB;
+    if (kind === 'sphere') { const X = 2*m*Math.cos(phi)/(m*m + 1), Y = 2*m*Math.sin(phi)/(m*m + 1), Z = (m*m - 1)/(m*m + 1); pts.push(X*S_, Z*S_, Y*S_); }
+    else if (kind === 'attr') { const u = m / (1 + m); pts.push(u*Math.cos(phi)*S_, 0, u*Math.sin(phi)*S_); }
+    else { const rho = Math.max(0, Math.log10(m) + 3) * CH[kind].scale; pts.push(rho*Math.cos(phi), kind === 'cyl' ? heightOf('cyl', tNow) : 0, rho*Math.sin(phi)); } }
+  const q = new Float32Array(pts); frL = layer(gZ, q, new Float32Array(q.length / 3)); }
 function meridianGeometry() { const pts = [], R = CH.sphere.scale; for (let i = 0; i <= 128; i++) { const a = i/128*2*Math.PI; pts.push(0, R*Math.sin(a), R*Math.cos(a)); } const q = new Float32Array(pts); return { pos: q, tt: new Float32Array(q.length/3) }; }   /* Re zeta = 0 is the plane X = 0 of the value sphere */
 function rebuildZ() { if (!gZ) return; const Z = zetaGeometry(kind); Zg = Z; Zc = layer(gZ, Z.pos, Z.tt); const zg = zerosGeometry(kind); ZmarkL = layer(gZ, zg.pos, zg.tt); const r = ringGeometry(kind); ringL = layer(gZ, r.pos, r.tt); const mg = meridianGeometry(); merL = layer(gZ, mg.pos, mg.tt);
   ticks = []; const sel = $('pt').value, ps = sel === 'all' ? [2,3,5,7,11,13] : sel === '0' ? [] : [+sel]; for (const p of ps) { const g = primeTicks(kind, p, Z), d = 2*Math.PI/Math.log(p); ticks.push({ p, L: layer(gZ, g.pos, g.tt), d, k0: Math.ceil(10/d) }); } }
@@ -166,15 +180,15 @@ function drawAzExtras(m) { if (!gA || !azPlane) return; draw(gA, azPlane, m, { f
   if ($('paint').checked) { draw(gA, AzP, m, { count: AzP.n, mode: 0, size: 3, alpha: 0.85 }); for (let j = 0; j < 6; j++) draw(gA, azZero, m, { first: 2 * j, count: 2, mode: 2, size: 1, alpha: 0.9, color: [1, 1, 1], lines: true }); } }
 function Benv(t) { const N_ = Math.floor(Math.sqrt(t / (2 * Math.PI))); let h = 0; for (let n = 1; n <= N_; n++) h += 1 / Math.sqrt(n); return 2 * h + Math.pow(t / (2 * Math.PI), -0.25); }
 function rebuildEnv() { if (!gZ) return; const t = T[ZIDX[step]], B = Benv(t), pts = []; const S_ = CH.sphere.scale;
-  for (let i = 0; i <= 128; i++) { const a = i / 128 * 2 * Math.PI; if (kind === 'sphere') { const Zs = (B*B - 1) / (B*B + 1), R_ = S_ * Math.sqrt(1 - Zs*Zs); pts.push(R_ * Math.cos(a), S_ * Zs, R_ * Math.sin(a)); } else { const r = (Math.log10(B) + 3) * CH[kind].scale; pts.push(r * Math.cos(a), kind === 'cyl' ? heightOf('cyl', t) : 0, r * Math.sin(a)); } }
+  for (let i = 0; i <= 128; i++) { const a = i / 128 * 2 * Math.PI; if (kind === 'attr') { const r_ = S_ * B / (1 + B); pts.push(r_ * Math.cos(a), 0, r_ * Math.sin(a)); } else if (kind === 'sphere') { const Zs = (B*B - 1) / (B*B + 1), R_ = S_ * Math.sqrt(1 - Zs*Zs); pts.push(R_ * Math.cos(a), S_ * Zs, R_ * Math.sin(a)); } else { const r = (Math.log10(B) + 3) * CH[kind].scale; pts.push(r * Math.cos(a), kind === 'cyl' ? heightOf('cyl', t) : 0, r * Math.sin(a)); } }
   const q = new Float32Array(pts); envL = layer(gZ, q, new Float32Array(q.length / 3)); }
-const LABS = { A: ['x', 'z (up)', 'y'], sphere: ['Re ζ', '|ζ| ↑∞ ↓0', 'Im ζ'], cyl: ['ρ cos φ', 'ln t (up)', 'ρ sin φ'], flat: ['ρ cos φ', '·', 'ρ sin φ'] };
+const LABS = { A: ['x', 'z (up)', 'y'], sphere: ['Re ζ', '|ζ| ↑∞ ↓0', 'Im ζ'], cyl: ['ρ cos φ', 'ln t (up)', 'ρ sin φ'], flat: ['ρ cos φ', '·', 'ρ sin φ'], attr: ['Re ζ', 'driver Z′/Z', 'Im ζ'] };
 function drawGizmo(id, cm, labs, cap) { const c = $(id); if (!c) return; const x = c.getContext('2d'), W = c.width, H = c.height; x.clearRect(0, 0, W, H); const cx = W / 2 - 14, cy = H / 2 + 6, L = 66, cp = Math.cos(cm.pitch), sp = Math.sin(cm.pitch), cyw = Math.cos(cm.yaw), sy = Math.sin(cm.yaw);
   const cols = ['#ff6b6b', '#6bff8f', '#6bb8ff']; x.font = '15px sans-serif'; x.lineWidth = 3;
   [[1,0,0],[0,1,0],[0,0,1]].map((a, i) => { const X = cyw*a[0] + sy*a[2], Y = a[1], Z = -sy*a[0] + cyw*a[2], Y2 = cp*Y - sp*Z, Z2 = sp*Y + cp*Z; return { i, px: X, py: Y2, d: Z2 }; }).sort((u, v) => u.d - v.d).forEach(o => {
     x.globalAlpha = o.d < -0.05 ? 0.45 : 1; x.strokeStyle = cols[o.i]; x.fillStyle = cols[o.i]; const tx = cx + o.px * L, ty = cy - o.py * L; x.beginPath(); x.moveTo(cx, cy); x.lineTo(tx, ty); x.stroke(); x.beginPath(); x.arc(tx, ty, 4, 0, 7); x.fill(); x.fillText(labs[o.i], tx + 6, ty + 4); });
   x.globalAlpha = 1; x.fillStyle = '#ffb3b3'; x.font = '13px sans-serif'; x.fillText(cap, 4, H - 6); }
-function drawGizmos() { drawGizmo('gA', link() ? cam : camA, LABS.A, 'frame = x = ½'); drawGizmo('gZ', cam, LABS[kind], 'curve = σ = ½'); }
+function drawGizmos() { drawGizmo('gA', link() ? cam : camA, LABS.A, 'frame = x = ½'); drawGizmo('gZ', cam, LABS[kind], kind === 'attr' ? 'ζ/(1+|ζ|) · curve = σ = ½' : 'curve = σ = ½'); }
 function renderAll() { render(); drawGizmos(); }
 function tag(x, W, text) { x.fillStyle = '#ffb3b3'; x.font = (11 * (window.devicePixelRatio || 1)) + 'px sans-serif'; x.fillText(text, W - x.measureText(text).width - 8, 14 * (window.devicePixelRatio || 1)); }
 
@@ -185,10 +199,11 @@ function render() {
     const first = blk ? a0 : 0, count = blk ? a1 - a0 + 1 : a1; if (!($('paint').checked && AzP)) draw(gA, Aiz, m, { first, count, mode: 0, size: 1.3, alpha: lines ? Math.max(0.12, Math.min(0.9, 6000 / count)) : Math.max(0.1, Math.min(0.7, 30000 / count)), lines, tmap: blk ? [a0 / AZ.points, AZ.points / Math.max(1, a1 - a0)] : [0, 1] }); drawAzExtras(m); }
   if (gZ) { resize($('cZ')); const gl = gZ.gl; gl.viewport(0, 0, gl.canvas.width, gl.canvas.height); gl.clear(gl.COLOR_BUFFER_BIT); const m = mvpFor($('cZ'), cam, [0, 0, 0]);
     const first = blk ? i0 : 0, count = blk ? i1 - i0 + 1 : i1 + 1;
-    draw(gZ, Zc, m, { first, count, mode: 0, size: 1.2, alpha: lines ? Math.max(0.05, Math.min(0.9, 6000 / count)) : Math.max(0.06, Math.min(0.5, 20000 / count)), lines, tmap: blk ? [i0 / N, N / Math.max(1, i1 - i0)] : [0, 1] });
-    if ($('eqring').checked) for (let j = 0; j < (kind === 'cyl' ? 3 : 1); j++) draw(gZ, ringL, m, { first: j * 129, count: 129, mode: 2, size: 1, alpha: 0.5, color: [0.5, 0.8, 1], lines: true });
+    draw(gZ, Zc, m, { first, count, mode: 0, size: 1.2, alpha: lines ? Math.max(0.012, Math.min(0.9, 2500 / count)) : Math.max(0.06, Math.min(0.5, 20000 / count)), lines, tmap: blk ? [i0 / N, N / Math.max(1, i1 - i0)] : [0, 1] });
+    if ($('eqring').checked) for (let j = 0; j < (kind === 'cyl' || kind === 'attr' ? 3 : 1); j++) draw(gZ, ringL, m, { first: j * 129, count: 129, mode: 2, size: 1, alpha: 0.5, color: [0.5, 0.8, 1], lines: true });
     if ($('remer').checked && kind === 'sphere') draw(gZ, merL, m, { mode: 2, size: 1, alpha: 0.55, color: [1, 0.55, 0.55], lines: true });
     if ($('zmark').checked) draw(gZ, ZmarkL, m, { first: blk ? (step - 1) * PER : 0, count: blk ? PER : zn, mode: 2, size: 2.5, alpha: kind === 'sphere' ? 0.5 : 0.85, color: [1, 1, 1] });
+    if ($('front').checked && frL) draw(gZ, frL, m, { mode: 2, size: 1, alpha: 0.95, color: [1, 0.82, 0.3], lines: true });
     if ($('env').checked && envL) draw(gZ, envL, m, { mode: 2, size: 1, alpha: 0.75, color: [1, 0.35, 0.35], lines: true });
     const tlo = blk ? T[i0] : 0, thi = T[Math.min(N - 1, i1)];
     for (const tk of ticks) { const kk0 = Math.max(0, Math.ceil(tlo / tk.d) - tk.k0), kk1 = Math.floor(thi / tk.d) - tk.k0; draw(gZ, tk.L, m, { first: kk0, count: Math.max(0, kk1 - kk0 + 1), mode: 2, size: 3, alpha: 0.85, color: PCOL[tk.p] }); } }
@@ -269,12 +284,12 @@ function anote() { $('anote').innerHTML = 'red frame: the plane <b>x = ½</b> (�
 
 /* ───── the animation: one step per second ───── */
 function setStep(k) { step = Math.max(1, Math.min(STEPS, k)); $('nz').value = step; $('nzv').textContent = step + ' / ' + STEPS + ' · ' + (blockMode() ? 'zeros ' + ((step-1)*PER + 1).toLocaleString() + '–' + (step * PER).toLocaleString() : (step * PER).toLocaleString() + ' zeros');
-  if ($('efollow').checked) $('te').value = ZEROS[step * PER - 1]; rebuildEnv(); drawEuler(); drawFlow(); drawMap(); drawH(); drawB(); anote(); readout(); renderAll(); }
+  if ($('efollow').checked) $('te').value = ZEROS[step * PER - 1]; rebuildEnv(); rebuildFrontier(); drawEuler(); drawFlow(); drawMap(); drawH(); drawB(); anote(); readout(); renderAll(); }
 $('nz').addEventListener('input', e => setStep(+e.target.value));
 $('fwd').onclick = () => setStep(step + 1); $('back').onclick = () => setStep(step - 1);
 $('play').onclick = () => { if (step >= STEPS && !playing) setStep(1); playing = !playing; $('play').textContent = playing ? '❚❚ pause' : '▶ play'; };
 setInterval(() => { if (!playing) return; if (step >= STEPS) { playing = false; $('play').textContent = '▶ replay'; return; } setStep(step + 1); }, 1000);
-$('chart').onchange = e => { kind = e.target.value; rebuildZ(); }; $('pt').onchange = rebuildZ; $('efollow').onchange = () => setStep(step); $('blk').onchange = () => setStep(step);
+$('chart').onchange = e => { kind = e.target.value; rebuildZ(); rebuildEnv(); rebuildFrontier(); }; $('pt').onchange = rebuildZ; $('efollow').onchange = () => setStep(step); $('blk').onchange = () => setStep(step);
 $('te').max = Math.floor(TMAX);
 /* URL options: ?chart=sphere|cyl|flat &view=pole|eq|tilt &step=1..250 &block=1 &play=0 &ticks=0|2|3|5|7|all &snap=1 (replace each WebGL canvas by a still image: for screenshots in browsers that do not capture WebGL) */
 const Q = new URLSearchParams(location.search);
