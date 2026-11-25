@@ -20,7 +20,7 @@ header{padding:12px 16px;border-bottom:1px solid var(--line)}h1{font-size:18px;m
 .grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:10px 16px}.panel{background:var(--card);border:1px solid var(--line);border-radius:8px;overflow:hidden}
 .panel h2{font-size:12.5px;margin:0;padding:6px 10px;border-bottom:1px solid var(--line);color:var(--mut);font-weight:600}
 canvas{display:block;width:100%;background:var(--cv);touch-action:none}.tall canvas{aspect-ratio:1/1}.short canvas{aspect-ratio:2/1}.wide{grid-column:1/-1}.wide canvas{aspect-ratio:4.2/1}
-.note{padding:6px 10px 8px;color:var(--mut);font-size:12px}.panel{position:relative}.giz{position:absolute;left:8px;top:34px;width:160px;height:104px;pointer-events:none}.ref{font-size:12px}.ref a{color:var(--acc)}.legend{padding:0 16px 14px;color:var(--mut);font-size:12.5px;max-width:1100px}.legend b{color:var(--fg)}
+.note{padding:6px 10px 8px;color:var(--mut);font-size:12px}.note.big{font-size:12.5px;line-height:1.5}.panel{position:relative}.giz{position:absolute;left:8px;top:34px;width:160px;height:104px;pointer-events:none}.ref{font-size:12px}.ref a{color:var(--acc)}.legend{padding:0 16px 14px;color:var(--mut);font-size:12.5px;max-width:1100px}.legend b{color:var(--fg)}
 @media (max-width:800px){.grid{grid-template-columns:1fr}}
 </style>
 </head>
@@ -38,6 +38,9 @@ canvas{display:block;width:100%;background:var(--cv);touch-action:none}.tall can
  <label><input id="eqring" type="checkbox" checked> equator |ζ|=1</label>
  <label><input id="remer" type="checkbox" checked> Re ζ = 0</label>
  <label><input id="zmark" type="checkbox" checked> zeros</label>
+ <label>Aizawa chart <select id="achart"><option value="cart">Cartesian (x, y, z)</option><option value="uns">UNS: ln r, φ, z (a torus)</option></select></label>
+ <label><input id="arate" type="checkbox"> colour by radial rate z − b (red: r grows, blue: r shrinks)</label>
+ <label><input id="xhalf" type="checkbox"> x = ½ frame</label>
  <label><input id="paint" type="checkbox"> paint the attractor with ζ(x + 19iy)</label>
  <label><input id="env" type="checkbox" checked> bound ring</label>
  <label><input id="front" type="checkbox" checked> frontier (the farthest reach in each direction)</label>
@@ -54,6 +57,9 @@ canvas{display:block;width:100%;background:var(--cv);touch-action:none}.tall can
   <div class="note"><label><select id="hmode"><option value="v">ζ(σ + it), t from 0.1 to 60, σ = 0.3 … 1</option><option value="h">ζ(σ + ic), σ from −3 to 4, c = ½, 1, π/2, π, 2π</option></select></label> · only σ = ½ (white) reaches the origin; neighbours keep off (min |ζ|: 0.174, 0.087, <b>0.008</b>, 0.080, 0.148, 0.326 for σ = 0.3, 0.4, ½, 0.6, 0.7, 1). Horizontal lines pass near 0 only through the trivial zero at s = −2.</div></div>
  <div class="panel short"><h2>The forbidden exterior and the sparse side: max |ζ| per block against the bound 2Σ n<sup>−½</sup> + (t/2π)<sup>−¼</sup></h2><canvas id="cB"></canvas>
   <div class="note">Line = largest |ζ| in each block; dashed = the bound from the Riemann–Siegel sum (nothing can be outside it); right = share of the path by direction (12 sectors of 30°, from −180°): the negative real axis is thin (about 0.23 of average) but not empty.</div></div>
+  <div class="panel short"><h2>Aizawa and ζ in UNS: log-radius against its own growth rate</h2><canvas id="cU"></canvas>
+  <div class="note"><select id="umode"><option value="pp">phase portrait: ln radius, asinh(d ln radius / dt)</option><option value="rate">rate plane λ = d ln w / dt: Re, Im</option><option value="sec">section at arg = 0 (φ = 0)</option></select> · <span style="color:#7fe0ff">■</span> Aizawa (w = x + iy) · <span style="color:#ff6ec8">■</span> ζ(½ + it), σ = ½ · for the block or the steps drawn</div></div>
+ <div class="panel short"><h2>The attractor in UNS maths</h2><div class="note big" id="unstext"><b>Complex form.</b> w = x + iy obeys dw/dt = (z − b + i d) w exactly. In log-polar coordinates u = ln r, φ = arg w: du/dt = z − b, dφ/dt = d, and only dz/dt = c + a z − z³/3 − e^(2u)(1 + e z) + f z e^(3u) cos³φ feeds back. So (u, φ, z) is the native chart: φ is a pure rotation, u integrates the driver, and the orbit lies on a <b>torus</b> (a surface of revolution about the axis) whose cross-section is the (u, z) curve: at f = 0 the closed limit cycle (u from −1.68 to 0.40, z from −0.27 to 1.78, period 6.05), at f = 0.1 a filled band (u from −2.06 to 0.40, z from −0.36 to 1.83, correlation −0.007 on the φ = 0 section, 752 crossings in 300,000 steps).<br><b>Rate plane.</b> λ = d(ln w)/dt = (z − b) + i d: a horizontal segment, Re from −1.07 to 1.15 with mean −0.0003 (u is bounded, so ⟨z⟩ = b), Im = 3.5. The axis is forbidden: r ≥ 0.116 (u ≥ −2.15).<br><b>ζ in the same chart.</b> ζ = e<sup>−iθ</sup> Z, so λ = Z′/Z − i θ′(t): the imaginary part drifts from 0.23 to 4.08 (it equals Aizawa&#39;s d at t = 6,890) and the real part is unbounded (22% of the path has |Z′/Z| &gt; 10: poles at the zeros). On the section arg ζ = 0 (near the Gram points) ζ is always near a zero (median |ζ| 0.15, median rate 34): in ζ the phase is locked to the radial driver, in Aizawa it is not. The z = b plane (gold) is Aizawa&#39;s radial balance, where d ln r/dt = 0.</div></div>
   <div class="panel wide"><h2>Flow map of the blocks: where each 100 zeros land in the value plane, and how little new ground each adds</h2><canvas id="cF"></canvas>
   <div class="note" id="fnote"></div></div>
 </div>
@@ -176,27 +182,37 @@ let AzP = null, azPlane = null, azZero = null, envL = null;
 if (gA && AZD && AZD.paint) { const f = s64 => f32(s64), pos = f(AZD.paint.pos), col = f(AZD.paint.col); AzP = layer(gA, pos, col);
   const pl = new Float32Array([0.5,-0.4,-1.5, 0.5,1.9,-1.5, 0.5,1.9,1.5, 0.5,-0.4,1.5, 0.5,-0.4,-1.5, 0.5,0.75,-1.5, 0.5,0.75,1.5]); azPlane = layer(gA, pl, new Float32Array(7));
   const zl = []; for (const t of [14.134725, 21.022040, 25.010858]) for (const sg of [1, -1]) zl.push(0.5, -0.4, sg * t / AZD.paint.K, 0.5, 1.9, sg * t / AZD.paint.K); azZero = layer(gA, new Float32Array(zl), new Float32Array(zl.length / 3)); }
-function drawAzExtras(m) { if (!gA || !azPlane) return; draw(gA, azPlane, m, { first: 0, count: 5, mode: 2, size: 1, alpha: 0.8, color: [1, 0.45, 0.45], lines: true }); draw(gA, azPlane, m, { first: 5, count: 2, mode: 2, size: 1, alpha: 0.3, color: [1, 0.45, 0.45], lines: true });
-  if ($('paint').checked) { draw(gA, AzP, m, { count: AzP.n, mode: 0, size: 3, alpha: 0.85 }); for (let j = 0; j < 6; j++) draw(gA, azZero, m, { first: 2 * j, count: 2, mode: 2, size: 1, alpha: 0.9, color: [1, 1, 1], lines: true }); } }
+const AZL = {}; let AZPOS = null, AZLINE = null, AZU = null, AZRATE = null, azBal = null, azBalU = null;
+function azPrep(g) { AZPOS = g.pos; AZLINE = g.line; const n = g.line.length; AZU = new Float32Array(g.pos.length); AZRATE = new Float32Array(n);
+  for (let i = 0; i < n; i++) { const x = g.pos[3*i], z = g.pos[3*i+1], y = g.pos[3*i+2], r = Math.hypot(x, y), rho = (Math.log(r) + 3.0) * 0.55, phi = Math.atan2(y, x); AZU[3*i] = rho * Math.cos(phi); AZU[3*i+1] = (z - 0.7) * 0.9; AZU[3*i+2] = rho * Math.sin(phi); AZRATE[i] = Math.max(0, Math.min(1, 0.5 + 0.5 * (z - 0.7) / 1.15)); }
+  azBal = layer(gA, new Float32Array([-1.5,0.7,-1.5, 1.5,0.7,-1.5, 1.5,0.7,1.5, -1.5,0.7,1.5, -1.5,0.7,-1.5]), new Float32Array(5));
+  const q = []; for (let i = 0; i <= 128; i++) { const a_ = i / 128 * 2 * Math.PI; q.push(1.95 * Math.cos(a_), 0, 1.95 * Math.sin(a_)); } azBalU = layer(gA, new Float32Array(q), new Float32Array(q.length / 3)); }
+function azLayer(uns, rate) { const k = (uns ? 'u' : 'c') + (rate ? 'r' : 'p'); if (!AZL[k]) AZL[k] = layer(gA, uns ? AZU : AZPOS, rate ? AZRATE : AZLINE); return AZL[k]; }
+function drawAzExtras(m, uns) { if (!gA) return;
+  if (uns) draw(gA, azBalU, m, { count: 129, mode: 2, size: 1, alpha: 0.9, color: [1, 0.82, 0.3], lines: true });
+  else { draw(gA, azBal, m, { count: 5, mode: 2, size: 1, alpha: 0.9, color: [1, 0.82, 0.3], lines: true }); if ($('xhalf').checked && azPlane) { draw(gA, azPlane, m, { first: 0, count: 5, mode: 2, size: 1, alpha: 0.8, color: [1, 0.45, 0.45], lines: true }); draw(gA, azPlane, m, { first: 5, count: 2, mode: 2, size: 1, alpha: 0.3, color: [1, 0.45, 0.45], lines: true }); } }
+  if (!uns && $('paint').checked && AzP) { draw(gA, AzP, m, { count: AzP.n, mode: 0, size: 3, alpha: 0.85 }); if (azZero) for (let j = 0; j < 6; j++) draw(gA, azZero, m, { first: 2 * j, count: 2, mode: 2, size: 1, alpha: 0.9, color: [1, 1, 1], lines: true }); } }
 function Benv(t) { const N_ = Math.floor(Math.sqrt(t / (2 * Math.PI))); let h = 0; for (let n = 1; n <= N_; n++) h += 1 / Math.sqrt(n); return 2 * h + Math.pow(t / (2 * Math.PI), -0.25); }
 function rebuildEnv() { if (!gZ) return; const t = T[ZIDX[step]], B = Benv(t), pts = []; const S_ = CH.sphere.scale;
   for (let i = 0; i <= 128; i++) { const a = i / 128 * 2 * Math.PI; if (kind === 'attr') { const r_ = S_ * B / (1 + B); pts.push(r_ * Math.cos(a), 0, r_ * Math.sin(a)); } else if (kind === 'sphere') { const Zs = (B*B - 1) / (B*B + 1), R_ = S_ * Math.sqrt(1 - Zs*Zs); pts.push(R_ * Math.cos(a), S_ * Zs, R_ * Math.sin(a)); } else { const r = (Math.log10(B) + 3) * CH[kind].scale; pts.push(r * Math.cos(a), kind === 'cyl' ? heightOf('cyl', t) : 0, r * Math.sin(a)); } }
   const q = new Float32Array(pts); envL = layer(gZ, q, new Float32Array(q.length / 3)); }
-const LABS = { A: ['x', 'z (up)', 'y'], sphere: ['Re ζ', '|ζ| ↑∞ ↓0', 'Im ζ'], cyl: ['ρ cos φ', 'ln t (up)', 'ρ sin φ'], flat: ['ρ cos φ', '·', 'ρ sin φ'], attr: ['Re ζ', 'driver Z′/Z', 'Im ζ'] };
+const LABS = { A: ['x', 'z (up)', 'y'], Au: ['ρ cos φ  (ρ = ln r)', 'z − b (up)', 'ρ sin φ'], sphere: ['Re ζ', '|ζ| ↑∞ ↓0', 'Im ζ'], cyl: ['ρ cos φ', 'ln t (up)', 'ρ sin φ'], flat: ['ρ cos φ', '·', 'ρ sin φ'], attr: ['Re ζ', 'driver Z′/Z', 'Im ζ'] };
 function drawGizmo(id, cm, labs, cap) { const c = $(id); if (!c) return; const x = c.getContext('2d'), W = c.width, H = c.height; x.clearRect(0, 0, W, H); const cx = W / 2 - 14, cy = H / 2 + 6, L = 66, cp = Math.cos(cm.pitch), sp = Math.sin(cm.pitch), cyw = Math.cos(cm.yaw), sy = Math.sin(cm.yaw);
   const cols = ['#ff6b6b', '#6bff8f', '#6bb8ff']; x.font = '15px sans-serif'; x.lineWidth = 3;
   [[1,0,0],[0,1,0],[0,0,1]].map((a, i) => { const X = cyw*a[0] + sy*a[2], Y = a[1], Z = -sy*a[0] + cyw*a[2], Y2 = cp*Y - sp*Z, Z2 = sp*Y + cp*Z; return { i, px: X, py: Y2, d: Z2 }; }).sort((u, v) => u.d - v.d).forEach(o => {
     x.globalAlpha = o.d < -0.05 ? 0.45 : 1; x.strokeStyle = cols[o.i]; x.fillStyle = cols[o.i]; const tx = cx + o.px * L, ty = cy - o.py * L; x.beginPath(); x.moveTo(cx, cy); x.lineTo(tx, ty); x.stroke(); x.beginPath(); x.arc(tx, ty, 4, 0, 7); x.fill(); x.fillText(labs[o.i], tx + 6, ty + 4); });
   x.globalAlpha = 1; x.fillStyle = '#ffb3b3'; x.font = '13px sans-serif'; x.fillText(cap, 4, H - 6); }
-function drawGizmos() { drawGizmo('gA', link() ? cam : camA, LABS.A, 'frame = x = ½'); drawGizmo('gZ', cam, LABS[kind], kind === 'attr' ? 'ζ/(1+|ζ|) · curve = σ = ½' : 'curve = σ = ½'); }
+function drawGizmos() { const un = $('achart').value === 'uns'; drawGizmo('gA', link() ? cam : camA, un ? LABS.Au : LABS.A, 'gold = the plane z = b (radial balance)'); drawGizmo('gZ', cam, LABS[kind], kind === 'attr' ? 'ζ/(1+|ζ|) · curve = σ = ½' : 'curve = σ = ½'); }
 function renderAll() { render(); drawGizmos(); }
 function tag(x, W, text) { x.fillStyle = '#ffb3b3'; x.font = (11 * (window.devicePixelRatio || 1)) + 'px sans-serif'; x.fillText(text, W - x.measureText(text).width - 8, 14 * (window.devicePixelRatio || 1)); }
 
 function render() {
   const blk = blockMode(), zn = step * PER, i0 = ZIDX[step - 1], i1 = ZIDX[step], lines = $('lines').checked;
   const a0 = Math.round((step - 1) / STEPS * AZ.points), a1 = Math.max(a0 + 2, Math.round(step / STEPS * AZ.points));
-  if (gA) { resize($('cA')); const gl = gA.gl; gl.viewport(0, 0, gl.canvas.width, gl.canvas.height); gl.clear(gl.COLOR_BUFFER_BIT); const m = mvpFor($('cA'), link() ? cam : camA, [0, 0.8, 0]);
-    const first = blk ? a0 : 0, count = blk ? a1 - a0 + 1 : a1; if (!($('paint').checked && AzP)) draw(gA, Aiz, m, { first, count, mode: 0, size: 1.3, alpha: lines ? Math.max(0.12, Math.min(0.9, 6000 / count)) : Math.max(0.1, Math.min(0.7, 30000 / count)), lines, tmap: blk ? [a0 / AZ.points, AZ.points / Math.max(1, a1 - a0)] : [0, 1] }); drawAzExtras(m); }
+  if (gA && AZPOS) { resize($('cA')); const gl = gA.gl; gl.viewport(0, 0, gl.canvas.width, gl.canvas.height); gl.clear(gl.COLOR_BUFFER_BIT);
+    const uns = $('achart').value === 'uns', rate = $('arate').checked, L = azLayer(uns, rate), m = mvpFor($('cA'), link() ? cam : camA, uns ? [0, 0, 0] : [0, 0.8, 0]); const first = blk ? a0 : 0, count = blk ? a1 - a0 + 1 : a1;
+    if (!($('paint').checked && AzP && !uns)) draw(gA, L, m, { first, count, mode: 0, size: 1.3, alpha: lines ? Math.max(0.12, Math.min(0.9, 6000 / count)) : Math.max(0.1, Math.min(0.7, 30000 / count)), lines, tmap: (blk && !rate) ? [a0 / AZ.points, AZ.points / Math.max(1, a1 - a0)] : [0, 1] });
+    drawAzExtras(m, uns); }
   if (gZ) { resize($('cZ')); const gl = gZ.gl; gl.viewport(0, 0, gl.canvas.width, gl.canvas.height); gl.clear(gl.COLOR_BUFFER_BIT); const m = mvpFor($('cZ'), cam, [0, 0, 0]);
     const first = blk ? i0 : 0, count = blk ? i1 - i0 + 1 : i1 + 1;
     draw(gZ, Zc, m, { first, count, mode: 0, size: 1.2, alpha: lines ? Math.max(0.012, Math.min(0.9, 2500 / count)) : Math.max(0.06, Math.min(0.5, 20000 / count)), lines, tmap: blk ? [i0 / N, N / Math.max(1, i1 - i0)] : [0, 1] });
@@ -280,23 +296,39 @@ function drawB() { const c = $('cB'); if (!c) return; resize(c); const x = c.get
   const blk = blockMode(), i1 = ZIDX[step], i0 = blk ? ZIDX[step - 1] : 0, hs = new Float64Array(12); let wsum = 0; for (let i = i0; i <= i1; i++) { const d_ = i < N - 1 ? T[i+1] - T[i] : T[i] - T[i-1], b = Math.min(11, Math.floor((Math.atan2(IM[i], RE[i]) + Math.PI) / (Math.PI / 6))); hs[b] += d_; wsum += d_; }
   const bx = pw + 14, bw = (W - bx - 10) / 12, bm = 0.2; for (let b = 0; b < 12; b++) { const h = hs[b] / wsum / bm * (H - 44 * dpr); x.fillStyle = b === 0 || b === 11 ? '#ff9f9f' : '#4a6fd0'; x.fillRect(bx + b * bw, H - 22 * dpr - h, bw - 2, h); }
   x.fillStyle = '#98a2c3'; x.fillText('direction of ζ (−180° → +180°)', bx, 14 * dpr); x.fillText('−180°', bx, H - 6); x.fillText('+180°', W - 40 * dpr, H - 6); tag(x, W, 'σ = ½'); }
-function anote() { $('anote').innerHTML = 'red frame: the plane <b>x = ½</b> (σ = ½ if x is read as σ and 19·y as t) · tick the paint box to colour the orbit by log|ζ(x + 19iy)| and see the first zeros ½ ± 14.13i, ± 21.02i, ± 25.01i as white lines'; }
+function anote() { $('anote').innerHTML = 'gold: the plane <b>z = b</b>, Aizawa&#39;s radial balance (d ln r/dt = z − b; the long-time mean of z is exactly b) · colour by radial rate to see where r grows and shrinks · the UNS chart shows the orbit as a torus in (ln r, φ, z) · paint (Cartesian) reads x + 19iy as s = σ + it, with the x = ½ frame and the first zeros as white lines'; }
 
+/* ───── Aizawa and zeta in UNS: log-radius and its rate (Canvas 2D) ───── */
+function drawU() { const c = $('cU'); if (!c || !AZPOS) return; resize(c); const x = c.getContext('2d'), W = c.width, H = c.height, dpr = window.devicePixelRatio || 1; x.fillStyle = '#05060f'; x.fillRect(0, 0, W, H);
+  const mode = $('umode').value, blk = blockMode(), a1 = Math.round(step / STEPS * AZ.points), a0 = blk ? Math.round((step - 1) / STEPS * AZ.points) : 0, i1 = ZIDX[step], i0 = blk ? ZIDX[step - 1] : 0, sa = Math.max(1, Math.floor((a1 - a0) / 25000)), sz = Math.max(1, Math.floor((i1 - i0) / 25000));
+  const ash = Math.asinh, zr = i => 2 * Math.atanh(Math.max(-0.9995, Math.min(0.9995, DRV[i]))), th_ = t => 0.5 * Math.log(t / (2 * Math.PI)) - 1 / (48 * t * t);
+  let X, Y, labx, laby; if (mode === 'rate') { X = v => (ash(v) + 3.4) / 6.8 * (W - 30) + 20; Y = v => H - 18 - v / 4.6 * (H - 36); labx = 'asinh(Re λ = d ln radius / dt)'; laby = 'Im λ'; }
+  else { X = v => (v + 5.2) / 8.8 * (W - 30) + 20; Y = v => H / 2 - ash(v) / 3.4 * (H / 2 - 18); labx = 'ln radius'; laby = 'asinh(rate)'; }
+  x.strokeStyle = '#333'; x.beginPath(); if (mode === 'rate') { x.moveTo(X(0), 4); x.lineTo(X(0), H - 4); } else { x.moveTo(8, Y(0)); x.lineTo(W - 8, Y(0)); x.moveTo(X(0), 4); x.lineTo(X(0), H - 4); } x.stroke();
+  const dot = (px, py, col, r) => { x.fillStyle = col; x.fillRect(px, py, r, r); };
+  if (mode === 'pp') { for (let i = i0; i <= i1; i += sz) { const u_ = 0.5 * Math.log(RE[i]*RE[i] + IM[i]*IM[i] + 1e-12); dot(X(Math.max(-5, u_)), Y(zr(i)), 'rgba(255,110,200,.30)', 1.6); }
+    for (let i = a0; i <= a1; i += sa) { const xx = AZPOS[3*i], yy = AZPOS[3*i+2], zz_ = AZPOS[3*i+1]; dot(X(Math.log(Math.hypot(xx, yy))), Y(zz_ - 0.7), 'rgba(100,230,255,.5)', 1.6); } }
+  else if (mode === 'rate') { for (let i = i0; i <= i1; i += sz) dot(X(zr(i)), Y(th_(T[i])), 'rgba(255,110,200,.30)', 1.6); let lo = 9, hi = -9; for (let i = a0; i <= a1; i += sa) { const v = AZPOS[3*i+1] - 0.7; lo = Math.min(lo, v); hi = Math.max(hi, v); } x.strokeStyle = '#7fe0ff'; x.lineWidth = 3; x.beginPath(); x.moveTo(X(lo), Y(3.5)); x.lineTo(X(hi), Y(3.5)); x.stroke(); x.lineWidth = 1;
+    x.fillStyle = '#7fe0ff'; x.font = (11 * dpr) + 'px sans-serif'; x.fillText('Aizawa: Im = d = 3.5, Re from z − b', X(0) + 8, Y(3.5) - 8); x.fillStyle = '#ff9f43'; x.fillText('ζ crosses Im = 3.5 at t = 2π e⁷ (block 66)', X(0) + 8, Y(3.5) + 16 * dpr); }
+  else { for (let i = Math.max(i0, 1); i <= i1; i++) if (IM[i-1] < 0 && IM[i] >= 0 && RE[i] > 0) { const u_ = 0.5 * Math.log(RE[i]*RE[i] + IM[i]*IM[i] + 1e-12); dot(X(Math.max(-5, u_)), Y(zr(i)), 'rgba(255,110,200,.55)', 2.2); }
+    for (let i = Math.max(a0, 1); i <= a1; i++) { const y0 = AZPOS[3*(i-1)+2], y1 = AZPOS[3*i+2], xx = AZPOS[3*i]; if (y0 < 0 && y1 >= 0 && xx > 0) dot(X(Math.log(Math.hypot(xx, y1))), Y(AZPOS[3*i+1] - 0.7), 'rgba(100,230,255,.9)', 2.6); } }
+  x.fillStyle = '#98a2c3'; x.font = (10 * dpr) + 'px sans-serif'; x.fillText(labx + ' →', W - 150 * dpr, H - 5); x.fillText(laby, 8, 12 * dpr); tag(x, W, 'ζ: σ = ½ · Aizawa: z = b is rate 0'); }
 /* ───── the animation: one step per second ───── */
 function setStep(k) { step = Math.max(1, Math.min(STEPS, k)); $('nz').value = step; $('nzv').textContent = step + ' / ' + STEPS + ' · ' + (blockMode() ? 'zeros ' + ((step-1)*PER + 1).toLocaleString() + '–' + (step * PER).toLocaleString() : (step * PER).toLocaleString() + ' zeros');
-  if ($('efollow').checked) $('te').value = ZEROS[step * PER - 1]; rebuildEnv(); rebuildFrontier(); drawEuler(); drawFlow(); drawMap(); drawH(); drawB(); anote(); readout(); renderAll(); }
+  if ($('efollow').checked) $('te').value = ZEROS[step * PER - 1]; rebuildEnv(); rebuildFrontier(); drawEuler(); drawFlow(); drawMap(); drawH(); drawB(); drawU(); anote(); readout(); renderAll(); }
 $('nz').addEventListener('input', e => setStep(+e.target.value));
 $('fwd').onclick = () => setStep(step + 1); $('back').onclick = () => setStep(step - 1);
 $('play').onclick = () => { if (step >= STEPS && !playing) setStep(1); playing = !playing; $('play').textContent = playing ? '❚❚ pause' : '▶ play'; };
 setInterval(() => { if (!playing) return; if (step >= STEPS) { playing = false; $('play').textContent = '▶ replay'; return; } setStep(step + 1); }, 1000);
+$('achart').onchange = () => { setStep(step); }; $('umode').onchange = drawU; $('arate').onchange = () => {}; 
 $('chart').onchange = e => { kind = e.target.value; rebuildZ(); rebuildEnv(); rebuildFrontier(); }; $('pt').onchange = rebuildZ; $('efollow').onchange = () => setStep(step); $('blk').onchange = () => setStep(step);
 $('te').max = Math.floor(TMAX);
-/* URL options: ?chart=sphere|cyl|flat &view=pole|eq|tilt &step=1..250 &block=1 &play=0 &ticks=0|2|3|5|7|all &snap=1 (replace each WebGL canvas by a still image: for screenshots in browsers that do not capture WebGL) */
+/* URL options: ?achart=cart|uns &umode=pp|rate|sec &arate=1 &chart=attr|sphere|cyl|flat &view=pole|eq|tilt &step=1..250 &block=1 &play=0 &ticks=0|2|3|5|7|all &snap=1 (replace each WebGL canvas by a still image: for screenshots in browsers that do not capture WebGL) */
 const Q = new URLSearchParams(location.search);
-if (Q.get('chart')) { kind = Q.get('chart'); $('chart').value = kind; } if (Q.get('ticks')) $('pt').value = Q.get('ticks'); if (Q.get('block') === '1') $('blk').checked = true;
+if (Q.get('chart')) { kind = Q.get('chart'); $('chart').value = kind; } if (Q.get('ticks')) $('pt').value = Q.get('ticks'); if (Q.get('block') === '1') $('blk').checked = true; if (Q.get('achart')) $('achart').value = Q.get('achart'); if (Q.get('umode')) $('umode').value = Q.get('umode'); if (Q.get('arate') === '1') $('arate').checked = true;
 if (Q.get('view') === 'eq') { cam.pitch = 0; camA.pitch = 0; } if (Q.get('view') === 'tilt') { cam.pitch = 0.35; camA.pitch = 0.35; }
 if (Q.get('play') === '0' || Q.get('snap')) { playing = false; $('play').textContent = '▶ play'; }
-if (gA) { const g = azGeometry(); Aiz = layer(gA, g.pos, g.line); }
+if (gA) { const g = azGeometry(); Aiz = layer(gA, g.pos, g.line); azPrep(g); }
 rebuildZ(); addEventListener('resize', () => { drawEuler(); drawFlow(); drawMap(); }); setStep(Q.get('step') ? +Q.get('step') : 1);
 if (Q.get('snap')) { renderAll(); for (const id of ['cA', 'cZ']) { const c = $(id), im = new Image(); im.src = c.toDataURL('image/png'); im.style.cssText = 'display:block;width:100%'; c.parentNode.replaceChild(im, c); } } else requestAnimationFrame(frame);
 </script>

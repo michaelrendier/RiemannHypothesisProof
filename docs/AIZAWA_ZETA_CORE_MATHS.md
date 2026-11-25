@@ -111,7 +111,15 @@ The CSS "Gradient Mesh" (#1074 in the collection) is nine radial gradients on a 
 - **Nested slices.** Cumulative frontier after N zeros (N = 100 … 25,000): reach toward +Re 6.1, 7.6, 9.2, 10.5, 13.4, 14.8, 16.5, 19.8 (log-log slope 0.255 against t, the t^¼ of the bound); toward −Re 0.01, 0.35, 1.4, 1.5, 2.3, 3.2, 5.1, 5.1 (slope 1.05, in jumps); wedge width 170° → 110°. Per window of 1,000 zeros the Re < 0 share rises 0.207 → 0.251 and the left/right density 0.054 → 0.125, linear in ln ln t (R² 0.90, 0.88); the wedge-width trend is noisy (R² 0.52). Block to block there is no alternation (residual sd 0.009, lag autocorrelations −0.19, 0.13, −0.04, −0.02, 0.01).
 - **spirals.png** (`rhp/atlas_riemann_fermat/spirals.py`) draws ζ(½+it) as a helix about the t axis whose radius is the signed Z(t): it passes through the axis at the zeros, and for σ = ½, 0.75, 1 the axis becomes a widening hole (min |ζ| 0.000, 0.180, 0.326). That is the interior curve the through-the-sphere chart shows in the value coordinates.
 
-## 11. Open
+## 11. The attractor in UNS maths (`experiments/aizawa_in_uns.py`; panel "Aizawa and ζ in UNS" and the Aizawa chart "UNS: ln r, φ, z" on the page)
+
+- **Complex form.** w = x + iy obeys dw/dt = (z − b + i d) w exactly (finite-difference residual 2×10⁻⁴ over 300,000 steps). In log-polar coordinates u = ln r, φ = arg w: du/dt = z − b, dφ/dt = d; only dz/dt = c + az − z³/3 − e^(2u)(1 + ez) + f z e^(3u) cos³φ feeds back. φ is a pure rotation; u integrates the driver.
+- **A torus.** The orbit lies on a surface of revolution about the axis whose cross-section is the (u, z) curve: at f = 0 the closed limit cycle (u −1.678 … 0.398, z −0.266 … 1.781, period 6.0493), at f = 0.1 a filled band (u −2.055 … 0.397, z −0.361 … 1.835; 752 section points per 300,000 steps; correlation −0.007). The axis is forbidden: r ≥ 0.116 (u ≥ −2.15), r ≤ 1.53.
+- **The rate plane.** λ = d(ln w)/dt = (z − b) + i d is a horizontal segment: Re from −1.066 to 1.148, mean −0.0003 (u is bounded, hence ⟨z⟩ = b), Im = 3.5; the radius grows 47.7% of the time.
+- **ζ in the same chart.** ζ = e^(−iθ) Z gives λ = Z′/Z − iθ′(t): the imaginary part drifts 0.23 → 4.08 (equal to Aizawa's d at t = 6,890) and the real part is unbounded (22.2% of the path has |Z′/Z| > 10: the poles at the zeros). On the section arg ζ = 0 (12,283 crossings, near the Gram points) ζ is always near a zero: median |ζ| e^(−1.92) = 0.15, median rate 34.5: in ζ the phase is locked to the radial driver (Gram's law and the interlacing of Gram points and zeros), in Aizawa the phase φ = d t is independent of u. That is the structural difference the panel shows: a bounded ring against unbounded horseshoes.
+- **The reference plane.** The x = ½ frame had no meaning inside Aizawa (it only held in the s = x + 19iy reading, still available as a checkbox). The natural reference is the **radial-balance plane z = b**, where d ln r/dt = 0; the page draws it in gold and offers a colouring by z − b (red: r grows, blue: r shrinks).
+
+## 12. Open
 
 - The Aizawa paper reference is not yet verified against a title page; the origin of the animation page is unknown.
 - Asked, not yet done: `AbrikosovTree` Ulam spaces read as phase offsets of a shared Δ, and the L-function zeros of one χ_Δ drawn beside ζ's.
