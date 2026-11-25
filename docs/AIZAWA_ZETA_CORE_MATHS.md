@@ -138,7 +138,14 @@ The CSS "Gradient Mesh" (#1074 in the collection) is nine radial gradients on a 
 - **Curvature on the sphere.** A circle on the value plane is a circle on the sphere, so the lobes have (nearly) constant geodesic curvature there; measured coefficient of variation of κ_g along a lobe: median 0.29 (finite differences on jittered samples, noisy). The round sphere has K = +1 and the through-the-sphere chart is flat (K = 0) by construction, so no intrinsic curvature of a "curved space" was found or tested; what was found is that the pathway is piecewise circular.
 - **Not done:** a space-curve curvature and torsion profile of both paths; a metric under which the lobes are geodesics.
 
-## 14. Open
+## 14. Curvature, the Mach number, the ceilings, and the zeros as a flow (`experiments/curvature_and_mach.py`, `curvature_and_mach.json`; the flow check was run inline, numbers below)
+
+- **Curvature.** At a zero κ = −2θ′/|Z′| exactly (median ratio 1.0000, max error 2×10⁻⁴ over 100 zeros), so the lobe there is a circle of radius |Z′|/(2θ′) (median 0.74). All ζ curvature is clockwise. Aizawa: κ median 1.45, torsion median 0.20 (Cartesian); in the UNS torus chart κ 0.77, torsion −0.02.
+- **Mach number** M = |Re λ|/|Im λ| = |Z′/Z|/θ′. Aizawa M ≤ 0.328 (never supersonic). ζ: M = |tan| of the lobe phase, so it is Cauchy: P(M<m) = (2/π) arctan m (measured 0.5001 at m = 1); supersonic exactly half the time; the density is smooth across M = 1, so no shock at the barrier. Lowering Aizawa's d below 1.1 makes it supersonic (1.5% of the orbit at 1.1, 84% at 0.3), with no sharp signature in the Lyapunov exponent.
+- **Ceilings.** Nothing caps |Z′(γ)|: 5.1, 7.7, 11.7, 15.5, 22.0, 30.9 for zero ranges up to 100, 300, 1,000, 3,000, 10,000, 25,000; mean square tracks Gonek's (ln T)³ within a factor 2.9 → 1.7. 31 is the data cutoff.
+- **The singularity is a point source-and-vortex.** f = ζ′/ζ is analytic with a simple pole of residue 1 at every zero (contour integral / 2πi = 1.0000 to 20 digits at zeros 1, 2, 3, 10, 100). As a plane flow V = f̄ that is a point source and vortex of strength 2π at each zero, with no divergence or curl anywhere else. The zeros on σ = ½ are therefore a row of like-signed vortices, a vortex sheet of density ln(t/2π)/2π per unit length (0.44 at t = 100, 1.30 at t = 22,000). Across the sheet the real part of f jumps from ≈ 0 (σ > ½) to −ln(t/2π) (σ < ½): measured jump −5.060 at ε = 0.2 against −5.070 (the functional equation). A vortex sheet with a velocity jump is the Kelvin–Helmholtz configuration. NOT tested: whether the Ĥ_RB map of this divergence is turbulent; no instability or Reynolds-type quantity was computed. The Ĥ_RB definition of the divergence → flow map was not found in the canonical-maths blocks searched (HBAR_HAT is about ħ).
+
+## 15. Open
 
 - The Aizawa paper reference is not yet verified against a title page; the origin of the animation page is unknown.
 - Asked, not yet done: `AbrikosovTree` Ulam spaces read as phase offsets of a shared Δ, and the L-function zeros of one χ_Δ drawn beside ζ's.
