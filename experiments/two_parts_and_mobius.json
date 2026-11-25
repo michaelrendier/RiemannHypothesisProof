@@ -1,0 +1,29 @@
+{
+ "spectra": {
+  "corr_discrete_vs_minus_Lambda_over_sqrt_n": 0.9999969751321508,
+  "corr_smooth_vs_minus_Lambda_over_sqrt_n": 0.15835270483447714,
+  "rms_discrete_at_prime_powers": 0.5418457669043326,
+  "rms_discrete_at_other_n": 0.0011458919708355509,
+  "rms_smooth_at_prime_powers": 0.00014339103806861698,
+  "rms_smooth_at_other_n": 8.450309751883493e-05,
+  "mean_discrete_at_prime_powers": -0.5082727676440163,
+  "mean_pred": -0.5088998430753479
+ },
+ "S_vs_smooth": {
+  "corr_S_Nsmooth": -0.0001889236398339429,
+  "corr_S_logslope": -0.00015929941335550313,
+  "S_mean": 0.4999731108029096,
+  "S_std": 0.2983599238871691
+ },
+ "mobius": {
+  "share_adjacent_lobes_with_opposite_sign_of_Z": 1.0,
+  "theta_advance_between_zeros_over_pi_mean": 1.0000073433406633,
+  "p5_p95": [
+   0.40931226610384275,
+   1.7180498374283575
+  ],
+  "total_theta_over_pi_to_T": 24998.63332334377,
+  "zeros": 25000,
+  "half_twists_minus_zeros": -1.366676656230993
+ }
+}
