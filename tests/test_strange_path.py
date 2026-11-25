@@ -33,3 +33,7 @@ def test_zeta_path_is_on_the_sphere_and_the_first_zero_is_the_south_pole():
     X = pos.reshape(-1, 3); assert np.max(np.abs(np.linalg.norm(X, axis=1) - 1)) < 1e-6
     i = int(np.argmin(np.abs(w))); assert abs(ts[i] - 14.134725) < 0.002             # nearest approach to w = 0 is the first Riemann zero
     assert np.linalg.norm(P.sphere_point(w[i]) - np.array([0, 0, -1])) < 0.01
+
+def test_js_config_values_give_a_bounded_orbit_in_the_same_shell():
+    pos, line = P.generate_geometry(P.aizawa(), points=20000, burn_in=P.JS_CONFIG['burn_in'], scale=P.JS_CONFIG['scale'], h=P.JS_CONFIG['h'])
+    X = pos.reshape(-1, 3) / P.JS_CONFIG['scale']; assert np.all(np.isfinite(X)) and np.abs(X).max() < 4.0 and line[-1] < 1

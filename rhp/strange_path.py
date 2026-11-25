@@ -14,6 +14,11 @@ So the picture is ONE trajectory of a 3-D ODE, drawn as a line.  It is a strange
 its axis); the code shown does not name the system, so `aizawa` below is an IDENTIFICATION BY SHAPE, checked in experiments/strange_path.py against a render.
 IT IS NOT THE ZETA FUNCTION.  Nothing in the shown code evaluates ζ; an RK4 orbit of Aizawa's equations has no zeros, no critical line, no primes.
 
+SOURCE FOUND (2026-11-24, GitHub code search): the screenshot's code is the 'Holographic Aizawa Attractor' page, e.g. github.com/xml12333/HTML_CSS_JS (folder
+'1137.Holographic Aizawa Attractor', no licence shown there; local copy only, not in this repo).  Read, not executed.  Its equations: dx=(z-b)x-dy, dy=dx+(z-b)y,
+dz=c+az-z^3/3-(x^2+y^2)(1+ez)+f z x^3 with a=.95 b=.7 c=.6 d=3.5 e=.25 f=.1, dt 0.0045, burnIn 3000, points 120000, scale 16: the Aizawa system, as identified.
+Two other repos hold the same functions: zymuk/zymuk.github.io (AizawaAttractor.jsx), shotcowboystyle/peanutbutter-porkchop (aizawa.js).  Author of the original not established.
+
 THE ZETA VERSION (built here, same layout): the critical-line path t ↦ ζ(½ + it), put on the Riemann sphere by inverse stereographic projection
       (X, Y, Z) = (2 Re w, 2 Im w, |w|² − 1) / (|w|² + 1),   w = ζ(½ + it)
 Every zero is w = 0, which lands on the south pole (0, 0, −1): the path visits the pole once per zero.  w = ∞ (a pole of ζ) is the north pole; on the critical line ζ has none.
@@ -23,6 +28,8 @@ Order of work for readers: `rk4_step`, `generate_geometry` (the port), `aizawa` 
 from __future__ import annotations
 import numpy as np
 from mpmath import mp, mpf, mpc, zeta
+
+JS_CONFIG = dict(points=120000, burn_in=3000, h=0.0045, scale=16.0)     # CONFIG in the found source
 
 # ── the port ──
 def rk4_step(f, state, h):
