@@ -19,7 +19,7 @@ header{padding:12px 16px;border-bottom:1px solid var(--line)}h1{font-size:18px;m
 .grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:10px 16px}.panel{background:var(--card);border:1px solid var(--line);border-radius:8px;overflow:hidden}
 .panel h2{font-size:12.5px;margin:0;padding:6px 10px;border-bottom:1px solid var(--line);color:var(--mut);font-weight:600}
 canvas{display:block;width:100%;background:var(--cv);touch-action:none}.tall canvas{aspect-ratio:1/1}.short canvas{aspect-ratio:2/1}.wide{grid-column:1/-1}.wide canvas{aspect-ratio:4.2/1}
-.note{padding:6px 10px 8px;color:var(--mut);font-size:12px}.ref{font-size:12px}.ref a{color:var(--acc)}.legend{padding:0 16px 14px;color:var(--mut);font-size:12.5px;max-width:1100px}.legend b{color:var(--fg)}
+.note{padding:6px 10px 8px;color:var(--mut);font-size:12px}.panel{position:relative}.giz{position:absolute;left:8px;top:34px;width:160px;height:104px;pointer-events:none}.ref{font-size:12px}.ref a{color:var(--acc)}.legend{padding:0 16px 14px;color:var(--mut);font-size:12.5px;max-width:1100px}.legend b{color:var(--fg)}
 @media (max-width:800px){.grid{grid-template-columns:1fr}}
 </style>
 </head>
@@ -37,16 +37,22 @@ canvas{display:block;width:100%;background:var(--cv);touch-action:none}.tall can
  <label><input id="eqring" type="checkbox" checked> equator |ζ|=1</label>
  <label><input id="remer" type="checkbox" checked> Re ζ = 0</label>
  <label><input id="zmark" type="checkbox" checked> zeros</label>
+ <label><input id="paint" type="checkbox"> paint the attractor with ζ(x + 19iy)</label>
+ <label><input id="env" type="checkbox" checked> bound ring</label>
  <label>prime ticks <select id="pt"><option value="0">none</option><option value="2">p = 2</option><option value="3">p = 3</option><option value="5">p = 5</option><option value="7">p = 7</option><option value="all" selected>2 3 5 7 11 13</option></select></label>
 </div>
 <div class="grid">
- <div class="panel tall"><h2>Aizawa attractor (RK4, live) <span id="azinfo"></span></h2><canvas id="cA"></canvas></div>
- <div class="panel tall"><h2>ζ(½ + it) <span id="zinfo"></span></h2><canvas id="cZ"></canvas><div class="note" id="orient"></div></div>
+ <div class="panel tall"><h2>Aizawa attractor (RK4, live) <span id="azinfo"></span></h2><canvas id="cA"></canvas><canvas id="gA" class="giz" width="320" height="208"></canvas><div class="note" id="anote"></div></div>
+ <div class="panel tall"><h2>ζ(½ + it) <span id="zinfo"></span></h2><canvas id="cZ"></canvas><canvas id="gZ" class="giz" width="320" height="208"></canvas><div class="note" id="orient"></div></div>
  <div class="panel short"><h2>Prime spring at the current step: Σ −ln(1 − p<sup>−½−it</sup>) over the first 3,000 primes</h2><canvas id="cE"></canvas>
   <div class="note"><label><input id="efollow" type="checkbox" checked> follow the animation (t = the last zero drawn)</label> · t <b id="tev"></b> <input id="te" type="range" min="10" max="1000" value="0" style="width:40%"> · one step per prime (2 3 5 7 11 13 17 19 labelled)</div></div>
  <div class="panel short"><h2>The flow of the primes in the zeros (Landau 1911): Σ cos(γ ln n) over the zeros drawn, against −(T/2π) Λ(n)/√n</h2><canvas id="cS"></canvas>
   <div class="note">Top: bars = measured, ticks = Landau's prediction, one per prime power n (x = ln n). Bottom: measured ÷ predicted for n = 2, 3, 4, 5, 7, 9 as the zeros are added; all flow to 1. The earlier spectrum was under-resolved at high N (the spikes are narrower than its grid) and is replaced.</div></div>
- <div class="panel wide"><h2>Flow map of the blocks: where each 100 zeros land in the value plane, and how little new ground each adds</h2><canvas id="cF"></canvas>
+<div class="panel short"><h2>The neighbours of the critical line, and the shadows of horizontal lines, in the value plane</h2><canvas id="cH"></canvas>
+  <div class="note"><label><select id="hmode"><option value="v">ζ(σ + it), t from 0.1 to 60, σ = 0.3 … 1</option><option value="h">ζ(σ + ic), σ from −3 to 4, c = ½, 1, π/2, π, 2π</option></select></label> · only σ = ½ (white) reaches the origin; neighbours keep off (min |ζ|: 0.174, 0.087, <b>0.008</b>, 0.080, 0.148, 0.326 for σ = 0.3, 0.4, ½, 0.6, 0.7, 1). Horizontal lines pass near 0 only through the trivial zero at s = −2.</div></div>
+ <div class="panel short"><h2>The forbidden exterior and the sparse side: max |ζ| per block against the bound 2Σ n<sup>−½</sup> + (t/2π)<sup>−¼</sup></h2><canvas id="cB"></canvas>
+  <div class="note">Line = largest |ζ| in each block; dashed = the bound from the Riemann–Siegel sum (nothing can be outside it); right = share of the path by direction (12 sectors of 30°, from −180°): the negative real axis is thin (about 0.23 of average) but not empty.</div></div>
+  <div class="panel wide"><h2>Flow map of the blocks: where each 100 zeros land in the value plane, and how little new ground each adds</h2><canvas id="cF"></canvas>
   <div class="note" id="fnote"></div></div>
 </div>
 <div class="legend">
@@ -59,6 +65,7 @@ canvas{display:block;width:100%;background:var(--cv);touch-action:none}.tall can
 <p class="ref">A picture here shows a space or a machinery. It is not evidence about the Riemann Hypothesis.</p>
 </div>
 <script src="zeta_uns_path_data.js"></script>
+<script src="attractor_zeta_data.js"></script>
 <script>
 "use strict";
 const D = window.ZETA_UNS, $ = id => document.getElementById(id);
@@ -149,21 +156,44 @@ function rebuildZ() { if (!gZ) return; const Z = zetaGeometry(kind); Zg = Z; Zc 
 function resize(c) { const w = Math.max(200, c.clientWidth * (window.devicePixelRatio || 1)); if (c.width !== (w|0)) { c.width = w|0; c.height = (c.clientHeight * (window.devicePixelRatio || 1))|0; } }
 function mvpFor(c, cm, centre) { const asp = c.width / c.height; return M4.mul(M4.persp(0.8, asp, 0.1, 100), M4.mul(M4.trans(0, 0, -cm.dist), M4.mul(M4.rotX(cm.pitch), M4.mul(M4.rotY(cm.yaw), M4.trans(-centre[0], -centre[1], -centre[2]))))); }
 const link = () => $('link').checked, blockMode = () => $('blk').checked;
+/* ───── orientation, the critical line in every frame, the attractor painted by zeta, the forbidden exterior ───── */
+const AZD = window.ATTR_ZETA || null, STAR = 66;      /* step 66 = zeros 6,501-6,600: t = 2 pi e^7 = 6890.35, where theta'(t) = 3.5 = Aizawa's d */
+let AzP = null, azPlane = null, azZero = null, envL = null;
+if (gA && AZD && AZD.paint) { const f = s64 => f32(s64), pos = f(AZD.paint.pos), col = f(AZD.paint.col); AzP = layer(gA, pos, col);
+  const pl = new Float32Array([0.5,-0.4,-1.5, 0.5,1.9,-1.5, 0.5,1.9,1.5, 0.5,-0.4,1.5, 0.5,-0.4,-1.5, 0.5,0.75,-1.5, 0.5,0.75,1.5]); azPlane = layer(gA, pl, new Float32Array(7));
+  const zl = []; for (const t of [14.134725, 21.022040, 25.010858]) for (const sg of [1, -1]) zl.push(0.5, -0.4, sg * t / AZD.paint.K, 0.5, 1.9, sg * t / AZD.paint.K); azZero = layer(gA, new Float32Array(zl), new Float32Array(zl.length / 3)); }
+function drawAzExtras(m) { if (!gA || !azPlane) return; draw(gA, azPlane, m, { first: 0, count: 5, mode: 2, size: 1, alpha: 0.8, color: [1, 0.45, 0.45], lines: true }); draw(gA, azPlane, m, { first: 5, count: 2, mode: 2, size: 1, alpha: 0.3, color: [1, 0.45, 0.45], lines: true });
+  if ($('paint').checked) { draw(gA, AzP, m, { count: AzP.n, mode: 0, size: 3, alpha: 0.85 }); for (let j = 0; j < 6; j++) draw(gA, azZero, m, { first: 2 * j, count: 2, mode: 2, size: 1, alpha: 0.9, color: [1, 1, 1], lines: true }); } }
+function Benv(t) { const N_ = Math.floor(Math.sqrt(t / (2 * Math.PI))); let h = 0; for (let n = 1; n <= N_; n++) h += 1 / Math.sqrt(n); return 2 * h + Math.pow(t / (2 * Math.PI), -0.25); }
+function rebuildEnv() { if (!gZ) return; const t = T[ZIDX[step]], B = Benv(t), pts = []; const S_ = CH.sphere.scale;
+  for (let i = 0; i <= 128; i++) { const a = i / 128 * 2 * Math.PI; if (kind === 'sphere') { const Zs = (B*B - 1) / (B*B + 1), R_ = S_ * Math.sqrt(1 - Zs*Zs); pts.push(R_ * Math.cos(a), S_ * Zs, R_ * Math.sin(a)); } else { const r = (Math.log10(B) + 3) * CH[kind].scale; pts.push(r * Math.cos(a), kind === 'cyl' ? heightOf('cyl', t) : 0, r * Math.sin(a)); } }
+  const q = new Float32Array(pts); envL = layer(gZ, q, new Float32Array(q.length / 3)); }
+const LABS = { A: ['x', 'z (up)', 'y'], sphere: ['Re ζ', '|ζ| ↑∞ ↓0', 'Im ζ'], cyl: ['ρ cos φ', 'ln t (up)', 'ρ sin φ'], flat: ['ρ cos φ', '·', 'ρ sin φ'] };
+function drawGizmo(id, cm, labs, cap) { const c = $(id); if (!c) return; const x = c.getContext('2d'), W = c.width, H = c.height; x.clearRect(0, 0, W, H); const cx = W / 2 - 14, cy = H / 2 + 6, L = 66, cp = Math.cos(cm.pitch), sp = Math.sin(cm.pitch), cyw = Math.cos(cm.yaw), sy = Math.sin(cm.yaw);
+  const cols = ['#ff6b6b', '#6bff8f', '#6bb8ff']; x.font = '15px sans-serif'; x.lineWidth = 3;
+  [[1,0,0],[0,1,0],[0,0,1]].map((a, i) => { const X = cyw*a[0] + sy*a[2], Y = a[1], Z = -sy*a[0] + cyw*a[2], Y2 = cp*Y - sp*Z, Z2 = sp*Y + cp*Z; return { i, px: X, py: Y2, d: Z2 }; }).sort((u, v) => u.d - v.d).forEach(o => {
+    x.globalAlpha = o.d < -0.05 ? 0.45 : 1; x.strokeStyle = cols[o.i]; x.fillStyle = cols[o.i]; const tx = cx + o.px * L, ty = cy - o.py * L; x.beginPath(); x.moveTo(cx, cy); x.lineTo(tx, ty); x.stroke(); x.beginPath(); x.arc(tx, ty, 4, 0, 7); x.fill(); x.fillText(labs[o.i], tx + 6, ty + 4); });
+  x.globalAlpha = 1; x.fillStyle = '#ffb3b3'; x.font = '13px sans-serif'; x.fillText(cap, 4, H - 6); }
+function drawGizmos() { drawGizmo('gA', link() ? cam : camA, LABS.A, 'frame = x = ½'); drawGizmo('gZ', cam, LABS[kind], 'curve = σ = ½'); }
+function renderAll() { render(); drawGizmos(); }
+function tag(x, W, text) { x.fillStyle = '#ffb3b3'; x.font = (11 * (window.devicePixelRatio || 1)) + 'px sans-serif'; x.fillText(text, W - x.measureText(text).width - 8, 14 * (window.devicePixelRatio || 1)); }
+
 function render() {
   const blk = blockMode(), zn = step * PER, i0 = ZIDX[step - 1], i1 = ZIDX[step], lines = $('lines').checked;
   const a0 = Math.round((step - 1) / STEPS * AZ.points), a1 = Math.max(a0 + 2, Math.round(step / STEPS * AZ.points));
   if (gA) { resize($('cA')); const gl = gA.gl; gl.viewport(0, 0, gl.canvas.width, gl.canvas.height); gl.clear(gl.COLOR_BUFFER_BIT); const m = mvpFor($('cA'), link() ? cam : camA, [0, 0.8, 0]);
-    const first = blk ? a0 : 0, count = blk ? a1 - a0 + 1 : a1; draw(gA, Aiz, m, { first, count, mode: 0, size: 1.3, alpha: lines ? Math.max(0.12, Math.min(0.9, 6000 / count)) : Math.max(0.1, Math.min(0.7, 30000 / count)), lines, tmap: blk ? [a0 / AZ.points, AZ.points / Math.max(1, a1 - a0)] : [0, 1] }); }
+    const first = blk ? a0 : 0, count = blk ? a1 - a0 + 1 : a1; if (!($('paint').checked && AzP)) draw(gA, Aiz, m, { first, count, mode: 0, size: 1.3, alpha: lines ? Math.max(0.12, Math.min(0.9, 6000 / count)) : Math.max(0.1, Math.min(0.7, 30000 / count)), lines, tmap: blk ? [a0 / AZ.points, AZ.points / Math.max(1, a1 - a0)] : [0, 1] }); drawAzExtras(m); }
   if (gZ) { resize($('cZ')); const gl = gZ.gl; gl.viewport(0, 0, gl.canvas.width, gl.canvas.height); gl.clear(gl.COLOR_BUFFER_BIT); const m = mvpFor($('cZ'), cam, [0, 0, 0]);
     const first = blk ? i0 : 0, count = blk ? i1 - i0 + 1 : i1 + 1;
     draw(gZ, Zc, m, { first, count, mode: 0, size: 1.2, alpha: lines ? Math.max(0.05, Math.min(0.9, 6000 / count)) : Math.max(0.06, Math.min(0.5, 20000 / count)), lines, tmap: blk ? [i0 / N, N / Math.max(1, i1 - i0)] : [0, 1] });
     if ($('eqring').checked) for (let j = 0; j < (kind === 'cyl' ? 3 : 1); j++) draw(gZ, ringL, m, { first: j * 129, count: 129, mode: 2, size: 1, alpha: 0.5, color: [0.5, 0.8, 1], lines: true });
     if ($('remer').checked && kind === 'sphere') draw(gZ, merL, m, { mode: 2, size: 1, alpha: 0.55, color: [1, 0.55, 0.55], lines: true });
     if ($('zmark').checked) draw(gZ, ZmarkL, m, { first: blk ? (step - 1) * PER : 0, count: blk ? PER : zn, mode: 2, size: 2.5, alpha: kind === 'sphere' ? 0.5 : 0.85, color: [1, 1, 1] });
+    if ($('env').checked && envL) draw(gZ, envL, m, { mode: 2, size: 1, alpha: 0.75, color: [1, 0.35, 0.35], lines: true });
     const tlo = blk ? T[i0] : 0, thi = T[Math.min(N - 1, i1)];
     for (const tk of ticks) { const kk0 = Math.max(0, Math.ceil(tlo / tk.d) - tk.k0), kk1 = Math.floor(thi / tk.d) - tk.k0; draw(gZ, tk.L, m, { first: kk0, count: Math.max(0, kk1 - kk0 + 1), mode: 2, size: 3, alpha: 0.85, color: PCOL[tk.p] }); } }
 }
-function frame() { render(); requestAnimationFrame(frame); }
+function frame() { renderAll(); requestAnimationFrame(frame); }
 function readout() { const zn = step * PER, blk = blockMode(), i1 = ZIDX[step], i0 = blk ? ZIDX[step - 1] : 0, w = cW[i1] - (i0 ? cW[i0] : 0), re = (cRe[i1] - (i0 ? cRe[i0] : 0)) / w, im = (cIm[i1] - (i0 ? cIm[i0] : 0)) / w, neg = (cNeg[i1] - (i0 ? cNeg[i0] : 0)) / w;
   $('azinfo').textContent = '· ' + (blk ? 'block ' + step + ' of the orbit' : Math.round(step / STEPS * AZ.points).toLocaleString() + ' points');
   $('zinfo').textContent = blk ? '· block ' + step + ' of ' + STEPS + ' · zeros ' + ((step-1)*PER + 1).toLocaleString() + '–' + zn.toLocaleString() + ' · t ' + (i0 ? T[i0] : 10).toFixed(1) + ' → ' + ZEROS[zn-1].toFixed(1) + ' · ' + (i1 - i0 + 1).toLocaleString() + ' path points' : '· step ' + step + ' of ' + STEPS + ' · zeros ' + zn.toLocaleString() + ' · t = ' + ZEROS[zn-1].toFixed(1) + ' · ' + (i1 + 1).toLocaleString() + ' path points';
@@ -185,8 +215,9 @@ function drawEuler() { const c = $('cE'); resize(c); const x = c.getContext('2d'
   for (let k = 0; k < P; k++) { const p = PR[k], mag = Math.pow(p, -0.5), ang = -t * Math.log(p), ar = mag*Math.cos(ang), ai = mag*Math.sin(ang), nr = 1 - ar, ni = -ai, m2 = nr*nr + ni*ni; re += -0.5*Math.log(m2); im += -Math.atan2(ni, nr); pts.push([re, im]); }
   let x0 = 1e9, x1 = -1e9, y0 = 1e9, y1 = -1e9; for (const [a, b] of pts) { x0 = Math.min(x0, a); x1 = Math.max(x1, a); y0 = Math.min(y0, b); y1 = Math.max(y1, b); }
   const sc = 0.9 * Math.min(W / (x1 - x0 + 1e-9), H / (y1 - y0 + 1e-9)), ox = W/2 - sc*(x0 + x1)/2, oy = H/2 + sc*(y0 + y1)/2, X = a => ox + sc*a, Y = b => oy - sc*b;
+  for (const sg of [0.4, 0.6]) { let r2 = 0, i2 = 0, prev = null; x.strokeStyle = 'rgba(190,190,190,.28)'; x.lineWidth = 1; x.beginPath(); for (let k = 0; k < P; k++) { const p = PR[k], mg = Math.pow(p, -sg), an = -t * Math.log(p), a_ = mg*Math.cos(an), b_ = mg*Math.sin(an), nr = 1 - a_, ni = -b_, m2 = nr*nr + ni*ni; r2 += -0.5*Math.log(m2); i2 += -Math.atan2(ni, nr); if (k) x.lineTo(X(r2), Y(i2)); else x.moveTo(X(r2), Y(i2)); } x.stroke(); }
   x.lineWidth = 1; for (let k = 1; k < pts.length; k++) { x.strokeStyle = `hsl(${280 - 280*k/pts.length},90%,62%)`; x.beginPath(); x.moveTo(X(pts[k-1][0]), Y(pts[k-1][1])); x.lineTo(X(pts[k][0]), Y(pts[k][1])); x.stroke(); }
-  x.fillStyle = '#fff'; x.font = (11 * (window.devicePixelRatio || 1)) + 'px sans-serif'; for (let k = 0; k < 8; k++) { x.beginPath(); x.arc(X(pts[k][0]), Y(pts[k][1]), 3, 0, 7); x.fill(); x.fillText(PR[k], X(pts[k][0]) + 5, Y(pts[k][1]) - 5); } }
+  x.fillStyle = '#fff'; x.font = (11 * (window.devicePixelRatio || 1)) + 'px sans-serif'; for (let k = 0; k < 8; k++) { x.beginPath(); x.arc(X(pts[k][0]), Y(pts[k][1]), 3, 0, 7); x.fill(); x.fillText(PR[k], X(pts[k][0]) + 5, Y(pts[k][1]) - 5); } tag(x, W, 'colour: σ = ½ · grey: σ = 0.4, 0.6 (same t)'); }
 $('te').addEventListener('input', () => { $('efollow').checked = false; drawEuler(); });
 
 /* ───── the flow of the primes: Landau's formula, measured against its prediction, per step ───── */
@@ -201,7 +232,7 @@ function drawFlow() { const c = $('cS'); resize(c); const x = c.getContext('2d')
   const bt = top + 14 * dpr, bh = H - bt - 20 * dpr, YR = v => bt + bh * (1 - (v - 0.5) / 1.0), XS = s => 12 + (s - 1) / (STEPS - 1) * (W - 24);                /* ratio measured/predicted in [0.5, 1.5] */
   x.strokeStyle = '#555'; x.beginPath(); x.moveTo(8, YR(1)); x.lineTo(W - 8, YR(1)); x.stroke(); x.fillStyle = '#98a2c3'; x.fillText('measured ÷ Landau', 12, bt + 10 * dpr);
   TRACK.forEach((q, ti) => { x.strokeStyle = TCOL[ti]; x.lineWidth = 1.2; x.beginPath(); for (let s = 1; s <= STEPS; s++) { const r = CUMS[s*NN + q] / ((ZEROS[s*PER - 1] / (2*Math.PI)) * PRED[q]), yy = Math.max(bt, Math.min(bt + bh, YR(r))); if (s > 1) x.lineTo(XS(s), yy); else x.moveTo(XS(s), yy); } x.stroke(); x.fillStyle = TCOL[ti]; x.fillText('n=' + NLIST[q], W - 48 * dpr, bt + (12 + 11 * ti) * dpr); });
-  x.strokeStyle = '#fff'; x.lineWidth = 1; x.beginPath(); x.moveTo(XS(k), bt); x.lineTo(XS(k), bt + bh); x.stroke(); }
+  x.strokeStyle = '#fff'; x.lineWidth = 1; x.beginPath(); x.moveTo(XS(k), bt); x.lineTo(XS(k), bt + bh); x.stroke(); tag(x, W, 'σ = ½ (weights p^(−½))'); }
 
 /* ───── the flow map: this block's footprint in the value plane, and the new ground each block adds ───── */
 function drawMap() { const c = $('cF'); resize(c); const x = c.getContext('2d'), W = c.width, H = c.height, dpr = window.devicePixelRatio || 1; x.fillStyle = '#05060f'; x.fillRect(0, 0, W, H);
@@ -211,13 +242,34 @@ function drawMap() { const c = $('cF'); resize(c); const x = c.getContext('2d'),
   const i0 = ZIDX[step - 1], i1 = ZIDX[step], w = cW[i1] - (i0 ? cW[i0] : 0), mre = (cRe[i1] - (i0 ? cRe[i0] : 0)) / w, mim = (cIm[i1] - (i0 ? cIm[i0] : 0)) / w; x.fillStyle = '#ff5577'; x.beginPath(); x.arc(ox + (mre + 4)/10*side, oy + side - (mim + 5)/10*side, 4, 0, 7); x.fill();
   const bx = ox + side + 24, bw = W - bx - 10, bh = H - 40 * dpr, by = 10; x.fillStyle = '#98a2c3'; x.font = (10 * dpr) + 'px sans-serif'; x.fillText('new cells per block (log scale)', bx, by + 8 * dpr);
   const mx = Math.log(1 + 450); for (let k = 1; k <= STEPS; k++) { const h = Math.log(1 + NEWC[k]) / mx * (bh - 18 * dpr); x.fillStyle = k === step ? '#fff' : (k <= 10 ? '#ffd34d' : '#4a6fd0'); x.fillRect(bx + (k - 1) / STEPS * bw, by + bh - h, Math.max(1, bw / STEPS - 0.5), h); }
+  { const xm = bx + (STAR - 1) / STEPS * bw; x.strokeStyle = '#ff9f43'; x.setLineDash([4, 3]); x.beginPath(); x.moveTo(xm, by + 14 * dpr); x.lineTo(xm, by + bh); x.stroke(); x.setLineDash([]); x.fillStyle = '#ff9f43'; x.fillText('θ′ = d', xm + 3, by + 22 * dpr); } tag(x, W, 'every point is a value ζ(½ + it)');
   x.fillStyle = '#98a2c3'; x.fillText('block 1', bx, H - 8); x.fillText('block 250', bx + bw - 48 * dpr, H - 8);
   const rr = step > 1 && NEWC[step - 1] ? NEWC[step] / NEWC[step - 1] : null;
   $('fnote').innerHTML = 'block <b>' + step + '</b>: t ' + (i0 ? T[i0] : 10).toFixed(1) + ' → ' + T[i1].toFixed(1) + ' (span ' + (T[i1] - (i0 ? T[i0] : 10)).toFixed(1) + '; ' + (((i1 - i0 + 1) / 16) | 0) + ' samples/zero-spacing ≈ 16) · visits <b>' + BCNT[step] + '</b> cells, <b>' + NEWC[step] + '</b> new' + (rr !== null ? ' (× ' + rr.toFixed(2) + ' of the block before)' : '') + ' · covered so far <b>' + CUMC[step] + '</b> of ' + (GN*GN) + ' · yellow = new, blue = revisited, dark blue = earlier blocks only, red = block mean, white lines = Re 0 and Im 0 · every block winds ≈ 50 turns (θ rises by π per zero)'; }
 
+/* ───── the neighbours of the critical line (value plane) ───── */
+function drawH() { const c = $('cH'); if (!c) return; resize(c); const x = c.getContext('2d'), W = c.width, H = c.height, dpr = window.devicePixelRatio || 1; x.fillStyle = '#05060f'; x.fillRect(0, 0, W, H); const SH = AZD && AZD.shadows; if (!SH) return;
+  const X0 = -3, X1 = 6, Y0 = -5, Y1 = 5, X = v => (v - X0) / (X1 - X0) * (W - 20) + 10, Y = v => H - ((v - Y0) / (Y1 - Y0) * (H - 20) + 10); x.strokeStyle = '#333'; x.beginPath(); x.moveTo(X(0), 0); x.lineTo(X(0), H); x.moveTo(0, Y(0)); x.lineTo(W, Y(0)); x.stroke();
+  const mode = $('hmode').value, set = mode === 'v' ? SH.vertical : SH.horizontal, keys = Object.keys(set), pal = ['#6fa8ff', '#7fe0ff', '#ffffff', '#ffd34d', '#ff9f43', '#ff6b6b'];
+  keys.forEach((k, i) => { const pts = set[k], half = mode === 'v' && +k === 0.5; x.strokeStyle = half ? '#fff' : pal[i % pal.length]; x.lineWidth = half ? 2.4 : 1.1; x.beginPath(); pts.forEach((p, j) => { const px = X(p[0]), py = Y(p[1]); if (j) x.lineTo(px, py); else x.moveTo(px, py); }); x.stroke(); x.fillStyle = half ? '#fff' : pal[i % pal.length]; x.font = (10 * dpr) + 'px sans-serif'; x.fillText((mode === 'v' ? 'σ = ' : 'Im s = ') + (mode === 'v' ? (+k) : (+k).toFixed(3)), 12, 14 * dpr + i * 12 * dpr); });
+  x.fillStyle = '#ff5577'; x.beginPath(); x.arc(X(0), Y(0), 4, 0, 7); x.fill(); x.fillStyle = '#98a2c3'; x.fillText('0 (a zero)', X(0) + 6, Y(0) - 6); tag(x, W, mode === 'v' ? 'white = σ = ½: the line through 0' : 'shadows of horizontal lines'); }
+$('hmode').onchange = drawH;
+/* ───── the forbidden exterior: max |zeta| per block against the Riemann–Siegel bound; and the share of the path by direction ───── */
+const BMAX = new Float64Array(STEPS + 1), BBND = new Float64Array(STEPS + 1); for (let k = 1; k <= STEPS; k++) { let m = 0; for (let i = ZIDX[k-1]; i <= ZIDX[k]; i++) m = Math.max(m, Math.hypot(RE[i], IM[i])); BMAX[k] = m; BBND[k] = Benv(T[ZIDX[k]]); }
+function drawB() { const c = $('cB'); if (!c) return; resize(c); const x = c.getContext('2d'), W = c.width, H = c.height, dpr = window.devicePixelRatio || 1; x.fillStyle = '#05060f'; x.fillRect(0, 0, W, H);
+  const pw = W * 0.62, X = k => 12 + (k - 1) / (STEPS - 1) * (pw - 24), ymax = 32, Y = v => H - 22 * dpr - v / ymax * (H - 36 * dpr); x.strokeStyle = '#333'; x.beginPath(); x.moveTo(10, Y(0)); x.lineTo(pw, Y(0)); x.stroke();
+  x.strokeStyle = '#ff6b6b'; x.setLineDash([5, 4]); x.lineWidth = 1.4; x.beginPath(); for (let k = 1; k <= STEPS; k++) { if (k > 1) x.lineTo(X(k), Y(BBND[k])); else x.moveTo(X(k), Y(BBND[k])); } x.stroke(); x.setLineDash([]);
+  x.strokeStyle = '#7fe0ff'; x.beginPath(); for (let k = 1; k <= STEPS; k++) { if (k > 1) x.lineTo(X(k), Y(BMAX[k])); else x.moveTo(X(k), Y(BMAX[k])); } x.stroke();
+  x.strokeStyle = '#fff'; x.beginPath(); x.moveTo(X(step), Y(0)); x.lineTo(X(step), Y(ymax)); x.stroke(); x.fillStyle = '#98a2c3'; x.font = (10 * dpr) + 'px sans-serif'; x.fillText('block 1', 12, H - 6); x.fillText('block 250', pw - 56 * dpr, H - 6);
+  x.fillStyle = '#7fe0ff'; x.fillText('max |ζ| in the block: ' + BMAX[step].toFixed(2), 14, 14 * dpr); x.fillStyle = '#ff6b6b'; x.fillText('bound: ' + BBND[step].toFixed(2) + '  (max/bound = ' + (BMAX[step] / BBND[step]).toFixed(2) + ')', 14, 26 * dpr);
+  const blk = blockMode(), i1 = ZIDX[step], i0 = blk ? ZIDX[step - 1] : 0, hs = new Float64Array(12); let wsum = 0; for (let i = i0; i <= i1; i++) { const d_ = i < N - 1 ? T[i+1] - T[i] : T[i] - T[i-1], b = Math.min(11, Math.floor((Math.atan2(IM[i], RE[i]) + Math.PI) / (Math.PI / 6))); hs[b] += d_; wsum += d_; }
+  const bx = pw + 14, bw = (W - bx - 10) / 12, bm = 0.2; for (let b = 0; b < 12; b++) { const h = hs[b] / wsum / bm * (H - 44 * dpr); x.fillStyle = b === 0 || b === 11 ? '#ff9f9f' : '#4a6fd0'; x.fillRect(bx + b * bw, H - 22 * dpr - h, bw - 2, h); }
+  x.fillStyle = '#98a2c3'; x.fillText('direction of ζ (−180° → +180°)', bx, 14 * dpr); x.fillText('−180°', bx, H - 6); x.fillText('+180°', W - 40 * dpr, H - 6); tag(x, W, 'σ = ½'); }
+function anote() { $('anote').innerHTML = 'red frame: the plane <b>x = ½</b> (σ = ½ if x is read as σ and 19·y as t) · tick the paint box to colour the orbit by log|ζ(x + 19iy)| and see the first zeros ½ ± 14.13i, ± 21.02i, ± 25.01i as white lines'; }
+
 /* ───── the animation: one step per second ───── */
 function setStep(k) { step = Math.max(1, Math.min(STEPS, k)); $('nz').value = step; $('nzv').textContent = step + ' / ' + STEPS + ' · ' + (blockMode() ? 'zeros ' + ((step-1)*PER + 1).toLocaleString() + '–' + (step * PER).toLocaleString() : (step * PER).toLocaleString() + ' zeros');
-  if ($('efollow').checked) $('te').value = ZEROS[step * PER - 1]; drawEuler(); drawFlow(); drawMap(); readout(); render(); }
+  if ($('efollow').checked) $('te').value = ZEROS[step * PER - 1]; rebuildEnv(); drawEuler(); drawFlow(); drawMap(); drawH(); drawB(); anote(); readout(); renderAll(); }
 $('nz').addEventListener('input', e => setStep(+e.target.value));
 $('fwd').onclick = () => setStep(step + 1); $('back').onclick = () => setStep(step - 1);
 $('play').onclick = () => { if (step >= STEPS && !playing) setStep(1); playing = !playing; $('play').textContent = playing ? '❚❚ pause' : '▶ play'; };
@@ -231,7 +283,7 @@ if (Q.get('view') === 'eq') { cam.pitch = 0; camA.pitch = 0; } if (Q.get('view')
 if (Q.get('play') === '0' || Q.get('snap')) { playing = false; $('play').textContent = '▶ play'; }
 if (gA) { const g = azGeometry(); Aiz = layer(gA, g.pos, g.line); }
 rebuildZ(); addEventListener('resize', () => { drawEuler(); drawFlow(); drawMap(); }); setStep(Q.get('step') ? +Q.get('step') : 1);
-if (Q.get('snap')) { render(); for (const id of ['cA', 'cZ']) { const c = $(id), im = new Image(); im.src = c.toDataURL('image/png'); im.style.cssText = 'display:block;width:100%'; c.parentNode.replaceChild(im, c); } } else requestAnimationFrame(frame);
+if (Q.get('snap')) { renderAll(); for (const id of ['cA', 'cZ']) { const c = $(id), im = new Image(); im.src = c.toDataURL('image/png'); im.style.cssText = 'display:block;width:100%'; c.parentNode.replaceChild(im, c); } } else requestAnimationFrame(frame);
 </script>
 </body>
 </html>

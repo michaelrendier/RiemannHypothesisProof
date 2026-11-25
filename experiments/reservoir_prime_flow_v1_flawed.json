@@ -1,0 +1,184 @@
+{
+ "attractor_3": {
+  "0": {
+   "acc": 0.7251,
+   "majority": 0.7251,
+   "gain": 0.0
+  },
+  "1": {
+   "acc": 0.7252,
+   "majority": 0.7252,
+   "gain": 0.0
+  },
+  "2": {
+   "acc": 0.7251,
+   "majority": 0.7251,
+   "gain": 0.0
+  },
+  "3": {
+   "acc": 0.7251,
+   "majority": 0.7251,
+   "gain": 0.0
+  },
+  "4": {
+   "acc": 0.7251,
+   "majority": 0.7251,
+   "gain": 0.0
+  },
+  "5": {
+   "acc": 0.725,
+   "majority": 0.725,
+   "gain": 0.0
+  },
+  "6": {
+   "acc": 0.7251,
+   "majority": 0.7251,
+   "gain": 0.0
+  },
+  "7": {
+   "acc": 0.7251,
+   "majority": 0.7251,
+   "gain": 0.0
+  },
+  "8": {
+   "acc": 0.7251,
+   "majority": 0.7251,
+   "gain": 0.0
+  }
+ },
+ "attractor_9": {
+  "0": {
+   "acc": 0.7251,
+   "majority": 0.7251,
+   "gain": 0.0
+  },
+  "1": {
+   "acc": 0.7252,
+   "majority": 0.7252,
+   "gain": 0.0
+  },
+  "2": {
+   "acc": 0.7251,
+   "majority": 0.7251,
+   "gain": 0.0
+  },
+  "3": {
+   "acc": 0.7251,
+   "majority": 0.7251,
+   "gain": 0.0
+  },
+  "4": {
+   "acc": 0.7251,
+   "majority": 0.7251,
+   "gain": 0.0
+  },
+  "5": {
+   "acc": 0.725,
+   "majority": 0.725,
+   "gain": 0.0
+  },
+  "6": {
+   "acc": 0.7251,
+   "majority": 0.7251,
+   "gain": 0.0
+  },
+  "7": {
+   "acc": 0.7251,
+   "majority": 0.7251,
+   "gain": 0.0
+  },
+  "8": {
+   "acc": 0.7251,
+   "majority": 0.7251,
+   "gain": 0.0
+  }
+ },
+ "linear_3": {
+  "0": {
+   "acc": 0.7251,
+   "majority": 0.7251,
+   "gain": 0.0
+  },
+  "1": {
+   "acc": 0.7252,
+   "majority": 0.7252,
+   "gain": 0.0
+  },
+  "2": {
+   "acc": 0.7251,
+   "majority": 0.7251,
+   "gain": 0.0
+  },
+  "3": {
+   "acc": 0.7251,
+   "majority": 0.7251,
+   "gain": 0.0
+  },
+  "4": {
+   "acc": 0.7251,
+   "majority": 0.7251,
+   "gain": 0.0
+  },
+  "5": {
+   "acc": 0.725,
+   "majority": 0.725,
+   "gain": 0.0
+  },
+  "6": {
+   "acc": 0.7251,
+   "majority": 0.7251,
+   "gain": 0.0
+  },
+  "7": {
+   "acc": 0.7251,
+   "majority": 0.7251,
+   "gain": 0.0
+  },
+  "8": {
+   "acc": 0.7251,
+   "majority": 0.7251,
+   "gain": 0.0
+  }
+ },
+ "shuffled_attractor_9_control": {
+  "0": {
+   "acc": 0.7142,
+   "majority": 0.7142,
+   "gain": 0.0
+  },
+  "1": {
+   "acc": 0.7143,
+   "majority": 0.7143,
+   "gain": 0.0
+  },
+  "4": {
+   "acc": 0.7143,
+   "majority": 0.7143,
+   "gain": 0.0
+  }
+ },
+ "setup": {
+  "words": 30000,
+  "classes": 16,
+  "top15": [
+   "the",
+   "of",
+   "a",
+   "to",
+   "in",
+   "and",
+   "for",
+   "that",
+   "he",
+   "on",
+   "was",
+   "is",
+   "be",
+   "said",
+   "as"
+  ],
+  "majority_class_share": 0.7106666666666667,
+  "phase_kick_std": 1.9654410377029747,
+  "n_unique_words": 5512
+ }
+}
