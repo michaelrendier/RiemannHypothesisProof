@@ -1,0 +1,201 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Aizawa vs Zeta in UNS</title>
+<!-- SPDX-License-Identifier: GPL-3.0-only. Raw WebGL + Canvas 2D, no libraries, no network: runs from file:// or a local server.
+     Left: the Aizawa attractor integrated LIVE here in JavaScript (RK4, dt 0.0045, burn-in 3000; the same equations as ValaQuenta/modules/aizawa_attractor).
+     Right: the critical-line path t -> zeta(1/2+it) (Riemann-Siegel, 16 samples per zero spacing, first 25,000 zeros), baked by experiments/build_zeta_uns_viz_data.py
+     from ValaQuenta/modules/zeta_uns_path.  Nothing here is evidence about RH. -->
+<style>
+:root{--bg:#f4f6fb;--fg:#1b2033;--mut:#5a6483;--card:#fff;--line:#d9deee;--acc:#3b5bdb;--cv:#05060f}
+@media (prefers-color-scheme:dark){:root:not([data-theme=light]){--bg:#0d1020;--fg:#e6e9f5;--mut:#98a2c3;--card:#161b33;--line:#2a3257;--acc:#8fa6ff}}
+*{box-sizing:border-box}html,body{margin:0;background:var(--bg);color:var(--fg);font:14px/1.45 system-ui,sans-serif}
+header{padding:12px 16px;border-bottom:1px solid var(--line)}h1{font-size:18px;margin:0 0 2px}.sub{color:var(--mut);font-size:12.5px}
+.bar{display:flex;flex-wrap:wrap;gap:8px 14px;align-items:center;padding:10px 16px;border-bottom:1px solid var(--line);background:var(--card)}
+.bar label{display:flex;align-items:center;gap:6px;font-size:12.5px;color:var(--mut)}.bar button,.bar select{background:var(--bg);color:var(--fg);border:1px solid var(--line);border-radius:6px;padding:4px 10px;font:inherit;cursor:pointer}
+.bar button:hover{border-color:var(--acc)}input[type=range]{accent-color:var(--acc)}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:10px 16px}.panel{background:var(--card);border:1px solid var(--line);border-radius:8px;overflow:hidden}
+.panel h2{font-size:12.5px;margin:0;padding:6px 10px;border-bottom:1px solid var(--line);color:var(--mut);font-weight:600}
+canvas{display:block;width:100%;background:var(--cv);touch-action:none}.tall canvas{aspect-ratio:1/1}.short canvas{aspect-ratio:2/1}
+.note{padding:6px 10px 8px;color:var(--mut);font-size:12px}.legend{padding:0 16px 14px;color:var(--mut);font-size:12.5px;max-width:1100px}.legend b{color:var(--fg)}
+@media (max-width:800px){.grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<header><h1>Aizawa attractor vs the ζ pathway in Universal Native Space</h1>
+<div class="sub">The same camera on both. Drag to rotate, wheel to zoom, double-click to reset. Left: Aizawa, integrated live. Right: ζ(½ + it) for the first <span id="nzTxt">25000</span> zeros.</div></header>
+<div class="bar">
+ <label>zeros drawn <input id="nz" type="range" min="0" max="1000" value="1000"><b id="nzv">25000</b></label>
+ <button id="play">▶ grow</button>
+ <label>ζ chart <select id="chart"><option value="sphere">Riemann sphere (value)</option><option value="cyl">UNS cylinder (spring: ρ, φ, t)</option><option value="flat">UNS flat (log-polar)</option></select></label>
+ <button id="eq">equatorial view</button><button id="pole">from the pole</button><button id="reset">reset</button>
+ <label><input id="link" type="checkbox" checked> link cameras</label>
+ <label><input id="lines" type="checkbox"> lines</label>
+ <label><input id="eqring" type="checkbox" checked> equator ring</label>
+ <label><input id="zmark" type="checkbox" checked> zeros</label>
+ <label>prime ticks <select id="pt"><option value="0">none</option><option value="2">p = 2</option><option value="3">p = 3</option><option value="5">p = 5</option><option value="7">p = 7</option><option value="all" selected>2 3 5 7 11 13</option></select></label>
+</div>
+<div class="grid">
+ <div class="panel tall"><h2>Aizawa attractor (RK4, live) <span id="azinfo"></span></h2><canvas id="cA"></canvas></div>
+ <div class="panel tall"><h2>ζ(½ + it) <span id="zinfo"></span></h2><canvas id="cZ"></canvas></div>
+ <div class="panel short"><h2>Prime spring at height t: Σ −ln(1 − p<sup>−½−it</sup>) over the first primes</h2><canvas id="cE"></canvas>
+  <div class="note"><label>t <input id="te" type="range" min="10" max="1000" value="0" style="width:60%"> <b id="tev"></b></label> <label><input id="efollow" type="checkbox"> follow the path head</label> · each step is one prime (2 3 5 7 11 13 17 19 labelled)</div></div>
+ <div class="panel short"><h2>Zero spectrum: Σ cos(γx)/N over the zeros drawn; spikes at x = ln p<sup>k</sup></h2><canvas id="cS"></canvas>
+  <div class="note"><span style="color:#ffcf5a">■</span> primes ln p · <span style="color:#7ad">■</span> prime powers ln p<sup>k</sup> (k ≥ 2) · the spikes grow as more zeros are drawn</div></div>
+</div>
+<div class="legend"><p><b>Both are a rotation with a radial driver.</b> Aizawa: dφ/dt = d (constant), dr/dt = (z − b) r, and r can never reach the axis. ζ on the critical line: ζ = e<sup>−iθ(t)</sup>·Z(t), angle −θ(t) turning at −θ′(t) = −½ ln(t/2π), radius the signed Z(t); Z′/Z is the sum over the zeros of the pole kernels 1/(t − γ), and the zeros are exactly the axis passages Aizawa forbids.
+In the cylinder chart the zeros sit on the axis at height γ. In the sphere chart every zero is the south pole and the equator ring is |ζ| = 1. The prime ticks mark where prime p's phasor is back at angle 0 (t·ln p = 2πk).</p></div>
+<script src="zeta_uns_path_data.js"></script>
+<script>
+"use strict";
+const D = window.ZETA_UNS, $ = id => document.getElementById(id);
+const f32 = s => { const b = atob(s), u = new Uint8Array(b.length); for (let i = 0; i < b.length; i++) u[i] = b.charCodeAt(i); return new Float32Array(u.buffer); };
+const T = f32(D.t), RE = f32(D.re), IM = f32(D.im), ZEROS = f32(D.zeros), SX = f32(D.specx), SP0 = f32(D.spec), N = D.n, NZ = D.nz, TMAX = D.tmax;
+
+/* ───── small matrix kit (column-major) ───── */
+const M4 = {
+  id: () => [1,0,0,0, 0,1,0,0, 0,0,1,0, 0,0,0,1],
+  mul(a, b) { const o = new Array(16).fill(0); for (let c = 0; c < 4; c++) for (let r = 0; r < 4; r++) { let s = 0; for (let k = 0; k < 4; k++) s += a[k*4+r] * b[c*4+k]; o[c*4+r] = s; } return o; },
+  persp(fy, asp, n, f) { const t = 1 / Math.tan(fy / 2); return [t/asp,0,0,0, 0,t,0,0, 0,0,(f+n)/(n-f),-1, 0,0,2*f*n/(n-f),0]; },
+  trans(x, y, z) { const m = M4.id(); m[12] = x; m[13] = y; m[14] = z; return m; },
+  rotX(a) { const c = Math.cos(a), s = Math.sin(a); return [1,0,0,0, 0,c,s,0, 0,-s,c,0, 0,0,0,1]; },
+  rotY(a) { const c = Math.cos(a), s = Math.sin(a); return [c,0,-s,0, 0,1,0,0, s,0,c,0, 0,0,0,1]; }
+};
+
+/* ───── raw WebGL layer ───── */
+const VS = `attribute vec3 aPos; attribute float aT; uniform mat4 uMVP; uniform float uSize; varying float vT; void main(){ gl_Position = uMVP*vec4(aPos,1.0); gl_PointSize = uSize; vT = aT; }`;
+const FS = `precision mediump float; varying float vT; uniform float uAlpha; uniform float uMode; uniform float uRound; uniform vec3 uColor;
+vec3 hsv(float h){ vec3 k = clamp(abs(mod(h*6.0+vec3(0.0,4.0,2.0),6.0)-3.0)-1.0,0.0,1.0); return k; }
+void main(){ vec2 d = gl_PointCoord-0.5; if(uRound>0.5 && dot(d,d)>0.25) discard; vec3 c = uMode<1.5 ? (uMode<0.5 ? hsv(0.8*(1.0-vT)) : uColor) : uColor; gl_FragColor = vec4(c, uAlpha); }`;
+function GL(canvas) {
+  const gl = canvas.getContext('webgl', { antialias: true, alpha: false, preserveDrawingBuffer: true }) || canvas.getContext('experimental-webgl');
+  if (!gl) { canvas.parentNode.insertAdjacentHTML('beforeend', '<div class="note">WebGL is not available in this browser.</div>'); return null; }
+  const mk = (t, s) => { const sh = gl.createShader(t); gl.shaderSource(sh, s); gl.compileShader(sh); if (!gl.getShaderParameter(sh, gl.COMPILE_STATUS)) { const m = gl.getShaderInfoLog(sh); console.error(m); window.__glerr = (window.__glerr || '') + ' shader: ' + m; } return sh; };
+  const p = gl.createProgram(); gl.attachShader(p, mk(gl.VERTEX_SHADER, VS)); gl.attachShader(p, mk(gl.FRAGMENT_SHADER, FS)); gl.linkProgram(p); gl.useProgram(p);
+  const U = n => gl.getUniformLocation(p, n), A = n => gl.getAttribLocation(p, n);
+  gl.enable(gl.BLEND); gl.blendFunc(gl.SRC_ALPHA, gl.ONE); gl.disable(gl.DEPTH_TEST); gl.clearColor(0.02, 0.024, 0.06, 1);
+  return { gl, p, U: { mvp: U('uMVP'), size: U('uSize'), alpha: U('uAlpha'), mode: U('uMode'), round: U('uRound'), color: U('uColor') }, aPos: A('aPos'), aT: A('aT') };
+}
+function layer(g, pos, tt) {
+  const gl = g.gl, bp = gl.createBuffer(), bt = gl.createBuffer(); gl.bindBuffer(gl.ARRAY_BUFFER, bp); gl.bufferData(gl.ARRAY_BUFFER, pos, gl.STATIC_DRAW);
+  gl.bindBuffer(gl.ARRAY_BUFFER, bt); gl.bufferData(gl.ARRAY_BUFFER, tt, gl.STATIC_DRAW); return { bp, bt, n: tt.length };
+}
+function draw(g, L, mvp, { count, mode = 0, size = 1, alpha = 0.5, color = [1,1,1], lines = false }) {
+  const gl = g.gl; gl.bindBuffer(gl.ARRAY_BUFFER, L.bp); gl.enableVertexAttribArray(g.aPos); gl.vertexAttribPointer(g.aPos, 3, gl.FLOAT, false, 0, 0);
+  gl.bindBuffer(gl.ARRAY_BUFFER, L.bt); gl.enableVertexAttribArray(g.aT); gl.vertexAttribPointer(g.aT, 1, gl.FLOAT, false, 0, 0);
+  gl.uniformMatrix4fv(g.U.mvp, false, new Float32Array(mvp)); gl.uniform1f(g.U.size, size); gl.uniform1f(g.U.alpha, alpha); gl.uniform1f(g.U.mode, mode); gl.uniform1f(g.U.round, lines || mode === 2 && size < 0 ? 0 : 1); gl.uniform3fv(g.U.color, color);
+  gl.drawArrays(lines ? gl.LINE_STRIP : gl.POINTS, 0, Math.min(count ?? L.n, L.n));
+}
+
+/* ───── Aizawa, live (the JavaScript page's generateGeometry, written here) ───── */
+const AZ = { a: .95, b: .70, c: .60, d: 3.50, e: .25, f: .10, dt: .0045, burnIn: 3000, points: 90000 };
+function azD(x, y, z) { return [(z - AZ.b)*x - AZ.d*y, AZ.d*x + (z - AZ.b)*y, AZ.c + AZ.a*z - z*z*z/3 - (x*x + y*y)*(1 + AZ.e*z) + AZ.f*z*x*x*x]; }
+function azStep(s) { const h = AZ.dt, k1 = azD(s[0], s[1], s[2]), k2 = azD(s[0]+k1[0]*h/2, s[1]+k1[1]*h/2, s[2]+k1[2]*h/2), k3 = azD(s[0]+k2[0]*h/2, s[1]+k2[1]*h/2, s[2]+k2[2]*h/2), k4 = azD(s[0]+k3[0]*h, s[1]+k3[1]*h, s[2]+k3[2]*h);
+  for (let i = 0; i < 3; i++) s[i] += h/6 * (k1[i] + 2*k2[i] + 2*k3[i] + k4[i]); }
+function azGeometry() { const pos = new Float32Array(AZ.points*3), line = new Float32Array(AZ.points), s = [0.1, 0, 0];
+  for (let i = 0; i < AZ.burnIn; i++) azStep(s);
+  for (let i = 0; i < AZ.points; i++) { azStep(s); pos[3*i] = s[0]; pos[3*i+1] = s[2]; pos[3*i+2] = s[1]; line[i] = i / AZ.points; }   // slot order x, z, y; z drawn up
+  return { pos, line }; }
+
+/* ───── zeta charts ───── */
+const STRIDE = 3;          /* draw every 3rd path point (133k of 400k): the order and the growth are kept, the glow stays readable */
+const CH = { sphere: { scale: 1.05 }, cyl: { scale: 0.27, H: 1.5 }, flat: { scale: 0.27 } };
+function zetaGeometry(kind) {
+  const Ns = Math.ceil(N / STRIDE), pos = new Float32Array(Ns*3), tt = new Float32Array(Ns);
+  for (let j = 0; j < Ns; j++) { const i = j * STRIDE, re = RE[i], im = IM[i], m = re*re + im*im, T_i = T[i]; tt[j] = i / N;
+    if (kind === 'sphere') { const X = 2*re/(m+1), Y = 2*im/(m+1), Z = (m-1)/(m+1); pos[3*j] = X*CH.sphere.scale; pos[3*j+1] = Z*CH.sphere.scale; pos[3*j+2] = Y*CH.sphere.scale; }
+    else { const rho = Math.max(0, Math.log10(Math.sqrt(m) + 1e-30) + 3), phi = Math.atan2(im, re), r = rho*CH[kind].scale;
+      pos[3*j] = r*Math.cos(phi); pos[3*j+1] = kind === 'cyl' ? ((T_i/TMAX)*2 - 1)*CH.cyl.H : 0; pos[3*j+2] = r*Math.sin(phi); } }
+  return { pos, tt };
+}
+function heightOf(kind, t) { return kind === 'cyl' ? ((t/TMAX)*2 - 1)*CH.cyl.H : 0; }
+function idxOfT(t) { let lo = 0, hi = N - 1; while (lo < hi) { const m = (lo + hi) >> 1; if (T[m] < t) lo = m + 1; else hi = m; } return lo; }
+function zerosGeometry(kind) { const pos = new Float32Array(NZ*3), tt = new Float32Array(NZ);
+  for (let k = 0; k < NZ; k++) { tt[k] = k / NZ; const y = kind === 'sphere' ? -CH.sphere.scale : heightOf(kind, ZEROS[k]); pos[3*k+1] = y; } return { pos, tt }; }
+function primeTicks(kind, p, Z) { const d = 2*Math.PI/Math.log(p), out = []; for (let k = Math.ceil(10/d); k*d <= TMAX; k++) { const i = Math.min(Z.tt.length - 1, Math.round(idxOfT(k*d) / STRIDE)); out.push(Z.pos[3*i], Z.pos[3*i+1], Z.pos[3*i+2]); } const a = new Float32Array(out); return { pos: a, tt: new Float32Array(a.length/3) }; }
+function ringGeometry(kind) { const pts = [], R = kind === 'sphere' ? CH.sphere.scale : 3*CH[kind].scale, ys = kind === 'cyl' ? [-CH.cyl.H, 0, CH.cyl.H] : [0];
+  for (const y of ys) for (let i = 0; i <= 128; i++) { const a = i/128*2*Math.PI; pts.push(R*Math.cos(a), y, R*Math.sin(a)); } const a = new Float32Array(pts); return { pos: a, tt: new Float32Array(a.length/3) }; }
+
+/* ───── state ───── */
+const cam = { yaw: 0.6, pitch: 0.35, dist: 4.2 }, camA = { yaw: 0.6, pitch: 0.35, dist: 4.2 };
+const gA = GL($('cA')), gZ = GL($('cZ'));
+let Aiz = null, Zc = null, ZmarkL = null, ringL = null, ticks = [], kind = 'sphere', frac = 1, playing = false;
+const PCOL = { 2: [1, .81, .35], 3: [.4, 1, .6], 5: [.45, .75, 1], 7: [1, .5, .8], 11: [1, .6, .3], 13: [.7, .6, 1] };
+let Zg = null;
+function rebuildZ() { if (!gZ) return; const Z = zetaGeometry(kind); Zg = Z; Zc = layer(gZ, Z.pos, Z.tt); const zg = zerosGeometry(kind); ZmarkL = layer(gZ, zg.pos, zg.tt); const r = ringGeometry(kind); ringL = layer(gZ, r.pos, r.tt);
+  ticks = []; const sel = $('pt').value, ps = sel === 'all' ? [2,3,5,7,11,13] : sel === '0' ? [] : [+sel]; for (const p of ps) { const g = primeTicks(kind, p, Z); ticks.push({ p, L: layer(gZ, g.pos, g.tt) }); } }
+function resize(c) { const w = Math.max(200, c.clientWidth * (window.devicePixelRatio || 1)); if (c.width !== (w|0)) { c.width = w|0; c.height = (c.clientHeight * (window.devicePixelRatio || 1))|0; } }
+function mvpFor(c, cm, centre) { const asp = c.width / c.height; return M4.mul(M4.persp(0.8, asp, 0.1, 100), M4.mul(M4.trans(0, 0, -cm.dist), M4.mul(M4.rotX(cm.pitch), M4.mul(M4.rotY(cm.yaw), M4.trans(-centre[0], -centre[1], -centre[2]))))); }
+function render() {
+  if (playing) { frac = Math.min(1, frac + 0.0015); $('nz').value = Math.round(frac*1000); syncN(false); if (frac >= 1) { playing = false; $('play').textContent = '▶ grow'; } }
+  const zn = Math.max(1, Math.round(frac * NZ)), zi = Math.min(N, zn*16 + 1), ai = Math.max(2, Math.round(frac * AZ.points));
+  if (gA) { resize($('cA')); const gl = gA.gl; gl.viewport(0, 0, gA.gl.canvas.width, gA.gl.canvas.height); gl.clear(gl.COLOR_BUFFER_BIT); const m = mvpFor($('cA'), link() ? cam : camA, [0, 0.8, 0]);
+    draw(gA, Aiz, m, { count: ai, mode: 0, size: 1.3, alpha: Math.max(0.1, Math.min(0.7, 30000 / ai)), lines: $('lines').checked }); }
+  if (gZ) { resize($('cZ')); const gl = gZ.gl; gl.viewport(0, 0, gl.canvas.width, gl.canvas.height); gl.clear(gl.COLOR_BUFFER_BIT); const m = mvpFor($('cZ'), cam, [0, 0, 0]);
+    const zs = Math.ceil(zi / STRIDE); draw(gZ, Zc, m, { count: zs, mode: 0, size: 1.2, alpha: Math.max(0.06, Math.min(0.5, 20000 / zs)), lines: $('lines').checked });
+    if ($('eqring').checked) draw(gZ, ringL, m, { mode: 2, size: 1, alpha: 0.5, color: [0.5, 0.8, 1], lines: true });
+    if ($('zmark').checked) draw(gZ, ZmarkL, m, { count: zn, mode: 2, size: 2, alpha: kind === 'sphere' ? 0.25 : 0.8, color: [1, 1, 1] });
+    for (const tk of ticks) { const keep = Math.round(tk.L.n * Math.min(1, T[Math.min(N-1, zi)] / TMAX)); draw(gZ, tk.L, m, { count: keep, mode: 2, size: 3, alpha: 0.85, color: PCOL[tk.p] }); } }
+  const lastT = T[Math.min(N-1, Math.round(frac * NZ) * 16)];
+  let lit = -1; if (gA) { const gl = gA.gl, w = gl.canvas.width, h = gl.canvas.height, px = new Uint8Array(w * h * 4); gl.readPixels(0, 0, w, h, gl.RGBA, gl.UNSIGNED_BYTE, px); lit = 0; for (let i = 0; i < px.length; i += 4) if (px[i] + px[i+1] + px[i+2] > 60) lit++; }
+  const er = (gA ? gA.gl.getError() : 0); $('azinfo').textContent = '· ' + ai.toLocaleString() + ' points' + (er || window.__glerr ? ' · GL error ' + er + (window.__glerr || '') : '') + (gA ? ' · ' + (gA.gl.getParameter(gA.gl.VERSION)) + ' · lit pixels ' + lit : ''); $('zinfo').textContent = '· zeros ' + zn.toLocaleString() + ' · t up to ' + lastT.toFixed(1) + ' · ' + zi.toLocaleString() + ' path points';
+  if ($('efollow').checked) { $('te').value = Math.min(+$('te').max, lastT); drawEuler(); }
+}
+function frame() { render(); requestAnimationFrame(frame); }
+const link = () => $('link').checked;
+
+/* ───── mouse ───── */
+function drag(c, cm, other) { let d = null; c.addEventListener('pointerdown', e => { d = [e.clientX, e.clientY]; c.setPointerCapture(e.pointerId); });
+  c.addEventListener('pointermove', e => { if (!d) return; const t = link() ? cam : cm; t.yaw += (e.clientX - d[0]) * 0.008; t.pitch = Math.max(-1.57, Math.min(1.57, t.pitch + (e.clientY - d[1]) * 0.008)); d = [e.clientX, e.clientY]; });
+  c.addEventListener('pointerup', () => d = null); c.addEventListener('wheel', e => { e.preventDefault(); const t = link() ? cam : cm; t.dist = Math.max(1.2, Math.min(14, t.dist * Math.exp(e.deltaY * 0.001))); }, { passive: false });
+  c.addEventListener('dblclick', () => { Object.assign(cam, { yaw: 0.6, pitch: 0.35, dist: 4.2 }); Object.assign(camA, { yaw: 0.6, pitch: 0.35, dist: 4.2 }); }); }
+drag($('cA'), camA); drag($('cZ'), cam);
+$('eq').onclick = () => { cam.pitch = 0; camA.pitch = 0; }; $('pole').onclick = () => { cam.pitch = Math.PI/2; camA.pitch = Math.PI/2; };
+$('reset').onclick = () => $('cZ').dispatchEvent(new Event('dblclick'));
+
+/* ───── Euler prime spring (Canvas 2D) ───── */
+const PR = []; { const s = new Uint8Array(40001).fill(1); s[0] = s[1] = 0; for (let i = 2; i * i <= 40000; i++) if (s[i]) for (let j = i*i; j <= 40000; j += i) s[j] = 0; for (let i = 2; i <= 40000; i++) if (s[i]) PR.push(i); }
+function drawEuler() { const c = $('cE'); resize(c); const x = c.getContext('2d'), W = c.width, H = c.height, t = +$('te').value; $('tev').textContent = t.toFixed(2);
+  x.fillStyle = '#05060f'; x.fillRect(0, 0, W, H); let re = 0, im = 0; const pts = []; const P = 3000;
+  for (let k = 0; k < P; k++) { const p = PR[k], mag = Math.pow(p, -0.5), ang = -t * Math.log(p);       // p^{-s}, s = 1/2 + it
+    const ar = mag*Math.cos(ang), ai = mag*Math.sin(ang), nr = 1 - ar, ni = -ai, m2 = nr*nr + ni*ni; re += -0.5*Math.log(m2); im += -Math.atan2(ni, nr); pts.push([re, im]); }   // step = -ln(1 - p^{-s})
+  let x0 = 1e9, x1 = -1e9, y0 = 1e9, y1 = -1e9; for (const [a, b] of pts) { x0 = Math.min(x0, a); x1 = Math.max(x1, a); y0 = Math.min(y0, b); y1 = Math.max(y1, b); }
+  const sc = 0.9 * Math.min(W / (x1 - x0 + 1e-9), H / (y1 - y0 + 1e-9)), ox = W/2 - sc*(x0 + x1)/2, oy = H/2 + sc*(y0 + y1)/2, X = a => ox + sc*a, Y = b => oy - sc*b;
+  x.lineWidth = 1; for (let k = 1; k < pts.length; k++) { x.strokeStyle = `hsl(${280 - 280*k/pts.length},90%,62%)`; x.beginPath(); x.moveTo(X(pts[k-1][0]), Y(pts[k-1][1])); x.lineTo(X(pts[k][0]), Y(pts[k][1])); x.stroke(); }
+  x.fillStyle = '#fff'; x.font = (11 * (window.devicePixelRatio || 1)) + 'px sans-serif'; for (let k = 0; k < 8; k++) { x.beginPath(); x.arc(X(pts[k][0]), Y(pts[k][1]), 3, 0, 7); x.fill(); x.fillText(PR[k], X(pts[k][0]) + 5, Y(pts[k][1]) - 5); } }
+$('te').addEventListener('input', drawEuler);
+
+/* ───── zero spectrum (Canvas 2D); recomputed for the zeros drawn ───── */
+let spec = SP0, specN = NZ;
+function computeSpec(n) { n = Math.max(1, n | 0); const out = new Float32Array(SX.length); for (let i = 0; i < SX.length; i++) { let s = 0; const x = SX[i]; for (let k = 0; k < n; k++) s += Math.cos(ZEROS[k] * x); out[i] = s / n; } return out; }
+function drawSpec() { const c = $('cS'); resize(c); const x = c.getContext('2d'), W = c.width, H = c.height; x.fillStyle = '#05060f'; x.fillRect(0, 0, W, H);
+  const xmin = SX[0], xmax = SX[SX.length-1], X = v => (v - xmin)/(xmax - xmin)*(W - 20) + 10; let amp = 0; for (let i = 0; i < spec.length; i++) if (SX[i] > 0.6) amp = Math.max(amp, Math.abs(spec[i])); amp = Math.max(amp, 1e-4);
+  const Y = v => H/2 - (v/amp)*(H*0.42);
+  const ticksL = []; for (const p of PR) { if (Math.log(p) > xmax) break; for (let k = 1; Math.log(p)*k <= xmax; k++) ticksL.push([Math.log(p)*k, p, k]); }
+  for (const [lx, p, k] of ticksL) { x.strokeStyle = k === 1 ? 'rgba(255,207,90,.55)' : 'rgba(120,170,220,.35)'; x.beginPath(); x.moveTo(X(lx), 6); x.lineTo(X(lx), H - 6); x.stroke(); }
+  x.strokeStyle = '#555'; x.beginPath(); x.moveTo(10, H/2); x.lineTo(W - 10, H/2); x.stroke(); x.strokeStyle = '#7fe0ff'; x.lineWidth = 1.2; x.beginPath();
+  for (let i = 0; i < spec.length; i++) { const px = X(SX[i]), py = Math.max(4, Math.min(H - 4, Y(spec[i]))); if (i) x.lineTo(px, py); else x.moveTo(px, py); } x.stroke();
+  x.fillStyle = '#ffcf5a'; x.font = (11 * (window.devicePixelRatio || 1)) + 'px sans-serif'; for (const [lx, p, k] of ticksL) if (k === 1 && p <= 13) x.fillText(p, X(lx) - 3, 16);
+  x.fillStyle = '#98a2c3'; x.fillText('x = ln p^k   (N = ' + specN.toLocaleString() + ' zeros)', 12, H - 8); }
+let specTimer = null; function scheduleSpec() { clearTimeout(specTimer); specTimer = setTimeout(() => { const n = Math.max(1, Math.round(frac*NZ)); spec = n >= NZ ? SP0 : computeSpec(n); specN = n; drawSpec(); }, 120); }
+
+/* ───── controls ───── */
+function syncN(user) { const v = +$('nz').value / 1000; frac = v; const n = Math.max(1, Math.round(v * NZ)); $('nzv').textContent = n.toLocaleString(); if (user) scheduleSpec(); else if ((Math.round(frac*1000) % 25) === 0) scheduleSpec(); }
+$('nz').addEventListener('input', () => { playing = false; $('play').textContent = '▶ grow'; syncN(true); });
+$('play').onclick = () => { playing = !playing; if (playing && frac >= 1) { frac = 0.002; } $('play').textContent = playing ? '❚❚ pause' : '▶ grow'; };
+$('chart').onchange = e => { kind = e.target.value; rebuildZ(); }; $('pt').onchange = rebuildZ;
+for (const id of ['te']) { $(id).max = Math.floor(TMAX); $(id).value = 14.1347; } drawEuler();
+if (gA) { const g = azGeometry(); Aiz = layer(gA, g.pos, g.line); }
+/* URL options: ?chart=sphere|cyl|flat  &view=pole|eq  &zeros=NUMBER  &ticks=0|2|3|5|7|all  &snap=1 (replace each WebGL canvas by a still image: for screenshots in browsers that do not capture WebGL) */
+const Q = new URLSearchParams(location.search);
+if (Q.get('chart')) { kind = Q.get('chart'); $('chart').value = kind; } if (Q.get('ticks')) $('pt').value = Q.get('ticks');
+if (Q.get('view') === 'pole') { cam.pitch = Math.PI/2; camA.pitch = Math.PI/2; } if (Q.get('view') === 'eq') { cam.pitch = 0; camA.pitch = 0; }
+if (Q.get('zeros')) { $('nz').value = Math.round(+Q.get('zeros') / NZ * 1000); }
+rebuildZ(); syncN(true); drawSpec(); addEventListener('resize', () => { drawEuler(); drawSpec(); }); render();
+if (Q.get('snap')) { render(); for (const id of ['cA', 'cZ']) { const c = $(id), im = new Image(); im.src = c.toDataURL('image/png'); im.style.cssText = 'display:block;width:100%'; c.parentNode.replaceChild(im, c); } }
+else requestAnimationFrame(frame);
+</script>
+</body>
+</html>

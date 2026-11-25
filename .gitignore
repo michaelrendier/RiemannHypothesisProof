@@ -2,3 +2,4 @@
 __pycache__/
 *.pyc
 .ipynb_checkpoints/
+visualizations/javascript/zeta_uns_path_data.js

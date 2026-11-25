@@ -1,0 +1,14 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>JavaScript Visualizations</title><link rel="icon" href="favicon.png">
+<!-- SPDX-License-Identifier: GPL-3.0-only. Sub-gallery of the visualizations made in JavaScript. File names say the kind of code inside: webgl_*, threejs_*, canvas2d_*, svg_*, css3d_*, react_*. -->
+<style>:root{--bg:#f4f6fb;--fg:#1b2033;--mut:#5a6483;--card:#fff;--line:#d9deee;--acc:#3b5bdb}@media (prefers-color-scheme:dark){:root{--bg:#0d1020;--fg:#e6e9f5;--mut:#98a2c3;--card:#161b33;--line:#2a3257;--acc:#8fa6ff}}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--fg);font:15px/1.5 system-ui,sans-serif}header,main{max-width:980px;margin:0 auto;padding:16px}h1{font-size:20px;margin:0}.sub{color:var(--mut)}
+.card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:14px 16px;margin:12px 0}.card h2{font-size:16px;margin:0 0 4px}.tag{display:inline-block;font:12px monospace;border:1px solid var(--line);border-radius:5px;padding:1px 7px;margin-right:6px;color:var(--mut)}
+a{color:var(--acc)}.how{color:var(--mut);font-size:13px}</style></head>
+<body><header><h1>JavaScript visualizations</h1><div class="sub">RiemannHypothesisProof · each file is named for the kind of code inside · no libraries, no network (run from a local server or file://)</div></header>
+<main>
+<div class="card"><h2><a href="webgl_aizawa_vs_zeta_uns.html">Aizawa attractor vs the ζ pathway in Universal Native Space</a></h2>
+<div><span class="tag">webgl_</span><span class="tag">raw WebGL 1.0</span><span class="tag">canvas2d panels</span></div>
+<p>Two 3-D views under one mouse-driven camera: the Aizawa attractor integrated live (RK4), and ζ(½ + it) for the first 25,000 zeros in three charts (Riemann sphere, UNS cylinder = the spring, UNS flat). Prime resonance ticks, the equator ring |ζ| = 1, the zeros on the axis, the prime spring (Euler path) at a chosen height, and the zero spectrum with spikes at ln p<sup>k</sup>. The &ldquo;grow&rdquo; button draws the path zero by zero.</p>
+<p class="how">URL options: <code>?chart=sphere|cyl|flat &amp;view=pole|eq &amp;zeros=N &amp;ticks=0|2|3|5|7|all</code>. Data: <code>zeta_uns_path_data.js</code>, built by <code>experiments/build_zeta_uns_viz_data.py</code> from the engine <code>ValaQuenta/modules/zeta_uns_path</code>.</p></div>
+</main></body></html>
