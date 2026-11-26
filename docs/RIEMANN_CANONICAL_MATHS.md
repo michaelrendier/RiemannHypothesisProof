@@ -1,5 +1,13 @@
 # Riemann Canonical Maths — the maths of the Two-Trees / ζ-pathway work
 
+> d* faces (all four are needed to chart ln(10) in Universal Native Space):  
+>   d*         = 0.24600          the value the code runs with (Boundary, σ_ζ=½ plane)  
+>   d*_taut    = 0.246307201473  A_π/ln10, the Flow (radial unit)  
+>   d*_RG      = dimension 8; numeric OPEN, no closed form  the Stability (centre r=0)  
+>   d*_ln(10)  = 0.5671432904   d*_taut·ln10 = A_π, the Translator (log bridge)  
+> Full story of d*: Ainulindale/wiki/17_alpha_omega_d_star.md; ~/.clauderc_canonical_maths @RCCM_FOUR_DSTAR; FourthAgePapers/DStarRG  
+
+
 **Written 2026-11-08** from the RiemannHypothesisProof repo (`rhp/`, tests, paper §7, `docs/`), the ValaQuenta / GenerationalLineage / AbrikosovTree engines, the Ainulindale wiki (47, 51, 58, 73, 75, 96, 126, 130) and the POE hardware primer.
 Purpose: one place that lists every piece of maths used in this interaction, **what it says, where it lives, and how sure it is**. It is a reference, not a derivation; the derivations are in the files named.
 Maths is in Unicode. Nothing here is evidence about RH, and nothing claims a Clay problem is solved.
