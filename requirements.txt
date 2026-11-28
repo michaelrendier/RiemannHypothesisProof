@@ -11,4 +11,3 @@ nltk>=3.10  # tested 3.10.3
 pytest>=9.1  # tested 9.1.1
 pillow>=12.3  # tested 12.3.0
 scikit-learn>=1.9  # tested 1.9.1
-ok>=0.1  # tested 0.1.1
